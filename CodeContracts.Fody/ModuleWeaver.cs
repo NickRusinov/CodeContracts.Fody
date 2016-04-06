@@ -20,7 +20,10 @@ namespace CodeContracts.Fody
 
         public void Execute()
         {
-
+            Contract.Requires(ModuleDefinition != null);
+            Contract.Requires(LogDebug != null);
+            Contract.Requires(LogInfo != null);
+            Contract.Requires(LogWarning != null);
         }
     }
 }
