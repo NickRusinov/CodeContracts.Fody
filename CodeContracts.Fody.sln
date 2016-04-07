@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.Fody", "CodeC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.Fody.Tests", "CodeContracts.Fody.Tests\CodeContracts.Fody.Tests.csproj", "{50435103-B1A1-4C17-A693-A9311CDEC1EC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestAssemblies", "TestAssemblies", "{6F7A45EF-5315-4567-99F9-1018AF4A4A3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.TestAssembly", "TestAssemblies\CodeContracts.TestAssembly\CodeContracts.TestAssembly.csproj", "{21E3E079-812C-4062-9DD4-E4A3196AA14E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{50435103-B1A1-4C17-A693-A9311CDEC1EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50435103-B1A1-4C17-A693-A9311CDEC1EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50435103-B1A1-4C17-A693-A9311CDEC1EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21E3E079-812C-4062-9DD4-E4A3196AA14E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21E3E079-812C-4062-9DD4-E4A3196AA14E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E3E079-812C-4062-9DD4-E4A3196AA14E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21E3E079-812C-4062-9DD4-E4A3196AA14E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21E3E079-812C-4062-9DD4-E4A3196AA14E} = {6F7A45EF-5315-4567-99F9-1018AF4A4A3D}
 	EndGlobalSection
 EndGlobal
