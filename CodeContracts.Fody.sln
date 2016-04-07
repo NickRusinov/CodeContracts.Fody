@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.Fody", "CodeContracts.Fody\CodeContracts.Fody.csproj", "{462F0895-0BE2-4BF5-AD9E-3C488A9013F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.Fody.Tests", "CodeContracts.Fody.Tests\CodeContracts.Fody.Tests.csproj", "{50435103-B1A1-4C17-A693-A9311CDEC1EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50435103-B1A1-4C17-A693-A9311CDEC1EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50435103-B1A1-4C17-A693-A9311CDEC1EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50435103-B1A1-4C17-A693-A9311CDEC1EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50435103-B1A1-4C17-A693-A9311CDEC1EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
