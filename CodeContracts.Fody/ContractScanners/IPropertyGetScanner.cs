@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.ContractScaners
+namespace CodeContracts.Fody.ContractScanners
 {
-    public interface IParameterScanner
+    public interface IPropertyGetScanner
     {
-        IEnumerable<ContractDefinition> Scan(ParameterDefinition parameterDefinition);
+        IEnumerable<ContractDefinition> Scan(PropertyDefinition propertyDefinition);
     }
 }

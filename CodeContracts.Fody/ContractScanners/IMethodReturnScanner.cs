@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.ContractScaners
+namespace CodeContracts.Fody.ContractScanners
 {
-    public interface IModuleScaner
+    public interface IMethodReturnScanner
     {
-        IEnumerable<ContractDefinition> Scan(ModuleDefinition moduleDefinition);
+        IEnumerable<ContractDefinition> Scan(MethodReturnType methodReturnDefinition);
     }
 }
