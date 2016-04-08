@@ -11,11 +11,16 @@ namespace CodeContracts.TestAssembly.Siths
 {
     public class DarthMaul : ISith
     {
+        [Contract]
         private readonly Lightsaber lightsaber;
 
-        public DarthMaul(Lightsaber lightsaber)
+        [NoContract]
+        private readonly ISith master;
+
+        public DarthMaul(Lightsaber lightsaber, ISith master)
         {
             this.lightsaber = lightsaber;
+            this.master = master;
         }
 
         [return: Contract]

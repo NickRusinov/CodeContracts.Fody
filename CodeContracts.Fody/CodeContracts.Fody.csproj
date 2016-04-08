@@ -151,6 +151,7 @@
     <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
     <Compile Include="ContractInjectors\IInvariantInjector.cs" />
     <Compile Include="ContractInjectors\IRequiresInjector.cs" />
+    <Compile Include="ContractScanners\FieldScanner.cs" />
     <Compile Include="ContractScanners\IContractCriteria.cs" />
     <Compile Include="ContractScanners\IFieldScanner.cs" />
     <Compile Include="ContractScanners\IMethodReturnScanner.cs" />

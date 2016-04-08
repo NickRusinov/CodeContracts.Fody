@@ -44,7 +44,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             sut.Scan(moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")).ToList();
 
-            fieldScannerMock.Verify(fs => fs.Scan(It.IsAny<FieldDefinition>()), Times.Exactly(1));
+            fieldScannerMock.Verify(fs => fs.Scan(It.IsAny<FieldDefinition>()), Times.Exactly(2));
         }
     }
 }
