@@ -33,7 +33,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             sut.Scan(moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")).ToList();
 
-            methodScannerMock.Verify(ms => ms.Scan(It.IsAny<MethodDefinition>()), Times.Exactly(2));
+            methodScannerMock.Verify(ms => ms.Scan(It.IsAny<MethodDefinition>()), Times.Exactly(3));
         }
 
         [Theory(DisplayName = "Проверка сканирования всех полей типа"), AutoFixture]

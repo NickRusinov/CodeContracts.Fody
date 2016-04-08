@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="AutoFixtureAttribute.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="ContractScanners\MethodReturnScannerTests.cs" />
     <Compile Include="ContractScanners\MethodScannerTests.cs" />
     <Compile Include="ContractScanners\ModuleScannerTests.cs" />
     <Compile Include="ContractScanners\ParameterScannerTests.cs" />

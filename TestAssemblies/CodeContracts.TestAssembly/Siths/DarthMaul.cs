@@ -18,9 +18,16 @@ namespace CodeContracts.TestAssembly.Siths
             this.lightsaber = lightsaber;
         }
 
-        public void KillJedi([Contract] IJedi jedi, [NoContract] double revenge)
+        [return: Contract]
+        public bool KillJedi([Contract] IJedi jedi, [NoContract] double revenge)
         {
+            return revenge > 100.0;
+        }
 
+        [return: NoContract]
+        public bool JoinDarkSide()
+        {
+            return true;
         }
 
         public string Name => "Maul";
