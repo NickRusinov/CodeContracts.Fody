@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ContractAttribute.cs" />
+    <Compile Include="Contracts\NoContractAttribute.cs" />
     <Compile Include="Jedis\IJedi.cs" />
     <Compile Include="Jedis\QuiGonJinn.cs" />
     <Compile Include="Lightsaber.cs" />

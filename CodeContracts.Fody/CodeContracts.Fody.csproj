@@ -151,6 +151,7 @@
     <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
     <Compile Include="ContractInjectors\IInvariantInjector.cs" />
     <Compile Include="ContractInjectors\IRequiresInjector.cs" />
+    <Compile Include="ContractScanners\IContractCriteria.cs" />
     <Compile Include="ContractScanners\IFieldScanner.cs" />
     <Compile Include="ContractScanners\IMethodReturnScanner.cs" />
     <Compile Include="ContractScanners\IMethodScanner.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="ContractScanners\ITypeScanner.cs" />
     <Compile Include="ContractScanners\MethodScanner.cs" />
     <Compile Include="ContractScanners\ModuleScanner.cs" />
+    <Compile Include="ContractScanners\ParameterScanner.cs" />
     <Compile Include="ContractScanners\PropertyScanner.cs" />
     <Compile Include="ContractScanners\TypeScanner.cs" />
     <Compile Include="ILProcessorResolvers\IEnsuresResolver.cs" />

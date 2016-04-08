@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.TestAssembly.Contracts;
 using CodeContracts.TestAssembly.Jedis;
 
 namespace CodeContracts.TestAssembly.Siths
@@ -17,7 +18,7 @@ namespace CodeContracts.TestAssembly.Siths
             this.lightsaber = lightsaber;
         }
 
-        public void KillJedi(IJedi jedi, double revenge)
+        public void KillJedi([Contract] IJedi jedi, [NoContract] double revenge)
         {
 
         }
