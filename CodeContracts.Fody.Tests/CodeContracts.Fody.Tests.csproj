@@ -98,7 +98,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AutoFixtureAttribute.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="ContractScanners\ModuleScannerTests.cs" />
+    <Compile Include="ContractScanners\TypeScannerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

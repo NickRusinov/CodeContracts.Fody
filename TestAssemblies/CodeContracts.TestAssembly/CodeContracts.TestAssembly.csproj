@@ -40,10 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Jedis\IJedi.cs" />
+    <Compile Include="Jedis\QuiGonJinn.cs" />
+    <Compile Include="Lightsaber.cs" />
+    <Compile Include="LightsaberColor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Siths\DarthMaul.cs" />
     <Compile Include="Siths\DarthPlagueis.cs" />
     <Compile Include="Siths\ISith.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

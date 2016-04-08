@@ -33,6 +33,7 @@ namespace CodeContracts.Fody.ContractScanners
         {
             return EnumerableUtils.Concat(
                 from methodDefinition in typeDefinition.Methods
+                where !methodDefinition.IsSetter && !methodDefinition.IsGetter
                 from contractDefinition in methodScanner.Scan(methodDefinition)
                 select contractDefinition,
 
