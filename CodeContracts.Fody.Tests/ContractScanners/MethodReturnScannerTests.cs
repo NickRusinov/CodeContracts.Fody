@@ -34,7 +34,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         }
 
         [Theory(DisplayName = "Проверка отсутствия атрибута контракта для возвращаемого значения"), AutoFixture]
-        public void ScanNoContractParameterTest(
+        public void ScanNoContractMethodReturnTest(
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             MethodReturnScanner sut)

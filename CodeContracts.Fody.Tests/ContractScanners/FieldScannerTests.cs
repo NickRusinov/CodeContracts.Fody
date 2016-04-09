@@ -16,7 +16,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
     public class FieldScannerTests
     {
         [Theory(DisplayName = "Проверка получения атрибута контракта для поля"), AutoFixture]
-        public void ScanContractMethodReturnTest(
+        public void ScanContractFieldTest(
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             FieldScanner sut)
@@ -34,7 +34,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         }
 
         [Theory(DisplayName = "Проверка отсутствия атрибута контракта для поля"), AutoFixture]
-        public void ScanNoContractParameterTest(
+        public void ScanNoContractFieldTest(
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             FieldScanner sut)

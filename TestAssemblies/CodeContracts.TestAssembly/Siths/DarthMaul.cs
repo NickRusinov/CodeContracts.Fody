@@ -23,12 +23,14 @@ namespace CodeContracts.TestAssembly.Siths
             this.master = master;
         }
 
+        [NoContract]
         [return: Contract]
         public bool KillJedi([Contract] IJedi jedi, [NoContract] double revenge)
         {
             return revenge > 100.0;
         }
 
+        [Contract]
         [return: NoContract]
         public bool JoinDarkSide()
         {

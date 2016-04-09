@@ -16,13 +16,17 @@ namespace CodeContracts.Fody.ContractScanners
 
         private readonly IMethodReturnScanner methodReturnScanner;
 
-        public MethodScanner(IParameterScanner parameterScanner, IMethodReturnScanner methodReturnScanner)
+        private readonly IContractCriteria contractCriteria;
+
+        public MethodScanner(IParameterScanner parameterScanner, IMethodReturnScanner methodReturnScanner, IContractCriteria contractCriteria)
         {
             Contract.Requires(parameterScanner != null);
             Contract.Requires(methodReturnScanner != null);
+            Contract.Requires(contractCriteria != null);
 
             this.parameterScanner = parameterScanner;
             this.methodReturnScanner = methodReturnScanner;
+            this.contractCriteria = contractCriteria;
         }
 
         public IEnumerable<ContractDefinition> Scan(MethodDefinition methodDefinition)
@@ -34,7 +38,11 @@ namespace CodeContracts.Fody.ContractScanners
 
                 from methodReturnDefinition in Enumerable.Repeat(methodDefinition.MethodReturnType, 1)
                 from contractDefinition in methodReturnScanner.Scan(methodReturnDefinition)
-                select contractDefinition);
+                select contractDefinition,
+                
+                from contractAttribute in methodDefinition.CustomAttributes
+                where contractCriteria.IsContract(contractAttribute)
+                select new RequiresDefinition(contractAttribute, methodDefinition.DeclaringType, methodDefinition));
         }
     }
 }
