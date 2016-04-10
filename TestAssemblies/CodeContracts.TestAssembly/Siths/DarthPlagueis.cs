@@ -15,5 +15,10 @@ namespace CodeContracts.TestAssembly.Siths
 
         [Contract]
         public ISith Slave { get; set; }
+
+        public bool JoinDarkSide()
+        {
+            return true;
+        }
     }
 }

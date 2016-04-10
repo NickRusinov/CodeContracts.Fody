@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using Mono.Cecil.Cil;
 
-namespace CodeContracts.Fody.ILProcessorResolvers
+namespace CodeContracts.Fody.MethodBodyResolvers
 {
     public interface IInvariantResolver
     {
-        ILProcessor Resolve(InvariantDefinition invariantDefinition);
+        MethodBody Resolve(InvariantDefinition invariantDefinition);
     }
 }

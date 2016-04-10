@@ -105,6 +105,8 @@
     <Compile Include="ContractScanners\ParameterScannerTests.cs" />
     <Compile Include="ContractScanners\PropertyScannerTests.cs" />
     <Compile Include="ContractScanners\TypeScannerTests.cs" />
+    <Compile Include="MethodBodyResolvers\InvariantResolverTests.cs" />
+    <Compile Include="MethodBodyResolvers\RequiresEnsuresResolverTests.cs" />
     <Compile Include="ModuleDefinitionsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

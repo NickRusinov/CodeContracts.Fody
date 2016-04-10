@@ -166,9 +166,14 @@
     <Compile Include="ContractScanners\ParameterScanner.cs" />
     <Compile Include="ContractScanners\PropertyScanner.cs" />
     <Compile Include="ContractScanners\TypeScanner.cs" />
-    <Compile Include="ILProcessorResolvers\IEnsuresResolver.cs" />
-    <Compile Include="ILProcessorResolvers\IInvariantResolver.cs" />
-    <Compile Include="ILProcessorResolvers\IRequiresResolver.cs" />
+    <Compile Include="Internal\IsOverrideUtils.cs" />
+    <Compile Include="MethodBodyResolvers\IContractClassResolver.cs" />
+    <Compile Include="MethodBodyResolvers\IEnsuresResolver.cs" />
+    <Compile Include="MethodBodyResolvers\IInvariantMethodResolver.cs" />
+    <Compile Include="MethodBodyResolvers\IInvariantResolver.cs" />
+    <Compile Include="MethodBodyResolvers\InvariantResolver.cs" />
+    <Compile Include="MethodBodyResolvers\IRequiresResolver.cs" />
+    <Compile Include="MethodBodyResolvers\RequiresEnsuresResolver.cs" />
     <Compile Include="Internal\EnumerableUtils.cs" />
     <Compile Include="ModuleWeaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

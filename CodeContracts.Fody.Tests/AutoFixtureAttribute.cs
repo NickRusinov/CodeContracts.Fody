@@ -23,6 +23,9 @@ namespace CodeContracts.Fody.Tests
             Fixture.Behaviors.Add(new NullRecursionBehavior());
 
             Fixture.Register(() => moduleDefinitionLazy.Value);
+            Fixture.Register(() => Fixture.Create<ModuleDefinition>().FindType("DarthMaul"));
+            Fixture.Register(() => Fixture.Create<ModuleDefinition>().FindMethod("DarthMaul", "JoinDarkSide"));
+            Fixture.Register(() => Fixture.Create<ModuleDefinition>().FindMethod("DarthMaul", "JoinDarkSide").CustomAttributes.First());
         }
     }
 }
