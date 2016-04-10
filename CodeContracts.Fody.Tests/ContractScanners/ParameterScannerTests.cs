@@ -21,13 +21,9 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             ParameterScanner sut)
         {
-            var parameter = moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")
-                .Methods.Single(md => md.Name == "KillJedi")
-                .Parameters.Single(pd => pd.Name == "jedi");
-
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(true);
 
-            var contracts = sut.Scan(parameter).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindParameter("DarthMaul", "KillJedi", "jedi")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Single(contracts);
@@ -40,13 +36,9 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             ParameterScanner sut)
         {
-            var parameter = moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")
-                .Methods.Single(md => md.Name == "KillJedi")
-                .Parameters.Single(pd => pd.Name == "revenge");
-
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(false);
 
-            var contracts = sut.Scan(parameter).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindParameter("DarthMaul", "KillJedi", "revenge")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Empty(contracts);

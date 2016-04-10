@@ -12,27 +12,32 @@ namespace CodeContracts.Fody.ContractScanners
 {
     public class PropertyScanner : IPropertyScanner
     {
-        private readonly IPropertyGetScanner propertyGetScanner;
+        private readonly IContractCriteria contractCriteria;
 
-        private readonly IPropertySetScanner propertySetScanner;
-
-        public PropertyScanner(IPropertyGetScanner propertyGetScanner, IPropertySetScanner propertySetScanner)
+        public PropertyScanner(IContractCriteria contractCriteria)
         {
-            Contract.Requires(propertyGetScanner != null);
-            Contract.Requires(propertySetScanner != null);
+            Contract.Requires(contractCriteria != null);
 
-            this.propertyGetScanner = propertyGetScanner;
-            this.propertySetScanner = propertySetScanner;
+            this.contractCriteria = contractCriteria;
         }
 
         public IEnumerable<ContractDefinition> Scan(PropertyDefinition propertyDefinition)
         {
-            return EnumerableUtils.Concat(
-                from contractDefinition in propertyGetScanner.Scan(propertyDefinition)
-                select contractDefinition,
+            return EnumerableUtils.Concat<ContractDefinition>(
+                from contractAttribute in propertyDefinition.CustomAttributes
+                where contractCriteria.IsContract(contractAttribute)
+                where propertyDefinition.SetMethod != null
+                select new RequiresDefinition(contractAttribute, propertyDefinition.DeclaringType, propertyDefinition.SetMethod),
 
-                from contractDefinition in propertySetScanner.Scan(propertyDefinition)
-                select contractDefinition);
+                from contractAttribute in propertyDefinition.CustomAttributes
+                where contractCriteria.IsContract(contractAttribute)
+                where propertyDefinition.GetMethod != null
+                select new EnsuresDefinition(contractAttribute, propertyDefinition.DeclaringType, propertyDefinition.GetMethod),
+
+                from contractAttribute in propertyDefinition.CustomAttributes
+                where contractCriteria.IsContract(contractAttribute)
+                where propertyDefinition.GetMethod != null
+                select new InvariantDefinition(contractAttribute, propertyDefinition.DeclaringType));
         }
     }
 }

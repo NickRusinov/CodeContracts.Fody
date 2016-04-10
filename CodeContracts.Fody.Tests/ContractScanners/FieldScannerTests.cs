@@ -21,12 +21,9 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             FieldScanner sut)
         {
-            var field = moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")
-                .Fields.Single(fd => fd.Name == "lightsaber");
-
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(true);
 
-            var contracts = sut.Scan(field).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindField("DarthMaul", "lightsaber")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Single(contracts);
@@ -39,12 +36,9 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             FieldScanner sut)
         {
-            var field = moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")
-                .Fields.Single(fd => fd.Name == "master");
-
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(false);
 
-            var contracts = sut.Scan(field).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindField("DarthMaul", "master")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Empty(contracts);

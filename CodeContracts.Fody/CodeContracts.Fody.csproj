@@ -158,9 +158,7 @@
     <Compile Include="ContractScanners\IMethodScanner.cs" />
     <Compile Include="ContractScanners\IModuleScanner.cs" />
     <Compile Include="ContractScanners\IParameterScanner.cs" />
-    <Compile Include="ContractScanners\IPropertyGetScanner.cs" />
     <Compile Include="ContractScanners\IPropertyScanner.cs" />
-    <Compile Include="ContractScanners\IPropertySetScanner.cs" />
     <Compile Include="ContractScanners\ITypeScanner.cs" />
     <Compile Include="ContractScanners\MethodReturnScanner.cs" />
     <Compile Include="ContractScanners\MethodScanner.cs" />

@@ -20,7 +20,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IPropertyScanner> propertyScannerMock,
             TypeScanner sut)
         {
-            sut.Scan(moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")).ToList();
+            sut.Scan(moduleDefinition.FindType("DarthMaul")).ToList();
 
             propertyScannerMock.Verify(ps => ps.Scan(It.IsAny<PropertyDefinition>()), Times.Exactly(1));
         }
@@ -31,7 +31,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IMethodScanner> methodScannerMock,
             TypeScanner sut)
         {
-            sut.Scan(moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")).ToList();
+            sut.Scan(moduleDefinition.FindType("DarthMaul")).ToList();
 
             methodScannerMock.Verify(ms => ms.Scan(It.IsAny<MethodDefinition>()), Times.Exactly(3));
         }
@@ -42,7 +42,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IFieldScanner> fieldScannerMock,
             TypeScanner sut)
         {
-            sut.Scan(moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")).ToList();
+            sut.Scan(moduleDefinition.FindType("DarthMaul")).ToList();
 
             fieldScannerMock.Verify(fs => fs.Scan(It.IsAny<FieldDefinition>()), Times.Exactly(2));
         }

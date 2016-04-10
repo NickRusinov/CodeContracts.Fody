@@ -98,13 +98,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AutoFixtureAttribute.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="ContractScanners\FieldScannerTests.cs" />
     <Compile Include="ContractScanners\MethodReturnScannerTests.cs" />
     <Compile Include="ContractScanners\MethodScannerTests.cs" />
     <Compile Include="ContractScanners\ModuleScannerTests.cs" />
     <Compile Include="ContractScanners\ParameterScannerTests.cs" />
+    <Compile Include="ContractScanners\PropertyScannerTests.cs" />
     <Compile Include="ContractScanners\TypeScannerTests.cs" />
+    <Compile Include="ModuleDefinitionsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

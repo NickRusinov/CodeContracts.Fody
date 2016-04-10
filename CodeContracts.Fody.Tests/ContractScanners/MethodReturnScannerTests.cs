@@ -21,12 +21,9 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             MethodReturnScanner sut)
         {
-            var methodReturn = moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")
-                .Methods.Single(md => md.Name == "KillJedi").MethodReturnType;
-
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(true);
 
-            var contracts = sut.Scan(methodReturn).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindMethod("DarthMaul", "KillJedi").MethodReturnType).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Single(contracts);
@@ -39,12 +36,9 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IContractCriteria> contractCriteriaMock,
             MethodReturnScanner sut)
         {
-            var methodReturn = moduleDefinition.GetType(Constants.SithNamespace, "DarthMaul")
-                .Methods.Single(md => md.Name == "JoinDarkSide").MethodReturnType;
-
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(false);
 
-            var contracts = sut.Scan(methodReturn).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindMethod("DarthMaul", "JoinDarkSide").MethodReturnType).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Empty(contracts);
