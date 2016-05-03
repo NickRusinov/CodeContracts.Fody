@@ -15,7 +15,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
     public class ContractClassResolverTests
     {
         [Theory(DisplayName = "Проверка разрешения контрактного класса для интерфейса с атрибутом ContractClass"), AutoFixture]
-        public void InterfaceWithContractClass(
+        public void InterfaceWithContractClassTest(
             [Frozen]ModuleDefinition moduleDefinition,
             ContractClassResolver sut)
         {
@@ -27,7 +27,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         }
 
         [Theory(DisplayName = "Проверка разрешения контрактного класса для абстрактного класса с атрибутом ContractClass"), AutoFixture]
-        public void AbstractClassWithContractClass(
+        public void AbstractClassWithContractClassTest(
             [Frozen]ModuleDefinition moduleDefinition,
             ContractClassResolver sut)
         {
@@ -41,7 +41,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         }
 
         [Theory(DisplayName = "Проверка разрешения контрактного класса для интерфейса без атрибута ContractClass"), AutoFixture]
-        public void InterfaceWithoutContractClass(
+        public void InterfaceWithoutContractClassTest(
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IContractClassResolver> contractClassResolverMock,
             ContractClassResolver sut)
@@ -54,7 +54,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         }
 
         [Theory(DisplayName = "Проверка разрешения контрактного класса для абстрактного класса без атрибута ContractClass"), AutoFixture]
-        public void AbstractClassWithoutContractClass(
+        public void AbstractClassWithoutContractClassTest(
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IContractClassResolver> contractClassResolverMock,
             ContractClassResolver sut)

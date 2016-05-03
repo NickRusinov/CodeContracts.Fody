@@ -106,6 +106,7 @@
     <Compile Include="ContractScanners\PropertyScannerTests.cs" />
     <Compile Include="ContractScanners\TypeScannerTests.cs" />
     <Compile Include="MethodBodyResolvers\ContractClassResolverTests.cs" />
+    <Compile Include="MethodBodyResolvers\InvariantMethodResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\RequiresEnsuresResolverTests.cs" />
     <Compile Include="ModuleDefinitionsExtensions.cs" />

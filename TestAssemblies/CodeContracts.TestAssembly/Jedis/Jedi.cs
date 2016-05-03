@@ -15,6 +15,12 @@ namespace CodeContracts.TestAssembly.Jedis
         public virtual string OrderRank { get; set; } = "Padawan";
 
         public abstract void UseTheForce(Force force);
+
+        [ContractInvariantMethod]
+        private void Invariant()
+        {
+            Contract.Invariant(OrderRank != "Youngling");
+        }
     }
 
     [ContractClassFor(typeof(Jedi))]

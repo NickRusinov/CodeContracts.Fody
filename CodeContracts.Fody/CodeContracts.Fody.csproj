@@ -172,6 +172,7 @@
     <Compile Include="MethodBodyResolvers\IEnsuresResolver.cs" />
     <Compile Include="MethodBodyResolvers\IInvariantMethodResolver.cs" />
     <Compile Include="MethodBodyResolvers\IInvariantResolver.cs" />
+    <Compile Include="MethodBodyResolvers\InvariantMethodResolver.cs" />
     <Compile Include="MethodBodyResolvers\InvariantResolver.cs" />
     <Compile Include="MethodBodyResolvers\IRequiresResolver.cs" />
     <Compile Include="MethodBodyResolvers\RequiresEnsuresResolver.cs" />
