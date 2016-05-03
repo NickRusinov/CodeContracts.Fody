@@ -23,7 +23,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         {
             sut.Resolve(requiresDefinition);
 
-            contractClassResolverMock.Verify(ccr => ccr.Resolve(requiresDefinition.DeclaringType));
+            contractClassResolverMock.Verify(ccr => ccr.Resolve(requiresDefinition.DeclaringType, requiresDefinition.ContractMethod));
         }
 
         [Theory(DisplayName = "Проверка вызова получателя контрактного класса для получателя постусловия"), AutoFixture]
@@ -34,7 +34,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         {
             sut.Resolve(ensuresDefinition);
 
-            contractClassResolverMock.Verify(ccr => ccr.Resolve(ensuresDefinition.DeclaringType));
+            contractClassResolverMock.Verify(ccr => ccr.Resolve(ensuresDefinition.DeclaringType, ensuresDefinition.ContractMethod));
         }
 
         [Theory(DisplayName = "Проверка получения метода для внедрения предусловия"), AutoFixture]
@@ -45,7 +45,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         {
             var methodDefinition = moduleDefinition.FindMethod("DarthMaul", "JoinDarkSide");
             var requiresDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.First(), methodDefinition.DeclaringType, methodDefinition);
-            contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType)).Returns(methodDefinition.DeclaringType);
+            contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType, methodDefinition)).Returns(methodDefinition.DeclaringType);
 
             var methodBody = sut.Resolve(requiresDefinition);
 
@@ -61,7 +61,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
             var methodDefinition = moduleDefinition.FindMethod("ISith", "JoinDarkSide");
             var requiresDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.First(), methodDefinition.DeclaringType, methodDefinition);
             var overrideMethodDefinition = moduleDefinition.FindMethod("DarthPlagueis", "JoinDarkSide");
-            contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType)).Returns(overrideMethodDefinition.DeclaringType);
+            contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType, methodDefinition)).Returns(overrideMethodDefinition.DeclaringType);
 
             var methodBody = sut.Resolve(requiresDefinition);
 
@@ -76,7 +76,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         {
             var methodDefinition = moduleDefinition.FindMethod("DarthMaul", "JoinDarkSide");
             var ensuresDefinition = new EnsuresDefinition(methodDefinition.CustomAttributes.First(), methodDefinition.DeclaringType, methodDefinition);
-            contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType)).Returns(methodDefinition.DeclaringType);
+            contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType, methodDefinition)).Returns(methodDefinition.DeclaringType);
 
             var methodBody = sut.Resolve(ensuresDefinition);
 
@@ -92,7 +92,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
             var methodDefinition = moduleDefinition.FindMethod("ISith", "JoinDarkSide");
             var ensuresDefinition = new EnsuresDefinition(methodDefinition.CustomAttributes.First(), methodDefinition.DeclaringType, methodDefinition);
             var overrideMethodDefinition = moduleDefinition.FindMethod("DarthPlagueis", "JoinDarkSide");
-            contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType)).Returns(overrideMethodDefinition.DeclaringType);
+            contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType, methodDefinition)).Returns(overrideMethodDefinition.DeclaringType);
 
             var methodBody = sut.Resolve(ensuresDefinition);
 

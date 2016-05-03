@@ -10,6 +10,6 @@ namespace CodeContracts.Fody.MethodBodyResolvers
 {
     public interface IContractClassResolver
     {
-        TypeDefinition Resolve(TypeDefinition typeDefinition);
+        TypeDefinition Resolve(TypeDefinition typeDefinition, MethodDefinition methodDefinition);
     }
 }

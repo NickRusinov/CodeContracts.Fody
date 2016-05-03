@@ -9,7 +9,7 @@ using Mono.Cecil.Rocks;
 
 namespace CodeContracts.Fody.Internal
 {
-    public static class IsOverrideUtils
+    internal static class IsOverrideUtils
     {
         public static bool IsOverride(this MethodDefinition method, MethodReference overridden)
         {

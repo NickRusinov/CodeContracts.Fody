@@ -167,6 +167,7 @@
     <Compile Include="ContractScanners\PropertyScanner.cs" />
     <Compile Include="ContractScanners\TypeScanner.cs" />
     <Compile Include="Internal\IsOverrideUtils.cs" />
+    <Compile Include="MethodBodyResolvers\ContractClassResolver.cs" />
     <Compile Include="MethodBodyResolvers\IContractClassResolver.cs" />
     <Compile Include="MethodBodyResolvers\IEnsuresResolver.cs" />
     <Compile Include="MethodBodyResolvers\IInvariantMethodResolver.cs" />

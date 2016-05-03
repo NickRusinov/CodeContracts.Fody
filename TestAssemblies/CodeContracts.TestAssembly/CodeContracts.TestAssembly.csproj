@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="Contracts\ContractAttribute.cs" />
     <Compile Include="Contracts\NoContractAttribute.cs" />
+    <Compile Include="Force.cs" />
     <Compile Include="Jedis\IJedi.cs" />
+    <Compile Include="Jedis\Jedi.cs" />
     <Compile Include="Jedis\QuiGonJinn.cs" />
     <Compile Include="Lightsaber.cs" />
     <Compile Include="LightsaberColor.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="Siths\DarthMaul.cs" />
     <Compile Include="Siths\DarthPlagueis.cs" />
     <Compile Include="Siths\ISith.cs" />
+    <Compile Include="Siths\Sith.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

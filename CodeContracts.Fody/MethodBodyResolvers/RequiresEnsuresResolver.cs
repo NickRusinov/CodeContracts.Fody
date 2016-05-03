@@ -35,7 +35,7 @@ namespace CodeContracts.Fody.MethodBodyResolvers
         protected MethodBody Resolve(ContractDefinition contractDefinition, MethodDefinition contractMethod)
         {
             return
-                (from methodDefinition in contractClassResolver.Resolve(contractDefinition.DeclaringType).Methods
+                (from methodDefinition in contractClassResolver.Resolve(contractDefinition.DeclaringType, contractMethod).Methods
                  where methodDefinition.IsOverride(contractMethod)
                  select methodDefinition.Body)
                 .Single();

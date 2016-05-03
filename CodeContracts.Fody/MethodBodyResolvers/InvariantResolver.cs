@@ -26,7 +26,7 @@ namespace CodeContracts.Fody.MethodBodyResolvers
 
         public MethodBody Resolve(InvariantDefinition invariantDefinition)
         {
-            return invariantMethodResolver.Resolve(contractClassResolver.Resolve(invariantDefinition.DeclaringType)).Body;
+            return invariantMethodResolver.Resolve(contractClassResolver.Resolve(invariantDefinition.DeclaringType, null)).Body;
         }
     }
 }

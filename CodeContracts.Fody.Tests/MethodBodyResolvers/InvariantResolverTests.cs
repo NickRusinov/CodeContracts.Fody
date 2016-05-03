@@ -23,7 +23,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         {
             sut.Resolve(invariantDefinition);
 
-            contractClassResolverMock.Verify(ccr => ccr.Resolve(invariantDefinition.DeclaringType));
+            contractClassResolverMock.Verify(ccr => ccr.Resolve(invariantDefinition.DeclaringType, null));
         }
 
         [Theory(DisplayName = "Проверка вызова получателя метода инварианта для получателя инварианта"), AutoFixture]
