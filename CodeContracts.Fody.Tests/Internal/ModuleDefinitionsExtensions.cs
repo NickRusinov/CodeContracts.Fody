@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.Tests
+namespace CodeContracts.Fody.Tests.Internal
 {
-    public static class ModuleDefinitionsExtensions
+    internal static class ModuleDefinitionsExtensions
     {
         public static TypeDefinition FindType(this ModuleDefinition moduleDefinition, string typeName)
         {

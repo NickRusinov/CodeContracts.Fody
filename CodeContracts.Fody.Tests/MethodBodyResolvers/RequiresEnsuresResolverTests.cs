@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.MethodBodyResolvers;
+using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Moq;
 using Ploeh.AutoFixture.Xunit2;

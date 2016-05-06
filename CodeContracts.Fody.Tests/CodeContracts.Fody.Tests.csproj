@@ -98,6 +98,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AutoFixtureAttribute.cs" />
+    <Compile Include="ContractInjectors\ContractMethodBuilderTests.cs" />
+    <Compile Include="ContractInjectors\ContractMethodWithMessageBuilderTests.cs" />
+    <Compile Include="ContractInjectors\ContractValidateBuilderTests.cs" />
     <Compile Include="ContractScanners\FieldScannerTests.cs" />
     <Compile Include="ContractScanners\MethodReturnScannerTests.cs" />
     <Compile Include="ContractScanners\MethodScannerTests.cs" />
@@ -105,11 +108,12 @@
     <Compile Include="ContractScanners\ParameterScannerTests.cs" />
     <Compile Include="ContractScanners\PropertyScannerTests.cs" />
     <Compile Include="ContractScanners\TypeScannerTests.cs" />
+    <Compile Include="Internal\InstructionComparer.cs" />
     <Compile Include="MethodBodyResolvers\ContractClassResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantMethodResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\RequiresEnsuresResolverTests.cs" />
-    <Compile Include="ModuleDefinitionsExtensions.cs" />
+    <Compile Include="Internal\ModuleDefinitionsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

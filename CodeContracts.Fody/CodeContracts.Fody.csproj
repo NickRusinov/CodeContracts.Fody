@@ -148,7 +148,11 @@
     <Compile Include="ContractDefinitions\ContractValidateDefinition.cs" />
     <Compile Include="ContractDefinitions\EnsuresDefinition.cs" />
     <Compile Include="ContractDefinitions\InvariantDefinition.cs" />
+    <Compile Include="ContractInjectors\ContractMethodBuilder.cs" />
+    <Compile Include="ContractInjectors\ContractMethodWithMessageBuilder.cs" />
+    <Compile Include="ContractInjectors\ContractValidateBuilder.cs" />
     <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
+    <Compile Include="ContractInjectors\IInstructionsBuilder.cs" />
     <Compile Include="ContractInjectors\IInvariantInjector.cs" />
     <Compile Include="ContractInjectors\IRequiresInjector.cs" />
     <Compile Include="ContractScanners\FieldScanner.cs" />

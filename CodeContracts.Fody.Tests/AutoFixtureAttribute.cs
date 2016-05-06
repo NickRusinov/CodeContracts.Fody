@@ -4,7 +4,9 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using Ploeh.AutoFixture.Xunit2;
@@ -20,12 +22,17 @@ namespace CodeContracts.Fody.Tests
         public AutoFixtureAttribute()
         {
             Fixture.Customize(new AutoConfiguredMoqCustomization());
+
             Fixture.Behaviors.Add(new NullRecursionBehavior());
 
             Fixture.Register(() => moduleDefinitionLazy.Value);
-            Fixture.Register(() => Fixture.Create<ModuleDefinition>().FindType("DarthMaul"));
-            Fixture.Register(() => Fixture.Create<ModuleDefinition>().FindMethod("DarthMaul", "JoinDarkSide"));
-            Fixture.Register(() => Fixture.Create<ModuleDefinition>().FindMethod("DarthMaul", "JoinDarkSide").CustomAttributes.First());
+            Fixture.Register((ModuleDefinition md) => md.FindType("DarthMaul"));
+            Fixture.Register((ModuleDefinition md) => md.FindType("DarthMaul") as TypeReference);
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "JoinDarkSide"));
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "JoinDarkSide") as MethodReference);
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "JoinDarkSide").CustomAttributes.First());
+
+            Fixture.Register(() => Instruction.Create(OpCodes.Ldarg_0));
         }
     }
 }
