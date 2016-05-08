@@ -4,13 +4,12 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public class FieldParameterBuilder : IInstructionsBuilder
+    public class FieldParameterBuilder : IParameterBuilder
     {
         private readonly FieldDefinition fieldDefinition;
 
@@ -21,12 +20,9 @@ namespace CodeContracts.Fody.ContractInjectors
             this.fieldDefinition = fieldDefinition;
         }
 
-        public IEnumerable<Instruction> Build(IEnumerable<Instruction> instructions)
+        public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
-            return EnumerableUtils.Concat(
-                Enumerable.Repeat(Instruction.Create(OpCodes.Nop), 1),
-                instructions,
-                Enumerable.Repeat(Instruction.Create(OpCodes.Ldfld, fieldDefinition), 1));
+            yield return Instruction.Create(OpCodes.Ldfld, fieldDefinition);
         }
     }
 }

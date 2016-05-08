@@ -156,6 +156,7 @@
     <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
     <Compile Include="ContractInjectors\IInstructionsBuilder.cs" />
     <Compile Include="ContractInjectors\IInvariantInjector.cs" />
+    <Compile Include="ContractInjectors\IParameterBuilder.cs" />
     <Compile Include="ContractInjectors\IRequiresInjector.cs" />
     <Compile Include="ContractInjectors\NullParameterBuilder.cs" />
     <Compile Include="ContractInjectors\PropertyParameterBuilder.cs" />

@@ -15,35 +15,15 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 {
     public class FieldParameterBuilderTests
     {
-        [Theory(DisplayName = "Проверка первой команды построителя параметра ссылки на поле класса"), AutoFixture]
-        public void FirstNopInstructionTest(
-            IEnumerable<Instruction> instructions,
-            FieldParameterBuilder sut)
-        {
-            var buildedInstructions = sut.Build(instructions);
-
-            Assert.Equal(Instruction.Create(OpCodes.Nop), buildedInstructions.FirstOrDefault(), InstructionComparer.Default);
-        }
-
-        [Theory(DisplayName = "Проверка последней команды построителя параметра ссылки на поле класса"), AutoFixture]
+        [Theory(DisplayName = "Проверка команд построителя параметра ссылки на поле класса"), AutoFixture]
         public void LastLdfldInstructionTest(
             [Frozen]FieldDefinition fieldDefinition,
-            IEnumerable<Instruction> instructions,
+            ParameterDefinition validateParameterDefinition,
             FieldParameterBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(validateParameterDefinition);
 
-            Assert.Equal(Instruction.Create(OpCodes.Ldfld, fieldDefinition), buildedInstructions.LastOrDefault(), InstructionComparer.Default);
-        }
-
-        [Theory(DisplayName = "Проверка команд построителя параметра ссылки на поле класса"), AutoFixture]
-        public void ContainsInstructionsTest(
-            IEnumerable<Instruction> instructions,
-            FieldParameterBuilder sut)
-        {
-            var buildedInstructions = sut.Build(instructions);
-
-            Assert.Empty(instructions.Except(buildedInstructions, InstructionComparer.Default));
+            Assert.Equal(Instruction.Create(OpCodes.Ldfld, fieldDefinition), buildedInstructions.SingleOrDefault(), InstructionComparer.Default);
         }
     }
 }

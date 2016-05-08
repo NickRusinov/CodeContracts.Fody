@@ -15,35 +15,15 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 {
     public class ArgumentParameterBuilderTests
     {
-        [Theory(DisplayName = "Проверка первой команды построителя параметра ссылки на аргумент (параметр) метода"), AutoFixture]
-        public void FirstNopInstructionTest(
-            IEnumerable<Instruction> instructions,
-            ArgumentParameterBuilder sut)
-        {
-            var buildedInstructions = sut.Build(instructions);
-
-            Assert.Equal(Instruction.Create(OpCodes.Nop), buildedInstructions.FirstOrDefault(), InstructionComparer.Default);
-        }
-
-        [Theory(DisplayName = "Проверка последней команды построителя параметра ссылки на аргумент (параметр) метода"), AutoFixture]
+        [Theory(DisplayName = "Проверка команд построителя параметра ссылки на аргумент (параметр) метода"), AutoFixture]
         public void LastLdargInstructionTest(
             [Frozen]ParameterDefinition parameterDefinition,
-            IEnumerable<Instruction> instructions,
+            ParameterDefinition validateParameterDefinition,
             ArgumentParameterBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(validateParameterDefinition);
 
-            Assert.Equal(Instruction.Create(OpCodes.Ldarg, parameterDefinition), buildedInstructions.LastOrDefault(), InstructionComparer.Default);
-        }
-
-        [Theory(DisplayName = "Проверка команд построителя параметра ссылки на аргумент (параметр) метода"), AutoFixture]
-        public void ContainsInstructionsTest(
-            IEnumerable<Instruction> instructions,
-            ArgumentParameterBuilder sut)
-        {
-            var buildedInstructions = sut.Build(instructions);
-
-            Assert.Empty(instructions.Except(buildedInstructions, InstructionComparer.Default));
+            Assert.Equal(Instruction.Create(OpCodes.Ldarg, parameterDefinition), buildedInstructions.SingleOrDefault(), InstructionComparer.Default);
         }
     }
 }

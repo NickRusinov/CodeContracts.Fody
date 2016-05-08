@@ -9,11 +9,8 @@ using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public class ThisParameterBuilder : IParameterBuilder
+    public interface IParameterBuilder
     {
-        public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
-        {
-            yield return Instruction.Create(OpCodes.Ldarg_0);
-        }
+        IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition);
     }
 }

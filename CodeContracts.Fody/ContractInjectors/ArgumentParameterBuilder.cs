@@ -4,13 +4,12 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public class ArgumentParameterBuilder : IInstructionsBuilder
+    public class ArgumentParameterBuilder : IParameterBuilder
     {
         private readonly ParameterDefinition parameterDefinition;
 
@@ -21,12 +20,9 @@ namespace CodeContracts.Fody.ContractInjectors
             this.parameterDefinition = parameterDefinition;
         }
 
-        public IEnumerable<Instruction> Build(IEnumerable<Instruction> instructions)
+        public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
-            return EnumerableUtils.Concat(
-                Enumerable.Repeat(Instruction.Create(OpCodes.Nop), 1),
-                instructions,
-                Enumerable.Repeat(Instruction.Create(OpCodes.Ldarg, parameterDefinition), 1));
+            yield return Instruction.Create(OpCodes.Ldarg, parameterDefinition);
         }
     }
 }

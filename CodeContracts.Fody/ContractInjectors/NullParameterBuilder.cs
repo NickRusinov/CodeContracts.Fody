@@ -4,19 +4,16 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.Internal;
+using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public class NullParameterBuilder : IInstructionsBuilder
+    public class NullParameterBuilder : IParameterBuilder
     {
-        public IEnumerable<Instruction> Build(IEnumerable<Instruction> instructions)
+        public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
-            return EnumerableUtils.Concat(
-                Enumerable.Repeat(Instruction.Create(OpCodes.Nop), 1),
-                instructions,
-                Enumerable.Repeat(Instruction.Create(OpCodes.Ldnull), 1));
+            yield return Instruction.Create(OpCodes.Ldnull);
         }
     }
 }

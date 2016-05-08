@@ -15,35 +15,15 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 {
     public class PropertyParameterBuilderTests
     {
-        [Theory(DisplayName = "Проверка первой команды построителя параметра ссылки на свойство"), AutoFixture]
-        public void FirstNopInstructionTest(
-            IEnumerable<Instruction> instructions,
-            PropertyParameterBuilder sut)
-        {
-            var buildedInstructions = sut.Build(instructions);
-
-            Assert.Equal(Instruction.Create(OpCodes.Nop), buildedInstructions.FirstOrDefault(), InstructionComparer.Default);
-        }
-
-        [Theory(DisplayName = "Проверка последней команды построителя параметра ссылки на свойство"), AutoFixture]
+        [Theory(DisplayName = "Проверка команд построителя параметра ссылки на свойство"), AutoFixture]
         public void LastCallInstructionTest(
             [Frozen]PropertyDefinition propertyDefinition,
-            IEnumerable<Instruction> instructions,
+            ParameterDefinition validateParameterDefinition,
             PropertyParameterBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(validateParameterDefinition);
 
-            Assert.Equal(Instruction.Create(OpCodes.Callvirt, propertyDefinition.GetMethod), buildedInstructions.LastOrDefault(), InstructionComparer.Default);
-        }
-
-        [Theory(DisplayName = "Проверка команд построителя параметра ссылки на свойство"), AutoFixture]
-        public void ContainsInstructionsTest(
-            IEnumerable<Instruction> instructions,
-            PropertyParameterBuilder sut)
-        {
-            var buildedInstructions = sut.Build(instructions);
-
-            Assert.Empty(instructions.Except(buildedInstructions, InstructionComparer.Default));
+            Assert.Equal(Instruction.Create(OpCodes.Callvirt, propertyDefinition.GetMethod), buildedInstructions.SingleOrDefault(), InstructionComparer.Default);
         }
     }
 }
