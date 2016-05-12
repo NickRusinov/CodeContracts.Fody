@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
+using TinyIoC;
 
 namespace CodeContracts.Fody
 {
@@ -24,6 +25,17 @@ namespace CodeContracts.Fody
             Contract.Requires(LogDebug != null);
             Contract.Requires(LogInfo != null);
             Contract.Requires(LogWarning != null);
+
+            var ioc = ConfigureIoCContainer();
+        }
+
+        private TinyIoCContainer ConfigureIoCContainer()
+        {
+            var ioc = new TinyIoCContainer();
+            ioc.Register(ModuleDefinition);
+            ioc.AutoRegister(DuplicateImplementationActions.RegisterMultiple);
+
+            return ioc;
         }
     }
 }
