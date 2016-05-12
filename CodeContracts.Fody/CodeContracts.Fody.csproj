@@ -169,6 +169,7 @@
     <Compile Include="ContractInjectors\StringParameterParser.cs" />
     <Compile Include="ContractInjectors\ThisParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ThisParameterParser.cs" />
+    <Compile Include="ContractScanners\ContractCriteria.cs" />
     <Compile Include="ContractScanners\FieldScanner.cs" />
     <Compile Include="ContractScanners\IContractCriteria.cs" />
     <Compile Include="ContractScanners\IFieldScanner.cs" />
