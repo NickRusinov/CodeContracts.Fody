@@ -99,14 +99,19 @@
   <ItemGroup>
     <Compile Include="AutoFixtureAttribute.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterBuilderTests.cs" />
+    <Compile Include="ContractInjectors\ArgumentParameterParserTests.cs" />
     <Compile Include="ContractInjectors\ContractMethodBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractMethodWithMessageBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractValidateBuilderTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilderTests.cs" />
+    <Compile Include="ContractInjectors\FieldParameterParserTests.cs" />
     <Compile Include="ContractInjectors\NullParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\PropertyParameterBuilderTests.cs" />
+    <Compile Include="ContractInjectors\PropertyParameterParserTests.cs" />
     <Compile Include="ContractInjectors\StringParameterBuilderTests.cs" />
+    <Compile Include="ContractInjectors\StringParameterParserTests.cs" />
     <Compile Include="ContractInjectors\ThisParameterBuilderTests.cs" />
+    <Compile Include="ContractInjectors\ThisParameterParserTests.cs" />
     <Compile Include="ContractScanners\FieldScannerTests.cs" />
     <Compile Include="ContractScanners\MethodReturnScannerTests.cs" />
     <Compile Include="ContractScanners\MethodScannerTests.cs" />
@@ -114,7 +119,9 @@
     <Compile Include="ContractScanners\ParameterScannerTests.cs" />
     <Compile Include="ContractScanners\PropertyScannerTests.cs" />
     <Compile Include="ContractScanners\TypeScannerTests.cs" />
+    <Compile Include="InlineAutoFixtureAttribute.cs" />
     <Compile Include="Internal\InstructionComparer.cs" />
+    <Compile Include="Internal\ReflectionExtensions.cs" />
     <Compile Include="MethodBodyResolvers\ContractClassResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantMethodResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantResolverTests.cs" />

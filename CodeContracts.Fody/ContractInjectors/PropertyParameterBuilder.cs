@@ -21,6 +21,8 @@ namespace CodeContracts.Fody.ContractInjectors
             this.propertyDefinition = propertyDefinition;
         }
 
+        public TypeReference ParameterType => propertyDefinition.PropertyType;
+
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             yield return Instruction.Create(OpCodes.Callvirt, propertyDefinition.GetMethod);

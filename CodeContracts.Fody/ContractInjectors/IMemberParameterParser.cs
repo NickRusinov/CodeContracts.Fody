@@ -5,14 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
-using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public interface IParameterBuilder
+    public interface IMemberParameterParser
     {
-        TypeReference ParameterType { get; }
-
-        IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition);
+        IEnumerable<IParameterBuilder> Parse(TypeDefinition typeDefinition, string parameterString);
     }
 }

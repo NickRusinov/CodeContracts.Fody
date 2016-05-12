@@ -11,6 +11,8 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class NullParameterBuilder : IParameterBuilder
     {
+        public TypeReference ParameterType => null;
+
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             yield return Instruction.Create(OpCodes.Ldnull);
