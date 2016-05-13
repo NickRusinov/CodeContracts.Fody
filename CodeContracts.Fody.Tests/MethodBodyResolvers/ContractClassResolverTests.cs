@@ -44,27 +44,27 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         [Theory(DisplayName = "Проверка разрешения контрактного класса для интерфейса без атрибута ContractClass"), AutoFixture]
         public void InterfaceWithoutContractClassTest(
             [Frozen]ModuleDefinition moduleDefinition,
-            [Frozen]Mock<IContractClassResolver> contractClassResolverMock,
+            [Frozen]Mock<IInterfaceContractClassBuilder> interfaceContractClassBuilderMock,
             ContractClassResolver sut)
         {
             var contractClassA = sut.Resolve(moduleDefinition.FindType("ISith"), moduleDefinition.FindMethod("ISith", "get_Name"));
             var contractClassB = sut.Resolve(moduleDefinition.FindType("ISith"), null);
 
-            contractClassResolverMock.Verify(ccr => ccr.Resolve(moduleDefinition.FindType("ISith"), moduleDefinition.FindMethod("ISith", "get_Name")), Times.Once);
-            contractClassResolverMock.Verify(ccr => ccr.Resolve(moduleDefinition.FindType("ISith"), null), Times.Once);
+            interfaceContractClassBuilderMock.Verify(iccb => iccb.Build(moduleDefinition.FindType("ISith")), Times.Exactly(2));
+            interfaceContractClassBuilderMock.Verify(iccb => iccb.Build(moduleDefinition.FindType("ISith")), Times.Exactly(2));
         }
 
         [Theory(DisplayName = "Проверка разрешения контрактного класса для абстрактного класса без атрибута ContractClass"), AutoFixture]
         public void AbstractClassWithoutContractClassTest(
             [Frozen]ModuleDefinition moduleDefinition,
-            [Frozen]Mock<IContractClassResolver> contractClassResolverMock,
+            [Frozen]Mock<IAbstractContractClassBuilder> abstractContractClassBuilderMock,
             ContractClassResolver sut)
         {
             var contractClassA = sut.Resolve(moduleDefinition.FindType("Sith"), moduleDefinition.FindMethod("Sith", "UseForceLightining"));
             var contractClassB = sut.Resolve(moduleDefinition.FindType("Sith"), moduleDefinition.FindMethod("Sith", "JoinDarkSide"));
             var contractClassC = sut.Resolve(moduleDefinition.FindType("Sith"), null);
 
-            contractClassResolverMock.Verify(ccr => ccr.Resolve(moduleDefinition.FindType("Sith"), moduleDefinition.FindMethod("Sith", "UseForceLightining")), Times.Once);
+            abstractContractClassBuilderMock.Verify(accb => accb.Build(moduleDefinition.FindType("Sith")), Times.Once);
             Assert.Same(moduleDefinition.FindType("Sith"), contractClassB);
             Assert.Same(moduleDefinition.FindType("Sith"), contractClassC);
         }

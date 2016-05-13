@@ -10,13 +10,13 @@ namespace CodeContracts.Fody.MethodBodyResolvers
 {
     public class InvariantMethodResolver : IInvariantMethodResolver
     {
-        private readonly IInvariantMethodResolver invariantMethodResolver;
+        private readonly IInvariantMethodBuilder invariantMethodBuilder;
 
-        public InvariantMethodResolver(IInvariantMethodResolver invariantMethodResolver)
+        public InvariantMethodResolver(IInvariantMethodBuilder invariantMethodBuilder)
         {
-            Contract.Requires(invariantMethodResolver != null);
+            Contract.Requires(invariantMethodBuilder != null);
 
-            this.invariantMethodResolver = invariantMethodResolver;
+            this.invariantMethodBuilder = invariantMethodBuilder;
         }
 
         public MethodDefinition Resolve(TypeDefinition typeDefinition)
@@ -24,7 +24,7 @@ namespace CodeContracts.Fody.MethodBodyResolvers
             var contractInvariantMethod = ResolveInvariantMethod(typeDefinition);
 
             if (contractInvariantMethod == null)
-                return invariantMethodResolver.Resolve(typeDefinition);
+                return invariantMethodBuilder.Build(typeDefinition);
 
             return contractInvariantMethod;
         }

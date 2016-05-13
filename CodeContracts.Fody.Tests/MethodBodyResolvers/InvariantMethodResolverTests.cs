@@ -28,12 +28,12 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         [Theory(DisplayName = "Проверка разрешения метода инварианта для класса, не содержащего метод инвариант"), AutoFixture]
         public void ClassWithoutInvariantMethodTest(
             [Frozen]ModuleDefinition moduleDefinition,
-            [Frozen]Mock<IInvariantMethodResolver> invariantMethodResolverMock,
+            [Frozen]Mock<IInvariantMethodBuilder> invariantMethodBuilderMock,
             InvariantMethodResolver sut)
         {
             var invariantMethod = sut.Resolve(moduleDefinition.FindType("Sith"));
 
-            invariantMethodResolverMock.Verify(imr => imr.Resolve(moduleDefinition.FindType("Sith")), Times.Once);
+            invariantMethodBuilderMock.Verify(imb => imb.Build(moduleDefinition.FindType("Sith")), Times.Once);
         }
     }
 }

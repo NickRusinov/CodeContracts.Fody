@@ -10,17 +10,17 @@ namespace CodeContracts.Fody.MethodBodyResolvers
 {
     public class ContractClassResolver : IContractClassResolver
     {
-        private readonly IContractClassResolver interfaceContractClassResolver;
+        private readonly IInterfaceContractClassBuilder interfaceContractClassBuilder;
 
-        private readonly IContractClassResolver abstractContractClassResolver;
+        private readonly IAbstractContractClassBuilder abstractContractClassBuilder;
 
-        public ContractClassResolver(IContractClassResolver interfaceContractClassResolver, IContractClassResolver abstractContractClassResolver)
+        public ContractClassResolver(IInterfaceContractClassBuilder interfaceContractClassBuilder, IAbstractContractClassBuilder abstractContractClassBuilder)
         {
-            Contract.Requires(interfaceContractClassResolver != null);
-            Contract.Requires(abstractContractClassResolver != null);
+            Contract.Requires(interfaceContractClassBuilder != null);
+            Contract.Requires(abstractContractClassBuilder != null);
 
-            this.interfaceContractClassResolver = interfaceContractClassResolver;
-            this.abstractContractClassResolver = abstractContractClassResolver;
+            this.interfaceContractClassBuilder = interfaceContractClassBuilder;
+            this.abstractContractClassBuilder = abstractContractClassBuilder;
         }
         
         public TypeDefinition Resolve(TypeDefinition typeDefinition, MethodDefinition methodDefinition)
@@ -28,13 +28,13 @@ namespace CodeContracts.Fody.MethodBodyResolvers
             var contractClass = ResolveContractClass(typeDefinition);
 
             if (typeDefinition.IsInterface && contractClass == null)
-                return interfaceContractClassResolver.Resolve(typeDefinition, methodDefinition);
+                return interfaceContractClassBuilder.Build(typeDefinition);
 
             if (typeDefinition.IsInterface && contractClass != null)
                 return contractClass;
 
             if (typeDefinition.IsAbstract && methodDefinition?.IsAbstract == true && contractClass == null)
-                return abstractContractClassResolver.Resolve(typeDefinition, methodDefinition);
+                return abstractContractClassBuilder.Build(typeDefinition);
 
             if (typeDefinition.IsAbstract && methodDefinition?.IsAbstract == true && contractClass != null)
                 return contractClass;
