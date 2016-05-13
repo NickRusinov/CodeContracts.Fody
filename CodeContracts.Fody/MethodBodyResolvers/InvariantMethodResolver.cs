@@ -34,7 +34,7 @@ namespace CodeContracts.Fody.MethodBodyResolvers
             Contract.Requires(typeDefinition != null);
 
             var contractInvariantMethodDefinition = typeDefinition.Module.ImportReference(typeof(ContractInvariantMethodAttribute)).Resolve();
-            var contractInvariantMethod = typeDefinition.Methods.SingleOrDefault(md => md.CustomAttributes.Any(ca => ca.AttributeType.Resolve() == contractInvariantMethodDefinition));
+            var contractInvariantMethod = typeDefinition.Methods.SingleOrDefault(md => md.CustomAttributes.Any(ca => Equals(ca.AttributeType.Resolve(), contractInvariantMethodDefinition)));
 
             return contractInvariantMethod;
         }

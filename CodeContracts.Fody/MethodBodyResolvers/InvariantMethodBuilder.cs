@@ -12,8 +12,23 @@ namespace CodeContracts.Fody.MethodBodyResolvers
     {
         public MethodDefinition Build(TypeDefinition typeDefinition)
         {
-            // todo - алгоритм генерации метода инварианта
-            return typeDefinition.Methods.First();
+            var invariantMethod = BuildContractInvariantMethodDefinition(typeDefinition.Module);
+            var invariantAttribute = BuildContractInvariantMethodAttribute(typeDefinition.Module);
+
+            invariantMethod.CustomAttributes.Add(invariantAttribute);
+            typeDefinition.Methods.Add(invariantMethod);
+
+            return invariantMethod;
+        }
+
+        private MethodDefinition BuildContractInvariantMethodDefinition(ModuleDefinition moduleDefinition)
+        {
+            return new MethodDefinition($"Invariant{ Guid.NewGuid().ToString("N") }", MethodAttributes.Private, moduleDefinition.TypeSystem.Void);
+        }
+
+        private CustomAttribute BuildContractInvariantMethodAttribute(ModuleDefinition moduleDefinition)
+        {
+            return new CustomAttribute(moduleDefinition.ImportReference(typeof(ContractInvariantMethodAttribute).GetConstructor(Type.EmptyTypes)));
         }
     }
 }

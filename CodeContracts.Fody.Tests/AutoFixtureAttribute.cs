@@ -17,7 +17,7 @@ namespace CodeContracts.Fody.Tests
     {
         private static readonly string moduleFileName = "CodeContracts.TestAssembly.dll";
 
-        private static readonly Lazy<ModuleDefinition> moduleDefinitionLazy = new Lazy<ModuleDefinition>(() => ModuleDefinition.ReadModule(moduleFileName));
+        private readonly Lazy<ModuleDefinition> moduleDefinitionLazy = new Lazy<ModuleDefinition>(() => ModuleDefinition.ReadModule(moduleFileName));
 
         public AutoFixtureAttribute()
         {

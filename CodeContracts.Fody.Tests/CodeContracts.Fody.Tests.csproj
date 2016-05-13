@@ -123,6 +123,7 @@
     <Compile Include="Internal\InstructionComparer.cs" />
     <Compile Include="Internal\ReflectionExtensions.cs" />
     <Compile Include="MethodBodyResolvers\ContractClassResolverTests.cs" />
+    <Compile Include="MethodBodyResolvers\InvariantMethodBuilderTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantMethodResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\RequiresEnsuresResolverTests.cs" />
