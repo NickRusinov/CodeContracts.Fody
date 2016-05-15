@@ -1,30 +1,41 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.Fody", "CodeContracts.Fody\CodeContracts.Fody.csproj", "{462F0895-0BE2-4BF5-AD9E-3C488A9013F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35} = {3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.Fody.Tests", "CodeContracts.Fody.Tests\CodeContracts.Fody.Tests.csproj", "{50435103-B1A1-4C17-A693-A9311CDEC1EC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{21E3E079-812C-4062-9DD4-E4A3196AA14E} = {21E3E079-812C-4062-9DD4-E4A3196AA14E}
 		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35} = {3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestAssemblies", "TestAssemblies", "{6F7A45EF-5315-4567-99F9-1018AF4A4A3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.TestAssembly", "TestAssemblies\CodeContracts.TestAssembly\CodeContracts.TestAssembly.csproj", "{21E3E079-812C-4062-9DD4-E4A3196AA14E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35} = {3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.Fody.IntegrationTests", "CodeContracts.Fody.IntegrationTests\CodeContracts.Fody.IntegrationTests.csproj", "{F2DED7D5-B852-429D-BE39-0BCE50FE24BD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C224E445-9EB3-45D4-B92B-3C74691FAB61} = {C224E445-9EB3-45D4-B92B-3C74691FAB61}
 		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35} = {3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWars", "TestAssemblies\StarWars\StarWars.csproj", "{C224E445-9EB3-45D4-B92B-3C74691FAB61}"
 	ProjectSection(ProjectDependencies) = postProject
 		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35} = {3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts", "CodeContracts\CodeContracts.csproj", "{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +63,10 @@ Global
 		{C224E445-9EB3-45D4-B92B-3C74691FAB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C224E445-9EB3-45D4-B92B-3C74691FAB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C224E445-9EB3-45D4-B92B-3C74691FAB61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
