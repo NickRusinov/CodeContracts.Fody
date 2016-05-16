@@ -151,11 +151,17 @@
     <Compile Include="ContractDefinitions\InvariantDefinition.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterParser.cs" />
+    <Compile Include="ContractInjectors\CompositeParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ContractMethodBuilder.cs" />
     <Compile Include="ContractInjectors\ContractMethodWithMessageBuilder.cs" />
+    <Compile Include="ContractInjectors\ContractParameterResolver.cs" />
+    <Compile Include="ContractInjectors\ContractPropertyResolver.cs" />
     <Compile Include="ContractInjectors\ContractValidateBuilder.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilder.cs" />
     <Compile Include="ContractInjectors\FieldParameterParser.cs" />
+    <Compile Include="ContractInjectors\IConstParameterBuilderFactory.cs" />
+    <Compile Include="ContractInjectors\IContractParameterResolver.cs" />
+    <Compile Include="ContractInjectors\IContractPropertyResolver.cs" />
     <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
     <Compile Include="ContractInjectors\IInstructionsBuilder.cs" />
     <Compile Include="ContractInjectors\IInvariantInjector.cs" />
