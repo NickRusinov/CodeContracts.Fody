@@ -145,6 +145,7 @@
   <ItemGroup>
     <Compile Include="ContractDefinitions\ContractDefinition.cs" />
     <Compile Include="ContractDefinitions\ContractParameterDefinition.cs" />
+    <Compile Include="ContractDefinitions\ContractPropertyDefinition.cs" />
     <Compile Include="ContractDefinitions\ContractValidateDefinition.cs" />
     <Compile Include="ContractDefinitions\EnsuresDefinition.cs" />
     <Compile Include="ContractDefinitions\InvariantDefinition.cs" />
