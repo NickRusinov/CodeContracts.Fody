@@ -159,6 +159,7 @@
     <Compile Include="ContractInjectors\ContractPropertyResolver.cs" />
     <Compile Include="ContractInjectors\ContractValidateBuilder.cs" />
     <Compile Include="ContractInjectors\ContractValidateCriteria.cs" />
+    <Compile Include="ContractInjectors\ContractValidateScanner.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilder.cs" />
     <Compile Include="ContractInjectors\FieldParameterParser.cs" />
     <Compile Include="ContractInjectors\IBestOverloadResolver.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="ContractInjectors\IContractParameterResolver.cs" />
     <Compile Include="ContractInjectors\IContractPropertyResolver.cs" />
     <Compile Include="ContractInjectors\IContractValidateCriteria.cs" />
+    <Compile Include="ContractInjectors\IContractValidateScanner.cs" />
     <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
     <Compile Include="ContractInjectors\IInstructionsBuilder.cs" />
     <Compile Include="ContractInjectors\IInvariantInjector.cs" />
