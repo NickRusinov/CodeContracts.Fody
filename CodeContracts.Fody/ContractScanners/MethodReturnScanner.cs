@@ -26,7 +26,7 @@ namespace CodeContracts.Fody.ContractScanners
                 from contractAttribute in methodReturnDefinition.CustomAttributes
                 where contractCriteria.IsContract(contractAttribute)
                 let methodDefinition = (MethodDefinition)methodReturnDefinition.Method
-                select new EnsuresDefinition(contractAttribute, methodDefinition.DeclaringType, methodDefinition);
+                select new EnsuresDefinition(contractAttribute, methodReturnDefinition, methodDefinition);
         }
     }
 }

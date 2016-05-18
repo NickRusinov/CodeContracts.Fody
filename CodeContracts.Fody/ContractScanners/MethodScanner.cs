@@ -42,7 +42,7 @@ namespace CodeContracts.Fody.ContractScanners
                 
                 from contractAttribute in methodDefinition.CustomAttributes
                 where contractCriteria.IsContract(contractAttribute)
-                select new RequiresDefinition(contractAttribute, methodDefinition.DeclaringType, methodDefinition));
+                select new RequiresDefinition(contractAttribute, methodDefinition, methodDefinition));
         }
     }
 }

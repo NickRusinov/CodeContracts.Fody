@@ -10,11 +10,11 @@ namespace CodeContracts.Fody.ContractDefinitions
 {
     public class RequiresDefinition : ContractDefinition
     {
-        public RequiresDefinition(CustomAttribute contractAttribute, TypeDefinition declaringType, MethodDefinition contractMethod)
-            : base(contractAttribute, declaringType)
+        public RequiresDefinition(CustomAttribute contractAttribute, ICustomAttributeProvider attributeProvider, MethodDefinition contractMethod)
+            : base(contractAttribute, attributeProvider, contractMethod.DeclaringType)
         {
             Contract.Requires(contractAttribute != null);
-            Contract.Requires(declaringType != null);
+            Contract.Requires(attributeProvider != null);
             Contract.Requires(contractMethod != null);
 
             ContractMethod = contractMethod;

@@ -10,11 +10,11 @@ namespace CodeContracts.Fody.ContractDefinitions
 {
     public class EnsuresDefinition : ContractDefinition
     {
-        public EnsuresDefinition(CustomAttribute contractAttribute, TypeDefinition declaringType, MethodDefinition contractMethod)
-            : base(contractAttribute, declaringType)
+        public EnsuresDefinition(CustomAttribute contractAttribute, ICustomAttributeProvider attributeProvider, MethodDefinition contractMethod)
+            : base(contractAttribute, attributeProvider, contractMethod.DeclaringType)
         {
             Contract.Requires(contractAttribute != null);
-            Contract.Requires(declaringType != null);
+            Contract.Requires(attributeProvider != null);
             Contract.Requires(contractMethod != null);
 
             ContractMethod = contractMethod;

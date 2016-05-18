@@ -25,7 +25,7 @@ namespace CodeContracts.Fody.ContractScanners
             return
                 from contractAttribute in fieldDefinition.CustomAttributes
                 where contractCriteria.IsContract(contractAttribute)
-                select new InvariantDefinition(contractAttribute, fieldDefinition.DeclaringType);
+                select new InvariantDefinition(contractAttribute, fieldDefinition, fieldDefinition.DeclaringType);
         }
     }
 }
