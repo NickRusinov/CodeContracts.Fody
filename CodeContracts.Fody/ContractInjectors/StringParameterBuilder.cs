@@ -11,21 +11,15 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class StringParameterBuilder : IParameterBuilder
     {
-        private readonly TypeSystem typeSystem;
-
         private readonly string stringParameter;
 
-        public StringParameterBuilder(TypeSystem typeSystem, string stringParameter)
+        public StringParameterBuilder(string stringParameter)
         {
-            Contract.Requires(typeSystem != null);
             Contract.Requires(stringParameter != null);
-
-            this.typeSystem = typeSystem;
+            
             this.stringParameter = stringParameter;
         }
-
-        public TypeReference ParameterType => typeSystem.String;
-
+        
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             yield return Instruction.Create(OpCodes.Ldstr, stringParameter);

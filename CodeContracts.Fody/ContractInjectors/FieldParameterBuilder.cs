@@ -19,9 +19,7 @@ namespace CodeContracts.Fody.ContractInjectors
 
             this.fieldDefinition = fieldDefinition;
         }
-
-        public TypeReference ParameterType => fieldDefinition.FieldType;
-
+        
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             yield return Instruction.Create(OpCodes.Ldfld, fieldDefinition);

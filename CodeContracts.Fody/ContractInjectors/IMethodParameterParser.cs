@@ -10,6 +10,6 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public interface IMethodParameterParser
     {
-        IEnumerable<IParameterBuilder> Parse(MethodDefinition methodDefinition, string parameterString);
+        ParseResult Parse(MethodDefinition methodDefinition, string parameterString);
     }
 }

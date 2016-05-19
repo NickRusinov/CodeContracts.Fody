@@ -19,9 +19,7 @@ namespace CodeContracts.Fody.ContractInjectors
 
             this.parameterDefinition = parameterDefinition;
         }
-
-        public TypeReference ParameterType => parameterDefinition.ParameterType;
-
+        
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             yield return Instruction.Create(OpCodes.Ldarg, parameterDefinition);

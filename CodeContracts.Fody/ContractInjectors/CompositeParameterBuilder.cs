@@ -20,8 +20,12 @@ namespace CodeContracts.Fody.ContractInjectors
             this.parameterBuilders = parameterBuilders;
         }
 
-        public TypeReference ParameterType => parameterBuilders.Select(pb => pb.ParameterType).LastOrDefault();
-
+        public CompositeParameterBuilder(params IParameterBuilder[] parameterBuilders)
+            : this(parameterBuilders as IEnumerable<IParameterBuilder>)
+        {
+            Contract.Requires(parameterBuilders != null);
+        }
+        
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             return parameterBuilders.SelectMany(pb => pb.Build(validateParameterDefinition));

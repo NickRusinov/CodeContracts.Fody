@@ -23,10 +23,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
 
-            var builders = sut.Parse(methodDefinition, "$force").ToList();
+            var parseResult = sut.Parse(methodDefinition, "$force");
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
-            Assert.IsType<ArgumentParameterBuilder>(builders.First());
+            Assert.IsType<ArgumentParameterBuilder>(parseResult.ParsedParameterBuilder);
+            Assert.Equal(moduleDefinition.FindType("Force"), parseResult.ParsedParameterType);
         }
 
         [Theory(DisplayName = "Проверка парсера аргументов методов для параметров, заданных строкой")]
@@ -39,10 +40,10 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
 
-            var builders = sut.Parse(methodDefinition, parameterString).ToList();
+            var parseResult = sut.Parse(methodDefinition, parameterString);
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("Force"), tailParameterString));
-            Assert.IsType<ArgumentParameterBuilder>(builders.First());
+            Assert.IsType<CompositeParameterBuilder>(parseResult.ParsedParameterBuilder);
         }
 
         [Theory(DisplayName = "Проверка парсера аргументов методов для параметров, заданных строкой")]
@@ -55,10 +56,10 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
 
-            var builders = sut.Parse(methodDefinition, parameterString).ToList();
+            var parseResult = sut.Parse(methodDefinition, parameterString);
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
-            Assert.Empty(builders);
+            Assert.Equal(ParseResult.Empty, parseResult);
         }
     }
 }

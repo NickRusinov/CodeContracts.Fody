@@ -10,6 +10,6 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public interface IMemberParameterParser
     {
-        IEnumerable<IParameterBuilder> Parse(TypeDefinition typeDefinition, string parameterString);
+        ParseResult Parse(TypeDefinition typeDefinition, string parameterString);
     }
 }

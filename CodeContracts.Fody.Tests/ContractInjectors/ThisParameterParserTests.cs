@@ -23,10 +23,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
 
-            var builders = sut.Parse(methodDefinition, "$").ToList();
+            var parseResult = sut.Parse(methodDefinition, "$");
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
-            Assert.IsType<ThisParameterBuilder>(builders.First());
+            Assert.IsType<ThisParameterBuilder>(parseResult.ParsedParameterBuilder);
+            Assert.Equal(moduleDefinition.FindType("Jedi"), parseResult.ParsedParameterType);
         }
 
         [Theory(DisplayName = "Проверка парсера параметра ссылки на текущий объект")]
@@ -39,10 +40,10 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
 
-            var builders = sut.Parse(methodDefinition, parameterString).ToList();
+            var parseResult = sut.Parse(methodDefinition, parameterString);
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("Jedi"), tailParameterString));
-            Assert.IsType<ThisParameterBuilder>(builders.First());
+            Assert.IsType<CompositeParameterBuilder>(parseResult.ParsedParameterBuilder);
         }
     }
 }

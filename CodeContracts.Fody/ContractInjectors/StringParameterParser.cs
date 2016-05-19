@@ -11,15 +11,19 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class StringParameterParser : IMethodParameterParser
     {
-        public IEnumerable<IParameterBuilder> Parse(MethodDefinition methodDefinition, string parameterString)
+        public ParseResult Parse(MethodDefinition methodDefinition, string parameterString)
         {
+            var parseResult = ParseResult.Empty;
+
             var matchSimpleString = Regex.Match(parameterString, @"^([^\$].*)$", RegexOptions.Compiled);
             if (matchSimpleString.Success)
-                yield return new StringParameterBuilder(methodDefinition.Module.TypeSystem, matchSimpleString.Groups[1].Value);
+                parseResult += new ParseResult(methodDefinition.Module.TypeSystem.String.Resolve(), new StringParameterBuilder(matchSimpleString.Groups[1].Value));
 
             var matchEscapedString = Regex.Match(parameterString, @"^\$(\$.+)$", RegexOptions.Compiled);
             if (matchEscapedString.Success)
-                yield return new StringParameterBuilder(methodDefinition.Module.TypeSystem, matchEscapedString.Groups[1].Value);
+                parseResult += new ParseResult(methodDefinition.Module.TypeSystem.String.Resolve(), new StringParameterBuilder(matchEscapedString.Groups[1].Value));
+
+            return parseResult;
         }
     }
 }

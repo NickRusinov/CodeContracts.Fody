@@ -20,15 +20,19 @@ namespace CodeContracts.Fody.ContractInjectors
             this.memberParameterParser = memberParameterParser;
         }
 
-        public IEnumerable<IParameterBuilder> Parse(MethodDefinition methodDefinition, string parameterString)
+        public ParseResult Parse(MethodDefinition methodDefinition, string parameterString)
         {
+            var parseResult = ParseResult.Empty;
+
             var thisMatch = Regex.Match(parameterString, @"^\$(?:\.(.+))?$", RegexOptions.Compiled);
+
             if (thisMatch.Success)
-                yield return new ThisParameterBuilder(methodDefinition.DeclaringType);
+                parseResult += new ParseResult(methodDefinition.DeclaringType, new ThisParameterBuilder());
 
             if (!string.IsNullOrEmpty(thisMatch.Groups[1].Value))
-                foreach (var parameterBuilder in memberParameterParser.Parse(methodDefinition.DeclaringType, thisMatch.Groups[1].Value))
-                    yield return parameterBuilder;
+                parseResult += memberParameterParser.Parse(methodDefinition.DeclaringType, thisMatch.Groups[1].Value);
+
+            return parseResult;
         }
     }
 }

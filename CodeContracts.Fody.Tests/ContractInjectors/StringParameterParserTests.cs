@@ -23,10 +23,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             MethodDefinition methodDefinition,
             StringParameterParser sut)
         {
-            var builders = sut.Parse(methodDefinition, parameterString).ToList();
+            var parseResult = sut.Parse(methodDefinition, parameterString);
             
-            Assert.IsType<StringParameterBuilder>(builders.Single());
-            Assert.Equal(parameterString, builders.Single().FindPrivateField<string>("stringParameter"));
+            Assert.IsType<StringParameterBuilder>(parseResult.ParsedParameterBuilder);
+            Assert.Equal(moduleDefinition.TypeSystem.String.Resolve(), parseResult.ParsedParameterType);
+            Assert.Equal(parameterString, parseResult.ParsedParameterBuilder.FindPrivateField<string>("stringParameter"));
         }
 
         [Theory(DisplayName = "Проверка парсера параметра строки константы")]
@@ -38,10 +39,12 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             MethodDefinition methodDefinition,
             StringParameterParser sut)
         {
-            var builders = sut.Parse(methodDefinition, parameterString).ToList();
+            var parseResult = sut.Parse(methodDefinition, parameterString);
             
-            Assert.IsType<StringParameterBuilder>(builders.Single());
-            Assert.Equal(expectedParameterString, builders.Single().FindPrivateField<string>("stringParameter"));
+            Assert.IsType<StringParameterBuilder>(parseResult.ParsedParameterBuilder);
+            Assert.Equal(moduleDefinition.TypeSystem.String.Resolve(), parseResult.ParsedParameterType);
+            Assert.Equal(expectedParameterString, parseResult.ParsedParameterBuilder.FindPrivateField<string>("stringParameter"));
         }
     }
 }
+

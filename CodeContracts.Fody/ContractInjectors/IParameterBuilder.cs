@@ -11,8 +11,6 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public interface IParameterBuilder
     {
-        TypeReference ParameterType { get; }
-
         IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition);
     }
 }

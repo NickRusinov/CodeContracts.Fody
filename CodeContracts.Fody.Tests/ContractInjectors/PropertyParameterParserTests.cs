@@ -23,10 +23,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var typeDefinition = moduleDefinition.FindType("Jedi");
 
-            var builders = sut.Parse(typeDefinition, "Name").ToList();
+            var parseResult = sut.Parse(typeDefinition, "Name");
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
-            Assert.IsType<PropertyParameterBuilder>(builders.First());
+            Assert.IsType<PropertyParameterBuilder>(parseResult.ParsedParameterBuilder);
+            Assert.Equal(moduleDefinition.TypeSystem.String.Resolve(), parseResult.ParsedParameterType);
         }
 
         [Theory(DisplayName = "Проверка парсера параметров ссылок на свойство объекта")]
@@ -39,10 +40,10 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var typeDefinition = moduleDefinition.FindType("Jedi");
 
-            var builders = sut.Parse(typeDefinition, parameterString).ToList();
+            var parseResult = sut.Parse(typeDefinition, parameterString);
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.TypeSystem.String.Resolve(), tailParameterString));
-            Assert.IsType<PropertyParameterBuilder>(builders.First());
+            Assert.IsType<CompositeParameterBuilder>(parseResult.ParsedParameterBuilder);
         }
 
         [Theory(DisplayName = "Проверка парсера параметров ссылок на свойство объекта")]
@@ -55,10 +56,10 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var typeDefinition = moduleDefinition.FindType("Jedi");
 
-            var builders = sut.Parse(typeDefinition, parameterString).ToList();
+            var parseResult = sut.Parse(typeDefinition, parameterString);
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
-            Assert.Empty(builders);
+            Assert.Equal(ParseResult.Empty, parseResult);
         }
     }
 }
