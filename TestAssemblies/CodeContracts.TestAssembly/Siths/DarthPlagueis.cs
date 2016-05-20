@@ -10,10 +10,10 @@ namespace CodeContracts.TestAssembly.Siths
 {
     public class DarthPlagueis : ISith
     {
-        [Contract]
+        [NotNull]
         public string Name => "Plagueis";
 
-        [Contract]
+        [True]
         public ISith Slave { get; set; }
 
         public bool JoinDarkSide()

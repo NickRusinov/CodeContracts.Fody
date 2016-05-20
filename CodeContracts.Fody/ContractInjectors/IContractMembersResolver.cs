@@ -4,12 +4,13 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.ContractDefinitions;
 using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public interface IConstParameterBuilderFactory
+    public interface IContractMembersResolver
     {
-        IParameterBuilder Create(ModuleDefinition moduleDefinition, object constValue);
+        IEnumerable<ContractMember> Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition);
     }
 }

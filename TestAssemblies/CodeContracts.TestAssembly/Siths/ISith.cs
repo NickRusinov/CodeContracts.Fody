@@ -12,7 +12,7 @@ namespace CodeContracts.TestAssembly.Siths
     {
         string Name { get; }
 
-        [Contract]
+        [True]
         bool JoinDarkSide();
     }
 }

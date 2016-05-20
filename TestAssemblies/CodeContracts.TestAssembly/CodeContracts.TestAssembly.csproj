@@ -40,21 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\ContractAttribute.cs" />
-    <Compile Include="Contracts\NoContractAttribute.cs" />
     <Compile Include="Force.cs" />
     <Compile Include="Jedis\IJedi.cs" />
     <Compile Include="Jedis\Jedi.cs" />
     <Compile Include="Jedis\QuiGonJinn.cs" />
     <Compile Include="Lightsaber.cs" />
     <Compile Include="LightsaberColor.cs" />
+    <Compile Include="NoContractAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Siths\DarthMaul.cs" />
     <Compile Include="Siths\DarthPlagueis.cs" />
     <Compile Include="Siths\ISith.cs" />
     <Compile Include="Siths\Sith.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeContracts\CodeContracts.csproj">
+      <Project>{3585eced-97ef-4dd9-a1b9-bd4b52a07d35}</Project>
+      <Name>CodeContracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

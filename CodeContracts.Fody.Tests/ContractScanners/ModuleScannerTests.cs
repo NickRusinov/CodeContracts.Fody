@@ -22,8 +22,8 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             var contracts = sut.Scan(moduleDefinition).ToList();
 
-            typeScannerMock.Verify(ts => ts.Scan(It.IsAny<TypeDefinition>()), Times.Exactly(15));
-            Assert.Equal(45, contracts.Count);
+            typeScannerMock.Verify(ts => ts.Scan(It.IsAny<TypeDefinition>()), Times.Exactly(14));
+            Assert.Equal(42, contracts.Count);
         }
     }
 }

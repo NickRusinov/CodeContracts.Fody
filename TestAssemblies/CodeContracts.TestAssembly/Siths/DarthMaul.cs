@@ -11,7 +11,7 @@ namespace CodeContracts.TestAssembly.Siths
 {
     public class DarthMaul : ISith
     {
-        [Contract]
+        [True]
         private readonly Lightsaber lightsaber;
 
         [NoContract]
@@ -24,13 +24,13 @@ namespace CodeContracts.TestAssembly.Siths
         }
 
         [NoContract]
-        [return: Contract]
-        public bool KillJedi([Contract] IJedi jedi, [NoContract] double revenge)
+        [return: True]
+        public bool KillJedi([NotNull] IJedi jedi, [NoContract] double revenge)
         {
             return revenge > 100.0;
         }
 
-        [Contract]
+        [Range("$parameter", 5ul, Min = "$.value", Max = (short)42)]
         [return: NoContract]
         public bool JoinDarkSide()
         {
