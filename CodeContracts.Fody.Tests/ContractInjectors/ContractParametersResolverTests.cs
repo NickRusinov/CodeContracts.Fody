@@ -17,7 +17,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
     public class ContractParametersResolverTests
     {
         [Theory(DisplayName = "Проверка разрешения константного параметра атрибута контракта"), AutoFixture]
-        public void ConstIfParameterValueIsConst(
+        public void ConstIfParameterValueIsConstTest(
             [Frozen] ModuleDefinition moduleDefinition,
             ContractParametersResolver sut)
         {
@@ -28,13 +28,13 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             var constMember = contractMembers.Skip(1).First();
 
             Assert.Equal(2, contractMembers.Count);
+            Assert.Equal("arg", constMember.ParameterDefinition.Name);
             Assert.Equal(moduleDefinition.TypeSystem.UInt64.Resolve(), constMember.ParameterDefinition.ParameterType.Resolve());
             Assert.IsType<ConstParameterBuilder>(constMember.ParameterBuilder);
-            Assert.Equal("arg", constMember.ParameterDefinition.Name);
         }
 
         [Theory(DisplayName = "Проверка разрешения строкового параметра атрибута контракта"), AutoFixture]
-        public void ParseIfParameterValueIsString(
+        public void ParseIfParameterValueIsStringTest(
             [Frozen] ModuleDefinition moduleDefinition,
             [Frozen] Mock<IMethodParameterParser> methodParameterParserMock,
             ContractParametersResolver sut)
@@ -48,6 +48,57 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             methodParameterParserMock.Verify(mpp => mpp.Parse(methodDefinition, "$parameter"), Times.Once);
             Assert.Equal(2, contractMembers.Count);
             Assert.Equal("arg", stringMember.ParameterDefinition.Name);
+        }
+
+        [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к полю"), AutoFixture]
+        public void AttributeAppliedToFieldTest(
+            [Frozen] ModuleDefinition moduleDefinition,
+            MethodDefinition methodDefinition,
+            ContractParametersResolver sut)
+        {
+            var fieldDefinition = moduleDefinition.FindField("DarthMaul", "lightsaber");
+            var contractDefinition = new InvariantDefinition(fieldDefinition.CustomAttributes.Single(), fieldDefinition, fieldDefinition.DeclaringType);
+            
+            var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();
+            
+            Assert.Equal(1, contractMembers.Count);
+            Assert.Equal("arg", contractMembers.Single().ParameterDefinition.Name);
+            Assert.Equal(fieldDefinition.FieldType, contractMembers.Single().ParameterDefinition.ParameterType.Resolve());
+            Assert.IsType<FieldParameterBuilder>(contractMembers.Single().ParameterBuilder);
+        }
+
+        [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к свойству"), AutoFixture]
+        public void AttributeAppliedToPropertyTest(
+            [Frozen] ModuleDefinition moduleDefinition,
+            MethodDefinition methodDefinition,
+            ContractParametersResolver sut)
+        {
+            var propertyDefinition = moduleDefinition.FindProperty("DarthPlagueis", "Slave");
+            var contractDefinition = new InvariantDefinition(propertyDefinition.CustomAttributes.Single(), propertyDefinition, propertyDefinition.DeclaringType);
+
+            var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();
+
+            Assert.Equal(1, contractMembers.Count);
+            Assert.Equal("arg", contractMembers.Single().ParameterDefinition.Name);
+            Assert.Equal(propertyDefinition.PropertyType, contractMembers.Single().ParameterDefinition.ParameterType.Resolve());
+            Assert.IsType<PropertyParameterBuilder>(contractMembers.Single().ParameterBuilder);
+        }
+
+        [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к параметру метода"), AutoFixture]
+        public void AttributeAppliedToParameterTest(
+            [Frozen] ModuleDefinition moduleDefinition,
+            MethodDefinition methodDefinition,
+            ContractParametersResolver sut)
+        {
+            var parameterDefinition = moduleDefinition.FindParameter("DarthMaul", "KillJedi", "jedi");
+            var contractDefinition = new RequiresDefinition(parameterDefinition.CustomAttributes.Single(), parameterDefinition, (MethodDefinition)parameterDefinition.Method);
+
+            var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();
+
+            Assert.Equal(1, contractMembers.Count);
+            Assert.Equal("arg", contractMembers.Single().ParameterDefinition.Name);
+            Assert.Equal(parameterDefinition.ParameterType, contractMembers.Single().ParameterDefinition.ParameterType.Resolve());
+            Assert.IsType<ArgumentParameterBuilder>(contractMembers.Single().ParameterBuilder);
         }
     }
 }

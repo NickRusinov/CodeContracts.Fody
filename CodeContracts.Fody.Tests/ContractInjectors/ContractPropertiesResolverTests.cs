@@ -17,7 +17,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
     public class ContractPropertiesResolverTests
     {
         [Theory(DisplayName = "Проверка разрешения константного свойства атрибута контракта"), AutoFixture]
-        public void ConstIfPropertyValueIsConst(
+        public void ConstIfPropertyValueIsConstTest(
             [Frozen] ModuleDefinition moduleDefinition,
             ContractPropertiesResolver sut)
         {
@@ -33,7 +33,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         }
 
         [Theory(DisplayName = "Проверка разрешения строкового свойства атрибута контракта"), AutoFixture]
-        public void ParseIfPropertyValueIsString(
+        public void ParseIfPropertyValueIsStringTest(
             [Frozen] ModuleDefinition moduleDefinition,
             [Frozen] Mock<IMethodParameterParser> methodParameterParserMock,
             ContractPropertiesResolver sut)
