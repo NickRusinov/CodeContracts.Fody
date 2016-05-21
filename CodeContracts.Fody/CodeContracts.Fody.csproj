@@ -171,6 +171,7 @@
     <Compile Include="ContractInjectors\FieldParameterParser.cs" />
     <Compile Include="ContractInjectors\IBestOverloadResolver.cs" />
     <Compile Include="ContractInjectors\IContractMembersResolver.cs" />
+    <Compile Include="ContractInjectors\IContractValidateBuilder.cs" />
     <Compile Include="ContractInjectors\IContractValidateCriteria.cs" />
     <Compile Include="ContractInjectors\IContractValidateResolver.cs" />
     <Compile Include="ContractInjectors\IContractValidatesResolver.cs" />

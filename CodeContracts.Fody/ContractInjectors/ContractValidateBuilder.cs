@@ -10,18 +10,9 @@ using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public class ContractValidateBuilder : IInstructionsBuilder
+    public class ContractValidateBuilder : IContractValidateBuilder
     {
-        private readonly ContractValidateDefinition contractValidateDefinition;
-
-        public ContractValidateBuilder(ContractValidateDefinition contractValidateDefinition)
-        {
-            Contract.Requires(contractValidateDefinition != null);
-
-            this.contractValidateDefinition = contractValidateDefinition;
-        }
-
-        public IEnumerable<Instruction> Build(IEnumerable<Instruction> instructions)
+        public IEnumerable<Instruction> Build(ContractValidateDefinition contractValidateDefinition, IEnumerable<Instruction> instructions)
         {
             return EnumerableUtils.Concat(
                 Enumerable.Repeat(Instruction.Create(OpCodes.Nop), 1),
