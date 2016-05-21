@@ -4,17 +4,34 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.ContractDefinitions;
 using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
     public class ContractValidateResolver : IContractValidateResolver
     {
-        public ILookup<ContractValidateDefinition, IParameterBuilder> Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
+        private readonly IBestOverloadResolver bestOverloadResolver;
+
+        private readonly IContractValidateScanner contractValidateScanner;
+
+        public ContractValidateResolver(IBestOverloadResolver bestOverloadResolver, IContractValidateScanner contractValidateScanner)
         {
-            // todo -  алгоритм получения методов валидации контракта для метода
-            return null;
+            Contract.Requires(bestOverloadResolver != null);
+            Contract.Requires(contractValidateScanner != null);
+
+            this.bestOverloadResolver = bestOverloadResolver;
+            this.contractValidateScanner = contractValidateScanner;
+        }
+
+        public ContractValidate Resolve(CustomAttribute customAttribute, ICollection<ContractMember> contractMembers)
+        {
+            var contractValidateDefinitions = contractValidateScanner.Scan(customAttribute).ToList();
+            var bestOverload = bestOverloadResolver.Resolve(contractValidateDefinitions.Select(cvd => cvd.ValidateMethod), contractMembers.Select(cm => cm.ParameterDefinition));
+            
+            var contractValidateDefinition = contractValidateDefinitions.First(cvd => Equals(cvd.ValidateMethod, bestOverload));
+            var contractParameterBuilders = bestOverload.Parameters.Select(pd => contractMembers.First(cm => Equals(cm.ParameterDefinition.Name, pd.Name))).Select(cm => cm.ParameterBuilder);
+
+            return new ContractValidate(contractValidateDefinition, contractParameterBuilders);
         }
     }
 }

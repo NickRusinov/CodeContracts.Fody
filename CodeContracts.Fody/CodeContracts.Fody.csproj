@@ -160,9 +160,12 @@
     <Compile Include="ContractInjectors\ContractMethodWithMessageBuilder.cs" />
     <Compile Include="ContractInjectors\ContractParametersResolver.cs" />
     <Compile Include="ContractInjectors\ContractPropertiesResolver.cs" />
+    <Compile Include="ContractInjectors\ContractSelfResolver.cs" />
+    <Compile Include="ContractInjectors\ContractValidate.cs" />
     <Compile Include="ContractInjectors\ContractValidateBuilder.cs" />
     <Compile Include="ContractInjectors\ContractValidateCriteria.cs" />
     <Compile Include="ContractInjectors\ContractValidateResolver.cs" />
+    <Compile Include="ContractInjectors\ContractValidatesResolver.cs" />
     <Compile Include="ContractInjectors\ContractValidateScanner.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilder.cs" />
     <Compile Include="ContractInjectors\FieldParameterParser.cs" />
@@ -170,6 +173,7 @@
     <Compile Include="ContractInjectors\IContractMembersResolver.cs" />
     <Compile Include="ContractInjectors\IContractValidateCriteria.cs" />
     <Compile Include="ContractInjectors\IContractValidateResolver.cs" />
+    <Compile Include="ContractInjectors\IContractValidatesResolver.cs" />
     <Compile Include="ContractInjectors\IContractValidateScanner.cs" />
     <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
     <Compile Include="ContractInjectors\IInstructionsBuilder.cs" />

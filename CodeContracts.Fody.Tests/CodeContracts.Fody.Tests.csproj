@@ -104,9 +104,12 @@
     <Compile Include="ContractInjectors\ContractMethodWithMessageBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractParametersResolverTests.cs" />
     <Compile Include="ContractInjectors\ContractPropertiesResolverTests.cs" />
+    <Compile Include="ContractInjectors\ContractSelfResolverTests.cs" />
     <Compile Include="ContractInjectors\ContractValidateBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractValidateCriteriaTests.cs" />
+    <Compile Include="ContractInjectors\ContractValidateResolverTests.cs" />
     <Compile Include="ContractInjectors\ContractValidateScannerTests.cs" />
+    <Compile Include="ContractInjectors\ContractValidatesResolverTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterParserTests.cs" />
     <Compile Include="ContractInjectors\NullParameterBuilderTests.cs" />

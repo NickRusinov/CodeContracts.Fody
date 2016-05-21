@@ -14,5 +14,8 @@ namespace CodeContracts.TestAssembly.Siths
         public virtual bool JoinDarkSide() => true;
 
         public abstract void UseForceLightining(Force force);
+
+        [True]
+        public static Sith Create() => null;
     }
 }
