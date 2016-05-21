@@ -16,7 +16,7 @@ namespace CodeContracts.TestAssembly
         }
 
         [RedLightsaber, BlueLightsaber]
-        public LightsaberColor Color { get; }
+        public LightsaberColor Color { get; set; }
 
         public int BladeCount { get; }
     }

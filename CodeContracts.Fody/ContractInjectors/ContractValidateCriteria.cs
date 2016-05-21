@@ -12,8 +12,14 @@ namespace CodeContracts.Fody.ContractInjectors
     {
         public bool IsContractValidate(MethodDefinition methodDefinition)
         {
-            // todo - алгоритм распознавания метода валидации
-            return true;
+            return methodDefinition.IsStatic &&
+                   methodDefinition.IsPublic &&
+                   !methodDefinition.IsGetter &&
+                   !methodDefinition.IsSetter &&
+                   !methodDefinition.IsConstructor &&
+                   !methodDefinition.HasGenericParameters &&
+                   methodDefinition.Name.StartsWith("Validate") &&
+                   Equals(methodDefinition.ReturnType.Resolve(), methodDefinition.Module.TypeSystem.Boolean.Resolve());
         }
     }
 }
