@@ -105,6 +105,7 @@
     <Compile Include="ContractInjectors\ContractParametersResolverTests.cs" />
     <Compile Include="ContractInjectors\ContractPropertiesResolverTests.cs" />
     <Compile Include="ContractInjectors\ContractValidateBuilderTests.cs" />
+    <Compile Include="ContractInjectors\ContractValidateScannerTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterParserTests.cs" />
     <Compile Include="ContractInjectors\NullParameterBuilderTests.cs" />

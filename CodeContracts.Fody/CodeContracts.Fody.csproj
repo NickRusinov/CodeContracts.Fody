@@ -227,7 +227,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CodeContracts\CodeContracts.csproj">
+      <Project>{3585eced-97ef-4dd9-a1b9-bd4b52a07d35}</Project>
+      <Name>CodeContracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy $(TargetPath) $(SolutionDir)packages\$(ProjectName)\ /Y</PostBuildEvent>

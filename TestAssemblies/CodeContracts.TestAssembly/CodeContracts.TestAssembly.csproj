@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlueLightsaberAttribute.cs" />
+    <Compile Include="RedLightsaberAttribute.cs" />
     <Compile Include="Force.cs" />
     <Compile Include="Jedis\IJedi.cs" />
     <Compile Include="Jedis\Jedi.cs" />
