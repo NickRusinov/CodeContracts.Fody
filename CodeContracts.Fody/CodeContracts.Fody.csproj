@@ -154,12 +154,15 @@
     <Compile Include="ContractInjectors\BestOverloadResolver.cs" />
     <Compile Include="ContractInjectors\CompositeParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ConstParameterBuilder.cs" />
+    <Compile Include="ContractInjectors\ContractEnsuresFactory.cs" />
+    <Compile Include="ContractInjectors\ContractInvariantFactory.cs" />
     <Compile Include="ContractInjectors\ContractMember.cs" />
     <Compile Include="ContractInjectors\ContractMembersResolver.cs" />
     <Compile Include="ContractInjectors\ContractMethodBuilder.cs" />
     <Compile Include="ContractInjectors\ContractMethodWithMessageBuilder.cs" />
     <Compile Include="ContractInjectors\ContractParametersResolver.cs" />
     <Compile Include="ContractInjectors\ContractPropertiesResolver.cs" />
+    <Compile Include="ContractInjectors\ContractRequiresFactory.cs" />
     <Compile Include="ContractInjectors\ContractSelfResolver.cs" />
     <Compile Include="ContractInjectors\ContractValidate.cs" />
     <Compile Include="ContractInjectors\ContractValidateBuilder.cs" />
@@ -171,6 +174,7 @@
     <Compile Include="ContractInjectors\FieldParameterParser.cs" />
     <Compile Include="ContractInjectors\IBestOverloadResolver.cs" />
     <Compile Include="ContractInjectors\IContractMembersResolver.cs" />
+    <Compile Include="ContractInjectors\IContractMethodFactory.cs" />
     <Compile Include="ContractInjectors\IContractValidateBuilder.cs" />
     <Compile Include="ContractInjectors\IContractValidateCriteria.cs" />
     <Compile Include="ContractInjectors\IContractValidateResolver.cs" />
@@ -191,6 +195,7 @@
     <Compile Include="ContractInjectors\StringParameterParser.cs" />
     <Compile Include="ContractInjectors\ThisParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ThisParameterParser.cs" />
+    <Compile Include="ContractReferences.cs" />
     <Compile Include="ContractScanners\ContractCriteria.cs" />
     <Compile Include="ContractScanners\FieldScanner.cs" />
     <Compile Include="ContractScanners\IContractCriteria.cs" />
@@ -207,6 +212,7 @@
     <Compile Include="ContractScanners\ParameterScanner.cs" />
     <Compile Include="ContractScanners\PropertyScanner.cs" />
     <Compile Include="ContractScanners\TypeScanner.cs" />
+    <Compile Include="Internal\GenericUtils.cs" />
     <Compile Include="Internal\IsOverrideUtils.cs" />
     <Compile Include="MethodBodyResolvers\AbstractContractClassBuilder.cs" />
     <Compile Include="MethodBodyResolvers\ContractClassResolver.cs" />
