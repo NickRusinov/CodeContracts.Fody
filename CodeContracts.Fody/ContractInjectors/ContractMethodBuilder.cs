@@ -12,20 +12,24 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class ContractMethodBuilder : IInstructionsBuilder
     {
+        private readonly IInstructionsBuilder instructionsBuilder;
+
         private readonly MethodReference methodReference;
 
-        public ContractMethodBuilder(MethodReference methodReference)
+        public ContractMethodBuilder(IInstructionsBuilder instructionsBuilder, MethodReference methodReference)
         {
             Contract.Requires(methodReference != null);
+            Contract.Requires(instructionsBuilder != null);
 
+            this.instructionsBuilder = instructionsBuilder;
             this.methodReference = methodReference;
         }
 
-        public IEnumerable<Instruction> Build(IEnumerable<Instruction> instructions)
+        public IEnumerable<Instruction> Build(ContractValidate contractValidate)
         {
             return EnumerableUtils.Concat(
                 Enumerable.Repeat(Instruction.Create(OpCodes.Nop), 1),
-                instructions,
+                instructionsBuilder.Build(contractValidate),
                 Enumerable.Repeat(Instruction.Create(OpCodes.Call, methodReference), 1));
         }
     }

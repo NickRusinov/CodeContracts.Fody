@@ -8,6 +8,7 @@ using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Moq;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
@@ -17,35 +18,35 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
     {
         [Theory(DisplayName = "Проверка первой команды построителя вызова контрактного метода"), AutoFixture]
         public void FirstNopTest(
-            [Frozen]MethodDefinition methodDefinition,
-            IEnumerable<Instruction> instructions,
+            ContractValidate contractValidate,
             ContractMethodBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
             Assert.Equal(Instruction.Create(OpCodes.Nop), buildedInstructions.FirstOrDefault(), InstructionComparer.Default);
         }
 
         [Theory(DisplayName = "Проверка последней команды построителя вызова контрактного метода"), AutoFixture]
         public void LastCallMethodTest(
-            [Frozen]MethodDefinition methodDefinition,
-            IEnumerable<Instruction> instructions,
+            [Frozen] MethodDefinition methodDefinition,
+            ContractValidate contractValidate,
             ContractMethodBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
             Assert.Equal(Instruction.Create(OpCodes.Call, methodDefinition), buildedInstructions.LastOrDefault(), InstructionComparer.Default);
         }
 
         [Theory(DisplayName = "Проверка команд построителя вызова контрактного метода"), AutoFixture]
         public void ContainsInstructionsTest(
-            [Frozen]MethodDefinition methodDefinition,
-            IEnumerable<Instruction> instructions,
+            [Frozen] Mock<IInstructionsBuilder> instructionsBuilderMock,
+            ContractValidate contractValidate,
             ContractMethodBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
-            Assert.Empty(instructions.Except(buildedInstructions, InstructionComparer.Default));
+            instructionsBuilderMock.Verify(ibm => ibm.Build(contractValidate), Times.Once);
+            Assert.NotEmpty(buildedInstructions);
         }
     }
 }

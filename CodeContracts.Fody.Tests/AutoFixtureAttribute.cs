@@ -4,6 +4,8 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.ContractDefinitions;
+using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -29,9 +31,11 @@ namespace CodeContracts.Fody.Tests
             Fixture.Register((ModuleDefinition md) => md.TypeSystem);
             Fixture.Register((ModuleDefinition md) => md.FindType("DarthMaul"));
             Fixture.Register((ModuleDefinition md) => md.FindType("DarthMaul") as TypeReference);
-            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "JoinDarkSide"));
-            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "JoinDarkSide") as MethodReference);
-            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "JoinDarkSide").CustomAttributes.First());
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi"));
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi") as MethodReference);
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi").CustomAttributes.First());
+
+            Fixture.Register((ModuleDefinition md) => new ContractValidate(Fixture.Create<ContractValidateDefinition>(), Fixture.CreateMany<IParameterBuilder>(Fixture.Create<MethodDefinition>().Parameters.Count)));
 
             Fixture.Register(() => Instruction.Create(OpCodes.Ldarg_0));
         }

@@ -10,18 +10,27 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class ContractRequiresFactory : IContractMethodFactory
     {
+        private readonly IInstructionsBuilder instructionsBuilder;
+
+        public ContractRequiresFactory(IInstructionsBuilder instructionsBuilder)
+        {
+            Contract.Requires(instructionsBuilder != null);
+
+            this.instructionsBuilder = instructionsBuilder;
+        }
+
         public IInstructionsBuilder Create(ModuleDefinition moduleDefinition, TypeDefinition typeDefinition, string message)
         {
             if (typeDefinition != null && message != null)
-                return new ContractMethodWithMessageBuilder(ContractReferences.RequiresWithExceptionAndMessage(moduleDefinition, typeDefinition), message);
+                return new ContractMethodWithMessageBuilder(instructionsBuilder, ContractReferences.RequiresWithExceptionAndMessage(moduleDefinition, typeDefinition), message);
 
             if (typeDefinition != null)
-                return new ContractMethodBuilder(ContractReferences.RequiresWithException(moduleDefinition, typeDefinition));
+                return new ContractMethodBuilder(instructionsBuilder, ContractReferences.RequiresWithException(moduleDefinition, typeDefinition));
 
             if (message != null)
-                return new ContractMethodWithMessageBuilder(ContractReferences.RequiresWithMessage(moduleDefinition), message);
+                return new ContractMethodWithMessageBuilder(instructionsBuilder, ContractReferences.RequiresWithMessage(moduleDefinition), message);
 
-            return new ContractMethodBuilder(ContractReferences.Requires(moduleDefinition));
+            return new ContractMethodBuilder(instructionsBuilder, ContractReferences.Requires(moduleDefinition));
         }
     }
 }

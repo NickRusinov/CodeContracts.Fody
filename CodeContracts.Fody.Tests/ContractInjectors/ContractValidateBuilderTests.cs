@@ -4,11 +4,11 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Moq;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
@@ -18,35 +18,34 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
     {
         [Theory(DisplayName = "Проверка первой команды построителя вызова метода валидации для контракта"), AutoFixture]
         public void FirstNopTest(
-            [Frozen] ContractValidateDefinition contractValidateDefinition,
-            ICollection<Instruction> instructions,
+            ContractValidate contractValidate,
             ContractValidateBuilder sut)
         {
-            var buildedInstructions = sut.Build(contractValidateDefinition, instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
             Assert.Equal(Instruction.Create(OpCodes.Nop), buildedInstructions.FirstOrDefault(), InstructionComparer.Default);
         }
 
         [Theory(DisplayName = "Проверка последней команды построителя вызова метода валидации для контракта"), AutoFixture]
         public void LastCallMethodTest(
-            [Frozen] ContractValidateDefinition contractValidateDefinition,
-            ICollection<Instruction> instructions,
+            ContractValidate contractValidate,
             ContractValidateBuilder sut)
         {
-            var buildedInstructions = sut.Build(contractValidateDefinition, instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
-            Assert.Equal(Instruction.Create(OpCodes.Call, contractValidateDefinition.ValidateMethod), buildedInstructions.LastOrDefault(), InstructionComparer.Default);
+            Assert.Equal(Instruction.Create(OpCodes.Call, contractValidate.ValidateDefinition.ValidateMethod), buildedInstructions.LastOrDefault(), InstructionComparer.Default);
         }
 
         [Theory(DisplayName = "Проверка команд построителя вызова метода валидации для контракта"), AutoFixture]
         public void ContainsInstructionsTest(
-            [Frozen] ContractValidateDefinition contractValidateDefinition,
-            ICollection<Instruction> instructions,
+            [Frozen] Mock<IParameterBuilder> parameterBuilderMock,
+            ContractValidate contractValidate,
             ContractValidateBuilder sut)
         {
-            var buildedInstructions = sut.Build(contractValidateDefinition, instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
-            Assert.Empty(instructions.Except(buildedInstructions, InstructionComparer.Default));
+            parameterBuilderMock.Verify(pbm => pbm.Build(It.IsAny<ParameterDefinition>()), Times.Exactly(contractValidate.ValidateDefinition.ValidateMethod.Parameters.Count));
+            Assert.NotEmpty(buildedInstructions);
         }
     }
 }

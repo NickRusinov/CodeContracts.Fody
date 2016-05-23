@@ -10,6 +10,6 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public interface IInstructionsBuilder
     {
-        IEnumerable<Instruction> Build(IEnumerable<Instruction> instructions);
+        IEnumerable<Instruction> Build(ContractValidate contractValidate);
     }
 }

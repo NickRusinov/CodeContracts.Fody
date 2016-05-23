@@ -8,6 +8,7 @@ using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Moq;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
@@ -17,23 +18,21 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
     {
         [Theory(DisplayName = "Проверка первой команды построителя вызова контрактного метода с сообщением"), AutoFixture]
         public void FirstNopTest(
-            [Frozen]MethodDefinition methodDefinition,
-            IEnumerable<Instruction> instructions,
+            ContractValidate contractValidate,
             ContractMethodWithMessageBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
             Assert.Equal(Instruction.Create(OpCodes.Nop), buildedInstructions.FirstOrDefault(), InstructionComparer.Default);
         }
 
         [Theory(DisplayName = "Проверка команды загрузки строки построителя вызова контрактного метода с сообщением"), AutoFixture]
         public void PreLastLoadStringTest(
-            [Frozen]MethodDefinition methodDefinition,
             [Frozen]string message,
-            IEnumerable<Instruction> instructions,
+            ContractValidate contractValidate,
             ContractMethodWithMessageBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList() as IEnumerable<Instruction>;
 
             Assert.Equal(Instruction.Create(OpCodes.Ldstr, message), buildedInstructions.Reverse().Skip(1).FirstOrDefault(), InstructionComparer.Default);
         }
@@ -41,23 +40,24 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         [Theory(DisplayName = "Проверка последней команды построителя вызова контрактного метода с сообщением"), AutoFixture]
         public void LastCallMethodTest(
             [Frozen]MethodDefinition methodDefinition,
-            IEnumerable<Instruction> instructions,
+            ContractValidate contractValidate,
             ContractMethodWithMessageBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
             Assert.Equal(Instruction.Create(OpCodes.Call, methodDefinition), buildedInstructions.LastOrDefault(), InstructionComparer.Default);
         }
 
         [Theory(DisplayName = "Проверка команд построителя вызова контрактного метода с сообщением"), AutoFixture]
         public void ContainsInstructionsTest(
-            [Frozen]MethodDefinition methodDefinition,
-            IEnumerable<Instruction> instructions,
+            [Frozen] Mock<IInstructionsBuilder> instructionsBuilderMock,
+            ContractValidate contractValidate,
             ContractMethodWithMessageBuilder sut)
         {
-            var buildedInstructions = sut.Build(instructions);
+            var buildedInstructions = sut.Build(contractValidate).ToList();
 
-            Assert.Empty(instructions.Except(buildedInstructions, InstructionComparer.Default));
+            instructionsBuilderMock.Verify(ibm => ibm.Build(contractValidate), Times.Once);
+            Assert.NotEmpty(buildedInstructions);
         }
     }
 }
