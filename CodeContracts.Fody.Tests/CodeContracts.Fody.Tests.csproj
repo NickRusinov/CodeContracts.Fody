@@ -100,6 +100,7 @@
     <Compile Include="AutoFixtureAttribute.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterParserTests.cs" />
+    <Compile Include="ContractInjectors\ContractBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractEnsuresFactoryTests.cs" />
     <Compile Include="ContractInjectors\ContractInvariantFactoryTests.cs" />
     <Compile Include="ContractInjectors\ContractMethodBuilderTests.cs" />
