@@ -9,7 +9,7 @@ using Mono.Cecil.Rocks;
 
 namespace CodeContracts.Fody.Internal
 {
-    internal static class IsOverrideUtils
+    internal static class MethodReferenceExtensions
     {
         public static bool IsOverride(this MethodDefinition method, MethodReference overridden)
         {
@@ -23,6 +23,19 @@ namespace CodeContracts.Fody.Internal
                 method.DeclaringType.Interfaces.Contains(overridden.DeclaringType) &&
                 !method.DeclaringType.Methods.SelectMany(m => m.Overrides).Contains(overridden) &&
                 method.Parameters.Select(p => p.ParameterType).SequenceEqual(overridden.Parameters.Select(p => p.ParameterType));
+        }
+
+        public static MethodReference MakeGeneric(this MethodReference methodReference, params TypeReference[] genericTypeReferences)
+        {
+            Contract.Requires(methodReference != null);
+            Contract.Requires(genericTypeReferences != null);
+            Contract.Ensures(Contract.Result<MethodReference>() != null);
+
+            var genericMethodReference = new MethodReference(methodReference.Name, methodReference.ReturnType, methodReference.DeclaringType);
+            genericMethodReference.Parameters.AddRange(methodReference.Parameters.Select(pd => new ParameterDefinition(pd.ParameterType)));
+            genericMethodReference.GenericParameters.AddRange(methodReference.GenericParameters.Select(gp => new GenericParameter(gp.Name, genericMethodReference)));
+            
+            return genericMethodReference;
         }
     }
 }

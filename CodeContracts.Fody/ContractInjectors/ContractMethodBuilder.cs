@@ -27,7 +27,7 @@ namespace CodeContracts.Fody.ContractInjectors
 
         public IEnumerable<Instruction> Build(ContractValidate contractValidate)
         {
-            return EnumerableUtils.Concat(
+            return EnumerableExtensions.Concat(
                 Enumerable.Repeat(Instruction.Create(OpCodes.Nop), 1),
                 instructionsBuilder.Build(contractValidate),
                 Enumerable.Repeat(Instruction.Create(OpCodes.Call, methodReference), 1));

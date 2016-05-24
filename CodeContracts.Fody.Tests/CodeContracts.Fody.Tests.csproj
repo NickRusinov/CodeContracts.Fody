@@ -124,6 +124,7 @@
     <Compile Include="ContractInjectors\StringParameterParserTests.cs" />
     <Compile Include="ContractInjectors\ThisParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\ThisParameterParserTests.cs" />
+    <Compile Include="ContractScanners\ContractCriteriaTests.cs" />
     <Compile Include="ContractScanners\FieldScannerTests.cs" />
     <Compile Include="ContractScanners\MethodReturnScannerTests.cs" />
     <Compile Include="ContractScanners\MethodScannerTests.cs" />

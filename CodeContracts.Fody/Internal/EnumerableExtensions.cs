@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CodeContracts.Fody.Internal
 {
-    internal static class EnumerableUtils
+    internal static class EnumerableExtensions
     {
         public static IEnumerable<T> Concat<T>(params IEnumerable<T>[] enumerables)
         {

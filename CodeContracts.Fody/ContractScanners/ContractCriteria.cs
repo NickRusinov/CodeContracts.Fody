@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractScanners
@@ -12,8 +13,9 @@ namespace CodeContracts.Fody.ContractScanners
     {
         public bool IsContract(CustomAttribute attribute)
         {
-            // todo - алгоритм распознавания атрибута контракта
-            return true;
+            var contractAttributeType = attribute.AttributeType.Module.ImportReference(typeof(ContractAttribute));
+
+            return attribute.AttributeType.Resolve().GetBaseTypes().Any(tr => Equals(tr.Resolve(), contractAttributeType.Resolve()));
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CodeContracts.Fody.ContractScanners
 
         public IEnumerable<ContractDefinition> Scan(PropertyDefinition propertyDefinition)
         {
-            return EnumerableUtils.Concat<ContractDefinition>(
+            return EnumerableExtensions.Concat<ContractDefinition>(
                 from contractAttribute in propertyDefinition.CustomAttributes
                 where contractCriteria.IsContract(contractAttribute)
                 where propertyDefinition.SetMethod != null

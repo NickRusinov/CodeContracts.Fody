@@ -209,8 +209,8 @@
     <Compile Include="ContractScanners\ParameterScanner.cs" />
     <Compile Include="ContractScanners\PropertyScanner.cs" />
     <Compile Include="ContractScanners\TypeScanner.cs" />
-    <Compile Include="Internal\GenericUtils.cs" />
-    <Compile Include="Internal\IsOverrideUtils.cs" />
+    <Compile Include="Internal\MethodReferenceExtensions.cs" />
+    <Compile Include="Internal\TypeReferenceExtensions.cs" />
     <Compile Include="MethodBodyResolvers\AbstractContractClassBuilder.cs" />
     <Compile Include="MethodBodyResolvers\ContractClassResolver.cs" />
     <Compile Include="MethodBodyResolvers\IAbstractContractClassBuilder.cs" />
@@ -226,7 +226,7 @@
     <Compile Include="MethodBodyResolvers\InvariantResolver.cs" />
     <Compile Include="MethodBodyResolvers\IRequiresResolver.cs" />
     <Compile Include="MethodBodyResolvers\RequiresEnsuresResolver.cs" />
-    <Compile Include="Internal\EnumerableUtils.cs" />
+    <Compile Include="Internal\EnumerableExtensions.cs" />
     <Compile Include="ModuleWeaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ContractDefinitions\RequiresDefinition.cs" />

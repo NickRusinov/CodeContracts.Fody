@@ -11,8 +11,10 @@ namespace CodeContracts.TestAssembly.Siths
     {
         public abstract string Name { get; }
 
+        [RedLightsaber]
         public virtual bool JoinDarkSide() => true;
 
+        [ExtraRedLightsaber]
         public abstract void UseForceLightining(Force force);
 
         [True]

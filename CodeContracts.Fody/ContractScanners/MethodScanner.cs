@@ -31,7 +31,7 @@ namespace CodeContracts.Fody.ContractScanners
 
         public IEnumerable<ContractDefinition> Scan(MethodDefinition methodDefinition)
         {
-            return EnumerableUtils.Concat(
+            return EnumerableExtensions.Concat(
                 from parameterDefinition in methodDefinition.Parameters
                 from contractDefinition in parameterScanner.Scan(parameterDefinition)
                 select contractDefinition,
