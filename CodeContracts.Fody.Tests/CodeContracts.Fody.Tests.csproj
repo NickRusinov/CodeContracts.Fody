@@ -116,6 +116,7 @@
     <Compile Include="ContractInjectors\ContractValidatesResolverTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterParserTests.cs" />
+    <Compile Include="ContractInjectors\InjectorTests.cs" />
     <Compile Include="ContractInjectors\NullParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\PropertyParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\PropertyParameterParserTests.cs" />

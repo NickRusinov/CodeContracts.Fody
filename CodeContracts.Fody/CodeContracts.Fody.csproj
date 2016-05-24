@@ -144,8 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContractDefinitions\ContractDefinition.cs" />
-    <Compile Include="ContractDefinitions\ContractParameterDefinition.cs" />
-    <Compile Include="ContractDefinitions\ContractPropertyDefinition.cs" />
     <Compile Include="ContractDefinitions\ContractValidateDefinition.cs" />
     <Compile Include="ContractDefinitions\EnsuresDefinition.cs" />
     <Compile Include="ContractDefinitions\InvariantDefinition.cs" />
@@ -180,13 +178,12 @@
     <Compile Include="ContractInjectors\IContractValidateResolver.cs" />
     <Compile Include="ContractInjectors\IContractValidatesResolver.cs" />
     <Compile Include="ContractInjectors\IContractValidateScanner.cs" />
-    <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
+    <Compile Include="ContractInjectors\IInjector.cs" />
     <Compile Include="ContractInjectors\IInstructionsBuilder.cs" />
-    <Compile Include="ContractInjectors\IInvariantInjector.cs" />
     <Compile Include="ContractInjectors\IMemberParameterParser.cs" />
     <Compile Include="ContractInjectors\IMethodParameterParser.cs" />
+    <Compile Include="ContractInjectors\Injector.cs" />
     <Compile Include="ContractInjectors\IParameterBuilder.cs" />
-    <Compile Include="ContractInjectors\IRequiresInjector.cs" />
     <Compile Include="ContractInjectors\NullParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ParseResult.cs" />
     <Compile Include="ContractInjectors\PropertyParameterBuilder.cs" />
