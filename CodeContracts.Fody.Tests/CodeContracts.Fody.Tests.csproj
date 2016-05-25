@@ -98,6 +98,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AutoFixtureAttribute.cs" />
+    <Compile Include="ContractExecutorTests.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterParserTests.cs" />
     <Compile Include="ContractInjectors\ContractBuilderTests.cs" />
@@ -136,14 +137,14 @@
     <Compile Include="InlineAutoFixtureAttribute.cs" />
     <Compile Include="Internal\InstructionComparer.cs" />
     <Compile Include="Internal\ReflectionExtensions.cs" />
-    <Compile Include="MethodBodyResolvers\AbstractContractClassBuilderTests.cs" />
-    <Compile Include="MethodBodyResolvers\ContractClassResolverTests.cs" />
-    <Compile Include="MethodBodyResolvers\InjectMethodResolverTests.cs" />
-    <Compile Include="MethodBodyResolvers\InterfaceContractClassBuilderTests.cs" />
-    <Compile Include="MethodBodyResolvers\InvariantMethodBuilderTests.cs" />
-    <Compile Include="MethodBodyResolvers\InvariantMethodResolverTests.cs" />
-    <Compile Include="MethodBodyResolvers\InvariantResolverTests.cs" />
-    <Compile Include="MethodBodyResolvers\RequiresEnsuresResolverTests.cs" />
+    <Compile Include="ContractInjectResolvers\AbstractContractClassBuilderTests.cs" />
+    <Compile Include="ContractInjectResolvers\ContractClassResolverTests.cs" />
+    <Compile Include="ContractInjectResolvers\ContractInjectResolverTests.cs" />
+    <Compile Include="ContractInjectResolvers\InterfaceContractClassBuilderTests.cs" />
+    <Compile Include="ContractInjectResolvers\InvariantMethodBuilderTests.cs" />
+    <Compile Include="ContractInjectResolvers\InvariantMethodResolverTests.cs" />
+    <Compile Include="ContractInjectResolvers\InvariantResolverTests.cs" />
+    <Compile Include="ContractInjectResolvers\RequiresEnsuresResolverTests.cs" />
     <Compile Include="Internal\ModuleDefinitionsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

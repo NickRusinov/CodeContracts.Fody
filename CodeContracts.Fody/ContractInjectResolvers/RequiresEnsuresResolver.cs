@@ -8,7 +8,7 @@ using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.MethodBodyResolvers
+namespace CodeContracts.Fody.ContractInjectResolvers
 {
     public class RequiresEnsuresResolver : IRequiresResolver, IEnsuresResolver
     {

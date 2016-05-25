@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.MethodBodyResolvers
+namespace CodeContracts.Fody.ContractInjectResolvers
 {
-    public class AbstractContractClassBuilder : IAbstractContractClassBuilder
+    public class InterfaceContractClassBuilder : IInterfaceContractClassBuilder
     {
         public TypeDefinition Build(TypeDefinition typeDefinition)
         {
@@ -26,19 +26,19 @@ namespace CodeContracts.Fody.MethodBodyResolvers
 
         private TypeDefinition BuildContractClassDefinition(TypeDefinition typeDefinition)
         {
-            var newTypeDefinition = new TypeDefinition(typeDefinition.Namespace, $"{ typeDefinition.Name }Contracts{ Guid.NewGuid().ToString("N") }", TypeAttributes.NotPublic | TypeAttributes.Abstract, typeDefinition);
-            newTypeDefinition.Methods.AddRange(typeDefinition.Methods.Where(md => md.IsVirtual).Select(BuildMethodDefinition));
+            var newTypeDefinition = new TypeDefinition(typeDefinition.Namespace, $"{ typeDefinition.Name }Contracts{ Guid.NewGuid().ToString("N") }", TypeAttributes.NotPublic | TypeAttributes.Abstract, typeDefinition.Module.TypeSystem.Object);
+            newTypeDefinition.Interfaces.Add(typeDefinition);
+            newTypeDefinition.Methods.AddRange(typeDefinition.Methods.Select(BuildMethodDefinition));
 
             return newTypeDefinition;
         }
 
         private MethodDefinition BuildMethodDefinition(MethodDefinition methodDefinition)
         {
-            var newMethodDefinition = new MethodDefinition(methodDefinition.Name, methodDefinition.Attributes & ~MethodAttributes.Abstract & ~MethodAttributes.NewSlot, methodDefinition.ReturnType);
-            newMethodDefinition.Overrides.Add(methodDefinition);
+            var newMethodDefinition = new MethodDefinition(methodDefinition.Name, methodDefinition.Attributes & ~MethodAttributes.Abstract, methodDefinition.ReturnType);
             newMethodDefinition.Parameters.AddRange(methodDefinition.Parameters.Select(BuildParameterDefinition));
             newMethodDefinition.GenericParameters.AddRange(methodDefinition.GenericParameters.Select(BuildGenericDefinition));
-            
+
             return newMethodDefinition;
         }
 

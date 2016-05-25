@@ -9,7 +9,7 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public interface IInjector
+    public interface IContractInjector
     {
         void Inject(ContractDefinition contractDefinition, MethodDefinition methodDefinition);
     }

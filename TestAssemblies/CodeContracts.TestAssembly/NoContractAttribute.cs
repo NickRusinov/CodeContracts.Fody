@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeContracts.TestAssembly.Contracts
+namespace CodeContracts.TestAssembly
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public class NoContractAttribute : Attribute

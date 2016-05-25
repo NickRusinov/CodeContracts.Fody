@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.MethodBodyResolvers
+namespace CodeContracts.Fody.ContractInjectResolvers
 {
-    public interface IInjectMethodResolver
+    public interface IRequiresResolver
     {
-        MethodDefinition Resolve(ContractDefinition contractDefinition);
+        MethodDefinition Resolve(RequiresDefinition requiresDefinition);
     }
 }

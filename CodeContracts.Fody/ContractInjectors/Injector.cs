@@ -9,7 +9,7 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public class Injector : IInjector
+    public class Injector : IContractInjector
     {
         private readonly IRequiresInjector requriesInjector;
 

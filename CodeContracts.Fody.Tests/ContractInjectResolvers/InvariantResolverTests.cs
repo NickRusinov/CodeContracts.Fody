@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
-using CodeContracts.Fody.MethodBodyResolvers;
+using CodeContracts.Fody.ContractInjectResolvers;
 using Mono.Cecil;
 using Moq;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace CodeContracts.Fody.Tests.MethodBodyResolvers
+namespace CodeContracts.Fody.Tests.ContractInjectResolvers
 {
     public class InvariantResolverTests
     {

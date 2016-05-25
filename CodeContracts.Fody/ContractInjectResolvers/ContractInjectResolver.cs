@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.MethodBodyResolvers
+namespace CodeContracts.Fody.ContractInjectResolvers
 {
-    public class InjectMethodResolver : IInjectMethodResolver
+    public class ContractInjectResolver : IContractInjectResolver
     {
         private readonly IRequiresResolver requiresResolver;
 
@@ -17,7 +17,7 @@ namespace CodeContracts.Fody.MethodBodyResolvers
 
         private readonly IInvariantResolver invariantResolver;
 
-        public InjectMethodResolver(IRequiresResolver requiresResolver, IEnsuresResolver ensuresResolver, IInvariantResolver invariantResolver)
+        public ContractInjectResolver(IRequiresResolver requiresResolver, IEnsuresResolver ensuresResolver, IInvariantResolver invariantResolver)
         {
             Contract.Requires(requiresResolver != null);
             Contract.Requires(ensuresResolver != null);

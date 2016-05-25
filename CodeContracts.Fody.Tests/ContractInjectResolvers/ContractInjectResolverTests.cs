@@ -5,20 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
-using CodeContracts.Fody.MethodBodyResolvers;
+using CodeContracts.Fody.ContractInjectResolvers;
 using Moq;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace CodeContracts.Fody.Tests.MethodBodyResolvers
+namespace CodeContracts.Fody.Tests.ContractInjectResolvers
 {
-    public class InjectMethodResolverTests
+    public class ContractInjectResolverTests
     {
         [Theory(DisplayName = "Проверка вызова разрешения метода для инъекции в него предусловия"), AutoFixture]
         public void RequiresResolverHasBeenCalled(
             [Frozen] Mock<IRequiresResolver> requiresResolverMock,
             RequiresDefinition requiresDefinition,
-            InjectMethodResolver sut)
+            ContractInjectResolver sut)
         {
             sut.Resolve(requiresDefinition);
 
@@ -29,7 +29,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         public void EnsuresResolverHasBeenCalled(
             [Frozen] Mock<IEnsuresResolver> ensuresResolverMock,
             EnsuresDefinition ensuresDefinition,
-            InjectMethodResolver sut)
+            ContractInjectResolver sut)
         {
             sut.Resolve(ensuresDefinition);
 
@@ -39,7 +39,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         public void InvariantResolverHasBeenCalled(
             [Frozen] Mock<IInvariantResolver> invariantResolverMock,
             InvariantDefinition invariantDefinition,
-            InjectMethodResolver sut)
+            ContractInjectResolver sut)
         {
             sut.Resolve(invariantDefinition);
 

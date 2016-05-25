@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.MethodBodyResolvers
+namespace CodeContracts.Fody.ContractInjectResolvers
 {
-    public interface IInvariantMethodResolver
+    public interface IAbstractContractClassBuilder
     {
-        MethodDefinition Resolve(TypeDefinition typeDefinition);
+        TypeDefinition Build(TypeDefinition typeDefinition);
     }
 }

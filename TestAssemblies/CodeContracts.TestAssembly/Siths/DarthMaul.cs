@@ -4,7 +4,6 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.TestAssembly.Contracts;
 using CodeContracts.TestAssembly.Jedis;
 
 namespace CodeContracts.TestAssembly.Siths
