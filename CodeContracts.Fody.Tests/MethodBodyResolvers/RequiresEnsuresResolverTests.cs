@@ -48,9 +48,9 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
             var requiresDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.First(), methodDefinition.DeclaringType, methodDefinition);
             contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType, methodDefinition)).Returns(methodDefinition.DeclaringType);
 
-            var methodBody = sut.Resolve(requiresDefinition);
+            var injectMethodDefinition = sut.Resolve(requiresDefinition);
 
-            Assert.Same(methodDefinition.Body, methodBody);
+            Assert.Same(methodDefinition, injectMethodDefinition);
         }
 
         [Theory(DisplayName = "Проверка получения переопределенного метода для внедрения предусловия"), AutoFixture]
@@ -64,9 +64,9 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
             var overrideMethodDefinition = moduleDefinition.FindMethod("DarthPlagueis", "JoinDarkSide");
             contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType, methodDefinition)).Returns(overrideMethodDefinition.DeclaringType);
 
-            var methodBody = sut.Resolve(requiresDefinition);
+            var injectMethodDefinition = sut.Resolve(requiresDefinition);
 
-            Assert.Same(overrideMethodDefinition.Body, methodBody);
+            Assert.Same(overrideMethodDefinition, injectMethodDefinition);
         }
 
         [Theory(DisplayName = "Проверка получения метода для внедрения постусловия"), AutoFixture]
@@ -79,9 +79,9 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
             var ensuresDefinition = new EnsuresDefinition(methodDefinition.CustomAttributes.First(), methodDefinition.DeclaringType, methodDefinition);
             contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType, methodDefinition)).Returns(methodDefinition.DeclaringType);
 
-            var methodBody = sut.Resolve(ensuresDefinition);
+            var injectMethodDefinition = sut.Resolve(ensuresDefinition);
 
-            Assert.Same(methodDefinition.Body, methodBody);
+            Assert.Same(methodDefinition, injectMethodDefinition);
         }
 
         [Theory(DisplayName = "Проверка получения переопределенного метода для внедрения постусловия"), AutoFixture]
@@ -95,9 +95,9 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
             var overrideMethodDefinition = moduleDefinition.FindMethod("DarthPlagueis", "JoinDarkSide");
             contractClassResolverMock.Setup(ccr => ccr.Resolve(methodDefinition.DeclaringType, methodDefinition)).Returns(overrideMethodDefinition.DeclaringType);
 
-            var methodBody = sut.Resolve(ensuresDefinition);
+            var injectMethodDefinition = sut.Resolve(ensuresDefinition);
 
-            Assert.Same(overrideMethodDefinition.Body, methodBody);
+            Assert.Same(overrideMethodDefinition, injectMethodDefinition);
         }
     }
 }

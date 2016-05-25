@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
-using Mono.Cecil.Cil;
+using Mono.Cecil;
 
 namespace CodeContracts.Fody.MethodBodyResolvers
 {
@@ -24,9 +24,9 @@ namespace CodeContracts.Fody.MethodBodyResolvers
             this.invariantMethodResolver = invariantMethodResolver;
         }
 
-        public MethodBody Resolve(InvariantDefinition invariantDefinition)
+        public MethodDefinition Resolve(InvariantDefinition invariantDefinition)
         {
-            return invariantMethodResolver.Resolve(contractClassResolver.Resolve(invariantDefinition.DeclaringType, null)).Body;
+            return invariantMethodResolver.Resolve(contractClassResolver.Resolve(invariantDefinition.DeclaringType, null));
         }
     }
 }

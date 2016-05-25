@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
-using Mono.Cecil.Cil;
+using Mono.Cecil;
 
 namespace CodeContracts.Fody.MethodBodyResolvers
 {
     public interface IEnsuresResolver
     {
-        MethodBody Resolve(EnsuresDefinition ensuresDefinition);
+        MethodDefinition Resolve(EnsuresDefinition ensuresDefinition);
     }
 }

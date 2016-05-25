@@ -9,8 +9,8 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.MethodBodyResolvers
 {
-    public interface IRequiresResolver
+    public interface IInjectMethodResolver
     {
-        MethodDefinition Resolve(RequiresDefinition requiresDefinition);
+        MethodDefinition Resolve(ContractDefinition contractDefinition);
     }
 }

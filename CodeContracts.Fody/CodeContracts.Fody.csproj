@@ -218,10 +218,12 @@
     <Compile Include="MethodBodyResolvers\IAbstractContractClassBuilder.cs" />
     <Compile Include="MethodBodyResolvers\IContractClassResolver.cs" />
     <Compile Include="MethodBodyResolvers\IEnsuresResolver.cs" />
+    <Compile Include="MethodBodyResolvers\IInjectMethodResolver.cs" />
     <Compile Include="MethodBodyResolvers\IInterfaceContractClassBuilder.cs" />
     <Compile Include="MethodBodyResolvers\IInvariantMethodBuilder.cs" />
     <Compile Include="MethodBodyResolvers\IInvariantMethodResolver.cs" />
     <Compile Include="MethodBodyResolvers\IInvariantResolver.cs" />
+    <Compile Include="MethodBodyResolvers\InjectMethodResolver.cs" />
     <Compile Include="MethodBodyResolvers\InterfaceContractClassBuilder.cs" />
     <Compile Include="MethodBodyResolvers\InvariantMethodBuilder.cs" />
     <Compile Include="MethodBodyResolvers\InvariantMethodResolver.cs" />

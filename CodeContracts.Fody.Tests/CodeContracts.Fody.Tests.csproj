@@ -137,6 +137,7 @@
     <Compile Include="Internal\ReflectionExtensions.cs" />
     <Compile Include="MethodBodyResolvers\AbstractContractClassBuilderTests.cs" />
     <Compile Include="MethodBodyResolvers\ContractClassResolverTests.cs" />
+    <Compile Include="MethodBodyResolvers\InjectMethodResolverTests.cs" />
     <Compile Include="MethodBodyResolvers\InterfaceContractClassBuilderTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantMethodBuilderTests.cs" />
     <Compile Include="MethodBodyResolvers\InvariantMethodResolverTests.cs" />

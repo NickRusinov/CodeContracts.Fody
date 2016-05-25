@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
-using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.MethodBodyResolvers
 {
@@ -22,22 +21,21 @@ namespace CodeContracts.Fody.MethodBodyResolvers
             this.contractClassResolver = contractClassResolver;
         }
 
-        public MethodBody Resolve(RequiresDefinition requiresDefinition)
+        public MethodDefinition Resolve(RequiresDefinition requiresDefinition)
         {
             return Resolve(requiresDefinition, requiresDefinition.ContractMethod);
         }
 
-        public MethodBody Resolve(EnsuresDefinition ensuresDefinition)
+        public MethodDefinition Resolve(EnsuresDefinition ensuresDefinition)
         {
             return Resolve(ensuresDefinition, ensuresDefinition.ContractMethod);
         }
 
-        protected MethodBody Resolve(ContractDefinition contractDefinition, MethodDefinition contractMethod)
+        protected MethodDefinition Resolve(ContractDefinition contractDefinition, MethodDefinition contractMethod)
         {
-            return
-                (from methodDefinition in contractClassResolver.Resolve(contractDefinition.DeclaringType, contractMethod).Methods
-                 where methodDefinition.IsOverride(contractMethod)
-                 select methodDefinition.Body)
+            return (from methodDefinition in contractClassResolver.Resolve(contractDefinition.DeclaringType, contractMethod).Methods
+                    where methodDefinition.IsOverride(contractMethod)
+                    select methodDefinition)
                 .Single();
         }
     }
