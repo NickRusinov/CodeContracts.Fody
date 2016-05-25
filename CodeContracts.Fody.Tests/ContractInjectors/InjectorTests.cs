@@ -15,28 +15,39 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 {
     public class InjectorTests
     {
-        [Theory(DisplayName = "Проверка вызова получателя методов валидации контрактов при внедрении контрактов"), AutoFixture]
-        public void ContractValidatesResolverHasBeenCalledTest(
-            [Frozen] Mock<IContractValidatesResolver> contractValidatesResolverMock,
-            ContractDefinition contractDefinition,
+        [Theory(DisplayName = "Проверка вызова инжектора для внедрения предусловия"), AutoFixture]
+        public void RequiresInjectorHasBeenCalled(
+            [Frozen] Mock<IRequiresInjector> requiresInjectorMock,
+            RequiresDefinition requiresDefinition,
             MethodDefinition methodDefinition,
             Injector sut)
         {
-            sut.Inject(contractDefinition, methodDefinition);
+            sut.Inject(requiresDefinition, methodDefinition);
 
-            contractValidatesResolverMock.Verify(cvr => cvr.Resolve(contractDefinition, methodDefinition), Times.Once);
+            requiresInjectorMock.Verify(ri => ri.Inject(requiresDefinition, methodDefinition), Times.Once);
         }
 
-        [Theory(DisplayName = "Проверка вызова получателя команд для контрактов при внедрении контрактов"), AutoFixture]
-        public void InstructionsBuilderHasBeenCalledTest(
-            [Frozen] Mock<IInstructionsBuilder> instructionsBuilderMock,
-            ContractDefinition contractDefinition,
+        [Theory(DisplayName = "Проверка вызова инжектора для внедрения постусловия"), AutoFixture]
+        public void EnsuresInjectorHasBeenCalled(
+            [Frozen] Mock<IEnsuresInjector> ensuresInjectorMock,
+            EnsuresDefinition ensuresDefinition,
             MethodDefinition methodDefinition,
             Injector sut)
         {
-            sut.Inject(contractDefinition, methodDefinition);
+            sut.Inject(ensuresDefinition, methodDefinition);
 
-            instructionsBuilderMock.Verify(ib => ib.Build(It.IsAny<ContractValidate>()), Times.Exactly(3));
+            ensuresInjectorMock.Verify(ei => ei.Inject(ensuresDefinition, methodDefinition), Times.Once);
+        }
+        [Theory(DisplayName = "Проверка вызова инжектора для внедрения инварианта"), AutoFixture]
+        public void InvariantInjectorHasBeenCalled(
+            [Frozen] Mock<IInvariantInjector> invariantInjectorMock,
+            InvariantDefinition invariantDefinition,
+            MethodDefinition methodDefinition,
+            Injector sut)
+        {
+            sut.Inject(invariantDefinition, methodDefinition);
+
+            invariantInjectorMock.Verify(ii => ii.Inject(invariantDefinition, methodDefinition), Times.Once);
         }
     }
 }

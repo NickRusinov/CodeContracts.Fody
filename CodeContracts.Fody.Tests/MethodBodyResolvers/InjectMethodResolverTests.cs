@@ -33,7 +33,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         {
             sut.Resolve(ensuresDefinition);
 
-            ensuresResolverMock.Verify(rr => rr.Resolve(ensuresDefinition), Times.Once);
+            ensuresResolverMock.Verify(er => er.Resolve(ensuresDefinition), Times.Once);
         }
         [Theory(DisplayName = "Проверка вызова разрешения метода для инъекции в него инварианта"), AutoFixture]
         public void InvariantResolverHasBeenCalled(
@@ -43,7 +43,7 @@ namespace CodeContracts.Fody.Tests.MethodBodyResolvers
         {
             sut.Resolve(invariantDefinition);
 
-            invariantResolverMock.Verify(rr => rr.Resolve(invariantDefinition), Times.Once);
+            invariantResolverMock.Verify(ir => ir.Resolve(invariantDefinition), Times.Once);
         }
     }
 }

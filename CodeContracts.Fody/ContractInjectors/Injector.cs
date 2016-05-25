@@ -5,31 +5,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
-using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
     public class Injector : IInjector
     {
-        private readonly IContractValidatesResolver contractValidatesResolver;
+        private readonly IRequiresInjector requriesInjector;
 
-        private readonly IInstructionsBuilder instructionsBuilder;
+        private readonly IEnsuresInjector ensuresInjector;
 
-        public Injector(IContractValidatesResolver contractValidatesResolver, IInstructionsBuilder instructionsBuilder)
+        private readonly IInvariantInjector invariantInjector;
+
+        public Injector(IRequiresInjector requriesInjector, IEnsuresInjector ensuresInjector, IInvariantInjector invariantInjector)
         {
-            Contract.Requires(contractValidatesResolver != null);
-            Contract.Requires(instructionsBuilder != null);
+            Contract.Requires(requriesInjector != null);
+            Contract.Requires(ensuresInjector != null);
+            Contract.Requires(invariantInjector != null);
 
-            this.contractValidatesResolver = contractValidatesResolver;
-            this.instructionsBuilder = instructionsBuilder;
+            this.requriesInjector = requriesInjector;
+            this.ensuresInjector = ensuresInjector;
+            this.invariantInjector = invariantInjector;
         }
 
         public void Inject(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
         {
-            var instructions = contractValidatesResolver.Resolve(contractDefinition, methodDefinition).SelectMany(instructionsBuilder.Build);
+            if (contractDefinition is RequiresDefinition)
+                requriesInjector.Inject((RequiresDefinition)contractDefinition, methodDefinition);
 
-            methodDefinition.Body.Instructions.AddRange(instructions);
+            else if (contractDefinition is EnsuresDefinition)
+                ensuresInjector.Inject((EnsuresDefinition)contractDefinition, methodDefinition);
+
+            else if (contractDefinition is InvariantDefinition)
+                invariantInjector.Inject((InvariantDefinition)contractDefinition, methodDefinition);
+
+            else
+                throw new NotSupportedException();
         }
     }
 }
