@@ -143,6 +143,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\TinyIoCConfiguration.cs" />
     <Compile Include="ContractConfig.cs" />
     <Compile Include="ContractConfigParser.cs" />
     <Compile Include="ContractDefinitions\ContractDefinition.cs" />

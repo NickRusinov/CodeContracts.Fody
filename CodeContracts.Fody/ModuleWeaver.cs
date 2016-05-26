@@ -4,13 +4,15 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.Configurations;
 using Mono.Cecil;
-using TinyIoC;
 
 namespace CodeContracts.Fody
 {
     public class ModuleWeaver
     {
+        private readonly TinyIoCConfiguration tinyIoCConfiguration = new TinyIoCConfiguration();
+
         public ModuleDefinition ModuleDefinition { get; set; }
         
         public Action<string> LogDebug { get; set; }
@@ -26,16 +28,7 @@ namespace CodeContracts.Fody
             Contract.Requires(LogInfo != null);
             Contract.Requires(LogWarning != null);
 
-            var ioc = ConfigureIoCContainer();
-        }
-
-        private TinyIoCContainer ConfigureIoCContainer()
-        {
-            var ioc = new TinyIoCContainer();
-            ioc.Register(ModuleDefinition);
-            ioc.AutoRegister(DuplicateImplementationActions.RegisterMultiple);
-
-            return ioc;
+            tinyIoCConfiguration.Configure(this);
         }
     }
 }
