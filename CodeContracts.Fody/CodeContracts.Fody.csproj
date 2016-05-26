@@ -143,6 +143,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContractConfig.cs" />
+    <Compile Include="ContractConfigParser.cs" />
     <Compile Include="ContractDefinitions\ContractDefinition.cs" />
     <Compile Include="ContractDefinitions\ContractValidateDefinition.cs" />
     <Compile Include="ContractDefinitions\EnsuresDefinition.cs" />
@@ -216,6 +218,7 @@
     <Compile Include="ContractScanners\ParameterScanner.cs" />
     <Compile Include="ContractScanners\PropertyScanner.cs" />
     <Compile Include="ContractScanners\TypeScanner.cs" />
+    <Compile Include="IContractConfigParser.cs" />
     <Compile Include="Internal\MethodReferenceExtensions.cs" />
     <Compile Include="Internal\TypeReferenceExtensions.cs" />
     <Compile Include="ContractInjectResolvers\AbstractContractClassBuilder.cs" />
