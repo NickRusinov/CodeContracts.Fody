@@ -6,10 +6,12 @@ using System.Text;
 
 namespace CodeContracts
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(DefaultUsages, AllowMultiple = true, Inherited = false)]
+    [ContractException(typeof(ArgumentOutOfRangeException))]
     public sealed class RangeAttribute : ContractAttribute
     {
         public RangeAttribute(params object[] args)
+            : base(args)
         {
 
         }
@@ -18,10 +20,13 @@ namespace CodeContracts
 
         public object Max { get; set; }
 
+        [Pure]
         public static bool ValidateMin(object self, int arg, int min) => arg >= min;
 
+        [Pure]
         public static bool ValidateMax(object self, int arg, int max) => arg <= max;
 
+        [Pure]
         public static bool ValidateMinMax(object self, int arg, int min, int max) => arg >= min && arg <= max;
     }
 }

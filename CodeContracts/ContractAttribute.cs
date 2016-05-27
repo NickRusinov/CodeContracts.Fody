@@ -6,9 +6,14 @@ using System.Text;
 
 namespace CodeContracts
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(DefaultUsages, AllowMultiple = true, Inherited = false)]
     public abstract class ContractAttribute : Attribute
     {
+        public const AttributeTargets DefaultUsages = AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Field | AttributeTargets.Property;
 
+        protected ContractAttribute(params object[] args)
+        {
+            
+        }
     }
 }

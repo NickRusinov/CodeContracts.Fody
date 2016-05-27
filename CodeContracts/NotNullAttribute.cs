@@ -6,14 +6,17 @@ using System.Text;
 
 namespace CodeContracts
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(DefaultUsages, AllowMultiple = true, Inherited = false)]
+    [ContractException(typeof(ArgumentNullException))]
     public sealed class NotNullAttribute : ContractAttribute
     {
         public NotNullAttribute(params object[] args)
+            : base(args)
         {
 
         }
 
+        [Pure]
         public static bool Validate(object self, object arg) => arg != null;
     }
 }
