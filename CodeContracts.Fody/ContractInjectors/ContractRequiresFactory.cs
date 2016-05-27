@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
+using static CodeContracts.Fody.ContractReferences;
+using static CodeContracts.Fody.RequiresMode;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
@@ -12,25 +14,29 @@ namespace CodeContracts.Fody.ContractInjectors
     {
         private readonly IInstructionsBuilder instructionsBuilder;
 
-        public ContractRequiresFactory(IInstructionsBuilder instructionsBuilder)
+        private readonly ContractConfig contractConfig;
+
+        public ContractRequiresFactory(IInstructionsBuilder instructionsBuilder, ContractConfig contractConfig)
         {
             Contract.Requires(instructionsBuilder != null);
+            Contract.Requires(contractConfig != null);
 
             this.instructionsBuilder = instructionsBuilder;
+            this.contractConfig = contractConfig;
         }
 
         public IInstructionsBuilder Create(ModuleDefinition moduleDefinition, TypeDefinition typeDefinition, string message)
         {
-            if (typeDefinition != null && message != null)
-                return new ContractMethodWithMessageBuilder(instructionsBuilder, ContractReferences.RequiresWithExceptionAndMessage(moduleDefinition, typeDefinition), message);
+            if (typeDefinition != null && message != null && contractConfig.Requires.HasFlag(WithMessages | WithExceptions))
+                return new ContractMethodWithMessageBuilder(instructionsBuilder, RequiresWithExceptionAndMessage(moduleDefinition, typeDefinition), message);
 
-            if (typeDefinition != null)
-                return new ContractMethodBuilder(instructionsBuilder, ContractReferences.RequiresWithException(moduleDefinition, typeDefinition));
+            if (typeDefinition != null && contractConfig.Requires.HasFlag(WithExceptions))
+                return new ContractMethodBuilder(instructionsBuilder, RequiresWithException(moduleDefinition, typeDefinition));
 
-            if (message != null)
-                return new ContractMethodWithMessageBuilder(instructionsBuilder, ContractReferences.RequiresWithMessage(moduleDefinition), message);
+            if (message != null && contractConfig.Requires.HasFlag(WithMessages))
+                return new ContractMethodWithMessageBuilder(instructionsBuilder, RequiresWithMessage(moduleDefinition), message);
 
-            return new ContractMethodBuilder(instructionsBuilder, ContractReferences.Requires(moduleDefinition));
+            return new ContractMethodBuilder(instructionsBuilder, Requires(moduleDefinition));
         }
     }
 }

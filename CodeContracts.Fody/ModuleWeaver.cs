@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using CodeContracts.Fody.Configurations;
 using Mono.Cecil;
 
@@ -14,6 +15,8 @@ namespace CodeContracts.Fody
         private readonly TinyIoCConfiguration tinyIoCConfiguration = new TinyIoCConfiguration();
 
         public ModuleDefinition ModuleDefinition { get; set; }
+
+        public XElement Config { get; set; }
         
         public Action<string> LogDebug { get; set; }
 
