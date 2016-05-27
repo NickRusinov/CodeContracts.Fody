@@ -32,7 +32,7 @@ namespace CodeContracts.Fody
 
         public void Execute(ModuleDefinition moduleDefinition)
         {
-            foreach (var contractDefinition in moduleScanner.Scan(moduleDefinition))
+            foreach (var contractDefinition in moduleScanner.Scan(moduleDefinition).ToList())
             {
                 var injectMethodDefinition = contractInjectResolver.Resolve(contractDefinition);
                 contractInjector.Inject(contractDefinition, injectMethodDefinition);

@@ -25,7 +25,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             contractConfig.Ensures = EnsuresMode.WithMessages;
             var typeDefinition = type != null ? moduleDefinition.ImportReference(type).Resolve() : null;
-            var instructionBuilder = sut.Create(moduleDefinition, typeDefinition, message);
+            var instructionBuilder = sut.Create(typeDefinition, message);
 
             Assert.IsType<ContractMethodWithMessageBuilder>(instructionBuilder);
             Assert.Equal(message, instructionBuilder.FindPrivateField<string>("message"));
@@ -43,7 +43,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             contractConfig.Ensures = EnsuresMode.WithoutMessages;
             var typeDefinition = type != null ? moduleDefinition.ImportReference(type).Resolve() : null;
-            var instructionBuilder = sut.Create(moduleDefinition, typeDefinition, message);
+            var instructionBuilder = sut.Create(typeDefinition, message);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
             Assert.Equal(ContractReferences.Ensures(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
@@ -57,7 +57,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             ContractEnsuresFactory sut)
         {
             var typeDefinition = type != null ? moduleDefinition.ImportReference(type).Resolve() : null;
-            var instructionBuilder = sut.Create(moduleDefinition, typeDefinition, null);
+            var instructionBuilder = sut.Create(typeDefinition, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
             Assert.Equal(ContractReferences.Ensures(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());

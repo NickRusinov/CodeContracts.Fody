@@ -24,21 +24,21 @@ namespace CodeContracts.Fody.Configurations
             container.Register(moduleWeaver.LogDebug, "LogDebug");
             container.Register(moduleWeaver.LogWarning, "LogWarning");
 
-            container.Register((tic, _) => tic.Resolve<IContractConfigParser>().Parse(moduleWeaver.Config.Value));
+            container.Register((tic, _) => tic.Resolve<IContractConfigParser>().Parse(moduleWeaver.Config.ToString()));
             
             container.Register<IEnsuresInjector>((tic, _) => new ContractInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("EnsuresContractBuilder")));
             container.Register<IRequiresInjector>((tic, _) => new ContractInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("RequiresContractBuilder")));
             container.Register<IInvariantInjector>((tic, _) => new ContractInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("InvariantContractBuilder")));
 
             container.Register<IInstructionsBuilder, ContractValidateBuilder>();
-            container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<IContractMethodFactory>("ContractEnsuresFactory")), "EnsuresContractBuilder");
-            container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<IContractMethodFactory>("ContractRequiresFactory")), "RequiresContractBuilder");
-            container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<IContractMethodFactory>("ContractInvariantFactory")), "InvariantContractBuilder");
+            container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractEnsuresFactory>()), "EnsuresContractBuilder");
+            container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractRequiresFactory>()), "RequiresContractBuilder");
+            container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractInvariantFactory>()), "InvariantContractBuilder");
             
             container.Register<IMethodParameterParser>((tic, _) => new CompositeMethodParameterParser(tic.ResolveAll<IMethodParameterParser>(false)));
             container.Register<IMemberParameterParser>((tic, _) => new CompositeMemberParameterParser(tic.ResolveAll<IMemberParameterParser>(false)));
 
-            container.Register<IContractValidatesResolver>((tic, _) => new ContractValidatesResolver(tic.Resolve<IContractValidateResolver>(), tic.Resolve<IContractMembersResolver>("ContractParametersResolver"), new[] { tic.Resolve<IContractMembersResolver>("ContractSelfResolver"), tic.Resolve<IContractMembersResolver>("ContractPropertiesResolver") }));
+            container.Register<IContractValidatesResolver>((tic, _) => new ContractValidatesResolver(tic.Resolve<IContractValidateResolver>(), tic.Resolve<ContractParametersResolver>(), tic.Resolve<ContractSelfResolver>(), tic.Resolve<ContractPropertiesResolver>()));
         }
     }
 }

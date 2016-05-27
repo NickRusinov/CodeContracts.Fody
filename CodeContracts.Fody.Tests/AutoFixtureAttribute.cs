@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.Tests.Internal;
@@ -24,9 +25,10 @@ namespace CodeContracts.Fody.Tests
         public AutoFixtureAttribute()
         {
             Fixture.Customize(new AutoConfiguredMoqCustomization());
+            Fixture.Customize<ModuleWeaver>(cc => cc.With(mw => mw.Config, XElement.Parse("<CodeContracts />")));
 
             Fixture.Behaviors.Add(new NullRecursionBehavior());
-
+            
             Fixture.Register(() => moduleDefinitionLazy.Value);
             Fixture.Register((ModuleDefinition md) => md.TypeSystem);
             Fixture.Register((ModuleDefinition md) => md.FindType("DarthMaul"));

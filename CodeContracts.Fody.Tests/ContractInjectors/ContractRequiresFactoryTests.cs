@@ -23,7 +23,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             contractConfig.Requires = RequiresMode.WithMessages | RequiresMode.WithExceptions;
             var typeDefinition = moduleDefinition.ImportReference(typeof(ArgumentNullException)).Resolve();
-            var instructionBuilder = sut.Create(moduleDefinition, typeDefinition, message);
+            var instructionBuilder = sut.Create(typeDefinition, message);
 
             Assert.IsType<ContractMethodWithMessageBuilder>(instructionBuilder);
             Assert.Equal(message, instructionBuilder.FindPrivateField<string>("message"));
@@ -39,7 +39,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             contractConfig.Requires = RequiresMode.WithoutMessages | RequiresMode.WithoutExceptions;
             var typeDefinition = moduleDefinition.ImportReference(typeof(ArgumentNullException)).Resolve();
-            var instructionBuilder = sut.Create(moduleDefinition, typeDefinition, message);
+            var instructionBuilder = sut.Create(typeDefinition, message);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
             Assert.Equal(ContractReferences.Requires(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
@@ -53,7 +53,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             contractConfig.Requires = RequiresMode.WithExceptions;
             var typeDefinition = moduleDefinition.ImportReference(typeof(ArgumentNullException)).Resolve();
-            var instructionBuilder = sut.Create(moduleDefinition, typeDefinition, null);
+            var instructionBuilder = sut.Create(typeDefinition, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
             Assert.Equal(ContractReferences.RequiresWithException(moduleDefinition, typeDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
@@ -67,7 +67,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             contractConfig.Requires = RequiresMode.WithoutExceptions;
             var typeDefinition = moduleDefinition.ImportReference(typeof(ArgumentNullException)).Resolve();
-            var instructionBuilder = sut.Create(moduleDefinition, typeDefinition, null);
+            var instructionBuilder = sut.Create(typeDefinition, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
             Assert.Equal(ContractReferences.Requires(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
@@ -81,7 +81,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             ContractRequiresFactory sut)
         {
             contractConfig.Requires = RequiresMode.WithMessages;
-            var instructionBuilder = sut.Create(moduleDefinition, null, message);
+            var instructionBuilder = sut.Create(null, message);
 
             Assert.IsType<ContractMethodWithMessageBuilder>(instructionBuilder);
             Assert.Equal(message, instructionBuilder.FindPrivateField<string>("message"));
@@ -96,7 +96,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             ContractRequiresFactory sut)
         {
             contractConfig.Requires = RequiresMode.WithoutMessages;
-            var instructionBuilder = sut.Create(moduleDefinition, null, message);
+            var instructionBuilder = sut.Create(null, message);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
             Assert.Equal(ContractReferences.Requires(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
@@ -107,7 +107,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             [Frozen] ModuleDefinition moduleDefinition,
             ContractRequiresFactory sut)
         {
-            var instructionBuilder = sut.Create(moduleDefinition, null, null);
+            var instructionBuilder = sut.Create(null, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
             Assert.Equal(ContractReferences.Requires(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());

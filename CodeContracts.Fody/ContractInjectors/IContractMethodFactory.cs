@@ -10,6 +10,6 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public interface IContractMethodFactory
     {
-        IInstructionsBuilder Create(ModuleDefinition moduleDefinition, TypeDefinition typeDefinition, string message);
+        IInstructionsBuilder Create(TypeDefinition typeDefinition, string message);
     }
 }

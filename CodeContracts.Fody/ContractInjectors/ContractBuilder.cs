@@ -21,7 +21,7 @@ namespace CodeContracts.Fody.ContractInjectors
 
         public IEnumerable<Instruction> Build(ContractValidate contractValidate)
         {
-            return contractMethodFactory.Create(contractValidate.ValidateDefinition.ValidateMethod.Module, contractValidate.ValidateDefinition.ExceptionType, contractValidate.ValidateDefinition.ErrorMessage).Build(contractValidate);
+            return contractMethodFactory.Create(contractValidate.ValidateDefinition.ExceptionType, contractValidate.ValidateDefinition.ErrorMessage).Build(contractValidate);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var instructions = sut.Build(contractValidate).ToList();
 
-            contractMethodFactoryMock.Verify(cmf => cmf.Create(moduleDefinition, contractValidate.ValidateDefinition.ExceptionType, contractValidate.ValidateDefinition.ErrorMessage), Times.Once);
+            contractMethodFactoryMock.Verify(cmf => cmf.Create(contractValidate.ValidateDefinition.ExceptionType, contractValidate.ValidateDefinition.ErrorMessage), Times.Once);
             Assert.NotEmpty(instructions);
         }
     }

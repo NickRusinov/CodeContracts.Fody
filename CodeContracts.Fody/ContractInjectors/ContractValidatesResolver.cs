@@ -28,6 +28,14 @@ namespace CodeContracts.Fody.ContractInjectors
             this.contractExtraParametersResolvers = contractExtraParametersResolvers;
         }
 
+        public ContractValidatesResolver(IContractValidateResolver contractValidateResolver, IContractMembersResolver contractParametersResolver, params IContractMembersResolver[] contractExtraParametersResolvers)
+            : this(contractValidateResolver, contractParametersResolver, contractExtraParametersResolvers as IEnumerable<IContractMembersResolver>)
+        {
+            Contract.Requires(contractValidateResolver != null);
+            Contract.Requires(contractParametersResolver != null);
+            Contract.Requires(contractExtraParametersResolvers != null);
+        }
+
         public IEnumerable<ContractValidate> Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
         {
             var extraParametersMembers = contractExtraParametersResolvers.SelectMany(cmr => cmr.Resolve(contractDefinition, methodDefinition)).ToList();

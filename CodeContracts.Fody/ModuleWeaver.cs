@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using CodeContracts.Fody.Configurations;
 using Mono.Cecil;
+using TinyIoC;
 
 namespace CodeContracts.Fody
 {
@@ -32,6 +33,8 @@ namespace CodeContracts.Fody
             Contract.Requires(LogWarning != null);
 
             tinyIoCConfiguration.Configure(this);
+            
+            TinyIoCContainer.Current.Resolve<ContractExecutor>().Execute(ModuleDefinition);
         }
     }
 }

@@ -12,20 +12,24 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class ContractInvariantFactory : IContractMethodFactory
     {
-        private readonly IInstructionsBuilder instructionsBuilder;
+        private readonly ModuleDefinition moduleDefinition;
 
         private readonly ContractConfig contractConfig;
 
-        public ContractInvariantFactory(IInstructionsBuilder instructionsBuilder, ContractConfig contractConfig)
+        private readonly IInstructionsBuilder instructionsBuilder;
+        
+        public ContractInvariantFactory(ModuleDefinition moduleDefinition, ContractConfig contractConfig, IInstructionsBuilder instructionsBuilder)
         {
-            Contract.Requires(instructionsBuilder != null);
+            Contract.Requires(moduleDefinition != null);
             Contract.Requires(contractConfig != null);
+            Contract.Requires(instructionsBuilder != null);
 
-            this.instructionsBuilder = instructionsBuilder;
+            this.moduleDefinition = moduleDefinition;
             this.contractConfig = contractConfig;
+            this.instructionsBuilder = instructionsBuilder;
         }
 
-        public IInstructionsBuilder Create(ModuleDefinition moduleDefinition, TypeDefinition typeDefinition, string message)
+        public IInstructionsBuilder Create(TypeDefinition typeDefinition, string message)
         {
             if (message != null && contractConfig.Invariant.HasFlag(WithMessages))
                 return new ContractMethodWithMessageBuilder(instructionsBuilder, InvariantWithMessage(moduleDefinition), message);

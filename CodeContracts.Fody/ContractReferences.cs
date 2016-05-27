@@ -34,7 +34,9 @@ namespace CodeContracts.Fody
             return moduleDefinition.ImportReference(typeof(Contract)).Resolve().Methods
                 .Where(md => md.Name == name)
                 .Where(md => md.Parameters.Count == parameters)
-                .Single(md => md.GenericParameters.Count == genericParameters);
+                .Where(md => md.GenericParameters.Count == genericParameters)
+                .Select(moduleDefinition.ImportReference)
+                .Single();
         }
     }
 }

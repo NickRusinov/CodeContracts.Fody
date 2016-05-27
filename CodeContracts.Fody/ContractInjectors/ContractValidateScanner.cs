@@ -12,20 +12,24 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class ContractValidateScanner : IContractValidateScanner
     {
+        private readonly ModuleDefinition moduleDefinition;
+
         private readonly IContractValidateCriteria contractValidateCriteria;
 
-        public ContractValidateScanner(IContractValidateCriteria contractValidateCriteria)
+        public ContractValidateScanner(ModuleDefinition moduleDefinition, IContractValidateCriteria contractValidateCriteria)
         {
+            Contract.Requires(moduleDefinition != null);
             Contract.Requires(contractValidateCriteria != null);
 
+            this.moduleDefinition = moduleDefinition;
             this.contractValidateCriteria = contractValidateCriteria;
         }
 
         public IEnumerable<ContractValidateDefinition> Scan(CustomAttribute customAttribute)
         {
-            var contractExceptionType = customAttribute.AttributeType.Module.ImportReference(typeof(ContractExceptionAttribute));
-            var contractMessageType = customAttribute.AttributeType.Module.ImportReference(typeof(ContractMessageAttribute));
-            var exceptionType = customAttribute.AttributeType.Module.ImportReference(typeof(Exception)).Resolve();
+            var contractExceptionType = moduleDefinition.ImportReference(typeof(ContractExceptionAttribute));
+            var contractMessageType = moduleDefinition.ImportReference(typeof(ContractMessageAttribute));
+            var exceptionType = moduleDefinition.ImportReference(typeof(Exception)).Resolve();
             
             return from methodDefinition in customAttribute.AttributeType.Resolve().GetMethods()
                    where contractValidateCriteria.IsContractValidate(methodDefinition)
