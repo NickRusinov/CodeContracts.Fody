@@ -7,8 +7,8 @@
     <ProjectGuid>{C224E445-9EB3-45D4-B92B-3C74691FAB61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StarWars</RootNamespace>
-    <AssemblyName>StarWars</AssemblyName>
+    <RootNamespace>CodeContracts.StarWars</RootNamespace>
+    <AssemblyName>CodeContracts.StarWars</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>

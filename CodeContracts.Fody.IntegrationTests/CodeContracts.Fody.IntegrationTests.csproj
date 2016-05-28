@@ -109,9 +109,9 @@
       <Project>{462f0895-0be2-4bf5-ad9e-3c488a9013f1}</Project>
       <Name>CodeContracts.Fody</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestAssemblies\StarWars\StarWars.csproj">
+    <ProjectReference Include="..\TestAssemblies\CodeContracts.StarWars\CodeContracts.StarWars.csproj">
       <Project>{c224e445-9eb3-45d4-b92b-3c74691fab61}</Project>
-      <Name>StarWars</Name>
+      <Name>CodeContracts.StarWars</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

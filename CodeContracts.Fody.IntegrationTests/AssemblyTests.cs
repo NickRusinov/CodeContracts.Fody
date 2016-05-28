@@ -14,7 +14,7 @@ namespace CodeContracts.Fody.IntegrationTests
         [Fact(DisplayName = "Проверка корректности загрузки тестовой сборки")]
         public void AssemblyTest()
         {
-            Assembly.LoadFrom("StarWars.dll");
+            Assembly.LoadFrom("CodeContracts.StarWars.dll");
         }
     }
 }
