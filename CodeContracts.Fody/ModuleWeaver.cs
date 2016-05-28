@@ -13,8 +13,6 @@ namespace CodeContracts.Fody
 {
     public class ModuleWeaver
     {
-        private readonly TinyIoCConfiguration tinyIoCConfiguration = new TinyIoCConfiguration();
-
         public ModuleDefinition ModuleDefinition { get; set; }
 
         public XElement Config { get; set; }
@@ -22,17 +20,22 @@ namespace CodeContracts.Fody
         public Action<string> LogDebug { get; set; }
 
         public Action<string> LogInfo { get; set; }
-
+        
         public Action<string> LogWarning { get; set; }
+
+        public Action<string> LogError { get; set; }
 
         public void Execute()
         {
             Contract.Requires(ModuleDefinition != null);
+            Contract.Requires(Config != null);
             Contract.Requires(LogDebug != null);
             Contract.Requires(LogInfo != null);
             Contract.Requires(LogWarning != null);
+            Contract.Requires(LogError != null);
 
-            tinyIoCConfiguration.Configure(this);
+            new TinyIoCConfiguration().Configure(this);
+            new LoggerConfiguration().Configure(this);
             
             TinyIoCContainer.Current.Resolve<ContractExecutor>().Execute(ModuleDefinition);
         }

@@ -143,6 +143,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\LoggerConfiguration.cs" />
     <Compile Include="Configurations\TinyIoCConfiguration.cs" />
     <Compile Include="ContractConfig.cs" />
     <Compile Include="ContractConfigParser.cs" />
@@ -240,6 +241,7 @@
     <Compile Include="ContractInjectResolvers\IRequiresResolver.cs" />
     <Compile Include="ContractInjectResolvers\RequiresEnsuresResolver.cs" />
     <Compile Include="Internal\EnumerableExtensions.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="ModuleWeaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ContractDefinitions\RequiresDefinition.cs" />

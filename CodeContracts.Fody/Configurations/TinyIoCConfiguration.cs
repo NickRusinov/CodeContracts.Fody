@@ -20,9 +20,6 @@ namespace CodeContracts.Fody.Configurations
 
             container.Register(moduleWeaver);
             container.Register(moduleWeaver.ModuleDefinition);
-            container.Register(moduleWeaver.LogInfo, "LogInfo");
-            container.Register(moduleWeaver.LogDebug, "LogDebug");
-            container.Register(moduleWeaver.LogWarning, "LogWarning");
 
             container.Register((tic, _) => tic.Resolve<IContractConfigParser>().Parse(moduleWeaver.Config.ToString()));
             
