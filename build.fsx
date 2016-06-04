@@ -13,6 +13,10 @@ Target "Clean" (fun _ ->
     CleanDir outputFolder
 )
 
+Target "Restore" (fun _ ->
+    RestorePackages ()
+)
+
 Target "Build" (fun _ ->
     !! "*.sln"
     |> MSBuild outputFolder "Rebuild" [ "Configuration", getConfiguration () ] |> ignore
@@ -48,6 +52,8 @@ Target "Release" ignore
 Target "Publish" ignore
 
 "Clean" ==> "Build"
+
+"Restore" ==> "Build"
 
 "Build" ==> "UnitTests"
 "Build" ==> "integrationTests"
