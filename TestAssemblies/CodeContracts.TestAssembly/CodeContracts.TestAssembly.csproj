@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BlueLightsaberAttribute.cs" />
     <Compile Include="ExtraRedLightsaberAttribute.cs" />
+    <Compile Include="MyAttribute.cs" />
     <Compile Include="RedLightsaberAttribute.cs" />
     <Compile Include="Force.cs" />
     <Compile Include="Jedis\IJedi.cs" />
