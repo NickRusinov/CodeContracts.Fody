@@ -25,18 +25,20 @@ Target "Build" (fun _ ->
 Target "UnitTests" (fun _ ->
     !! (outputFolder + "/*.Tests.dll")
     |> xUnit2 (fun p -> { p with Parallel = ParallelMode.All
-                                 HtmlOutputPath = Some (outputFolder @@ "Tests.html") })
+                                 XmlOutputPath = outputFolder @@ "Tests.xml" |> Some
+                                 HtmlOutputPath = outputFolder @@ "Tests.html" |> Some })
 )
 
 Target "IntegrationTests" (fun _ ->
     !! (outputFolder + "/*.IntegrationTests.dll")
     |> xUnit2 (fun p -> { p with Parallel = ParallelMode.All
-                                 HtmlOutputPath = Some (outputFolder @@ "IntegrationTests.html") })
+                                 XmlOutputPath = outputFolder @@ "IntegrationTests.xml" |> Some
+                                 HtmlOutputPath = outputFolder @@ "IntegrationTests.html" |> Some })
 )
 
 Target "NugetPackage" (fun _ ->
     !! "*.nuspec"
-    |> Seq.iter (NuGet (fun p -> { p with Version = GetAssemblyVersionString (outputFolder @@ "CodeContracts.Fody.dll")
+    |> Seq.iter (NuGet (fun p -> { p with Version = outputFolder @@ "CodeContracts.Fody.dll" |> GetAssemblyVersionString
                                           WorkingDir = outputFolder
                                           OutputPath = outputFolder }))
 )
