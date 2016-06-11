@@ -9,8 +9,16 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractScanners
 {
+    /// <summary>
+    /// Scans custom contract attributes in a parameter of method
+    /// </summary>
     public interface IParameterScanner
     {
+        /// <summary>
+        /// Scans custom contract attributes in a parameter of method
+        /// </summary>
+        /// <param name="parameterDefinition">Scanned parameter of method</param>
+        /// <returns>Collection of all found contract attributes</returns>
         IEnumerable<ContractDefinition> Scan(ParameterDefinition parameterDefinition);
     }
 }

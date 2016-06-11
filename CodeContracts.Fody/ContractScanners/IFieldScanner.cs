@@ -9,8 +9,16 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractScanners
 {
+    /// <summary>
+    /// Scans custom contract attributes in a field
+    /// </summary>
     public interface IFieldScanner
     {
+        /// <summary>
+        /// Scans custom contract attributes in a field
+        /// </summary>
+        /// <param name="fieldDefinition">Scanned field</param>
+        /// <returns>Collection of all found contract attributes</returns>
         IEnumerable<ContractDefinition> Scan(FieldDefinition fieldDefinition);
     }
 }

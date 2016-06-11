@@ -10,14 +10,32 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractScanners
 {
+    /// <summary>
+    /// Scans custom contract attributes in a type
+    /// </summary>
     public class TypeScanner : ITypeScanner
     {
+        /// <summary>
+        /// Scans custom contract attributes in a method
+        /// </summary>
         private readonly IMethodScanner methodScanner;
 
+        /// <summary>
+        /// Scans custom contract attributes in a property
+        /// </summary>
         private readonly IPropertyScanner propertyScanner;
 
+        /// <summary>
+        /// Scans custom contract attributes in a field
+        /// </summary>
         private readonly IFieldScanner fieldScanner;
 
+        /// <summary>
+        /// Initializes a new instance of class <see cref="TypeScanner"/>
+        /// </summary>
+        /// <param name="methodScanner">Scans custom contract attributes in a method</param>
+        /// <param name="propertyScanner">Scans custom contract attributes in a property</param>
+        /// <param name="fieldScanner">Scans custom contract attributes in a field</param>
         public TypeScanner(IMethodScanner methodScanner, IPropertyScanner propertyScanner, IFieldScanner fieldScanner)
         {
             Contract.Requires(methodScanner != null);
@@ -29,6 +47,7 @@ namespace CodeContracts.Fody.ContractScanners
             this.fieldScanner = fieldScanner;
         }
 
+        /// <inheritdoc/>
         public IEnumerable<ContractDefinition> Scan(TypeDefinition typeDefinition)
         {
             return EnumerableExtensions.Concat(

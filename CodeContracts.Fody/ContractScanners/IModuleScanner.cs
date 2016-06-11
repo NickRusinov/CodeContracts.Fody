@@ -9,8 +9,16 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractScanners
 {
+    /// <summary>
+    /// Scans custom contract attributes in a assembly
+    /// </summary>
     public interface IModuleScanner
     {
+        /// <summary>
+        /// Scans custom contract attributes in a assembly
+        /// </summary>
+        /// <param name="moduleDefinition">Definition of current weaving assembly</param>
+        /// <returns>Collection of all found contract attributes</returns>
         IEnumerable<ContractDefinition> Scan(ModuleDefinition moduleDefinition);
     }
 }

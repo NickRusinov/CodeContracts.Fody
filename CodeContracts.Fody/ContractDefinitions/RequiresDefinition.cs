@@ -8,8 +8,17 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractDefinitions
 {
+    /// <summary>
+    /// Represents contract requires definition
+    /// </summary>
     public class RequiresDefinition : ContractDefinition
     {
+        /// <summary>
+        /// Initializes a new instance of class <see cref="RequiresDefinition"/>
+        /// </summary>
+        /// <param name="contractAttribute">Custom attribute that contains information about contract</param>
+        /// <param name="attributeProvider">Member to which was applied custom attribute</param>
+        /// <param name="contractMethod">Method that references to custom contract attribute</param>
         public RequiresDefinition(CustomAttribute contractAttribute, ICustomAttributeProvider attributeProvider, MethodDefinition contractMethod)
             : base(contractAttribute, attributeProvider, contractMethod.DeclaringType)
         {
@@ -20,6 +29,9 @@ namespace CodeContracts.Fody.ContractDefinitions
             ContractMethod = contractMethod;
         }
 
+        /// <summary>
+        /// Method that references to custom contract attribute
+        /// </summary>
         public MethodDefinition ContractMethod { get; set; }
     }
 }

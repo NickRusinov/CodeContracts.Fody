@@ -10,8 +10,15 @@ using TinyIoC;
 
 namespace CodeContracts.Fody.Configurations
 {
+    /// <summary>
+    /// Registers all services in dependency injection container (TinyIOC)
+    /// </summary>
     public class TinyIoCConfiguration
     {
+        /// <summary>
+        /// Registers all services in dependency injection container
+        /// </summary>
+        /// <param name="moduleWeaver">ModuleWeaver instance for Fody addin</param>
         public void Configure(ModuleWeaver moduleWeaver)
         {
             var container = TinyIoCContainer.Current;
