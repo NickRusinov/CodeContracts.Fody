@@ -4,12 +4,11 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody
+namespace CodeContracts.Fody.Internal
 {
-    public static class ContractReferences
+    internal static class ContractReferences
     {
         public static MethodReference Ensures(ModuleDefinition moduleDefinition) => FindMethod(moduleDefinition, "Ensures", 1, 0);
 

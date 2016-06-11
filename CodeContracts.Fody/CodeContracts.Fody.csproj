@@ -207,7 +207,6 @@
     <Compile Include="ContractInjectors\StringParameterParser.cs" />
     <Compile Include="ContractInjectors\ThisParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ThisParameterParser.cs" />
-    <Compile Include="ContractReferences.cs" />
     <Compile Include="ContractScanners\ContractCriteria.cs" />
     <Compile Include="ContractScanners\FieldScanner.cs" />
     <Compile Include="ContractScanners\IContractCriteria.cs" />
@@ -225,6 +224,7 @@
     <Compile Include="ContractScanners\PropertyScanner.cs" />
     <Compile Include="ContractScanners\TypeScanner.cs" />
     <Compile Include="IContractConfigParser.cs" />
+    <Compile Include="Internal\ContractReferences.cs" />
     <Compile Include="Internal\MethodReferenceComparer.cs" />
     <Compile Include="Internal\MethodReferenceExtensions.cs" />
     <Compile Include="Internal\TypeReferenceComparer.cs" />

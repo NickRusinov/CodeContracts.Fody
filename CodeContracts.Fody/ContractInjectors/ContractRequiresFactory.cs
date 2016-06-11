@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
-using static CodeContracts.Fody.ContractReferences;
+using static CodeContracts.Fody.Internal.ContractReferences;
 using static CodeContracts.Fody.RequiresMode;
 
 namespace CodeContracts.Fody.ContractInjectors
