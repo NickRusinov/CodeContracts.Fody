@@ -26,7 +26,7 @@ namespace CodeContracts.Fody.ContractInjectors
         public ContractValidate Resolve(CustomAttribute customAttribute, ICollection<ContractMember> contractMembers)
         {
             var contractValidateDefinitions = contractValidateScanner.Scan(customAttribute).ToList();
-            var bestOverload = bestOverloadResolver.Resolve(contractValidateDefinitions.Select(cvd => cvd.ValidateMethod), contractMembers.Select(cm => cm.ParameterDefinition));
+            var bestOverload = bestOverloadResolver.Resolve(contractValidateDefinitions.Select(cvd => cvd.ValidateMethod).ToList(), contractMembers.Select(cm => cm.ParameterDefinition).ToList());
             
             var contractValidateDefinition = contractValidateDefinitions.First(cvd => Equals(cvd.ValidateMethod, bestOverload));
             var contractParameterBuilders = bestOverload.Parameters.Select(pd => contractMembers.First(cm => Equals(cm.ParameterDefinition.Name, pd.Name))).Select(cm => cm.ParameterBuilder);

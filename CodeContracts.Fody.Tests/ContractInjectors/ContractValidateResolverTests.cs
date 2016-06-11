@@ -35,7 +35,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             sut.Resolve(customAttribute, contractMembers);
 
-            bestOverloadResolverMock.Verify(bor => bor.Resolve(It.IsAny<IEnumerable<MethodDefinition>>(), It.IsAny<IEnumerable<ParameterDefinition>>()), Times.Once);
+            bestOverloadResolverMock.Verify(bor => bor.Resolve(It.IsAny<IReadOnlyCollection<MethodDefinition>>(), It.IsAny<IReadOnlyCollection<ParameterDefinition>>()), Times.Once);
         }
     }
 }

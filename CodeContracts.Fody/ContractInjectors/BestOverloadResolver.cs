@@ -10,10 +10,20 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class BestOverloadResolver : IBestOverloadResolver
     {
-        public MethodDefinition Resolve(IEnumerable<MethodDefinition> methodDefinitions, IEnumerable<ParameterDefinition> parameterDefinitions)
+        private readonly IBestOverloadCriteria bestOverloadCriteria;
+
+        public BestOverloadResolver(IBestOverloadCriteria bestOverloadCriteria)
         {
-            // todo - алгоритм выбора наилучшей перегрузки метода
-            return methodDefinitions.FirstOrDefault();
+            Contract.Requires(bestOverloadCriteria != null);
+
+            this.bestOverloadCriteria = bestOverloadCriteria;
+        }
+
+        public MethodReference Resolve(IReadOnlyCollection<MethodReference> methodReferences, IReadOnlyCollection<ParameterDefinition> parameterDefinitions)
+        {
+            methodReferences = methodReferences.Where(mr => bestOverloadCriteria.IsApply(mr, parameterDefinitions)).ToList();
+
+            return methodReferences.Single(mr => methodReferences.All(imr => BestOverloadMethodComparer.Instance.Compare(mr, imr) >= 0));
         }
     }
 }

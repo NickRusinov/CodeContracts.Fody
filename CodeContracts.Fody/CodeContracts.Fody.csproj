@@ -154,6 +154,9 @@
     <Compile Include="ContractExecutor.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterParser.cs" />
+    <Compile Include="ContractInjectors\BestOverloadMethodComparer.cs" />
+    <Compile Include="ContractInjectors\BestOverloadCriteria.cs" />
+    <Compile Include="ContractInjectors\BestOverloadParameterComparer.cs" />
     <Compile Include="ContractInjectors\BestOverloadResolver.cs" />
     <Compile Include="ContractInjectors\CompositeMemberParameterParser.cs" />
     <Compile Include="ContractInjectors\CompositeMethodParameterParser.cs" />
@@ -179,6 +182,7 @@
     <Compile Include="ContractInjectors\ContractValidateScanner.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilder.cs" />
     <Compile Include="ContractInjectors\FieldParameterParser.cs" />
+    <Compile Include="ContractInjectors\IBestOverloadCriteria.cs" />
     <Compile Include="ContractInjectors\IBestOverloadResolver.cs" />
     <Compile Include="ContractInjectors\IContractMembersResolver.cs" />
     <Compile Include="ContractInjectors\IContractMethodFactory.cs" />
@@ -221,7 +225,9 @@
     <Compile Include="ContractScanners\PropertyScanner.cs" />
     <Compile Include="ContractScanners\TypeScanner.cs" />
     <Compile Include="IContractConfigParser.cs" />
+    <Compile Include="Internal\MethodReferenceComparer.cs" />
     <Compile Include="Internal\MethodReferenceExtensions.cs" />
+    <Compile Include="Internal\TypeReferenceComparer.cs" />
     <Compile Include="Internal\TypeReferenceExtensions.cs" />
     <Compile Include="ContractInjectResolvers\AbstractContractClassBuilder.cs" />
     <Compile Include="ContractInjectResolvers\ContractClassResolver.cs" />

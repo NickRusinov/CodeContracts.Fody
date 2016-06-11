@@ -15,7 +15,7 @@ namespace CodeContracts.Fody.ContractScanners
         {
             var contractAttributeType = attribute.AttributeType.Module.ImportReference(typeof(ContractAttribute));
 
-            return attribute.AttributeType.Resolve().GetBaseTypes().Any(tr => Equals(tr.Resolve(), contractAttributeType.Resolve()));
+            return attribute.AttributeType.GetBaseTypes().Contains(contractAttributeType, TypeReferenceComparer.Instance);
         }
     }
 }

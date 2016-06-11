@@ -37,6 +37,8 @@ namespace CodeContracts.Fody.Tests
             Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi") as MethodReference);
             Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi").CustomAttributes.First());
 
+            Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria());
+            Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria() as IBestOverloadCriteria);
             Fixture.Register((ModuleDefinition md) => new ContractValidate(Fixture.Create<ContractValidateDefinition>(), Fixture.CreateMany<IParameterBuilder>(Fixture.Create<MethodDefinition>().Parameters.Count)));
 
             Fixture.Register(() => Instruction.Create(OpCodes.Ldarg_0));
