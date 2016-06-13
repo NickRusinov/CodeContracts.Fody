@@ -23,7 +23,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var buildedInstructions = sut.Build(validateParameterDefinition);
 
-            Assert.Equal(Instruction.Create(OpCodes.Callvirt, propertyDefinition.GetMethod), buildedInstructions.SingleOrDefault(), InstructionComparer.Default);
+            Assert.Equal(Instruction.Create(OpCodes.Callvirt, propertyDefinition.GetMethod), buildedInstructions.SingleOrDefault(), InstructionComparer.Instance);
         }
     }
 }

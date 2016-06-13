@@ -18,7 +18,7 @@ namespace CodeContracts.Fody.Configurations
         /// <param name="moduleWeaver">ModuleWeaver instance for Fody addin</param>
         public void Configure(ModuleWeaver moduleWeaver)
         {
-            Logger.Current = new Logger(moduleWeaver.LogDebug, moduleWeaver.LogInfo, moduleWeaver.LogWarning, moduleWeaver.LogError);
+            Logger.Instance = new Logger(moduleWeaver.LogDebug, moduleWeaver.LogInfo, moduleWeaver.LogWarning, moduleWeaver.LogError);
         }
     }
 }

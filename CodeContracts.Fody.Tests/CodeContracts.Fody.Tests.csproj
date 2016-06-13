@@ -110,6 +110,7 @@
     <Compile Include="ContractInjectors\BestOverloadMethodComparerTests.cs" />
     <Compile Include="ContractInjectors\BestOverloadParameterComparerTests.cs" />
     <Compile Include="ContractInjectors\BestOverloadResolverTests.cs" />
+    <Compile Include="ContractInjectors\ConstParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractEnsuresFactoryTests.cs" />
     <Compile Include="ContractInjectors\ContractInvariantFactoryTests.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="ContractInjectors\ContractValidateResolverTests.cs" />
     <Compile Include="ContractInjectors\ContractValidateScannerTests.cs" />
     <Compile Include="ContractInjectors\ContractValidatesResolverTests.cs" />
+    <Compile Include="ContractInjectors\ConvertParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterParserTests.cs" />
     <Compile Include="ContractInjectors\ContractInjectorTests.cs" />

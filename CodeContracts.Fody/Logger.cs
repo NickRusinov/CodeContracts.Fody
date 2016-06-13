@@ -9,7 +9,7 @@ namespace CodeContracts.Fody
 {
     internal sealed class Logger
     {
-        public static Logger Current { get; set; } = new Logger();
+        public static Logger Instance { get; set; } = new Logger();
 
         private readonly Action<string> logDebug;
 

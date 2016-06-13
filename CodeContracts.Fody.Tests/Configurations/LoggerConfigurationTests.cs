@@ -24,16 +24,16 @@ namespace CodeContracts.Fody.Tests.Configurations
 
             sut.Configure(moduleWeaver);
 
-            Logger.Current.LogDebug("message");
+            Logger.Instance.LogDebug("message");
             Assert.Equal("Debug:message", testValue);
 
-            Logger.Current.LogInfo("message");
+            Logger.Instance.LogInfo("message");
             Assert.Equal("Info:message", testValue);
 
-            Logger.Current.LogWarning("message");
+            Logger.Instance.LogWarning("message");
             Assert.Equal("Warning:message", testValue);
 
-            Logger.Current.LogError("message");
+            Logger.Instance.LogError("message");
             Assert.Equal("Error:message", testValue);
         }
     }

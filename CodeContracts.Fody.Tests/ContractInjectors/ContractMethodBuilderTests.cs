@@ -23,7 +23,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var buildedInstructions = sut.Build(contractValidate).ToList();
 
-            Assert.Equal(Instruction.Create(OpCodes.Nop), buildedInstructions.FirstOrDefault(), InstructionComparer.Default);
+            Assert.Equal(Instruction.Create(OpCodes.Nop), buildedInstructions.FirstOrDefault(), InstructionComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка последней команды построителя вызова контрактного метода"), AutoFixture]
@@ -34,7 +34,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var buildedInstructions = sut.Build(contractValidate).ToList();
 
-            Assert.Equal(Instruction.Create(OpCodes.Call, methodDefinition), buildedInstructions.LastOrDefault(), InstructionComparer.Default);
+            Assert.Equal(Instruction.Create(OpCodes.Call, methodDefinition), buildedInstructions.LastOrDefault(), InstructionComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка команд построителя вызова контрактного метода"), AutoFixture]

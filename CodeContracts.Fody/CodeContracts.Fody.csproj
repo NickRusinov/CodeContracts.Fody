@@ -180,6 +180,7 @@
     <Compile Include="ContractInjectors\ContractValidateResolver.cs" />
     <Compile Include="ContractInjectors\ContractValidatesResolver.cs" />
     <Compile Include="ContractInjectors\ContractValidateScanner.cs" />
+    <Compile Include="ContractInjectors\ConvertParameterBuilder.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilder.cs" />
     <Compile Include="ContractInjectors\FieldParameterParser.cs" />
     <Compile Include="ContractInjectors\IBestOverloadCriteria.cs" />

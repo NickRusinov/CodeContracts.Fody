@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.ContractInjectors;
+using CodeContracts.Fody.Internal;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Moq;
@@ -28,8 +29,8 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 
             Assert.Equal(2, contractMembers.Count);
             var constMember = Assert.Single(contractMembers, cm => cm.ParameterDefinition.Name == "Max");
-            Assert.Equal(moduleDefinition.TypeSystem.Int16.Resolve(), constMember.ParameterDefinition.ParameterType.Resolve());
-            Assert.IsType<ConstParameterBuilder>(constMember.ParameterBuilder);
+            Assert.Equal(moduleDefinition.TypeSystem.Int16, constMember.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
+            Assert.IsType<CompositeParameterBuilder>(constMember.ParameterBuilder);
         }
 
         [Theory(DisplayName = "Проверка разрешения строкового свойства атрибута контракта"), AutoFixture]

@@ -10,7 +10,7 @@ namespace CodeContracts.Fody.Tests.Internal
 {
     internal class InstructionComparer : IEqualityComparer<Instruction>
     {
-        public static readonly IEqualityComparer<Instruction> Default = new InstructionComparer();
+        public static readonly IEqualityComparer<Instruction> Instance = new InstructionComparer();
 
         public bool Equals(Instruction x, Instruction y) => Equals(x.OpCode, y.OpCode) && Equals(x.Operand, y.Operand);
 

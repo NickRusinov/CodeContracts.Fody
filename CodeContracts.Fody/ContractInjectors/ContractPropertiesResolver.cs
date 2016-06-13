@@ -11,9 +11,10 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public class ContractPropertiesResolver : ContractMembersResolver
     {
-        public ContractPropertiesResolver(IMethodParameterParser methodParameterParser)
-            : base(methodParameterParser)
+        public ContractPropertiesResolver(ModuleDefinition moduleDefinition, IMethodParameterParser methodParameterParser)
+            : base(moduleDefinition, methodParameterParser)
         {
+            Contract.Requires(moduleDefinition != null);
             Contract.Requires(methodParameterParser != null);
         }
 

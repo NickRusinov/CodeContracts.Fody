@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.ContractInjectors;
+using CodeContracts.Fody.Internal;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Moq;
@@ -29,8 +30,8 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 
             Assert.Equal(2, contractMembers.Count);
             Assert.Equal("arg", constMember.ParameterDefinition.Name);
-            Assert.Equal(moduleDefinition.TypeSystem.UInt64.Resolve(), constMember.ParameterDefinition.ParameterType.Resolve());
-            Assert.IsType<ConstParameterBuilder>(constMember.ParameterBuilder);
+            Assert.Equal(moduleDefinition.TypeSystem.UInt64, constMember.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
+            Assert.IsType<CompositeParameterBuilder>(constMember.ParameterBuilder);
         }
 
         [Theory(DisplayName = "Проверка разрешения строкового параметра атрибута контракта"), AutoFixture]
@@ -63,7 +64,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             
             Assert.Equal(1, contractMembers.Count);
             Assert.Equal("arg", contractMembers.Single().ParameterDefinition.Name);
-            Assert.Equal(fieldDefinition.FieldType, contractMembers.Single().ParameterDefinition.ParameterType.Resolve());
+            Assert.Equal(fieldDefinition.FieldType, contractMembers.Single().ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
             Assert.IsType<FieldParameterBuilder>(contractMembers.Single().ParameterBuilder);
         }
 
@@ -80,7 +81,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 
             Assert.Equal(1, contractMembers.Count);
             Assert.Equal("arg", contractMembers.Single().ParameterDefinition.Name);
-            Assert.Equal(propertyDefinition.PropertyType, contractMembers.Single().ParameterDefinition.ParameterType.Resolve());
+            Assert.Equal(propertyDefinition.PropertyType, contractMembers.Single().ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
             Assert.IsType<PropertyParameterBuilder>(contractMembers.Single().ParameterBuilder);
         }
 
@@ -97,7 +98,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 
             Assert.Equal(1, contractMembers.Count);
             Assert.Equal("arg", contractMembers.Single().ParameterDefinition.Name);
-            Assert.Equal(parameterDefinition.ParameterType, contractMembers.Single().ParameterDefinition.ParameterType.Resolve());
+            Assert.Equal(parameterDefinition.ParameterType, contractMembers.Single().ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
             Assert.IsType<ArgumentParameterBuilder>(contractMembers.Single().ParameterBuilder);
         }
     }

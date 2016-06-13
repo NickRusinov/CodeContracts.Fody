@@ -11,12 +11,16 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public abstract class ContractMembersResolver : IContractMembersResolver
     {
+        private readonly ModuleDefinition moduleDefinition;
+
         private readonly IMethodParameterParser methodParameterParser;
 
-        protected ContractMembersResolver(IMethodParameterParser methodParameterParser)
+        protected ContractMembersResolver(ModuleDefinition moduleDefinition, IMethodParameterParser methodParameterParser)
         {
+            Contract.Requires(moduleDefinition != null);
             Contract.Requires(methodParameterParser != null);
 
+            this.moduleDefinition = moduleDefinition;
             this.methodParameterParser = methodParameterParser;
         }
 
@@ -33,7 +37,7 @@ namespace CodeContracts.Fody.ContractInjectors
                     yield return new ContractMember(new ParameterDefinition(parameter.Key, 0, parseResult.ParsedParameterType), parseResult.ParsedParameterBuilder);
                 }
                 else
-                    yield return new ContractMember(new ParameterDefinition(parameter.Key, 0, methodDefinition.Module.ImportReference(parameter.Value.GetType())), new ConstParameterBuilder(parameter.Value)); 
+                    yield return new ContractMember(new ParameterDefinition(parameter.Key, 0, moduleDefinition.ImportReference(parameter.Value.GetType())), new CompositeParameterBuilder(new ConstParameterBuilder(parameter.Value), new ConvertParameterBuilder(moduleDefinition))); 
             }
         }
     }
