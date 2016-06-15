@@ -9,10 +9,20 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
+    /// <summary>
+    /// Parses a reference to method's argument of contract expression
+    /// </summary>
     public class ArgumentParameterParser : IMethodParameterParser
     {
+        /// <summary>
+        /// Parses a member access contract expression
+        /// </summary>
         private readonly IMemberParameterParser memberParameterParser;
 
+        /// <summary>
+        /// Initializes a new instance of class <see cref="ArgumentParameterParser"/>
+        /// </summary>
+        /// <param name="memberParameterParser">Parses a member access contract expression</param>
         public ArgumentParameterParser(IMemberParameterParser memberParameterParser)
         {
             Contract.Requires(memberParameterParser != null);
@@ -20,6 +30,7 @@ namespace CodeContracts.Fody.ContractInjectors
             this.memberParameterParser = memberParameterParser;
         }
 
+        /// <inheritdoc/>
         public ParseResult Parse(MethodDefinition methodDefinition, string parameterString)
         {
             var parseResult = ParseResult.Empty;

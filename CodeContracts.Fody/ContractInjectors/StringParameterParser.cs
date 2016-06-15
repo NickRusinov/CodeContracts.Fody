@@ -9,8 +9,12 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
+    /// <summary>
+    /// Parses a constant string which is not contract expression
+    /// </summary>
     public class StringParameterParser : IMethodParameterParser
     {
+        /// <inheritdoc/>
         public ParseResult Parse(MethodDefinition methodDefinition, string parameterString)
         {
             var parseResult = ParseResult.Empty;
