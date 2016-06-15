@@ -28,6 +28,12 @@ namespace CodeContracts.Fody.Internal
 
         public static MethodReference Result(ModuleDefinition moduleDefinition, TypeDefinition genericReference) => FindMethod(moduleDefinition, "Result", 0, 1).MakeGeneric(genericReference);
 
+        public static TypeReference ContractClass(ModuleDefinition moduleDefinition) => moduleDefinition.ImportReference(typeof(ContractClassAttribute));
+
+        public static TypeReference ContractClassFor(ModuleDefinition moduleDefinition) => moduleDefinition.ImportReference(typeof(ContractClassForAttribute));
+
+        public static TypeReference ContractInvariantMethod(ModuleDefinition moduleDefinition) => moduleDefinition.ImportReference(typeof(ContractInvariantMethodAttribute));
+
         private static MethodReference FindMethod(ModuleDefinition moduleDefinition, string name, int parameters, int genericParameters)
         {
             return moduleDefinition.ImportReference(typeof(Contract)).Resolve().Methods

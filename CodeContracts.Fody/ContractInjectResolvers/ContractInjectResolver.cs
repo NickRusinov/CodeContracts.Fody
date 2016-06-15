@@ -9,14 +9,32 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectResolvers
 {
+    /// <summary>
+    /// Resolves method in which will be injected contract (requires, ensures or invariant) expressions
+    /// </summary>
     public class ContractInjectResolver : IContractInjectResolver
     {
+        /// <summary>
+        /// Resolves method in which will be injected requires expressions
+        /// </summary>
         private readonly IRequiresResolver requiresResolver;
 
+        /// <summary>
+        /// Resolves method in which will be injected ensures expressions
+        /// </summary>
         private readonly IEnsuresResolver ensuresResolver;
 
+        /// <summary>
+        /// Resolves method in which will be injected invariant expressions
+        /// </summary>
         private readonly IInvariantResolver invariantResolver;
 
+        /// <summary>
+        /// Initailizes a new instance of class <see cref="ContractInjectResolver"/>
+        /// </summary>
+        /// <param name="requiresResolver">Resolves method in which will be injected requires expressions</param>
+        /// <param name="ensuresResolver">Resolves method in which will be injected ensures expressions</param>
+        /// <param name="invariantResolver">Resolves method in which will be injected invariant expressions</param>
         public ContractInjectResolver(IRequiresResolver requiresResolver, IEnsuresResolver ensuresResolver, IInvariantResolver invariantResolver)
         {
             Contract.Requires(requiresResolver != null);
@@ -28,6 +46,11 @@ namespace CodeContracts.Fody.ContractInjectResolvers
             this.invariantResolver = invariantResolver;
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="NotSupportedException">
+        /// Throws if contract definition isn't requires, ensures or invariant definition 
+        /// (other definitions are not allowed)
+        /// </exception>
         public MethodDefinition Resolve(ContractDefinition contractDefinition)
         {
             var requiresDefinition = contractDefinition as RequiresDefinition;
