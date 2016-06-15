@@ -9,8 +9,12 @@ using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
+    /// <summary>
+    /// Creates il instructions for inject null reference to contract's validate method
+    /// </summary>
     public class NullParameterBuilder : IParameterBuilder
     {
+        /// <inheritdoc/>
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             yield return Instruction.Create(OpCodes.Ldnull);

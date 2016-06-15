@@ -9,15 +9,27 @@ using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
+    /// <summary>
+    /// Creates il instructions for inject constant value to contract's validate method
+    /// </summary>
     public class ConstParameterBuilder : IParameterBuilder
     {
+        /// <summary>
+        /// Injected constant value
+        /// </summary>
         private readonly object constParameter;
 
+        /// <summary>
+        /// Initializes a new instance of class <see cref="ConstParameterBuilder"/>
+        /// </summary>
+        /// <param name="constParameter">Injected constant value</param>
         public ConstParameterBuilder(object constParameter)
         {
             this.constParameter = constParameter;
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="NotSupportedException">Type of injected constant value is not supported</exception>
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             if (constParameter == null)

@@ -10,10 +10,20 @@ using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
+    /// <summary>
+    /// Creates il instructions for inject convertion operation to contract's validate method
+    /// </summary>
     public class ConvertParameterBuilder : IParameterBuilder
     {
+        /// <summary>
+        /// Definition of current weaving assembly
+        /// </summary>
         private readonly ModuleDefinition moduleDefinition;
 
+        /// <summary>
+        /// Initializes a new instance of class <see cref="ConvertParameterBuilder"/>
+        /// </summary>
+        /// <param name="moduleDefinition">Definition of current weaving assembly</param>
         public ConvertParameterBuilder(ModuleDefinition moduleDefinition)
         {
             Contract.Requires(moduleDefinition != null);
@@ -21,6 +31,10 @@ namespace CodeContracts.Fody.ContractInjectors
             this.moduleDefinition = moduleDefinition;
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="NotSupportedException">
+        /// Type of parameter of contract's validate method is not supported for conversion
+        /// </exception>
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
             if (TypeReferenceComparer.Instance.Equals(validateParameterDefinition.ParameterType, moduleDefinition.TypeSystem.SByte))
