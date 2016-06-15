@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectors;
+using CodeContracts.Fody.Internal;
 using TinyIoC;
 
 namespace CodeContracts.Fody.Configurations
@@ -39,8 +40,8 @@ namespace CodeContracts.Fody.Configurations
             container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractRequiresFactory>()), "RequiresContractBuilder");
             container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractInvariantFactory>()), "InvariantContractBuilder");
             
-            container.Register<IMethodParameterParser>((tic, _) => new CompositeMethodParameterParser(tic.ResolveAll<IMethodParameterParser>(false)));
-            container.Register<IMemberParameterParser>((tic, _) => new CompositeMemberParameterParser(tic.ResolveAll<IMemberParameterParser>(false)));
+            container.Register<IMethodParameterParser>((tic, _) => new CompositeMethodParameterParser(new LazyCollection<IMethodParameterParser>(tic.ResolveAll<IMethodParameterParser>(false).ToList)));
+            container.Register<IMemberParameterParser>((tic, _) => new CompositeMemberParameterParser(new LazyCollection<IMemberParameterParser>(tic.ResolveAll<IMemberParameterParser>(false).ToList)));
 
             container.Register<IContractValidatesResolver>((tic, _) => new ContractValidatesResolver(tic.Resolve<IContractValidateResolver>(), tic.Resolve<ContractParametersResolver>(), tic.Resolve<ContractSelfResolver>(), tic.Resolve<ContractPropertiesResolver>()));
         }

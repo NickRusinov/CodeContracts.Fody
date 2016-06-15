@@ -16,13 +16,13 @@ namespace CodeContracts.Fody.ContractInjectors
         /// <summary>
         /// Collection of inner <see cref="IMemberParameterParser"/>
         /// </summary>
-        private readonly IEnumerable<IMemberParameterParser> memberParameterParsers;
+        private readonly IReadOnlyCollection<IMemberParameterParser> memberParameterParsers;
 
         /// <summary>
         /// Initializes a new instance of class <see cref="CompositeMemberParameterParser"/>
         /// </summary>
         /// <param name="memberParameterParsers">Collection of inner <see cref="IMemberParameterParser"/></param>
-        public CompositeMemberParameterParser(IEnumerable<IMemberParameterParser> memberParameterParsers)
+        public CompositeMemberParameterParser(IReadOnlyCollection<IMemberParameterParser> memberParameterParsers)
         {
             Contract.Requires(memberParameterParsers != null);
 
@@ -34,7 +34,7 @@ namespace CodeContracts.Fody.ContractInjectors
         /// </summary>
         /// <param name="memberParameterParsers">Collection of inner <see cref="IMemberParameterParser"/></param>
         public CompositeMemberParameterParser(params IMemberParameterParser[] memberParameterParsers)
-            : this(memberParameterParsers as IEnumerable<IMemberParameterParser>)
+            : this(memberParameterParsers as IReadOnlyCollection<IMemberParameterParser>)
         {
             Contract.Requires(memberParameterParsers != null);
         }
