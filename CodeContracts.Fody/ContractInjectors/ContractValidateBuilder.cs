@@ -10,10 +10,20 @@ using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
+    /// <summary>
+    /// Creates il instructions for inject call validation method of contract attribute
+    /// </summary>
     public class ContractValidateBuilder : IInstructionsBuilder
     {
+        /// <summary>
+        /// Definition of current weaving assembly
+        /// </summary>
         private readonly ModuleDefinition moduleDefinition;
 
+        /// <summary>
+        /// Initializes a new instance of class <see cref="ContractValidateBuilder"/>
+        /// </summary>
+        /// <param name="moduleDefinition">Definition of current weaving assembly</param>
         public ContractValidateBuilder(ModuleDefinition moduleDefinition)
         {
             Contract.Requires(moduleDefinition != null);
@@ -21,6 +31,7 @@ namespace CodeContracts.Fody.ContractInjectors
             this.moduleDefinition = moduleDefinition;
         }
 
+        /// <inheritdoc/>
         public IEnumerable<Instruction> Build(ContractValidate contractValidate)
         {
             return EnumerableExtensions.Concat(
