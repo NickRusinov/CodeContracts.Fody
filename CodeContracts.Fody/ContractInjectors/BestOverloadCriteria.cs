@@ -9,8 +9,12 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
+    /// <summary>
+    /// Criteria that define can specified method overload calls with specified parameters
+    /// </summary>
     public class BestOverloadCriteria : IBestOverloadCriteria
     {
+        /// <inheritdoc/>
         public bool IsApply(MethodReference methodReference, IReadOnlyCollection<ParameterDefinition> parameterDefinitions)
         {
             return methodReference.Parameters.All(pd => parameterDefinitions.Select(ipd => ipd.Name).Contains(pd.Name)) &&

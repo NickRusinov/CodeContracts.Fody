@@ -9,10 +9,21 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
+    /// <summary>
+    /// Defines priority of methods
+    /// </summary>
     public class BestOverloadMethodComparer : IComparer<MethodReference>
     {
+        /// <summary>
+        /// Singleton <see cref="BestOverloadMethodComparer"/> comparer
+        /// </summary>
         public static BestOverloadMethodComparer Instance { get; } = new BestOverloadMethodComparer();
 
+        /// <inheritdoc/>
+        /// <remarks>
+        /// Returns +1 then <paramref name="x"/> has more priority then <paramref name="y"/>; -1 otherwise.
+        /// 0 then <paramref name="x"/> and <paramref name="y"/> independent
+        /// </remarks>
         public int Compare(MethodReference x, MethodReference y)
         {
             var sharedParameterNames = x.Parameters.Select(pd => pd.Name).Intersect(y.Parameters.Select(pd => pd.Name)).ToList();
