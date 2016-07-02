@@ -10,6 +10,6 @@ namespace CodeContracts.Fody.ContractInjectors
 {
     public interface IContractValidateResolver
     {
-        ContractValidate Resolve(CustomAttribute customAttribute, ICollection<ContractMember> contractMembers);
+        ContractValidate Resolve(CustomAttribute customAttribute, IReadOnlyCollection<ContractMember> contractMembers);
     }
 }

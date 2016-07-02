@@ -18,7 +18,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         public void ContractValidateScannerHasBeenCalledTest(
             [Frozen] Mock<IContractValidateScanner> contractValidateScannerMock,
             CustomAttribute customAttribute,
-            ICollection<ContractMember> contractMembers,
+            IReadOnlyCollection<ContractMember> contractMembers,
             ContractValidateResolver sut)
         {
             sut.Resolve(customAttribute, contractMembers);
@@ -30,7 +30,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         public void BestOverloadResolverHasBeenCalledTest(
             [Frozen] Mock<IBestOverloadResolver> bestOverloadResolverMock,
             CustomAttribute customAttribute,
-            ICollection<ContractMember> contractMembers,
+            IReadOnlyCollection<ContractMember> contractMembers,
             ContractValidateResolver sut)
         {
             sut.Resolve(customAttribute, contractMembers);

@@ -24,7 +24,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var contractValidates = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            contractValidateResolverMock.Verify(cvr => cvr.Resolve(contractDefinition.ContractAttribute, It.Is<ICollection<ContractMember>>(cms => cms.Count == 10)), Times.Exactly(3));
+            contractValidateResolverMock.Verify(cvr => cvr.Resolve(contractDefinition.ContractAttribute, It.Is<IReadOnlyCollection<ContractMember>>(cms => cms.Count == 10)), Times.Exactly(3));
             Assert.Equal(3, contractValidates.Count);
         }
 

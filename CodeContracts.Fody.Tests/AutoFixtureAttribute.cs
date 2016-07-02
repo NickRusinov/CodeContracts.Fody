@@ -25,9 +25,9 @@ namespace CodeContracts.Fody.Tests
         public AutoFixtureAttribute()
         {
             Fixture.Customize(new AutoConfiguredMoqCustomization());
-            Fixture.Customize<ModuleWeaver>(cc => cc.With(mw => mw.Config, XElement.Parse("<CodeContracts />")));
-
             Fixture.Behaviors.Add(new NullRecursionBehavior());
+
+            Fixture.Customize<ModuleWeaver>(cc => cc.With(mw => mw.Config, XElement.Parse("<CodeContracts />")));
             
             Fixture.Register(() => moduleDefinitionLazy.Value);
             Fixture.Register((ModuleDefinition md) => md.TypeSystem);
@@ -35,13 +35,16 @@ namespace CodeContracts.Fody.Tests
             Fixture.Register((ModuleDefinition md) => md.FindType("DarthMaul") as TypeReference);
             Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi"));
             Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi") as MethodReference);
+            Fixture.Register((ModuleDefinition md) => md.FindParameter("DarthMaul", "KillJedi", "jedi"));
+            Fixture.Register((ModuleDefinition md) => md.FindParameter("DarthMaul", "KillJedi", "jedi") as ParameterReference);
             Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi").CustomAttributes.First());
 
             Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria());
             Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria() as IBestOverloadCriteria);
-            Fixture.Register((ModuleDefinition md) => new ContractValidate(Fixture.Create<ContractValidateDefinition>(), Fixture.CreateMany<IParameterBuilder>(Fixture.Create<MethodDefinition>().Parameters.Count)));
+            Fixture.Register((ModuleDefinition md, ContractValidateDefinition cvd) => new ContractValidate(cvd, Fixture.CreateMany<IParameterBuilder>(md.FindMethod("DarthMaul", "KillJedi").Parameters.Count).ToList()));
+            Fixture.Register((ModuleDefinition md, IParameterBuilder pb) => new[] { new ContractMember(md.FindParameter("DarthMaul", "KillJedi", "jedi"), pb), new ContractMember(md.FindParameter("DarthMaul", "KillJedi", "revenge"), pb) } as IReadOnlyCollection<ContractMember>);
 
-            Fixture.Register(() => Instruction.Create(OpCodes.Ldarg_0));
+            Fixture.Register(() => Instruction.Create(OpCodes.Nop));
         }
     }
 }
