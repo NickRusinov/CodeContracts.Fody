@@ -23,9 +23,9 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             var methodDefinition = moduleDefinition.FindMethod("Sith", "Create");
             var contractDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.Single(), methodDefinition, methodDefinition);
 
-            var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();
+            var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            var contractMember = Assert.Single(contractMembers);
+            var contractMember = Assert.Single(contractValidateParameters);
             Assert.IsType<NullParameterBuilder>(contractMember.ParameterBuilder);
             Assert.Equal("self", contractMember.ParameterDefinition.Name);
             Assert.Equal(moduleDefinition.TypeSystem.Void.Resolve(), contractMember.ParameterDefinition.ParameterType.Resolve());
@@ -39,9 +39,9 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             var methodDefinition = moduleDefinition.FindMethod("DarthMaul", "JoinDarkSide");
             var contractDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.Single(), methodDefinition, methodDefinition);
 
-            var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();
+            var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            var contractMember = Assert.Single(contractMembers);
+            var contractMember = Assert.Single(contractValidateParameters);
             Assert.IsType<ThisParameterBuilder>(contractMember.ParameterBuilder);
             Assert.Equal("self", contractMember.ParameterDefinition.Name);
             Assert.Equal(moduleDefinition.FindType("DarthMaul"), contractMember.ParameterDefinition.ParameterType.Resolve());

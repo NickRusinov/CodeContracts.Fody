@@ -42,7 +42,7 @@ namespace CodeContracts.Fody.Tests
             Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria());
             Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria() as IBestOverloadCriteria);
             Fixture.Register((ModuleDefinition md, ContractValidateDefinition cvd) => new ContractValidate(cvd, Fixture.CreateMany<IParameterBuilder>(md.FindMethod("DarthMaul", "KillJedi").Parameters.Count).ToList()));
-            Fixture.Register((ModuleDefinition md, IParameterBuilder pb) => new[] { new ContractMember(md.FindParameter("DarthMaul", "KillJedi", "jedi"), pb), new ContractMember(md.FindParameter("DarthMaul", "KillJedi", "revenge"), pb) } as IReadOnlyCollection<ContractMember>);
+            Fixture.Register((ModuleDefinition md, IParameterBuilder pb) => new[] { new ContractValidateParameter(md.FindParameter("DarthMaul", "KillJedi", "jedi"), pb), new ContractValidateParameter(md.FindParameter("DarthMaul", "KillJedi", "revenge"), pb) } as IReadOnlyCollection<ContractValidateParameter>);
 
             Fixture.Register(() => Instruction.Create(OpCodes.Nop));
         }

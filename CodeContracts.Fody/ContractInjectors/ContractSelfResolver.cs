@@ -9,14 +9,19 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public class ContractSelfResolver : IContractMembersResolver
+    /// <summary>
+    /// Resolves a single parameter that representes as this reference for non static methods 
+    /// and null reference for static methods
+    /// </summary>
+    public class ContractSelfResolver : IContractValidateParametersResolver
     {
-        public IEnumerable<ContractMember> Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
+        /// <inheritdoc/>
+        public IEnumerable<ContractValidateParameter> Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
         {
             if (methodDefinition.IsStatic)
-                return new ContractMember(new ParameterDefinition("self", ParameterAttributes.Optional, methodDefinition.Module.TypeSystem.Void), new NullParameterBuilder());
+                return new ContractValidateParameter(new ParameterDefinition("self", ParameterAttributes.Optional, methodDefinition.Module.TypeSystem.Void), new NullParameterBuilder());
 
-            return new ContractMember(new ParameterDefinition("self", ParameterAttributes.Optional, contractDefinition.DeclaringType), new ThisParameterBuilder());
+            return new ContractValidateParameter(new ParameterDefinition("self", ParameterAttributes.Optional, contractDefinition.DeclaringType), new ThisParameterBuilder());
         }
     }
 }

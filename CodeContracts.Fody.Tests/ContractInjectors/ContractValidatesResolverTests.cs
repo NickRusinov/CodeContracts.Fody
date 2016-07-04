@@ -24,20 +24,20 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             var contractValidates = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            contractValidateResolverMock.Verify(cvr => cvr.Resolve(contractDefinition.ContractAttribute, It.Is<IReadOnlyCollection<ContractMember>>(cms => cms.Count == 10)), Times.Exactly(3));
+            contractValidateResolverMock.Verify(cvr => cvr.Resolve(contractDefinition, It.Is<IReadOnlyCollection<ContractValidateParameter>>(cms => cms.Count == 10)), Times.Exactly(3));
             Assert.Equal(3, contractValidates.Count);
         }
 
         [Theory(DisplayName = "Проверка вызова получателя параметров для валидатора контракта"), AutoFixture]
-        public void ContractMembersResolverHasBeenCalledTest(
-            [Frozen] Mock<IContractMembersResolver> contractMembersResolverMock,
+        public void ContractValidateParametersResolverHasBeenCalledTest(
+            [Frozen] Mock<IContractValidateParametersResolver> contractValidateParametersResolverMock,
             ContractDefinition contractDefinition,
             MethodDefinition methodDefinition,
             ContractValidatesResolver sut)
         {
             var contractValidates = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            contractMembersResolverMock.Verify(cvr => cvr.Resolve(contractDefinition, methodDefinition), Times.Exactly(4));
+            contractValidateParametersResolverMock.Verify(cvr => cvr.Resolve(contractDefinition, methodDefinition), Times.Exactly(4));
             Assert.Equal(3, contractValidates.Count);
         }
     }

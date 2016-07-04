@@ -9,8 +9,17 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    public class ContractPropertiesResolver : ContractMembersResolver
+    /// <summary>
+    /// Resolves a collection of parameters which representes as properties of custom contract attribute 
+    /// and can be used for injecting to validation method
+    /// </summary>
+    public class ContractPropertiesResolver : ContractValidateParametersResolver
     {
+        /// <summary>
+        /// Initializes a new instance of class <see cref="ContractPropertiesResolver"/>
+        /// </summary>
+        /// <param name="moduleDefinition">Definition of current weaving assembly</param>
+        /// <param name="methodParameterParser">Parses a top level contract expression</param>
         public ContractPropertiesResolver(ModuleDefinition moduleDefinition, IMethodParameterParser methodParameterParser)
             : base(moduleDefinition, methodParameterParser)
         {
@@ -18,6 +27,10 @@ namespace CodeContracts.Fody.ContractInjectors
             Contract.Requires(methodParameterParser != null);
         }
 
+        /// <inheritdoc/>
+        /// <remarks>
+        /// Current implementation returns collection of properties specified definition of contract
+        /// </remarks>
         protected override IEnumerable<KeyValuePair<string, object>> ResolveParameters(ContractDefinition contractDefinition)
         {
             return contractDefinition.ContractAttribute.Properties
