@@ -42,6 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.cmd = build.cmd
 		build.fsx = build.fsx
 		CodeContracts.Fody.nuspec = CodeContracts.Fody.nuspec
+		CodeContracts.Fody.snk = CodeContracts.Fody.snk
 		Icon.png = Icon.png
 		Icon.svg = Icon.svg
 		LICENSE.txt = LICENSE.txt
