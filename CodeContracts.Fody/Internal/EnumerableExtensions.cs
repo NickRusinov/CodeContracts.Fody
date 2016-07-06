@@ -7,8 +7,18 @@ using System.Threading.Tasks;
 
 namespace CodeContracts.Fody.Internal
 {
+    /// <summary>
+    /// Contains extension methods for collection interfaces such as <see cref="IEnumerable{T}"/>, 
+    /// <see cref="ICollection{T}"/>, <see cref="IList{T}"/> and etc.
+    /// </summary>
     internal static class EnumerableExtensions
     {
+        /// <summary>
+        /// Concatanates all items in specified collections to one collection
+        /// </summary>
+        /// <typeparam name="T">Type of items in collections</typeparam>
+        /// <param name="enumerables">Collections that will be concatanated</param>
+        /// <returns>Concatanated collection</returns>
         public static IEnumerable<T> Concat<T>(params IEnumerable<T>[] enumerables)
         {
             Contract.Requires(enumerables != null);
@@ -17,16 +27,43 @@ namespace CodeContracts.Fody.Internal
             return enumerables.SelectMany(e => e);
         }
 
-        public static ICollection<T> AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
+        /// <summary>
+        /// Adds collection of items to end of specified list
+        /// </summary>
+        /// <typeparam name="T">Type of items in collections</typeparam>
+        /// <param name="list">List in that will be added items</param>
+        /// <param name="items">Collection of items</param>
+        /// <returns><paramref name="list"/> reference</returns>
+        public static IList<T> AddRange<T>(this IList<T> list, IEnumerable<T> items)
         {
-            Contract.Requires(collection != null);
+            Contract.Requires(list != null);
             Contract.Requires(items != null);
-            Contract.Ensures(ReferenceEquals(Contract.Result<ICollection<T>>(), collection));
+            Contract.Ensures(ReferenceEquals(Contract.Result<IList<T>>(), list));
 
             foreach (var item in items)
-                collection.Add(item);
+                list.Add(item);
 
-            return collection;
+            return list;
+        }
+
+        /// <summary>
+        /// Adds collection of items to begin of specified list
+        /// </summary>
+        /// <typeparam name="T">Type of items in collections</typeparam>
+        /// <param name="list">List in that will be added items</param>
+        /// <param name="items">Collection of items</param>
+        /// <returns><paramref name="list"/> reference</returns>
+        public static IList<T> InsertRange<T>(this IList<T> list, IEnumerable<T> items)
+        {
+            Contract.Requires(list != null);
+            Contract.Requires(items != null);
+            Contract.Ensures(ReferenceEquals(Contract.Result<IList<T>>(), list));
+
+            var index = 0;
+            foreach (var item in items)
+                list.Insert(index++, item);
+
+            return list;
         }
     }
 }

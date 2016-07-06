@@ -8,8 +8,16 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.Internal
 {
+    /// <summary>
+    /// Contains exetension method for <see cref="TypeReference"/> and <see cref="TypeDefinition"/>
+    /// </summary>
     internal static class TypeReferenceExtensions
     {
+        /// <summary>
+        /// Get all base types for specified type exclude itself
+        /// </summary>
+        /// <param name="typeReference">Type for that gets base types</param>
+        /// <returns>All base types for <paramref name="typeReference"/></returns>
         public static IEnumerable<TypeReference> GetBaseTypes(this TypeReference typeReference)
         {
             Contract.Requires(typeReference != null);
@@ -22,6 +30,11 @@ namespace CodeContracts.Fody.Internal
             return Enumerable.Repeat(typeDefinition.BaseType, 1).Concat(typeDefinition.BaseType.GetBaseTypes());
         }
 
+        /// <summary>
+        /// Get all interface for specified type exclude itself
+        /// </summary>
+        /// <param name="typeReference">Type for that gets interfaces</param>
+        /// <returns>All interfaces for <paramref name="typeReference"/></returns>
         public static IEnumerable<TypeReference> GetInterfaces(this TypeReference typeReference)
         {
             Contract.Requires(typeReference != null);
@@ -34,6 +47,11 @@ namespace CodeContracts.Fody.Internal
             return typeDefinition.Interfaces.Concat(typeDefinition.BaseType.GetInterfaces());
         }
 
+        /// <summary>
+        /// Resolves all primitive numeric types to thats can implicit converts specified numeric type
+        /// </summary>
+        /// <param name="typeReference">Specified numeric type</param>
+        /// <returns>All numeric types to that can implicit converts <paramref name="typeReference"/></returns>
         public static IEnumerable<TypeReference> GetImplicitNumericConversions(this TypeReference typeReference)
         {
             Contract.Requires(typeReference != null);
@@ -74,25 +92,41 @@ namespace CodeContracts.Fody.Internal
             return Enumerable.Empty<TypeReference>();
         }
 
+        /// <summary>
+        /// Is specified type signed number (<see cref="sbyte"/>, <see cref="short"/>, <see cref="int"/> or 
+        /// <see cref="long"/>)
+        /// </summary>
+        /// <param name="typeReference">Specified type</param>
+        /// <returns>Is <paramref name="typeReference"/> signed number</returns>
         public static bool IsSignedNumeric(this TypeReference typeReference)
         {
             Contract.Requires(typeReference != null);
 
-            return TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.SByte) ||
-                   TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.Int16) ||
-                   TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.Int32) ||
-                   TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.Int64);
+            var typeSystem = typeReference.Module.TypeSystem;
+
+            return TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.SByte) ||
+                   TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.Int16) ||
+                   TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.Int32) ||
+                   TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.Int64);
         }
 
+        /// <summary>
+        /// Is specified type unsigned numeric (<see cref="byte"/>, <see cref="char"/>, <see cref="ushort"/>, 
+        /// <see cref="uint"/> or <see cref="uint"/>)
+        /// </summary>
+        /// <param name="typeReference">Specified type</param>
+        /// <returns>Is <paramref name="typeReference"/> unsigned number</returns>
         public static bool IsUnsignedNumeric(this TypeReference typeReference)
         {
             Contract.Requires(typeReference != null);
 
-            return TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.Byte) ||
-                   TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.Char) ||
-                   TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.UInt16) ||
-                   TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.UInt32) ||
-                   TypeReferenceComparer.Instance.Equals(typeReference, typeReference.Module.TypeSystem.UInt64);
+            var typeSystem = typeReference.Module.TypeSystem;
+
+            return TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.Byte) ||
+                   TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.Char) ||
+                   TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.UInt16) ||
+                   TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.UInt32) ||
+                   TypeReferenceComparer.Instance.Equals(typeReference, typeSystem.UInt64);
         }
         
         public static bool IsAssignable(this TypeReference typeReference, TypeReference toTypeReference)
@@ -106,6 +140,12 @@ namespace CodeContracts.Fody.Internal
                    typeReference.GetInterfaces().Contains(toTypeReference, TypeReferenceComparer.Instance);
         }
 
+        /// <summary>
+        /// Creates new closed generic type that maked from open generic type with specified types
+        /// </summary>
+        /// <param name="typeReference">Open generic type</param>
+        /// <param name="genericTypeRefrerences">Types for closes open generic type</param>
+        /// <returns>Closed generic type</returns>
         public static TypeReference MakeGeneric(this TypeReference typeReference, params TypeReference[] genericTypeRefrerences)
         {
             Contract.Requires(typeReference != null);
