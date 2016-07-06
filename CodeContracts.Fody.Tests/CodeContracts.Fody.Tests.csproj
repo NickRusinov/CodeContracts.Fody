@@ -132,8 +132,8 @@
     <Compile Include="ContractInjectors\ConvertParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\FieldParameterParserTests.cs" />
+    <Compile Include="ContractInjectors\RequiresEnsuresInvariantInjectorTests.cs" />
     <Compile Include="ContractInjectors\ContractInjectorTests.cs" />
-    <Compile Include="ContractInjectors\InjectorTests.cs" />
     <Compile Include="ContractInjectors\NullParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\PropertyParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\PropertyParameterParserTests.cs" />

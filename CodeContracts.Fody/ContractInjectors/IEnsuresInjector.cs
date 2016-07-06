@@ -10,22 +10,16 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    [ContractClass(typeof(IEnsuresInjectorContracts))]
+    /// <summary>
+    /// Injects il instructions for ensures expression in specified method
+    /// </summary>
     public interface IEnsuresInjector
     {
+        /// <summary>
+        /// Injects il instructions for ensures expression in specified method
+        /// </summary>
+        /// <param name="ensuresDefinition">Ensures definition for injecting to method</param>
+        /// <param name="methodDefinition">Method in that will be injected il instructions</param>
         void Inject(EnsuresDefinition ensuresDefinition, MethodDefinition methodDefinition);
-    }
-
-    [ExcludeFromCodeCoverage]
-    [ContractClassFor(typeof(IEnsuresInjector))]
-    internal abstract class IEnsuresInjectorContracts : IEnsuresInjector
-    {
-        public void Inject(EnsuresDefinition ensuresDefinition, MethodDefinition methodDefinition)
-        {
-            Contract.Requires(ensuresDefinition != null);
-            Contract.Requires(methodDefinition != null);
-
-            throw new NotImplementedException();
-        }
     }
 }

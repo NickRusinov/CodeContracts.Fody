@@ -31,11 +31,10 @@ namespace CodeContracts.Fody.Configurations
 
             container.Register((tic, _) => tic.Resolve<IContractConfigParser>().Parse(moduleWeaver.Config.ToString()));
             
-            container.Register<IEnsuresInjector>((tic, _) => new ContractInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("EnsuresContractBuilder")));
-            container.Register<IRequiresInjector>((tic, _) => new ContractInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("RequiresContractBuilder")));
-            container.Register<IInvariantInjector>((tic, _) => new ContractInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("InvariantContractBuilder")));
-
-            container.Register<IInstructionsBuilder, ContractValidateBuilder>();
+            container.Register<IEnsuresInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("EnsuresContractBuilder")));
+            container.Register<IRequiresInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("RequiresContractBuilder")));
+            container.Register<IInvariantInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("InvariantContractBuilder")));
+            
             container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractEnsuresFactory>()), "EnsuresContractBuilder");
             container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractRequiresFactory>()), "RequiresContractBuilder");
             container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractInvariantFactory>()), "InvariantContractBuilder");

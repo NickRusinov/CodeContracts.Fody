@@ -10,22 +10,16 @@ using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
-    [ContractClass(typeof(IInvariantInjectorContracts))]
+    /// <summary>
+    /// Injects il instructions for invariant expression in specified method
+    /// </summary>
     public interface IInvariantInjector
     {
+        /// <summary>
+        /// Injects il instructions for invariant expression in specified method
+        /// </summary>
+        /// <param name="invariantDefinition">Invariant definition for injecting to method</param>
+        /// <param name="methodDefinition">Method in that will be injected il instructions</param>
         void Inject(InvariantDefinition invariantDefinition, MethodDefinition methodDefinition);
-    }
-
-    [ExcludeFromCodeCoverage]
-    [ContractClassFor(typeof(IInvariantInjector))]
-    internal abstract class IInvariantInjectorContracts : IInvariantInjector
-    {
-        public void Inject(InvariantDefinition invariantDefinition, MethodDefinition methodDefinition)
-        {
-            Contract.Requires(invariantDefinition != null);
-            Contract.Requires(methodDefinition != null);
-
-            throw new NotImplementedException();
-        }
     }
 }
