@@ -15,6 +15,11 @@ namespace CodeContracts.Fody.ContractInjectors
     /// </summary>
     public struct ContractValidateParameter : IEnumerable<ContractValidateParameter>
     {
+        /// <summary>
+        /// Initializes a new instance of class <see cref="ContractValidateParameter"/>
+        /// </summary>
+        /// <param name="parameterDefinition">Parameter of validate method that can be used in contract expression</param>
+        /// <param name="parameterBuilder">Builder of il instructions for <paramref name="parameterDefinition"/>'s parameters</param>
         public ContractValidateParameter(ParameterDefinition parameterDefinition, IParameterBuilder parameterBuilder)
         {
             Contract.Requires(parameterDefinition != null);

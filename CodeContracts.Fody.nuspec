@@ -12,5 +12,6 @@
         <file src="CodeContracts.pdb" target="lib\net45" />
         <file src="CodeContracts.Fody.dll" target="lib\net45" />
         <file src="CodeContracts.Fody.pdb" target="lib\net45" />
+        <file src="CodeContracts.Fody.xml" target="lib\net45" />
     </files>
 </package>

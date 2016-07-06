@@ -13,6 +13,9 @@
 // FITNESS FOR A PARTICULAR PURPOSE.
 //===============================================================================
 
+// FIX xml comments before pr https://github.com/grumpydev/TinyIoC/pull/57
+#pragma warning disable 1574, 1591, 1711, 1712
+
 #region Preprocessor Directives
 // Uncomment this line if you want the container to automatically
 // register the TinyMessenger messenger/event aggregator
