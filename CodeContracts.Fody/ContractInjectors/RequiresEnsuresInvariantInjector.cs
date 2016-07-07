@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
@@ -66,7 +67,10 @@ namespace CodeContracts.Fody.ContractInjectors
         {
             var instructions = contractValidatesResolver.Resolve(contractDefinition, methodDefinition).SelectMany(instructionsBuilder.Build);
 
-            methodDefinition.Body.Instructions.AddRange(instructions);
+            var callBaseCtorInstruction = methodDefinition.Body.Instructions.FirstOrDefault(i => Equals(i.OpCode, OpCodes.Call) && ((MethodReference)i.Operand).Resolve().IsConstructor);
+            var callBaseCtorInstructionIndex = methodDefinition.Body.Instructions.IndexOf(callBaseCtorInstruction) + 1;
+
+            methodDefinition.Body.Instructions.InsertRange(callBaseCtorInstructionIndex, instructions);
         }
     }
 }

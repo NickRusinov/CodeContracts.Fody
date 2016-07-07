@@ -18,7 +18,7 @@ namespace CodeContracts.Fody.ContractInjectors
         /// <inheritdoc/>
         public IEnumerable<ContractValidateParameter> Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
         {
-            if (methodDefinition.IsStatic)
+            if (methodDefinition.IsStatic || methodDefinition.IsConstructor)
                 return new ContractValidateParameter(new ParameterDefinition("self", ParameterAttributes.Optional, methodDefinition.Module.TypeSystem.Void), new NullParameterBuilder());
 
             return new ContractValidateParameter(new ParameterDefinition("self", ParameterAttributes.Optional, contractDefinition.DeclaringType), new ThisParameterBuilder());
