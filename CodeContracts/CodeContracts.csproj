@@ -127,6 +127,7 @@
     <Compile Include="ContractAttribute.cs" />
     <Compile Include="ContractExceptionAttribute.cs" />
     <Compile Include="ContractMessageAttribute.cs" />
+    <Compile Include="EnumAttribute.cs" />
     <Compile Include="EqualsAttribute.cs" />
     <Compile Include="FalseAttribute.cs" />
     <Compile Include="NotNullAttribute.cs" />
