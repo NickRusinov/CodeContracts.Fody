@@ -156,6 +156,7 @@
     <Compile Include="ContractInjectors\BestOverloadCriteria.cs" />
     <Compile Include="ContractInjectors\BestOverloadParameterComparer.cs" />
     <Compile Include="ContractInjectors\BestOverloadResolver.cs" />
+    <Compile Include="ContractInjectors\BoxParameterBuilder.cs" />
     <Compile Include="ContractInjectors\CompositeMemberParameterParser.cs" />
     <Compile Include="ContractInjectors\CompositeMethodParameterParser.cs" />
     <Compile Include="ContractInjectors\CompositeParameterBuilder.cs" />
@@ -264,7 +265,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetPath) $(SolutionDir)packages\$(ProjectName)\ /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetPath) $(SolutionDir)packages\$(ProjectName)\ /Y
+xcopy $(TargetDir)$(TargetName).pdb $(SolutionDir)packages\$(ProjectName)\ /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

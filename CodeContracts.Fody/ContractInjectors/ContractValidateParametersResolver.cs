@@ -17,12 +17,12 @@ namespace CodeContracts.Fody.ContractInjectors
         /// <summary>
         /// Definition of current weaving assembly
         /// </summary>
-        private readonly ModuleDefinition moduleDefinition;
+        protected readonly ModuleDefinition moduleDefinition;
 
         /// <summary>
         /// Parses a top level contract expression
         /// </summary>
-        private readonly IMethodParameterParser methodParameterParser;
+        protected readonly IMethodParameterParser methodParameterParser;
 
         /// <summary>
         /// Initializes a new instance of class <see cref="ContractValidateParametersResolver"/>
@@ -60,7 +60,10 @@ namespace CodeContracts.Fody.ContractInjectors
                     yield return new ContractValidateParameter(new ParameterDefinition(parameter.Key, 0, parseResult.ParsedParameterType), parseResult.ParsedParameterBuilder);
                 }
                 else
-                    yield return new ContractValidateParameter(new ParameterDefinition(parameter.Key, 0, moduleDefinition.ImportReference(parameter.Value.GetType())), new CompositeParameterBuilder(new ConstParameterBuilder(parameter.Value), new ConvertParameterBuilder(moduleDefinition))); 
+                {
+                    var parameterType = moduleDefinition.ImportReference(parameter.Value.GetType());
+                    yield return new ContractValidateParameter(new ParameterDefinition(parameter.Key, 0, parameterType), new CompositeParameterBuilder(new ConstParameterBuilder(parameter.Value), new ConvertParameterBuilder(moduleDefinition), new BoxParameterBuilder(moduleDefinition, parameterType)));
+                }
             }
         }
     }

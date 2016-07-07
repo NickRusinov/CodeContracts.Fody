@@ -62,10 +62,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
             
-            Assert.Equal(1, contractValidateParameters.Count);
-            Assert.Equal("arg", contractValidateParameters.Single().ParameterDefinition.Name);
-            Assert.Equal(fieldDefinition.FieldType, contractValidateParameters.Single().ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
-            Assert.IsType<FieldParameterBuilder>(contractValidateParameters.Single().ParameterBuilder);
+            var contractValidateParameter = Assert.Single(contractValidateParameters);
+            var compositeParameterBuilder = Assert.IsType<CompositeParameterBuilder>(contractValidateParameter.ParameterBuilder);
+            Assert.Equal("arg", contractValidateParameter.ParameterDefinition.Name);
+            Assert.Equal(fieldDefinition.FieldType, contractValidateParameter.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
+            Assert.IsType<FieldParameterBuilder>(compositeParameterBuilder.FindPrivateField<IEnumerable<IParameterBuilder>>("parameterBuilders").First());
         }
 
         [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к свойству"), AutoFixture]
@@ -79,10 +80,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            Assert.Equal(1, contractValidateParameters.Count);
-            Assert.Equal("arg", contractValidateParameters.Single().ParameterDefinition.Name);
-            Assert.Equal(propertyDefinition.PropertyType, contractValidateParameters.Single().ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
-            Assert.IsType<PropertyParameterBuilder>(contractValidateParameters.Single().ParameterBuilder);
+            var contractValidateParameter = Assert.Single(contractValidateParameters);
+            var compositeParameterBuilder = Assert.IsType<CompositeParameterBuilder>(contractValidateParameter.ParameterBuilder);
+            Assert.Equal("arg", contractValidateParameter.ParameterDefinition.Name);
+            Assert.Equal(propertyDefinition.PropertyType, contractValidateParameter.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
+            Assert.IsType<PropertyParameterBuilder>(compositeParameterBuilder.FindPrivateField<IEnumerable<IParameterBuilder>>("parameterBuilders").First());
         }
 
         [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к параметру метода"), AutoFixture]
@@ -96,10 +98,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            Assert.Equal(1, contractValidateParameters.Count);
-            Assert.Equal("arg", contractValidateParameters.Single().ParameterDefinition.Name);
-            Assert.Equal(parameterDefinition.ParameterType, contractValidateParameters.Single().ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
-            Assert.IsType<ArgumentParameterBuilder>(contractValidateParameters.Single().ParameterBuilder);
+            var contractValidateParameter = Assert.Single(contractValidateParameters);
+            var compositeParameterBuilder = Assert.IsType<CompositeParameterBuilder>(contractValidateParameter.ParameterBuilder);
+            Assert.Equal("arg", contractValidateParameter.ParameterDefinition.Name);
+            Assert.Equal(parameterDefinition.ParameterType, contractValidateParameter.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
+            Assert.IsType<ArgumentParameterBuilder>(compositeParameterBuilder.FindPrivateField<IEnumerable<IParameterBuilder>>("parameterBuilders").First());
         }
     }
 }

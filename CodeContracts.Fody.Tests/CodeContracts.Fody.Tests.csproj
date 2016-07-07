@@ -114,6 +114,7 @@
     <Compile Include="ContractInjectors\BestOverloadMethodComparerTests.cs" />
     <Compile Include="ContractInjectors\BestOverloadParameterComparerTests.cs" />
     <Compile Include="ContractInjectors\BestOverloadResolverTests.cs" />
+    <Compile Include="ContractInjectors\BoxParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\ConstParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractBuilderTests.cs" />
     <Compile Include="ContractInjectors\ContractEnsuresFactoryTests.cs" />

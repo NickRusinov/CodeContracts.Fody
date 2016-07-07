@@ -51,15 +51,16 @@ namespace CodeContracts.Fody.Internal
         /// </summary>
         /// <typeparam name="T">Type of items in collections</typeparam>
         /// <param name="list">List in that will be added items</param>
+        /// <param name="index">The zero-based index at which item should be inserted</param>
         /// <param name="items">Collection of items</param>
         /// <returns><paramref name="list"/> reference</returns>
-        public static IList<T> InsertRange<T>(this IList<T> list, IEnumerable<T> items)
+        public static IList<T> InsertRange<T>(this IList<T> list, int index, IEnumerable<T> items)
         {
             Contract.Requires(list != null);
             Contract.Requires(items != null);
+            Contract.Requires(index >= 0 && index <= list.Count);
             Contract.Ensures(ReferenceEquals(Contract.Result<IList<T>>(), list));
-
-            var index = 0;
+            
             foreach (var item in items)
                 list.Insert(index++, item);
 

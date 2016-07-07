@@ -48,15 +48,15 @@ namespace CodeContracts.Fody.ContractInjectors
         {
             var fieldDefinition = contractDefinition.AttributeProvider as FieldDefinition;
             if (fieldDefinition != null)
-                return new ContractValidateParameter(new ParameterDefinition("arg", 0, fieldDefinition.FieldType), new FieldParameterBuilder(fieldDefinition));
+                return new ContractValidateParameter(new ParameterDefinition("arg", 0, fieldDefinition.FieldType), new CompositeParameterBuilder(new FieldParameterBuilder(fieldDefinition), new BoxParameterBuilder(moduleDefinition, fieldDefinition.FieldType)));
 
             var propertyDefinition = contractDefinition.AttributeProvider as PropertyDefinition;
             if (propertyDefinition != null)
-                return new ContractValidateParameter(new ParameterDefinition("arg", 0, propertyDefinition.PropertyType), new PropertyParameterBuilder(propertyDefinition));
+                return new ContractValidateParameter(new ParameterDefinition("arg", 0, propertyDefinition.PropertyType), new CompositeParameterBuilder(new PropertyParameterBuilder(propertyDefinition), new BoxParameterBuilder(moduleDefinition, propertyDefinition.PropertyType)));
 
             var parameterDefinition = contractDefinition.AttributeProvider as ParameterDefinition;
             if (parameterDefinition != null)
-                return new ContractValidateParameter(new ParameterDefinition("arg", 0, parameterDefinition.ParameterType), new ArgumentParameterBuilder(parameterDefinition));
+                return new ContractValidateParameter(new ParameterDefinition("arg", 0, parameterDefinition.ParameterType), new CompositeParameterBuilder(new ArgumentParameterBuilder(parameterDefinition), new BoxParameterBuilder(moduleDefinition, parameterDefinition.ParameterType)));
 
             return base.Resolve(contractDefinition, methodDefinition);
         }
