@@ -118,6 +118,10 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
     <DocumentationFile>bin\Release\CodeContracts.Fody.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <CodeContractsInstallDir>$(SolutionDir)\tools\CodeContracts\</CodeContractsInstallDir>
+    <DontImportCodeContracts>True</DontImportCodeContracts>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\FodyCecil.1.29.4\lib\net40\Mono.Cecil.dll</HintPath>
@@ -264,6 +268,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\tools\CodeContracts\MSBuild\v$(MSBuildToolsVersion)\Microsoft.CodeContracts.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy $(TargetPath) $(SolutionDir)packages\$(SolutionName)\ /Y
 xcopy $(TargetDir)$(TargetName).pdb $(SolutionDir)packages\$(SolutionName)\ /Y</PostBuildEvent>

@@ -213,3 +213,6 @@ ModelManifest.xml
 
 # FAKE - F# MAKE
 .fake/
+
+# CodeContracts
+!tools/CodeContracts/Bin/
