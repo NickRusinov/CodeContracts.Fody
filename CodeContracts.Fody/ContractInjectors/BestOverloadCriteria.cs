@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
+using static System.StringComparer;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
@@ -17,9 +18,9 @@ namespace CodeContracts.Fody.ContractInjectors
         /// <inheritdoc/>
         public bool IsApply(MethodReference methodReference, IReadOnlyCollection<ParameterDefinition> parameterDefinitions)
         {
-            return methodReference.Parameters.All(pd => parameterDefinitions.Select(ipd => ipd.Name).Contains(pd.Name)) &&
-                   parameterDefinitions.Where(pd => !pd.IsOptional).All(pd => methodReference.Parameters.Select(ipd => ipd.Name).Contains(pd.Name)) &&
-                   methodReference.Parameters.All(pd => parameterDefinitions.Single(ipd => ipd.Name == pd.Name).ParameterType.IsAssignable(pd.ParameterType));
+            return methodReference.Parameters.All(pd => parameterDefinitions.Select(ipd => ipd.Name).Contains(pd.Name, OrdinalIgnoreCase)) &&
+                   parameterDefinitions.Where(pd => !pd.IsOptional).All(pd => methodReference.Parameters.Select(ipd => ipd.Name).Contains(pd.Name, OrdinalIgnoreCase)) &&
+                   methodReference.Parameters.All(pd => parameterDefinitions.Single(ipd => OrdinalIgnoreCase.Equals(ipd.Name, pd.Name)).ParameterType.IsAssignable(pd.ParameterType));
         }
     }
 }

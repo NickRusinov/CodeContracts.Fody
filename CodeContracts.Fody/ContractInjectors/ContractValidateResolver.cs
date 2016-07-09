@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
+using static System.StringComparer;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
@@ -44,7 +45,7 @@ namespace CodeContracts.Fody.ContractInjectors
             var bestOverload = bestOverloadResolver.Resolve(contractValidateDefinitions.Select(cvd => cvd.ValidateMethod).ToList(), contractValidateParameters.Select(cm => cm.ParameterDefinition).ToList());
             
             var contractValidateDefinition = contractValidateDefinitions.First(cvd => Equals(cvd.ValidateMethod, bestOverload));
-            var contractParameterBuilders = bestOverload.Parameters.Select(pd => contractValidateParameters.First(cm => Equals(cm.ParameterDefinition.Name, pd.Name))).Select(cm => cm.ParameterBuilder).ToList();
+            var contractParameterBuilders = bestOverload.Parameters.Select(pd => contractValidateParameters.First(cm => OrdinalIgnoreCase.Equals(cm.ParameterDefinition.Name, pd.Name))).Select(cm => cm.ParameterBuilder).ToList();
 
             return new ContractValidate(contractValidateDefinition, contractParameterBuilders);
         }
