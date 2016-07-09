@@ -9,7 +9,7 @@ namespace CodeContracts.StarWars
 {
     public class Lightsaber
     {
-        public Lightsaber([Enum] LightsaberColor color, int bladeCount)
+        public Lightsaber([Enum] LightsaberColor color, [Range(Min = 1, Max = 2)] int bladeCount)
         {
             Color = color;
             BladeCount = bladeCount;
