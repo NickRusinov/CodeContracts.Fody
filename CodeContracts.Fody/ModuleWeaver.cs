@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Xml.Linq;
 using CodeContracts.Fody.Configurations;
 using Mono.Cecil;
 using TinyIoC;
+using static System.StringComparer;
 
 namespace CodeContracts.Fody
 {
@@ -57,6 +59,11 @@ namespace CodeContracts.Fody
             Contract.Requires(LogInfo != null);
             Contract.Requires(LogWarning != null);
             Contract.Requires(LogError != null);
+
+#if DEBUG
+            if (OrdinalIgnoreCase.Equals(Config.Attribute("IsDebug")?.Value, bool.TrueString) && !Debugger.IsAttached)
+                Debugger.Launch();
+#endif
 
             new TinyIoCConfiguration().Configure(this);
             new LoggerConfiguration().Configure(this);
