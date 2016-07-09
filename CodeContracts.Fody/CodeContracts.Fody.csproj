@@ -145,6 +145,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CodeContracts.Fody.Shared.cs">
+      <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
+    </Compile>
     <Compile Include="Configurations\LoggerConfiguration.cs" />
     <Compile Include="Configurations\TinyIoCConfiguration.cs" />
     <Compile Include="ContractConfig.cs" />

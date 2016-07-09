@@ -101,6 +101,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="..\CodeContracts.Fody.Shared.cs">
+      <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
+    </Compile>
     <Compile Include="AssemblyTests.cs" />
     <Compile Include="ContractAssert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

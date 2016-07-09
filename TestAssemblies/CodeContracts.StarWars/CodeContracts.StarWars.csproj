@@ -127,6 +127,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\CodeContracts.Fody.Shared.cs">
+      <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
+    </Compile>
     <Compile Include="Lightsaber.cs" />
     <Compile Include="LightsaberColor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

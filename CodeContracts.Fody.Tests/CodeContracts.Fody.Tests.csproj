@@ -103,6 +103,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="..\CodeContracts.Fody.Shared.cs">
+      <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
+    </Compile>
     <Compile Include="AutoFixtureAttribute.cs" />
     <Compile Include="Configurations\LoggerConfigurationTests.cs" />
     <Compile Include="Configurations\TinyIoCConfigurationTests.cs" />

@@ -6,11 +6,7 @@ TODO: Insert description here
 
 [Introduction to Fody](http://github.com/Fody/Fody/wiki/SampleUsage)
 
-## The nuget package [![NuGet Status](http://img.shields.io/nuget/v/CodeContracts.Fody.svg?style=flat)](https://www.nuget.org/packages/CodeContracts.Fody/)
-
-https://nuget.org/packages/CodeContracts.Fody/
-
-    PM> Install-Package CodeContracts.Fody
+TODO: Insert nuget package here
 
 ## Overview
 

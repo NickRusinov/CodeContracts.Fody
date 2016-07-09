@@ -38,6 +38,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\CodeContracts.Fody.Shared.cs">
+      <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
+    </Compile>
     <Compile Include="BlueLightsaberAttribute.cs" />
     <Compile Include="ExtraRedLightsaberAttribute.cs" />
     <Compile Include="MyAttribute.cs" />
