@@ -46,6 +46,14 @@ namespace CodeContracts.Fody.ContractInjectors
         /// </remarks>
         public override IEnumerable<ContractValidateParameter> Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
         {
+            var parameterDefinition = contractDefinition.AttributeProvider as ParameterDefinition;
+            if (parameterDefinition != null)
+                return new ContractValidateParameter(new ParameterDefinition("arg", 0, parameterDefinition.ParameterType), new CompositeParameterBuilder(new ArgumentParameterBuilder(parameterDefinition), new BoxParameterBuilder(moduleDefinition, parameterDefinition.ParameterType)));
+
+            var methodReturnDefinition = contractDefinition.AttributeProvider as MethodReturnType;
+            if (methodReturnDefinition != null)
+                return new ContractValidateParameter(new ParameterDefinition("arg", 0, methodReturnDefinition.ReturnType), new CompositeParameterBuilder(new ResultParameterBuilder(moduleDefinition, methodReturnDefinition.ReturnType), new BoxParameterBuilder(moduleDefinition, methodReturnDefinition.ReturnType)));
+
             var fieldDefinition = contractDefinition.AttributeProvider as FieldDefinition;
             if (fieldDefinition != null)
                 return new ContractValidateParameter(new ParameterDefinition("arg", 0, fieldDefinition.FieldType), new CompositeParameterBuilder(new ThisParameterBuilder(), new FieldParameterBuilder(fieldDefinition), new BoxParameterBuilder(moduleDefinition, fieldDefinition.FieldType)));
@@ -59,10 +67,6 @@ namespace CodeContracts.Fody.ContractInjectors
 
             if (propertyDefinition != null && contractDefinition is InvariantDefinition)
                 return new ContractValidateParameter(new ParameterDefinition("arg", 0, propertyDefinition.PropertyType), new CompositeParameterBuilder(new ThisParameterBuilder(), new PropertyParameterBuilder(propertyDefinition), new BoxParameterBuilder(moduleDefinition, propertyDefinition.PropertyType)));
-
-            var parameterDefinition = contractDefinition.AttributeProvider as ParameterDefinition;
-            if (parameterDefinition != null)
-                return new ContractValidateParameter(new ParameterDefinition("arg", 0, parameterDefinition.ParameterType), new CompositeParameterBuilder(new ArgumentParameterBuilder(parameterDefinition), new BoxParameterBuilder(moduleDefinition, parameterDefinition.ParameterType)));
 
             return base.Resolve(contractDefinition, methodDefinition);
         }

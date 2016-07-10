@@ -133,6 +133,21 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             Assert.IsType<BoxParameterBuilder>(builders[1]);
         }
 
+        [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к возвращаемому значению метода"), AutoFixture]
+        public void AttributeAppliedToReturnTest(
+            [Frozen] ModuleDefinition moduleDefinition,
+            ContractParametersResolver sut)
+        {
+            var methodDefinition = moduleDefinition.FindMethod("DarthMaul", "KillJedi");
+            var contractDefinition = new EnsuresDefinition(methodDefinition.MethodReturnType.CustomAttributes.Single(), methodDefinition.MethodReturnType, methodDefinition);
+
+            var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
+
+            var builders = ContractValidateParametersAssert(contractValidateParameters, methodDefinition.MethodReturnType.ReturnType).ToList();
+            Assert.IsType<ResultParameterBuilder>(builders[0]);
+            Assert.IsType<BoxParameterBuilder>(builders[1]);
+        }
+
         private static IEnumerable<IParameterBuilder> ContractValidateParametersAssert(IReadOnlyCollection<ContractValidateParameter> contractValidateParameters, TypeReference parameterTypeReference)
         {
             var contractValidateParameter = Assert.Single(contractValidateParameters);
