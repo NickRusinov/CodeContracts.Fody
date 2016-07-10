@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 
 namespace CodeContracts.Fody.ContractInjectResolvers
 {
@@ -32,7 +33,11 @@ namespace CodeContracts.Fody.ContractInjectResolvers
         /// <returns>A new invariant method for existing class</returns>
         private MethodDefinition BuildContractInvariantMethodDefinition(ModuleDefinition moduleDefinition)
         {
-            return new MethodDefinition("Invariant<G>", MethodAttributes.Private, moduleDefinition.TypeSystem.Void);
+            var invariantMethodDefinition = new MethodDefinition("Invariant<>", MethodAttributes.Private, moduleDefinition.TypeSystem.Void);
+            invariantMethodDefinition.Body.Instructions.Add(Instruction.Create(OpCodes.Nop));
+            invariantMethodDefinition.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
+
+            return invariantMethodDefinition;
         }
 
         /// <summary>
