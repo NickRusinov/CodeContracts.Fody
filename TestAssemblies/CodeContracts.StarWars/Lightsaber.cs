@@ -15,8 +15,10 @@ namespace CodeContracts.StarWars
             BladeCount = bladeCount;
         }
         
+        [Enum]
         public LightsaberColor Color { get; set; }
         
+        [Range(Min = (short)1, Max = (short)2)]
         public int BladeCount { get; set; }
     }
 }

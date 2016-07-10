@@ -20,5 +20,17 @@ namespace CodeContracts.Fody.IntegrationTests.StarWars
             ContractAssert.Fail(() => new Lightsaber(LightsaberColor.Black, 0));
             ContractAssert.Fail(() => new Lightsaber(LightsaberColor.Black, 3));
         }
+
+        [Fact(DisplayName = "Проверка свойств класса Lightsaber")]
+        public void PropertiesTest()
+        {
+            var lightsaber = new Lightsaber(LightsaberColor.Red, 2);
+
+            ContractAssert.Success(() => lightsaber.Color);
+            ContractAssert.Success(() => lightsaber.BladeCount);
+
+            ContractAssert.Fail(() => lightsaber.Color = (LightsaberColor)66);
+            ContractAssert.Fail(() => lightsaber.BladeCount = 4);
+        }
     }
 }
