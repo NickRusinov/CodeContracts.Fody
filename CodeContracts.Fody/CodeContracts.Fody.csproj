@@ -210,6 +210,7 @@
     <Compile Include="ContractInjectors\ParseResult.cs" />
     <Compile Include="ContractInjectors\PropertyParameterBuilder.cs" />
     <Compile Include="ContractInjectors\PropertyParameterParser.cs" />
+    <Compile Include="ContractInjectors\ResultParameterBuilder.cs" />
     <Compile Include="ContractInjectors\StringParameterBuilder.cs" />
     <Compile Include="ContractInjectors\StringParameterParser.cs" />
     <Compile Include="ContractInjectors\ThisParameterBuilder.cs" />

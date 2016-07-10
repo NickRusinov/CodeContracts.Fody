@@ -141,6 +141,7 @@
     <Compile Include="ContractInjectors\NullParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\PropertyParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\PropertyParameterParserTests.cs" />
+    <Compile Include="ContractInjectors\ResultParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\StringParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\StringParameterParserTests.cs" />
     <Compile Include="ContractInjectors\ThisParameterBuilderTests.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="ContractScanners\PropertyScannerTests.cs" />
     <Compile Include="ContractScanners\TypeScannerTests.cs" />
     <Compile Include="InlineAutoFixtureAttribute.cs" />
+    <Compile Include="Internal\CallInstructionComparer.cs" />
     <Compile Include="Internal\InstructionComparer.cs" />
     <Compile Include="Internal\ReflectionExtensions.cs" />
     <Compile Include="ContractInjectResolvers\AbstractContractClassBuilderTests.cs" />

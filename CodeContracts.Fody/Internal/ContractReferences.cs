@@ -90,7 +90,7 @@ namespace CodeContracts.Fody.Internal
         /// <param name="moduleDefinition">Definition of module for import reference</param>
         /// <param name="genericReference">Type of exception for requires method</param>
         /// <returns>Resolved method</returns>
-        public static MethodReference RequiresWithExceptionAndMessage(ModuleDefinition moduleDefinition, TypeDefinition genericReference)
+        public static MethodReference RequiresWithExceptionAndMessage(ModuleDefinition moduleDefinition, TypeReference genericReference)
         {
             return FindMethod(moduleDefinition, "Requires", 2, 1).MakeGeneric(genericReference);
         }
@@ -101,7 +101,7 @@ namespace CodeContracts.Fody.Internal
         /// <param name="moduleDefinition">Definition of module for import reference</param>
         /// <param name="genericReference">Type of return value for method</param>
         /// <returns>Resolved method</returns>
-        public static MethodReference Result(ModuleDefinition moduleDefinition, TypeDefinition genericReference)
+        public static MethodReference Result(ModuleDefinition moduleDefinition, TypeReference genericReference)
         {
             return FindMethod(moduleDefinition, "Result", 0, 1).MakeGeneric(genericReference);
         }

@@ -46,9 +46,8 @@ namespace CodeContracts.Fody.Internal
             Contract.Requires(genericTypeReferences != null);
             Contract.Ensures(Contract.Result<MethodReference>() != null);
 
-            var genericMethodReference = new MethodReference(methodReference.Name, methodReference.ReturnType, methodReference.DeclaringType);
-            genericMethodReference.Parameters.AddRange(methodReference.Parameters.Select(pd => new ParameterDefinition(pd.ParameterType)));
-            genericMethodReference.GenericParameters.AddRange(methodReference.GenericParameters.Select(gp => new GenericParameter(gp.Name, genericMethodReference)));
+            var genericMethodReference = new GenericInstanceMethod(methodReference);
+            genericMethodReference.GenericArguments.AddRange(genericTypeReferences);
             
             return genericMethodReference;
         }
