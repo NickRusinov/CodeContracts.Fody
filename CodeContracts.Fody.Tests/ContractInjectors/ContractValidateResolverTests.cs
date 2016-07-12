@@ -19,10 +19,10 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         public void ContractValidateScannerHasBeenCalledTest(
             [Frozen] Mock<IContractValidateScanner> contractValidateScannerMock,
             ContractDefinition contractDefinition,
-            IReadOnlyCollection<ContractValidateParameter> contractValidateParameters,
+            MethodDefinition methodDefinition,
             ContractValidateResolver sut)
         {
-            sut.Resolve(contractDefinition, contractValidateParameters);
+            sut.Resolve(contractDefinition, methodDefinition);
 
             contractValidateScannerMock.Verify(cvs => cvs.Scan(contractDefinition.ContractAttribute), Times.Once);
         }
@@ -31,12 +31,24 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         public void BestOverloadResolverHasBeenCalledTest(
             [Frozen] Mock<IBestOverloadResolver> bestOverloadResolverMock,
             ContractDefinition contractDefinition,
-            IReadOnlyCollection<ContractValidateParameter> contractValidateParameters,
+            MethodDefinition methodDefinition,
             ContractValidateResolver sut)
         {
-            sut.Resolve(contractDefinition, contractValidateParameters);
+            sut.Resolve(contractDefinition, methodDefinition);
 
             bestOverloadResolverMock.Verify(bor => bor.Resolve(It.IsAny<IReadOnlyCollection<MethodDefinition>>(), It.IsAny<IReadOnlyCollection<ParameterDefinition>>()), Times.Once);
+        }
+
+        [Theory(DisplayName = "Проверка вызова получателя параметров для валидатора контракта"), AutoFixture]
+        public void ContractValidateParametersResolverHasBeenCalledTest(
+            [Frozen] Mock<IContractValidateParametersResolver> contractValidateParametersResolverMock,
+            ContractDefinition contractDefinition,
+            MethodDefinition methodDefinition,
+            ContractValidateResolver sut)
+        {
+            sut.Resolve(contractDefinition, methodDefinition);
+
+            contractValidateParametersResolverMock.Verify(cvr => cvr.Resolve(contractDefinition, methodDefinition), Times.Once);
         }
     }
 }

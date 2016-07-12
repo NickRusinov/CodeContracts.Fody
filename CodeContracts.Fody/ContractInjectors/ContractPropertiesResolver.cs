@@ -29,7 +29,7 @@ namespace CodeContracts.Fody.ContractInjectors
 
         /// <inheritdoc/>
         /// <remarks>
-        /// Current implementation returns collection of properties specified definition of contract
+        /// Current implementation returns collection of properties for specified definition of contract
         /// </remarks>
         protected override IEnumerable<KeyValuePair<string, object>> ResolveParameters(ContractDefinition contractDefinition)
         {

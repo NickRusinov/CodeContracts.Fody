@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
+using Mono.Cecil;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
@@ -18,8 +19,8 @@ namespace CodeContracts.Fody.ContractInjectors
         /// for current resolving method
         /// </summary>
         /// <param name="contractDefinition">Specified definition of contract</param>
-        /// <param name="contractValidateParameters">Collection of parameters for current resolving method</param>
+        /// <param name="methodDefinition">Method to that will be injected resolved validation methods</param>
         /// <returns>Method of validation of contract</returns>
-        ContractValidate Resolve(ContractDefinition contractDefinition, IReadOnlyCollection<ContractValidateParameter> contractValidateParameters);
+        ContractValidate Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition);
     }
 }

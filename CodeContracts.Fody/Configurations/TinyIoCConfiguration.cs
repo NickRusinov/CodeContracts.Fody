@@ -31,9 +31,9 @@ namespace CodeContracts.Fody.Configurations
 
             container.Register((tic, _) => tic.Resolve<IContractConfigParser>().Parse(moduleWeaver.Config.ToString()));
             
-            container.Register<IEnsuresInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("EnsuresContractBuilder")));
-            container.Register<IRequiresInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("RequiresContractBuilder")));
-            container.Register<IInvariantInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidatesResolver>(), tic.Resolve<IInstructionsBuilder>("InvariantContractBuilder")));
+            container.Register<IEnsuresInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidateResolver>(), tic.Resolve<IInstructionsBuilder>("EnsuresContractBuilder")));
+            container.Register<IRequiresInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidateResolver>(), tic.Resolve<IInstructionsBuilder>("RequiresContractBuilder")));
+            container.Register<IInvariantInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidateResolver>(), tic.Resolve<IInstructionsBuilder>("InvariantContractBuilder")));
             
             container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractEnsuresFactory>()), "EnsuresContractBuilder");
             container.Register<IInstructionsBuilder>((tic, _) => new ContractBuilder(tic.Resolve<ContractRequiresFactory>()), "RequiresContractBuilder");
@@ -41,8 +41,7 @@ namespace CodeContracts.Fody.Configurations
             
             container.Register<IMethodParameterParser>((tic, _) => new CompositeMethodParameterParser(new LazyCollection<IMethodParameterParser>(tic.ResolveAll<IMethodParameterParser>(false).ToList)));
             container.Register<IMemberParameterParser>((tic, _) => new CompositeMemberParameterParser(new LazyCollection<IMemberParameterParser>(tic.ResolveAll<IMemberParameterParser>(false).ToList)));
-
-            container.Register<IContractValidatesResolver>((tic, _) => new ContractValidatesResolver(tic.Resolve<IContractValidateResolver>(), tic.Resolve<ContractParametersResolver>(), tic.Resolve<ContractSelfResolver>(), tic.Resolve<ContractPropertiesResolver>()));
+            container.Register<IContractValidateParametersResolver>((tic, _) => new CompositeContractValidateParametersResolver(new LazyCollection<IContractValidateParametersResolver>(tic.ResolveAll<IContractValidateParametersResolver>(false).ToList)));
         }
     }
 }

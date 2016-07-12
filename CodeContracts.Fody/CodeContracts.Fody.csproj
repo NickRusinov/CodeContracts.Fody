@@ -164,10 +164,12 @@
     <Compile Include="ContractInjectors\BestOverloadParameterComparer.cs" />
     <Compile Include="ContractInjectors\BestOverloadResolver.cs" />
     <Compile Include="ContractInjectors\BoxParameterBuilder.cs" />
+    <Compile Include="ContractInjectors\CompositeContractValidateParametersResolver.cs" />
     <Compile Include="ContractInjectors\CompositeMemberParameterParser.cs" />
     <Compile Include="ContractInjectors\CompositeMethodParameterParser.cs" />
     <Compile Include="ContractInjectors\CompositeParameterBuilder.cs" />
     <Compile Include="ContractInjectors\ConstParameterBuilder.cs" />
+    <Compile Include="ContractInjectors\ContractAttributeResolver.cs" />
     <Compile Include="ContractInjectors\ContractBuilder.cs" />
     <Compile Include="ContractInjectors\ContractEnsuresFactory.cs" />
     <Compile Include="ContractInjectors\RequiresEnsuresInvariantInjector.cs" />
@@ -184,7 +186,6 @@
     <Compile Include="ContractInjectors\ContractValidateBuilder.cs" />
     <Compile Include="ContractInjectors\ContractValidateCriteria.cs" />
     <Compile Include="ContractInjectors\ContractValidateResolver.cs" />
-    <Compile Include="ContractInjectors\ContractValidatesResolver.cs" />
     <Compile Include="ContractInjectors\ContractValidateScanner.cs" />
     <Compile Include="ContractInjectors\ConvertParameterBuilder.cs" />
     <Compile Include="ContractInjectors\FieldParameterBuilder.cs" />
@@ -195,7 +196,6 @@
     <Compile Include="ContractInjectors\IContractMethodFactory.cs" />
     <Compile Include="ContractInjectors\IContractValidateCriteria.cs" />
     <Compile Include="ContractInjectors\IContractValidateResolver.cs" />
-    <Compile Include="ContractInjectors\IContractValidatesResolver.cs" />
     <Compile Include="ContractInjectors\IContractValidateScanner.cs" />
     <Compile Include="ContractInjectors\IEnsuresInjector.cs" />
     <Compile Include="ContractInjectors\IContractInjector.cs" />
@@ -233,6 +233,7 @@
     <Compile Include="ContractScanners\TypeScanner.cs" />
     <Compile Include="IContractConfigParser.cs" />
     <Compile Include="Internal\ContractReferences.cs" />
+    <Compile Include="Internal\CustomAttributeExtensions.cs" />
     <Compile Include="Internal\LazyCollection.cs" />
     <Compile Include="Internal\MethodReferenceComparer.cs" />
     <Compile Include="Internal\MethodReferenceExtensions.cs" />

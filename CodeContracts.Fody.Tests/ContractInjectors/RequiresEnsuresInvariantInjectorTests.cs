@@ -17,14 +17,14 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
     {
         [Theory(DisplayName = "Проверка вызова получателя методов валидации контрактов при внедрении контрактов"), AutoFixture]
         public void ContractValidatesResolverHasBeenCalledTest(
-            [Frozen] Mock<IContractValidatesResolver> contractValidatesResolverMock,
+            [Frozen] Mock<IContractValidateResolver> contractValidateResolverMock,
             ContractDefinition contractDefinition,
             MethodDefinition methodDefinition,
             RequiresEnsuresInvariantInjector sut)
         {
             sut.Inject(contractDefinition, methodDefinition);
 
-            contractValidatesResolverMock.Verify(cvr => cvr.Resolve(contractDefinition, methodDefinition), Times.Once);
+            contractValidateResolverMock.Verify(cvr => cvr.Resolve(contractDefinition, methodDefinition), Times.Once);
         }
 
         [Theory(DisplayName = "Проверка вызова получателя команд для контрактов при внедрении контрактов"), AutoFixture]
@@ -36,7 +36,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
         {
             sut.Inject(contractDefinition, methodDefinition);
 
-            instructionsBuilderMock.Verify(ib => ib.Build(It.IsAny<ContractValidate>()), Times.Exactly(3));
+            instructionsBuilderMock.Verify(ib => ib.Build(It.IsAny<ContractValidate>()), Times.Once);
         }
     }
 }

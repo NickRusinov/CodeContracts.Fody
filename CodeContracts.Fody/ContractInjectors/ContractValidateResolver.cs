@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
+using Mono.Cecil;
 using static System.StringComparer;
 
 namespace CodeContracts.Fody.ContractInjectors
@@ -25,23 +26,32 @@ namespace CodeContracts.Fody.ContractInjectors
         private readonly IContractValidateScanner contractValidateScanner;
 
         /// <summary>
+        /// Resolves a collection of required parameters which can be used for injecting to validation method
+        /// </summary>
+        private readonly IContractValidateParametersResolver contractParametersResolver;
+
+        /// <summary>
         /// Initailizes a new instance of class <see cref="ContractValidateResolver"/>
         /// </summary>
         /// <param name="bestOverloadResolver">Resolves method that is a best overload for specified parameters</param>
         /// <param name="contractValidateScanner">Scans validate methods in a custom attribute</param>
-        public ContractValidateResolver(IBestOverloadResolver bestOverloadResolver, IContractValidateScanner contractValidateScanner)
+        /// <param name="contractParametersResolver">Resolves a collection of required parameters which can be used for injecting to validation method</param>
+        public ContractValidateResolver(IBestOverloadResolver bestOverloadResolver, IContractValidateScanner contractValidateScanner, IContractValidateParametersResolver contractParametersResolver)
         {
             Contract.Requires(bestOverloadResolver != null);
             Contract.Requires(contractValidateScanner != null);
+            Contract.Requires(contractParametersResolver != null);
 
             this.bestOverloadResolver = bestOverloadResolver;
             this.contractValidateScanner = contractValidateScanner;
+            this.contractParametersResolver = contractParametersResolver;
         }
 
         /// <inheritdoc/>
-        public ContractValidate Resolve(ContractDefinition contractDefinition, IReadOnlyCollection<ContractValidateParameter> contractValidateParameters)
+        public ContractValidate Resolve(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
         {
             var contractValidateDefinitions = contractValidateScanner.Scan(contractDefinition.ContractAttribute).ToList();
+            var contractValidateParameters = contractParametersResolver.Resolve(contractDefinition, methodDefinition).ToList();
             var bestOverload = bestOverloadResolver.Resolve(contractValidateDefinitions.Select(cvd => cvd.ValidateMethod).ToList(), contractValidateParameters.Select(cm => cm.ParameterDefinition).ToList());
             
             var contractValidateDefinition = contractValidateDefinitions.First(cvd => Equals(cvd.ValidateMethod, bestOverload));

@@ -17,9 +17,9 @@ namespace CodeContracts.Fody.ContractInjectors
     public class RequiresEnsuresInvariantInjector : IRequiresInjector, IEnsuresInjector, IInvariantInjector
     {
         /// <summary>
-        /// Resolves collection of validate methods for injecting to specified method
+        /// Resolves validate method for injecting to specified methods
         /// </summary>
-        private readonly IContractValidatesResolver contractValidatesResolver;
+        private readonly IContractValidateResolver contractValidateResolver;
 
         /// <summary>
         /// Creates il instructions for injected method of contract attribute
@@ -29,14 +29,14 @@ namespace CodeContracts.Fody.ContractInjectors
         /// <summary>
         /// Initializes a new instance of class <see cref="RequiresEnsuresInvariantInjector"/>
         /// </summary>
-        /// <param name="contractValidatesResolver">Resolves collection of validate methods for injecting to specified method</param>
+        /// <param name="contractValidateResolver">Resolves validate method for injecting to specified methods</param>
         /// <param name="instructionsBuilder">Creates il instructions for injected method of contract attribute</param>
-        public RequiresEnsuresInvariantInjector(IContractValidatesResolver contractValidatesResolver, IInstructionsBuilder instructionsBuilder)
+        public RequiresEnsuresInvariantInjector(IContractValidateResolver contractValidateResolver, IInstructionsBuilder instructionsBuilder)
         {
-            Contract.Requires(contractValidatesResolver != null);
+            Contract.Requires(contractValidateResolver != null);
             Contract.Requires(instructionsBuilder != null);
 
-            this.contractValidatesResolver = contractValidatesResolver;
+            this.contractValidateResolver = contractValidateResolver;
             this.instructionsBuilder = instructionsBuilder;
         }
 
@@ -65,7 +65,7 @@ namespace CodeContracts.Fody.ContractInjectors
         /// <param name="methodDefinition">Method in that will be injected il instructions</param>
         public void Inject(ContractDefinition contractDefinition, MethodDefinition methodDefinition)
         {
-            var instructions = contractValidatesResolver.Resolve(contractDefinition, methodDefinition).SelectMany(instructionsBuilder.Build);
+            var instructions = contractValidateResolver.Resolve(contractDefinition, methodDefinition).SelectMany(instructionsBuilder.Build);
 
             var callBaseCtorInstruction = methodDefinition.Body.Instructions.FirstOrDefault(i => Equals(i.OpCode, OpCodes.Call) && ((MethodReference)i.Operand).Resolve().IsConstructor);
             var callBaseCtorInstructionIndex = methodDefinition.Body.Instructions.IndexOf(callBaseCtorInstruction) + 1;

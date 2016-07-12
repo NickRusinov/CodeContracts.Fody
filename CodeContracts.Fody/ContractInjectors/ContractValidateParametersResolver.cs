@@ -17,12 +17,12 @@ namespace CodeContracts.Fody.ContractInjectors
         /// <summary>
         /// Definition of current weaving assembly
         /// </summary>
-        protected readonly ModuleDefinition moduleDefinition;
+        private readonly ModuleDefinition moduleDefinition;
 
         /// <summary>
         /// Parses a top level contract expression
         /// </summary>
-        protected readonly IMethodParameterParser methodParameterParser;
+        private readonly IMethodParameterParser methodParameterParser;
 
         /// <summary>
         /// Initializes a new instance of class <see cref="ContractValidateParametersResolver"/>
