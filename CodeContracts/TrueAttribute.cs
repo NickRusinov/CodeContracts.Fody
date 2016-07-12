@@ -10,13 +10,16 @@ namespace CodeContracts
     [ContractException(typeof(ArgumentException))]
     public sealed class TrueAttribute : ContractAttribute
     {
-        public TrueAttribute(params object[] args)
-            : base(args)
-        {
+        public TrueAttribute() { }
 
-        }
+        public TrueAttribute(object arg) { }
+
+        public TrueAttribute(object arg0, object arg1) { }
 
         [Pure]
-        public static bool Validate(object self, bool arg) => arg;
+        public static bool Validate(bool arg) => arg;
+
+        [Pure]
+        public static bool Validate(bool arg0, bool arg1) => arg0 && arg1;
     }
 }

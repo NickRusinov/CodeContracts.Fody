@@ -8,15 +8,18 @@ namespace CodeContracts
 {
     [AttributeUsage(DefaultUsages, AllowMultiple = true, Inherited = false)]
     [ContractException(typeof(ArgumentException))]
-    public class EnumAttribute : ContractAttribute
+    public sealed class EnumAttribute : ContractAttribute
     {
-        public EnumAttribute(params object[] args)
-            : base(args)
-        {
-            
-        }
+        public EnumAttribute() { }
+
+        public EnumAttribute(object arg) { }
+
+        public EnumAttribute(object arg0, object arg1) { }
 
         [Pure]
-        public static bool Validate(object self, Enum arg) => Enum.IsDefined(arg.GetType(), arg);
+        public static bool Validate(Enum arg) => Enum.IsDefined(arg.GetType(), arg);
+
+        [Pure]
+        public static bool Validate(Enum arg0, Enum arg1) => Enum.IsDefined(arg0.GetType(), arg0) && Enum.IsDefined(arg1.GetType(), arg1);
     }
 }

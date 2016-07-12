@@ -8,15 +8,18 @@ namespace CodeContracts
 {
     [AttributeUsage(DefaultUsages, AllowMultiple = true, Inherited = false)]
     [ContractException(typeof(ArgumentException))]
-    public class NullAttribute : ContractAttribute
+    public sealed class NullAttribute : ContractAttribute
     {
-        public NullAttribute(params object[] args)
-            : base(args)
-        {
-            
-        }
+        public NullAttribute() { }
+
+        public NullAttribute(object arg) { }
+
+        public NullAttribute(object arg0, object arg1) { }
 
         [Pure]
-        public static bool Validate(object self, object arg) => arg == null;
+        public static bool Validate(object arg) => arg == null;
+
+        [Pure]
+        public static bool Validate(object arg0, object arg1) => arg0 == null && arg1 == null;
     }
 }

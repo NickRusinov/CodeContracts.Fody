@@ -10,13 +10,16 @@ namespace CodeContracts
     [ContractException(typeof(ArgumentNullException))]
     public sealed class NotNullAttribute : ContractAttribute
     {
-        public NotNullAttribute(params object[] args)
-            : base(args)
-        {
+        public NotNullAttribute() { }
 
-        }
+        public NotNullAttribute(object arg) { }
+
+        public NotNullAttribute(object arg0, object arg1) { }
 
         [Pure]
-        public static bool Validate(object self, object arg) => arg != null;
+        public static bool Validate(object arg) => arg != null;
+
+        [Pure]
+        public static bool Validate(object arg0, object arg1) => arg0 != null && arg1 != null;
     }
 }

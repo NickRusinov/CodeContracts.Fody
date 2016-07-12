@@ -10,10 +10,5 @@ namespace CodeContracts
     public abstract class ContractAttribute : Attribute
     {
         public const AttributeTargets DefaultUsages = AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.Field | AttributeTargets.Property;
-
-        protected ContractAttribute(params object[] args)
-        {
-            
-        }
     }
 }
