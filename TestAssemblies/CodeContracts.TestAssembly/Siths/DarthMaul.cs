@@ -29,7 +29,7 @@ namespace CodeContracts.TestAssembly.Siths
             return revenge > 100.0;
         }
 
-        [Range("$parameter", 5ul, Min = "$.value", Max = (short)42)]
+        [Range("$parameter", 5ul, min: "$.value", max: (short)42)]
         [return: NoContract]
         public bool JoinDarkSide()
         {

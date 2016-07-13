@@ -15,6 +15,7 @@ namespace CodeContracts.TestAssembly.Siths
         [True]
         public ISith Slave { get; set; }
 
+        [My(Min = "$.value", Max = (short)42)]
         public bool JoinDarkSide()
         {
             return true;

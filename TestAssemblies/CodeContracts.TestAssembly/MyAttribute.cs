@@ -11,12 +11,6 @@ namespace CodeContracts.TestAssembly
     [ContractException(typeof(ArgumentOutOfRangeException))]
     public sealed class MyAttribute : ContractAttribute
     {
-        public MyAttribute(params object[] args)
-            : base(args)
-        {
-
-        }
-
         public object Min { get; set; }
 
         public object Max { get; set; }

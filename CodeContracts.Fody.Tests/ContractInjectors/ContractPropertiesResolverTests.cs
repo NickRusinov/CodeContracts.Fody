@@ -22,7 +22,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             [Frozen] ModuleDefinition moduleDefinition,
             ContractPropertiesResolver sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("DarthMaul", "JoinDarkSide");
+            var methodDefinition = moduleDefinition.FindMethod("DarthPlagueis", "JoinDarkSide");
             var contractDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.Single(), methodDefinition, methodDefinition);
 
             var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();
@@ -39,7 +39,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectors
             [Frozen] Mock<IMethodParameterParser> methodParameterParserMock,
             ContractPropertiesResolver sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("DarthMaul", "JoinDarkSide");
+            var methodDefinition = moduleDefinition.FindMethod("DarthPlagueis", "JoinDarkSide");
             var contractDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.Single(), methodDefinition, methodDefinition);
 
             var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();

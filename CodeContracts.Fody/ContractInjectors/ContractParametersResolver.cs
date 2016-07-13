@@ -35,7 +35,7 @@ namespace CodeContracts.Fody.ContractInjectors
         protected override IEnumerable<KeyValuePair<string, object>> ResolveParameters(ContractDefinition contractDefinition)
         {
             return contractDefinition.ContractAttribute.GetNamedConstructorArguments()
-                .Select(cana => new KeyValuePair<string, object>(cana.Name, cana.Argument.Value));
+                .Select(cana => new KeyValuePair<string, object>(cana.Name, ((CustomAttributeArgument)cana.Argument.Value).Value));
         }
     }
 }
