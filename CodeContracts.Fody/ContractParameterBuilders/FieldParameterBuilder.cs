@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-namespace CodeContracts.Fody.ContractInjectors
+namespace CodeContracts.Fody.ContractParameterBuilders
 {
     /// <summary>
     /// Creates il instructions for inject field to contract's validate method

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-namespace CodeContracts.Fody.ContractInjectors
+namespace CodeContracts.Fody.ContractParameterBuilders
 {
     /// <summary>
     /// Creates il instructions for inject <see cref="Contract.Result{T}"/> method 

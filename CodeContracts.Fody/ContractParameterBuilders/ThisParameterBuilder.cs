@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-namespace CodeContracts.Fody.ContractInjectors
+namespace CodeContracts.Fody.ContractParameterBuilders
 {
     /// <summary>
-    /// Creates il instructions for inject null reference to contract's validate method
+    /// Creates il instructions for inject "this" reference to contract's validate method
     /// </summary>
-    public class NullParameterBuilder : IParameterBuilder
+    public class ThisParameterBuilder : IParameterBuilder
     {
         /// <inheritdoc/>
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
-            yield return Instruction.Create(OpCodes.Ldnull);
+            yield return Instruction.Create(OpCodes.Ldarg_0);
         }
     }
 }

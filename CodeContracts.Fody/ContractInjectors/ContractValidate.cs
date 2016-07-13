@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
+using CodeContracts.Fody.ContractParameterBuilders;
 
 namespace CodeContracts.Fody.ContractInjectors
 {
