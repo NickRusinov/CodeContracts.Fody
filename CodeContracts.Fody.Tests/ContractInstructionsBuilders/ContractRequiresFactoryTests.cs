@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.ContractInjectors;
+using CodeContracts.Fody.ContractInstructionsBuilders;
 using CodeContracts.Fody.Internal;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace CodeContracts.Fody.Tests.ContractInjectors
+namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
 {
     public class ContractRequiresFactoryTests
     {

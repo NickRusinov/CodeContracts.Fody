@@ -2,66 +2,65 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.ContractInjectors;
+using CodeContracts.Fody.ContractInstructionsBuilders;
 using CodeContracts.Fody.Internal;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace CodeContracts.Fody.Tests.ContractInjectors
+namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
 {
-    public class ContractEnsuresFactoryTests
+    public class ContractInvariantFactoryTests
     {
-        [Theory(DisplayName = "Проверка фабрики создания метода контракта постусловия с сообщением")]
+        [Theory(DisplayName = "Проверка фабрики создания метода контракта инварианта с сообщением")]
         [InlineAutoFixture(typeof(ArgumentNullException))]
         [InlineAutoFixture(null)]
-        public void CreateContractMethodWithMessageTest(Type type, 
+        public void CreateContractMethodWithMessageTest(Type type,
             [Frozen] ModuleDefinition moduleDefinition,
             [Frozen] ContractConfig contractConfig,
             string message,
-            ContractEnsuresFactory sut)
+            ContractInvariantFactory sut)
         {
-            contractConfig.Ensures = EnsuresMode.WithMessages;
+            contractConfig.Invariant = InvariantMode.WithMessages;
             var typeDefinition = type != null ? moduleDefinition.ImportReference(type).Resolve() : null;
             var instructionBuilder = sut.Create(typeDefinition, message);
 
             Assert.IsType<ContractMethodWithMessageBuilder>(instructionBuilder);
             Assert.Equal(message, instructionBuilder.FindPrivateField<string>("message"));
-            Assert.Equal(ContractReferences.EnsuresWithMessage(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(ContractReferences.InvariantWithMessage(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
         }
 
-        [Theory(DisplayName = "Проверка фабрики создания метода контракта постусловия с сообщением")]
+        [Theory(DisplayName = "Проверка фабрики создания метода контракта инварианта с сообщением")]
         [InlineAutoFixture(typeof(ArgumentNullException))]
         [InlineAutoFixture(null)]
         public void CreateContractMethodWithoutMessagesModeTest(Type type,
             [Frozen] ModuleDefinition moduleDefinition,
             [Frozen] ContractConfig contractConfig,
             string message,
-            ContractEnsuresFactory sut)
+            ContractInvariantFactory sut)
         {
-            contractConfig.Ensures = EnsuresMode.WithoutMessages;
+            contractConfig.Invariant = InvariantMode.WithoutMessages;
             var typeDefinition = type != null ? moduleDefinition.ImportReference(type).Resolve() : null;
             var instructionBuilder = sut.Create(typeDefinition, message);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.Ensures(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(ContractReferences.Invariant(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
         }
 
-        [Theory(DisplayName = "Проверка фабрики создания метода контракта постусловия без сообщения")]
+        [Theory(DisplayName = "Проверка фабрики создания метода контракта инварианта без сообщения")]
         [InlineAutoFixture(typeof(ArgumentNullException))]
         [InlineAutoFixture(null)]
         public void CreateContractMethodTest(Type type,
             [Frozen] ModuleDefinition moduleDefinition,
-            ContractEnsuresFactory sut)
+            ContractInvariantFactory sut)
         {
             var typeDefinition = type != null ? moduleDefinition.ImportReference(type).Resolve() : null;
             var instructionBuilder = sut.Create(typeDefinition, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.Ensures(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(ContractReferences.Invariant(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
         }
     }
 }

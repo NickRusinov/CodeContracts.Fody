@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectors;
+using CodeContracts.Fody.ContractInstructionsBuilders;
 using CodeContracts.Fody.ContractParameterParsers;
 using CodeContracts.Fody.Internal;
 using TinyIoC;

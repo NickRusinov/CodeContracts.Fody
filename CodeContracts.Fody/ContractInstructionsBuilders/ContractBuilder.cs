@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.ContractInjectors;
 using Mono.Cecil.Cil;
 
-namespace CodeContracts.Fody.ContractInjectors
+namespace CodeContracts.Fody.ContractInstructionsBuilders
 {
     /// <summary>
     /// Creates il instructions for injecting one of <see cref="Contract"/>'s methods

@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.Internal;
 using Mono.Cecil;
-using static CodeContracts.Fody.Internal.ContractReferences;
-using static CodeContracts.Fody.RequiresMode;
 
-namespace CodeContracts.Fody.ContractInjectors
+namespace CodeContracts.Fody.ContractInstructionsBuilders
 {
     /// <summary>
     /// Creates a il instructions builder <see cref="IInstructionsBuilder"/> for injecting one 
@@ -43,16 +41,16 @@ namespace CodeContracts.Fody.ContractInjectors
         /// <inheritdoc/>
         public IInstructionsBuilder Create(TypeDefinition typeDefinition, string message)
         {
-            if (typeDefinition != null && message != null && contractConfig.Requires.HasFlag(WithMessages | WithExceptions))
-                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), RequiresWithExceptionAndMessage(moduleDefinition, typeDefinition), message);
+            if (typeDefinition != null && message != null && contractConfig.Requires.HasFlag(RequiresMode.WithMessages | RequiresMode.WithExceptions))
+                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.RequiresWithExceptionAndMessage(moduleDefinition, typeDefinition), message);
 
-            if (typeDefinition != null && contractConfig.Requires.HasFlag(WithExceptions))
-                return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), RequiresWithException(moduleDefinition, typeDefinition));
+            if (typeDefinition != null && contractConfig.Requires.HasFlag(RequiresMode.WithExceptions))
+                return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.RequiresWithException(moduleDefinition, typeDefinition));
 
-            if (message != null && contractConfig.Requires.HasFlag(WithMessages))
-                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), RequiresWithMessage(moduleDefinition), message);
+            if (message != null && contractConfig.Requires.HasFlag(RequiresMode.WithMessages))
+                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.RequiresWithMessage(moduleDefinition), message);
 
-            return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), Requires(moduleDefinition));
+            return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.Requires(moduleDefinition));
         }
     }
 }

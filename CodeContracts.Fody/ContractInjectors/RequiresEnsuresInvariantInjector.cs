@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
+using CodeContracts.Fody.ContractInstructionsBuilders;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
