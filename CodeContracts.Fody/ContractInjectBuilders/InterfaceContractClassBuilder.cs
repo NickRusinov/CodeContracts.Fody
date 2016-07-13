@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.ContractInjectResolvers
+namespace CodeContracts.Fody.ContractInjectBuilders
 {
     /// <summary>
-    /// Creates a new contract class for specified type which is abstract class
+    /// Creates a new contract class for specified type which is interface
     /// </summary>
-    public class AbstractContractClassBuilder : IAbstractContractClassBuilder
+    public class InterfaceContractClassBuilder : IInterfaceContractClassBuilder
     {
         /// <inheritdoc/>
         public TypeDefinition Build(TypeDefinition typeDefinition)
@@ -35,8 +34,9 @@ namespace CodeContracts.Fody.ContractInjectResolvers
         /// <returns>A new contract class for existing class</returns>
         private TypeDefinition BuildContractClassDefinition(TypeDefinition typeDefinition)
         {
-            var newTypeDefinition = new TypeDefinition(typeDefinition.Namespace, $"{ typeDefinition.Name }Contracts<G>", TypeAttributes.NotPublic | TypeAttributes.Abstract, typeDefinition);
-            newTypeDefinition.Methods.AddRange(typeDefinition.Methods.Where(md => md.IsVirtual).Select(BuildMethodDefinition));
+            var newTypeDefinition = new TypeDefinition(typeDefinition.Namespace, $"{ typeDefinition.Name }Contracts<G>", TypeAttributes.NotPublic | TypeAttributes.Abstract, typeDefinition.Module.TypeSystem.Object);
+            newTypeDefinition.Interfaces.Add(typeDefinition);
+            newTypeDefinition.Methods.AddRange(typeDefinition.Methods.Select(BuildMethodDefinition));
 
             return newTypeDefinition;
         }
@@ -48,11 +48,10 @@ namespace CodeContracts.Fody.ContractInjectResolvers
         /// <returns>A new overriden method for contract class</returns>
         private MethodDefinition BuildMethodDefinition(MethodDefinition methodDefinition)
         {
-            var newMethodDefinition = new MethodDefinition(methodDefinition.Name, methodDefinition.Attributes & ~MethodAttributes.Abstract & ~MethodAttributes.NewSlot, methodDefinition.ReturnType);
-            newMethodDefinition.Overrides.Add(methodDefinition);
+            var newMethodDefinition = new MethodDefinition(methodDefinition.Name, methodDefinition.Attributes & ~MethodAttributes.Abstract, methodDefinition.ReturnType);
             newMethodDefinition.Parameters.AddRange(methodDefinition.Parameters.Select(BuildParameterDefinition));
             newMethodDefinition.GenericParameters.AddRange(methodDefinition.GenericParameters.Select(BuildGenericDefinition));
-            
+
             return newMethodDefinition;
         }
 

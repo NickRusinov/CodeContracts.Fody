@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CodeContracts.Fody.ContractInjectResolvers;
+using CodeContracts.Fody.ContractInjectBuilders;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace CodeContracts.Fody.Tests.ContractInjectResolvers
+namespace CodeContracts.Fody.Tests.ContractInjectBuilders
 {
     public class InvariantMethodBuilderTests
     {

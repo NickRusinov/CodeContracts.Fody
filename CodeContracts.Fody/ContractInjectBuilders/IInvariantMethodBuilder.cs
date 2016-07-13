@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.ContractInjectResolvers
+namespace CodeContracts.Fody.ContractInjectBuilders
 {
     /// <summary>
     /// Creates a new invariant method for specified type

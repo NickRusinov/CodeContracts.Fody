@@ -111,6 +111,9 @@
     <Compile Include="Configurations\TinyIoCConfigurationTests.cs" />
     <Compile Include="ContractConfigParserTests.cs" />
     <Compile Include="ContractExecutorTests.cs" />
+    <Compile Include="ContractInjectBuilders\AbstractContractClassBuilderTests.cs" />
+    <Compile Include="ContractInjectBuilders\InterfaceContractClassBuilderTests.cs" />
+    <Compile Include="ContractInjectBuilders\InvariantMethodBuilderTests.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterBuilderTests.cs" />
     <Compile Include="ContractInjectors\ArgumentParameterParserTests.cs" />
     <Compile Include="ContractInjectors\BestOverloadCriteriaTests.cs" />
@@ -158,11 +161,8 @@
     <Compile Include="Internal\CallInstructionComparer.cs" />
     <Compile Include="Internal\InstructionComparer.cs" />
     <Compile Include="Internal\ReflectionExtensions.cs" />
-    <Compile Include="ContractInjectResolvers\AbstractContractClassBuilderTests.cs" />
     <Compile Include="ContractInjectResolvers\ContractClassResolverTests.cs" />
     <Compile Include="ContractInjectResolvers\ContractInjectResolverTests.cs" />
-    <Compile Include="ContractInjectResolvers\InterfaceContractClassBuilderTests.cs" />
-    <Compile Include="ContractInjectResolvers\InvariantMethodBuilderTests.cs" />
     <Compile Include="ContractInjectResolvers\InvariantMethodResolverTests.cs" />
     <Compile Include="ContractInjectResolvers\InvariantResolverTests.cs" />
     <Compile Include="ContractInjectResolvers\RequiresEnsuresResolverTests.cs" />

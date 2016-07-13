@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.ContractInjectBuilders;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 using static CodeContracts.Fody.Internal.ContractReferences;
