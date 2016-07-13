@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractParameterBuilders;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.ContractInjectors
+namespace CodeContracts.Fody.ContractParameterParsers
 {
     /// <summary>
     /// Represents results of parse parameter or property of contract expression

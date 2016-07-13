@@ -114,7 +114,6 @@
     <Compile Include="ContractInjectBuilders\AbstractContractClassBuilderTests.cs" />
     <Compile Include="ContractInjectBuilders\InterfaceContractClassBuilderTests.cs" />
     <Compile Include="ContractInjectBuilders\InvariantMethodBuilderTests.cs" />
-    <Compile Include="ContractInjectors\ArgumentParameterParserTests.cs" />
     <Compile Include="ContractInjectors\BestOverloadCriteriaTests.cs" />
     <Compile Include="ContractInjectors\BestOverloadMethodComparerTests.cs" />
     <Compile Include="ContractInjectors\BestOverloadParameterComparerTests.cs" />
@@ -133,12 +132,8 @@
     <Compile Include="ContractInjectors\ContractValidateCriteriaTests.cs" />
     <Compile Include="ContractInjectors\ContractValidateResolverTests.cs" />
     <Compile Include="ContractInjectors\ContractValidateScannerTests.cs" />
-    <Compile Include="ContractInjectors\FieldParameterParserTests.cs" />
     <Compile Include="ContractInjectors\RequiresEnsuresInvariantInjectorTests.cs" />
     <Compile Include="ContractInjectors\ContractInjectorTests.cs" />
-    <Compile Include="ContractInjectors\PropertyParameterParserTests.cs" />
-    <Compile Include="ContractInjectors\StringParameterParserTests.cs" />
-    <Compile Include="ContractInjectors\ThisParameterParserTests.cs" />
     <Compile Include="ContractParameterBuilders\ArgumentParameterBuilderTests.cs" />
     <Compile Include="ContractParameterBuilders\BoxParameterBuilderTests.cs" />
     <Compile Include="ContractParameterBuilders\ConstParameterBuilderTests.cs" />
@@ -149,6 +144,11 @@
     <Compile Include="ContractParameterBuilders\ResultParameterBuilderTests.cs" />
     <Compile Include="ContractParameterBuilders\StringParameterBuilderTests.cs" />
     <Compile Include="ContractParameterBuilders\ThisParameterBuilderTests.cs" />
+    <Compile Include="ContractParameterParsers\ArgumentParameterParserTests.cs" />
+    <Compile Include="ContractParameterParsers\FieldParameterParserTests.cs" />
+    <Compile Include="ContractParameterParsers\PropertyParameterParserTests.cs" />
+    <Compile Include="ContractParameterParsers\StringParameterParserTests.cs" />
+    <Compile Include="ContractParameterParsers\ThisParameterParserTests.cs" />
     <Compile Include="ContractScanners\ContractCriteriaTests.cs" />
     <Compile Include="ContractScanners\FieldScannerTests.cs" />
     <Compile Include="ContractScanners\MethodReturnScannerTests.cs" />

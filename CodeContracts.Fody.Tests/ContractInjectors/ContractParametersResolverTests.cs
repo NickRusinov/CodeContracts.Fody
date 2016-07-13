@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.ContractParameterBuilders;
+using CodeContracts.Fody.ContractParameterParsers;
 using CodeContracts.Fody.Internal;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
