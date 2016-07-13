@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.ContractInstructionsBuilders;
+using CodeContracts.Fody.ContractValidateResolvers;
 using Mono.Cecil;
 using Moq;
 using Ploeh.AutoFixture.Xunit2;

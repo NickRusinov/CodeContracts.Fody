@@ -107,6 +107,10 @@
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
     <Compile Include="AutoFixtureAttribute.cs" />
+    <Compile Include="BestOverloadResolvers\BestOverloadCriteriaTests.cs" />
+    <Compile Include="BestOverloadResolvers\BestOverloadMethodComparerTests.cs" />
+    <Compile Include="BestOverloadResolvers\BestOverloadParameterComparerTests.cs" />
+    <Compile Include="BestOverloadResolvers\BestOverloadResolverTests.cs" />
     <Compile Include="Configurations\LoggerConfigurationTests.cs" />
     <Compile Include="Configurations\TinyIoCConfigurationTests.cs" />
     <Compile Include="ContractConfigParserTests.cs" />
@@ -114,17 +118,6 @@
     <Compile Include="ContractInjectBuilders\AbstractContractClassBuilderTests.cs" />
     <Compile Include="ContractInjectBuilders\InterfaceContractClassBuilderTests.cs" />
     <Compile Include="ContractInjectBuilders\InvariantMethodBuilderTests.cs" />
-    <Compile Include="ContractInjectors\BestOverloadCriteriaTests.cs" />
-    <Compile Include="ContractInjectors\BestOverloadMethodComparerTests.cs" />
-    <Compile Include="ContractInjectors\BestOverloadParameterComparerTests.cs" />
-    <Compile Include="ContractInjectors\BestOverloadResolverTests.cs" />
-    <Compile Include="ContractInjectors\ContractAttributeResolverTests.cs" />
-    <Compile Include="ContractInjectors\ContractParametersResolverTests.cs" />
-    <Compile Include="ContractInjectors\ContractPropertiesResolverTests.cs" />
-    <Compile Include="ContractInjectors\ContractSelfResolverTests.cs" />
-    <Compile Include="ContractInjectors\ContractValidateCriteriaTests.cs" />
-    <Compile Include="ContractInjectors\ContractValidateResolverTests.cs" />
-    <Compile Include="ContractInjectors\ContractValidateScannerTests.cs" />
     <Compile Include="ContractInjectors\RequiresEnsuresInvariantInjectorTests.cs" />
     <Compile Include="ContractInjectors\ContractInjectorTests.cs" />
     <Compile Include="ContractInstructionsBuilders\ContractBuilderTests.cs" />
@@ -157,6 +150,13 @@
     <Compile Include="ContractScanners\ParameterScannerTests.cs" />
     <Compile Include="ContractScanners\PropertyScannerTests.cs" />
     <Compile Include="ContractScanners\TypeScannerTests.cs" />
+    <Compile Include="ContractValidateResolvers\ContractAttributeResolverTests.cs" />
+    <Compile Include="ContractValidateResolvers\ContractParametersResolverTests.cs" />
+    <Compile Include="ContractValidateResolvers\ContractPropertiesResolverTests.cs" />
+    <Compile Include="ContractValidateResolvers\ContractSelfResolverTests.cs" />
+    <Compile Include="ContractValidateResolvers\ContractValidateCriteriaTests.cs" />
+    <Compile Include="ContractValidateResolvers\ContractValidateResolverTests.cs" />
+    <Compile Include="ContractValidateResolvers\ContractValidateScannerTests.cs" />
     <Compile Include="InlineAutoFixtureAttribute.cs" />
     <Compile Include="Internal\CallInstructionComparer.cs" />
     <Compile Include="Internal\InstructionComparer.cs" />

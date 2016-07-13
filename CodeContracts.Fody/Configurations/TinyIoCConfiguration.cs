@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.ContractInstructionsBuilders;
 using CodeContracts.Fody.ContractParameterParsers;
+using CodeContracts.Fody.ContractValidateResolvers;
 using CodeContracts.Fody.Internal;
 using TinyIoC;
 
