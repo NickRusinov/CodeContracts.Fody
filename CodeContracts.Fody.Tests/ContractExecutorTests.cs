@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.ContractCleaners;
 using CodeContracts.Fody.ContractDefinitions;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.ContractInjectResolvers;
@@ -48,6 +49,17 @@ namespace CodeContracts.Fody.Tests
             sut.Execute(moduleDefinition);
 
             contractInjectorMock.Verify(ci => ci.Inject(It.IsAny<ContractDefinition>(), It.IsAny<MethodDefinition>()), Times.Exactly(3));
+        }
+
+        [Theory(DisplayName = "Проверка вызова очистителя контрактов при выполнении основного алгоритма"), AutoFixture]
+        public void ContractClenerHasBeenCalledTest(
+            [Frozen] ModuleDefinition moduleDefinition,
+            [Frozen] Mock<IContractCleaner> contractCleanerMock,
+            ContractExecutor sut)
+        {
+            sut.Execute(moduleDefinition);
+
+            contractCleanerMock.Verify(cc => cc.Clean(It.IsAny<ContractDefinition>()), Times.Exactly(3));
         }
     }
 }

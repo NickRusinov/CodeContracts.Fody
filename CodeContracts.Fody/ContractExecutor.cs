@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.ContractCleaners;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.ContractInjectResolvers;
 using CodeContracts.Fody.ContractScanners;
@@ -32,20 +33,28 @@ namespace CodeContracts.Fody
         private readonly IContractInjector contractInjector;
 
         /// <summary>
+        /// Removes custom contract attribute from assembly
+        /// </summary>
+        private readonly IContractCleaner contractCleaner;
+
+        /// <summary>
         /// Initializes a new instance of class <see cref="ContractExecutor"/>
         /// </summary>
         /// <param name="moduleScanner">Scans custom contract attributes in a assembly</param>
         /// <param name="contractInjectResolver">Resolves method in which will be injected contract expressions</param>
         /// <param name="contractInjector">Injectes calls of methods of <see cref="Contract"/> class to specified methods</param>
-        public ContractExecutor(IModuleScanner moduleScanner, IContractInjectResolver contractInjectResolver, IContractInjector contractInjector)
+        /// <param name="contractCleaner">Removes custom contract attribute from assembly</param>
+        public ContractExecutor(IModuleScanner moduleScanner, IContractInjectResolver contractInjectResolver, IContractInjector contractInjector, IContractCleaner contractCleaner)
         {
             Contract.Requires(moduleScanner != null);
             Contract.Requires(contractInjectResolver != null);
             Contract.Requires(contractInjector != null);
+            Contract.Requires(contractCleaner != null);
 
             this.moduleScanner = moduleScanner;
             this.contractInjectResolver = contractInjectResolver;
             this.contractInjector = contractInjector;
+            this.contractCleaner = contractCleaner;
         }
 
         /// <summary>
@@ -57,7 +66,9 @@ namespace CodeContracts.Fody
             foreach (var contractDefinition in moduleScanner.Scan(moduleDefinition).ToList())
             {
                 var injectMethodDefinition = contractInjectResolver.Resolve(contractDefinition);
+
                 contractInjector.Inject(contractDefinition, injectMethodDefinition);
+                contractCleaner.Clean(contractDefinition);
             }
         }
     }
