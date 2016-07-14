@@ -22,6 +22,18 @@ namespace CodeContracts.Fody.Tests
             Assert.Equal(isEnabledExpected, contractConfig.IsEnabled);
         }
 
+        [Theory(DisplayName = "Проверка парсера конфигурации")]
+        [InlineAutoFixture(@"<CodeContracts />", true)]
+        [InlineAutoFixture(@"<CodeContracts Clean=""true"" />", true)]
+        [InlineAutoFixture(@"<CodeContracts Clean=""false"" />", false)]
+        public void CleanParseTest(string configString, bool cleanExpected,
+            ContractConfigParser sut)
+        {
+            var contractConfig = sut.Parse(configString);
+
+            Assert.Equal(cleanExpected, contractConfig.Clean);
+        }
+
         [Theory(DisplayName = "Проверка парсера конфигурации для предусловий")]
         [InlineAutoFixture(@"<CodeContracts />", RequiresMode.WithoutMessages | RequiresMode.WithoutExceptions)]
         [InlineAutoFixture(@"<CodeContracts Requires=""WithMessages"" />", RequiresMode.WithMessages | RequiresMode.WithoutExceptions)]

@@ -113,6 +113,8 @@
     <Compile Include="BestOverloadResolvers\BestOverloadResolverTests.cs" />
     <Compile Include="Configurations\LoggerConfigurationTests.cs" />
     <Compile Include="Configurations\TinyIoCConfigurationTests.cs" />
+    <Compile Include="ContractCleaners\ContractCleanerTests.cs" />
+    <Compile Include="ContractCleaners\DisabledContractCleanerTests.cs" />
     <Compile Include="ContractConfigParserTests.cs" />
     <Compile Include="ContractExecutorTests.cs" />
     <Compile Include="ContractInjectBuilders\AbstractContractClassBuilderTests.cs" />

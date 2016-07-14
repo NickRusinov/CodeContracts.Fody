@@ -40,6 +40,8 @@ namespace CodeContracts.Fody.Tests
             Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi") as MethodReference);
             Fixture.Register((ModuleDefinition md) => md.FindParameter("DarthMaul", "KillJedi", "jedi"));
             Fixture.Register((ModuleDefinition md) => md.FindParameter("DarthMaul", "KillJedi", "jedi") as ParameterReference);
+
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi") as ICustomAttributeProvider);
             Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi").CustomAttributes.First());
 
             Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria());
