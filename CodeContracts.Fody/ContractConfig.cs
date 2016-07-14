@@ -22,6 +22,13 @@ namespace CodeContracts.Fody
         public bool IsEnabled { get; set; } = true;
 
         /// <summary>
+        /// If enabled then all contract attributes will be removed from final assembly.
+        /// Default value is enabled
+        /// </summary>
+        [XmlAttribute]
+        public bool Clean { get; set; } = true;
+
+        /// <summary>
         /// Determining the mode of implementation Contract.Requires overload.
         /// Default value is without messages and without specified exception type overload
         /// </summary>

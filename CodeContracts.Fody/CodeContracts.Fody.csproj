@@ -156,6 +156,9 @@
     <Compile Include="BestOverloadResolvers\IBestOverloadResolver.cs" />
     <Compile Include="Configurations\LoggerConfiguration.cs" />
     <Compile Include="Configurations\TinyIoCConfiguration.cs" />
+    <Compile Include="ContractCleaners\ContractCleaner.cs" />
+    <Compile Include="ContractCleaners\DisabledContractCleaner.cs" />
+    <Compile Include="ContractCleaners\IContractCleaner.cs" />
     <Compile Include="ContractConfig.cs" />
     <Compile Include="ContractConfigParser.cs" />
     <Compile Include="ContractDefinitions\ContractDefinition.cs" />
