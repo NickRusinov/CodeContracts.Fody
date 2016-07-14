@@ -68,7 +68,7 @@ namespace CodeContracts.Fody
             new TinyIoCConfiguration().Configure(this);
             new LoggerConfiguration().Configure(this);
             
-            TinyIoCContainer.Current.Resolve<ContractExecutor>().Execute(ModuleDefinition);
+            TinyIoCContainer.Current.Resolve<IContractExecutor>().Execute(ModuleDefinition);
         }
     }
 }

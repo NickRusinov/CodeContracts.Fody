@@ -240,7 +240,9 @@
     <Compile Include="ContractValidateResolvers\IContractValidateParametersResolver.cs" />
     <Compile Include="ContractValidateResolvers\IContractValidateResolver.cs" />
     <Compile Include="ContractValidateResolvers\IContractValidateScanner.cs" />
+    <Compile Include="DisabledContractExecutor.cs" />
     <Compile Include="IContractConfigParser.cs" />
+    <Compile Include="IContractExecutor.cs" />
     <Compile Include="Internal\ContractReferences.cs" />
     <Compile Include="Internal\CustomAttributeExtensions.cs" />
     <Compile Include="Internal\LazyCollection.cs" />

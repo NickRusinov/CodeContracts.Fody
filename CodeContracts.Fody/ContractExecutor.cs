@@ -15,7 +15,7 @@ namespace CodeContracts.Fody
     /// <summary>
     /// Top level algorithm for replace custom contract attributes to <see cref="Contract"/>'s methods calls
     /// </summary>
-    public class ContractExecutor
+    public class ContractExecutor : IContractExecutor
     {
         /// <summary>
         /// Scans custom contract attributes in a assembly
@@ -57,10 +57,7 @@ namespace CodeContracts.Fody
             this.contractCleaner = contractCleaner;
         }
 
-        /// <summary>
-        /// Execute top level algorithm with specified assembly that represented by <see cref="ModuleDefinition"/>
-        /// </summary>
-        /// <param name="moduleDefinition">Assembly that be handled and rewrited</param>
+        /// <inheritdoc/>
         public void Execute(ModuleDefinition moduleDefinition)
         {
             foreach (var contractDefinition in moduleScanner.Scan(moduleDefinition).ToList())

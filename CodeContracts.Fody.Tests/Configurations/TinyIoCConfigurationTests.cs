@@ -18,7 +18,7 @@ namespace CodeContracts.Fody.Tests.Configurations
             TinyIoCConfiguration sut)
         {
             sut.Configure(moduleWeaver);
-            var contractExecutor = TinyIoCContainer.Current.Resolve<ContractExecutor>();
+            var contractExecutor = TinyIoCContainer.Current.Resolve<IContractExecutor>();
 
             Assert.NotNull(contractExecutor);
         }
