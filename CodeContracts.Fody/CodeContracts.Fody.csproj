@@ -248,6 +248,7 @@
     <Compile Include="Internal\LazyCollection.cs" />
     <Compile Include="Internal\MethodReferenceComparer.cs" />
     <Compile Include="Internal\MethodReferenceExtensions.cs" />
+    <Compile Include="Internal\TinyIoCContainerExtensions.cs" />
     <Compile Include="Internal\TypeReferenceComparer.cs" />
     <Compile Include="Internal\TypeReferenceExtensions.cs" />
     <Compile Include="ContractInjectResolvers\ContractClassResolver.cs" />

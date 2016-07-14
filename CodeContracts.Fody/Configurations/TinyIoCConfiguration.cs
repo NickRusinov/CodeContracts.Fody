@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using CodeContracts.Fody.ContractCleaners;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.ContractInstructionsBuilders;
 using CodeContracts.Fody.ContractParameterParsers;
@@ -33,6 +34,8 @@ namespace CodeContracts.Fody.Configurations
             container.Register(moduleWeaver.ModuleDefinition);
 
             container.Register((tic, _) => tic.Resolve<IContractConfigParser>().Parse(moduleWeaver.Config.ToString()));
+            container.Register((tic, _) => tic.ResolveByConfig<IContractCleaner, ContractCleaner, DisabledContractCleaner>(cc => cc.Clean));
+            container.Register((tic, _) => tic.ResolveByConfig<IContractExecutor, ContractExecutor, DisabledContractExecutor>(cc => cc.IsEnabled));
             
             container.Register<IEnsuresInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidateResolver>(), tic.Resolve<IInstructionsBuilder>("EnsuresContractBuilder")));
             container.Register<IRequiresInjector>((tic, _) => new RequiresEnsuresInvariantInjector(tic.Resolve<IContractValidateResolver>(), tic.Resolve<IInstructionsBuilder>("RequiresContractBuilder")));
