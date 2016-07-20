@@ -24,7 +24,7 @@ namespace CodeContracts.Fody.Tests.ContractParameterBuilders
         {
             var buildedInstructions = sut.Build(parameterDefinition).ToList();
 
-            Assert.Equal(Instruction.Create(OpCodes.Call, ContractReferences.Result(moduleDefinition, typeReference)), buildedInstructions.Single(), CallInstructionComparer.Instance);
+            Assert.Equal(Instruction.Create(OpCodes.Call, moduleDefinition.ImportResult(typeReference)), buildedInstructions.Single(), CallInstructionComparer.Instance);
         }
     }
 }

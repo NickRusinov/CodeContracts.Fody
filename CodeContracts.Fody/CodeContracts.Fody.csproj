@@ -243,7 +243,7 @@
     <Compile Include="DisabledContractExecutor.cs" />
     <Compile Include="IContractConfigParser.cs" />
     <Compile Include="IContractExecutor.cs" />
-    <Compile Include="Internal\ContractReferences.cs" />
+    <Compile Include="Internal\ContractExtensions.cs" />
     <Compile Include="Internal\CustomAttributeExtensions.cs" />
     <Compile Include="Internal\LazyCollection.cs" />
     <Compile Include="Internal\MethodReferenceComparer.cs" />

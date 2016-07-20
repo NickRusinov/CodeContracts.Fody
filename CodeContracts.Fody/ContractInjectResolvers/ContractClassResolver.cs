@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectBuilders;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
-using static CodeContracts.Fody.Internal.ContractReferences;
 
 namespace CodeContracts.Fody.ContractInjectResolvers
 {
@@ -78,7 +77,7 @@ namespace CodeContracts.Fody.ContractInjectResolvers
             Contract.Requires(typeDefinition != null);
             
             return (TypeDefinition)typeDefinition.CustomAttributes
-                .SingleOrDefault(ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, ContractClass(moduleDefinition)))?.ConstructorArguments
+                .SingleOrDefault(ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, moduleDefinition.ImportContractClass()))?.ConstructorArguments
                 .Select(ca => ca.Value)
                 .Single();
         }

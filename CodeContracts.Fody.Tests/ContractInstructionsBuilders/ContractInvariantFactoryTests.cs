@@ -29,7 +29,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
 
             Assert.IsType<ContractMethodWithMessageBuilder>(instructionBuilder);
             Assert.Equal(message, instructionBuilder.FindPrivateField<string>("message"));
-            Assert.Equal(ContractReferences.InvariantWithMessage(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportInvariantWithMessage(), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка фабрики создания метода контракта инварианта с сообщением")]
@@ -46,7 +46,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
             var instructionBuilder = sut.Create(typeDefinition, message);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.Invariant(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportInvariant(), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка фабрики создания метода контракта инварианта без сообщения")]
@@ -60,7 +60,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
             var instructionBuilder = sut.Create(typeDefinition, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.Invariant(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportInvariant(), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
     }
 }

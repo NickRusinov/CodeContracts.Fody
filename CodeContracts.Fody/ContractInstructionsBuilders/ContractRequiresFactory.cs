@@ -42,15 +42,15 @@ namespace CodeContracts.Fody.ContractInstructionsBuilders
         public IInstructionsBuilder Create(TypeDefinition typeDefinition, string message)
         {
             if (typeDefinition != null && message != null && contractConfig.Requires.HasFlag(RequiresMode.WithMessages | RequiresMode.WithExceptions))
-                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.RequiresWithExceptionAndMessage(moduleDefinition, typeDefinition), message);
+                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), moduleDefinition.ImportRequiresWithExceptionAndMessage(typeDefinition), message);
 
             if (typeDefinition != null && contractConfig.Requires.HasFlag(RequiresMode.WithExceptions))
-                return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.RequiresWithException(moduleDefinition, typeDefinition));
+                return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), moduleDefinition.ImportRequiresWithException(typeDefinition));
 
             if (message != null && contractConfig.Requires.HasFlag(RequiresMode.WithMessages))
-                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.RequiresWithMessage(moduleDefinition), message);
+                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), moduleDefinition.ImportRequiresWithMessage(), message);
 
-            return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.Requires(moduleDefinition));
+            return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), moduleDefinition.ImportRequires());
         }
     }
 }

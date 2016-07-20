@@ -27,7 +27,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
 
             Assert.IsType<ContractMethodWithMessageBuilder>(instructionBuilder);
             Assert.Equal(message, instructionBuilder.FindPrivateField<string>("message"));
-            Assert.Equal(ContractReferences.RequiresWithExceptionAndMessage(moduleDefinition, typeDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportRequiresWithExceptionAndMessage(typeDefinition), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка фабрики создания метода контракта предусловия с типом и сообщением"), AutoFixture]
@@ -42,7 +42,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
             var instructionBuilder = sut.Create(typeDefinition, message);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.Requires(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportRequires(), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка фабрики создания метода контракта предусловия с типом и без сообщения"), AutoFixture]
@@ -56,7 +56,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
             var instructionBuilder = sut.Create(typeDefinition, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.RequiresWithException(moduleDefinition, typeDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportRequiresWithException(typeDefinition), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка фабрики создания метода контракта предусловия с типом и без сообщения"), AutoFixture]
@@ -70,7 +70,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
             var instructionBuilder = sut.Create(typeDefinition, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.Requires(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportRequires(), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка фабрики создания метода контракта предусловия c сообщением без типа"), AutoFixture]
@@ -85,7 +85,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
 
             Assert.IsType<ContractMethodWithMessageBuilder>(instructionBuilder);
             Assert.Equal(message, instructionBuilder.FindPrivateField<string>("message"));
-            Assert.Equal(ContractReferences.RequiresWithMessage(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportRequiresWithMessage(), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка фабрики создания метода контракта предусловия c сообщением без типа"), AutoFixture]
@@ -99,7 +99,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
             var instructionBuilder = sut.Create(null, message);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.Requires(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportRequires(), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
 
         [Theory(DisplayName = "Проверка фабрики создания метода контракта предусловия без сообщения и типа"), AutoFixture]
@@ -110,7 +110,7 @@ namespace CodeContracts.Fody.Tests.ContractInstructionsBuilders
             var instructionBuilder = sut.Create(null, null);
 
             Assert.IsType<ContractMethodBuilder>(instructionBuilder);
-            Assert.Equal(ContractReferences.Requires(moduleDefinition).Resolve(), instructionBuilder.FindPrivateField<MethodReference>("methodReference").Resolve());
+            Assert.Equal(moduleDefinition.ImportRequires(), instructionBuilder.FindPrivateField<MethodReference>("methodReference"), MethodReferenceComparer.Instance);
         }
     }
 }

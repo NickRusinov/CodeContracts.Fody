@@ -42,7 +42,7 @@ namespace CodeContracts.Fody.ContractParameterBuilders
         /// <inheritdoc/>
         public IEnumerable<Instruction> Build(ParameterDefinition validateParameterDefinition)
         {
-            yield return Instruction.Create(OpCodes.Call, ContractReferences.Result(moduleDefinition, typeReference));
+            yield return Instruction.Create(OpCodes.Call, moduleDefinition.ImportResult(typeReference));
         }
     }
 }

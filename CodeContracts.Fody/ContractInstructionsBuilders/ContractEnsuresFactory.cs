@@ -42,9 +42,9 @@ namespace CodeContracts.Fody.ContractInstructionsBuilders
         public IInstructionsBuilder Create(TypeDefinition typeDefinition, string message)
         {
             if (message != null && contractConfig.Ensures.HasFlag(EnsuresMode.WithMessages))
-                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.EnsuresWithMessage(moduleDefinition), message);
+                return new ContractMethodWithMessageBuilder(new ContractValidateBuilder(moduleDefinition), moduleDefinition.ImportEnsuresWithMessage(), message);
 
-            return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), ContractReferences.Ensures(moduleDefinition));
+            return new ContractMethodBuilder(new ContractValidateBuilder(moduleDefinition), moduleDefinition.ImportEnsures());
         }
     }
 }
