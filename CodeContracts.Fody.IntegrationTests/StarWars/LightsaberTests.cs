@@ -14,23 +14,33 @@ namespace CodeContracts.Fody.IntegrationTests.StarWars
         [Fact(DisplayName = "Проверка конструктора класса Lightsaber")]
         public void ConstructorTest()
         {
-            ContractAssert.Success(() => new Lightsaber(LightsaberColor.Blue, 1));
+            ContractAssert.Success(() => new Lightsaber());
 
-            ContractAssert.Fail(() => new Lightsaber((LightsaberColor)42, 1));
-            ContractAssert.Fail(() => new Lightsaber(LightsaberColor.Black, 0));
-            ContractAssert.Fail(() => new Lightsaber(LightsaberColor.Black, 3));
+            ContractAssert.Fail(() => new Lightsaber(color: (LightsaberColor)42));
+
+            ContractAssert.Fail(() => new Lightsaber(bladeCount: 0));
+
+            ContractAssert.Fail(() => new Lightsaber(bladeCount: 3));
         }
 
-        [Fact(DisplayName = "Проверка свойств класса Lightsaber")]
-        public void PropertiesTest()
+        [Fact(DisplayName = "Проверка свойства Color класса Lightsaber")]
+        public void PropertyColorTest()
         {
-            var lightsaber = new Lightsaber(LightsaberColor.Red, 2);
+            ContractAssert.Success(() => new Lightsaber(),
+                ls => ls.Color.Get());
 
-            ContractAssert.Success(() => lightsaber.Color);
-            ContractAssert.Success(() => lightsaber.BladeCount);
+            ContractAssert.Fail(() => new Lightsaber(),
+                ls => ls.Color = (LightsaberColor)66);
+        }
 
-            ContractAssert.Fail(() => lightsaber.Color = (LightsaberColor)66);
-            ContractAssert.Fail(() => lightsaber.BladeCount = 4);
+        [Fact(DisplayName = "Проверка свойства BladeCount класса Lightsaber")]
+        public void PropertyBladeCountTest()
+        {
+            ContractAssert.Success(() => new Lightsaber(),
+                ls => ls.BladeCount.Get());
+
+            ContractAssert.Fail(() => new Lightsaber(),
+                ls => ls.BladeCount = 4);
         }
     }
 }

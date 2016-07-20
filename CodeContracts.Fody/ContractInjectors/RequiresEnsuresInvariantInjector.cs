@@ -37,7 +37,7 @@ namespace CodeContracts.Fody.ContractInjectors
         {
             Contract.Requires(contractValidateResolver != null);
             Contract.Requires(instructionsBuilder != null);
-
+            
             this.contractValidateResolver = contractValidateResolver;
             this.instructionsBuilder = instructionsBuilder;
         }
@@ -72,7 +72,10 @@ namespace CodeContracts.Fody.ContractInjectors
             var callBaseCtorInstruction = methodDefinition.Body.Instructions.FirstOrDefault(i => Equals(i.OpCode, OpCodes.Call) && ((MethodReference)i.Operand).Resolve().IsConstructor);
             var callBaseCtorInstructionIndex = methodDefinition.Body.Instructions.IndexOf(callBaseCtorInstruction) + 1;
 
-            methodDefinition.Body.Instructions.InsertRange(callBaseCtorInstructionIndex, instructions);
+            var callRequiresInstruction = methodDefinition.Body.Instructions.LastOrDefault(i => Equals(i.OpCode, OpCodes.Call) && ((MethodReference)i.Operand).Resolve().Name == "Requires");
+            var callRequiresInstructionIndex = methodDefinition.Body.Instructions.IndexOf(callRequiresInstruction) + 1;
+
+            methodDefinition.Body.Instructions.InsertRange(Math.Max(callBaseCtorInstructionIndex, callRequiresInstructionIndex), instructions);
         }
     }
 }

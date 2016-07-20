@@ -10,20 +10,32 @@ namespace CodeContracts.Fody.IntegrationTests
 {
     public static class ContractAssert
     {
-        public static void Fail(Action action)
+        public static void Fail<T>(Func<T> constructor, params Action<T>[] actions)
         {
-            var exception = Assert.ThrowsAny<Exception>(action);
+            var exception = Record.Exception(() =>
+            {
+                var instance = constructor.Invoke();
+                Array.ForEach(actions, a => a.Invoke(instance));
+            });
+
+            Assert.NotNull(exception);
             Assert.Equal("ContractException", exception.GetType().Name);
         }
 
-        public static void Success(Action action)
+        public static void Success<T>(Func<T> constructor, params Action<T>[] actions)
         {
-            action.Invoke();
-            Assert.True(true);
+            var exception = Record.Exception(() =>
+            {
+                var instance = constructor.Invoke();
+                Array.ForEach(actions, a => a.Invoke(instance));
+            });
+
+            Assert.Null(exception);
         }
 
-        public static void Fail(Func<object> func) => Fail(() => { func(); });
-
-        public static void Success(Func<object> func) => Success(() => { func(); });
+        public static void Get(this object o)
+        {
+            
+        }
     }
 }
