@@ -15,6 +15,6 @@ namespace CodeContracts
         public EnumAttribute(object arg) { }
 
         [Pure]
-        public static bool Validate(Enum arg) => Enum.IsDefined(arg.GetType(), arg);
+        public static bool Validate(Enum arg) => arg != null && Enum.IsDefined(arg.GetType(), arg);
     }
 }

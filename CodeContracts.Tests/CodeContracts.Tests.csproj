@@ -89,11 +89,25 @@
     <Compile Include="..\CodeContracts.Fody.Shared.cs">
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
+    <Compile Include="EnumAttributeTests.cs" />
+    <Compile Include="EqualsAttributeTests.cs" />
+    <Compile Include="FalseAttributeTests.cs" />
+    <Compile Include="NotNullAttributeTests.cs" />
+    <Compile Include="NullAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangeAttributeTests.cs" />
+    <Compile Include="ThisAttributeTests.cs" />
+    <Compile Include="TrueAttributeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeContracts\CodeContracts.csproj">
+      <Project>{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}</Project>
+      <Name>CodeContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
