@@ -14,12 +14,7 @@ namespace CodeContracts
 
         public NullAttribute(object arg) { }
 
-        public NullAttribute(object arg0, object arg1) { }
-
         [Pure]
         public static bool Validate(object arg) => arg == null;
-
-        [Pure]
-        public static bool Validate(object arg0, object arg1) => arg0 == null && arg1 == null;
     }
 }

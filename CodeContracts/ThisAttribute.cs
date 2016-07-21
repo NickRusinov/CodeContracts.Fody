@@ -14,12 +14,7 @@ namespace CodeContracts
 
         public ThisAttribute(object arg) { }
 
-        public ThisAttribute(object arg0, object arg1) { }
-
         [Pure]
-        public static bool Validate(object self, object arg) => ReferenceEquals(self, arg);
-        
-        [Pure]
-        public static bool Validate(object self, object arg0, object arg1) => ReferenceEquals(self, arg0) && ReferenceEquals(self, arg1);
+        public static bool Validate(object self, object arg) => self != null && arg != null && ReferenceEquals(self, arg);
     }
 }
