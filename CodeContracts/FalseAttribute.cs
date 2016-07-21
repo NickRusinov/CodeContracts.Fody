@@ -14,12 +14,7 @@ namespace CodeContracts
 
         public FalseAttribute(object arg) { }
 
-        public FalseAttribute(object arg0, object arg1) { }
-
         [Pure]
         public static bool Validate(bool arg) => !arg;
-
-        [Pure]
-        public static bool Validate(bool arg0, bool arg1) => !arg0 && !arg1;
     }
 }
