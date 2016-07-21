@@ -109,6 +109,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StarWars\LightsaberTests.cs" />
     <Compile Include="StarWars\LightSideTests.cs" />
+    <Compile Include="StarWars\TogruteRaceTests.cs" />
+    <Compile Include="StarWars\UnknownRaceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

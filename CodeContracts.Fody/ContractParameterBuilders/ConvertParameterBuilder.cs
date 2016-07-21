@@ -65,9 +65,6 @@ namespace CodeContracts.Fody.ContractParameterBuilders
 
             else if (TypeReferenceComparer.Instance.Equals(validateParameterDefinition.ParameterType, moduleDefinition.TypeSystem.Double))
                 yield return Instruction.Create(OpCodes.Conv_R8);
-
-            else
-                throw new NotSupportedException();
         }
     }
 }
