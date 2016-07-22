@@ -16,6 +16,12 @@ namespace CodeContracts.TestAssembly
         public object Max { get; set; }
 
         [Pure]
+        public static bool ValidateMinIntShort(int arg, short min) => arg >= min;
+
+        [Pure]
+        public static bool ValidateMinShortInt(short arg, int min) => arg >= min;
+
+        [Pure]
         public static bool ValidateMinInt(object self, int arg, int min) => arg >= min;
 
         [Pure]

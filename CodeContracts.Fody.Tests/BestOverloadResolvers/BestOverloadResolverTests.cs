@@ -28,5 +28,19 @@ namespace CodeContracts.Fody.Tests.BestOverloadResolvers
 
             Assert.Equal(moduleDefinition.FindMethod("MyAttribute", methodNameExpected), method);
         }
+
+        [Theory(DisplayName = "Проверка выбора наилучшей версии метода валидации")]
+        [InlineAutoFixture(new[] { "self", "arg" }, new[] { typeof(object), typeof(int) }, typeof(BestOverloadMissingMethodsException))]
+        [InlineAutoFixture(new[] { "self", "arg", "min" }, new[] { typeof(object), typeof(object), typeof(object) }, typeof(BestOverloadMissingMethodsException))]
+        [InlineAutoFixture(new[] { "arg", "min" }, new[] { typeof(short), typeof(short) }, typeof(BestOverloadAmbiguousMethodsException))]
+        public void ResolveThrowsTest(string[] parameterNames, Type[] parameterTypes, Type exceptionTypeExpected,
+            [Frozen] ModuleDefinition moduleDefinition,
+            BestOverloadResolver sut)
+        {
+            var methodDefinitions = moduleDefinition.FindType("MyAttribute").Methods.Where(md => md.IsStatic).ToList();
+            var parameterDefinitions = parameterNames.Zip(parameterTypes, (s, t) => new ParameterDefinition(s, 0, moduleDefinition.ImportReference(t))).ToList();
+
+            Assert.Throws(exceptionTypeExpected, () => sut.Resolve(methodDefinitions, parameterDefinitions));
+        }
     }
 }

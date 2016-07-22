@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
+using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 
 namespace CodeContracts.Fody.BestOverloadResolvers
@@ -35,7 +36,9 @@ namespace CodeContracts.Fody.BestOverloadResolvers
         {
             methodReferences = methodReferences.Where(mr => bestOverloadCriteria.IsApply(mr, parameterDefinitions)).ToList();
 
-            return methodReferences.Single(mr => methodReferences.All(imr => BestOverloadMethodComparer.Instance.Compare(mr, imr) >= 0));
+            return methodReferences.Single(mr => methodReferences.All(imr => BestOverloadMethodComparer.Instance.Compare(mr, imr) >= 0),
+                ms => new BestOverloadAmbiguousMethodsException(methodReferences, ms),
+                () => new BestOverloadMissingMethodsException(methodReferences));
         }
     }
 }

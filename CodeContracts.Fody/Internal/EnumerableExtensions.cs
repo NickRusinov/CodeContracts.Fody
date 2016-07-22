@@ -66,5 +66,32 @@ namespace CodeContracts.Fody.Internal
 
             return list;
         }
+
+        /// <summary>
+        /// Returns the only element of a sequence that satisfies a specified condition, and throws an specified exceptions if more than one such element exists
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of source</typeparam>
+        /// <param name="enumerable">An <see cref="IEnumerable{T}"/> to return a single element from</param>
+        /// <param name="predicate">A function to test an element for a condition</param>
+        /// <param name="onAmbiguous">Provider for throw exception if more than one elements in collection</param>
+        /// <param name="onMissing">Provider for throw exception if missing elements in collection</param>
+        /// <returns>The single element of the input sequence that satisfies a condition</returns>
+        public static T Single<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate, Func<IReadOnlyCollection<T>, Exception> onAmbiguous, Func<Exception> onMissing)
+        {
+            Contract.Requires(enumerable != null);
+            Contract.Requires(predicate != null);
+            Contract.Requires(onAmbiguous != null);
+            Contract.Requires(onMissing != null);
+
+            var filteredList = enumerable.Where(predicate).ToList();
+
+            if (filteredList.Count == 0)
+                throw onMissing.Invoke();
+
+            if (filteredList.Count > 1)
+                throw onAmbiguous.Invoke(filteredList);
+
+            return filteredList[0];
+        }
     }
 }
