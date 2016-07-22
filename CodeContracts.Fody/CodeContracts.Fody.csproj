@@ -154,6 +154,7 @@
     <Compile Include="BestOverloadResolvers\BestOverloadResolver.cs" />
     <Compile Include="BestOverloadResolvers\IBestOverloadCriteria.cs" />
     <Compile Include="BestOverloadResolvers\IBestOverloadResolver.cs" />
+    <Compile Include="CodeContractsFodyException.cs" />
     <Compile Include="Configurations\LoggerConfiguration.cs" />
     <Compile Include="Configurations\TinyIoCConfiguration.cs" />
     <Compile Include="ContractCleaners\ContractCleaner.cs" />
