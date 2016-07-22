@@ -43,12 +43,7 @@ namespace CodeContracts.Fody.ContractScanners
                 from contractAttribute in propertyDefinition.CustomAttributes
                 where contractCriteria.IsContract(contractAttribute)
                 where propertyDefinition.GetMethod != null
-                select new EnsuresDefinition(contractAttribute, propertyDefinition, propertyDefinition.GetMethod),
-
-                from contractAttribute in propertyDefinition.CustomAttributes
-                where contractCriteria.IsContract(contractAttribute)
-                where propertyDefinition.GetMethod != null
-                select new InvariantDefinition(contractAttribute, propertyDefinition, propertyDefinition.DeclaringType));
+                select new EnsuresDefinition(contractAttribute, propertyDefinition, propertyDefinition.GetMethod));
         }
     }
 }
