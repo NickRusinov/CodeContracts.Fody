@@ -9,7 +9,7 @@ namespace CodeContracts.StarWars
 {
     public class LightSide : ForceSide
     {
-        public LightSide(string caption = "Light", string alternationCaption = "Ashla")
+        public LightSide([NotNull] string caption = "Light", [NotNull] string alternationCaption = "Ashla")
         {
             Caption = caption;
             AlternativeCaption = alternationCaption;

@@ -130,7 +130,9 @@
     <Compile Include="..\..\CodeContracts.Fody.Shared.cs">
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
+    <Compile Include="BattleDroid.cs" />
     <Compile Include="ForceSide.cs" />
+    <Compile Include="IDroid.cs" />
     <Compile Include="IRace.cs" />
     <Compile Include="Lightsaber.cs" />
     <Compile Include="LightsaberColor.cs" />

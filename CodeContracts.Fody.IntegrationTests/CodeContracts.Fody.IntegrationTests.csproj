@@ -107,6 +107,7 @@
     <Compile Include="AssemblyTests.cs" />
     <Compile Include="ContractAssert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StarWars\BattleDroidTests.cs" />
     <Compile Include="StarWars\LightsaberTests.cs" />
     <Compile Include="StarWars\LightSideTests.cs" />
     <Compile Include="StarWars\TogruteRaceTests.cs" />

@@ -135,6 +135,7 @@ namespace CodeContracts.Fody.Internal
             Contract.Requires(toTypeReference != null);
 
             return TypeReferenceComparer.Instance.Equals(typeReference, toTypeReference) ||
+                   TypeReferenceComparer.Instance.Equals(toTypeReference, typeReference.Module.TypeSystem.Object) ||
                    typeReference.GetImplicitNumericConversions().Contains(toTypeReference, TypeReferenceComparer.Instance) ||
                    typeReference.GetBaseTypes().Contains(toTypeReference, TypeReferenceComparer.Instance) ||
                    typeReference.GetInterfaces().Contains(toTypeReference, TypeReferenceComparer.Instance);
