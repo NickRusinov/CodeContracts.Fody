@@ -98,6 +98,8 @@
     <Compile Include="PropertyAttributeTests.cs" />
     <Compile Include="RangeAttributeTests.cs" />
     <Compile Include="ThisAttributeTests.cs" />
+    <Compile Include="NotZeroAttributeTests.cs" />
+    <Compile Include="ZeroAttributeTests.cs" />
     <Compile Include="TrueAttributeTests.cs" />
   </ItemGroup>
   <ItemGroup>
