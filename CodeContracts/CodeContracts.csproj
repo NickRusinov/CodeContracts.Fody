@@ -137,6 +137,7 @@
     <Compile Include="EnumAttribute.cs" />
     <Compile Include="EqualsAttribute.cs" />
     <Compile Include="FalseAttribute.cs" />
+    <Compile Include="IsAttribute.cs" />
     <Compile Include="NotNullAttribute.cs" />
     <Compile Include="NotZeroAttribute.cs" />
     <Compile Include="NullAttribute.cs" />

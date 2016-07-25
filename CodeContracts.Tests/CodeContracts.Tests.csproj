@@ -92,6 +92,7 @@
     <Compile Include="EnumAttributeTests.cs" />
     <Compile Include="EqualsAttributeTests.cs" />
     <Compile Include="FalseAttributeTests.cs" />
+    <Compile Include="IsAttributeTests.cs" />
     <Compile Include="NotNullAttributeTests.cs" />
     <Compile Include="NullAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
