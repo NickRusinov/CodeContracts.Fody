@@ -184,6 +184,10 @@
       <Project>{21e3e079-812c-4062-9dd4-e4a3196aa14e}</Project>
       <Name>CodeContracts.TestAssembly</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestFoundations\TestFoundations.UnitTests\TestFoundations.UnitTests.csproj">
+      <Project>{f533d32d-4712-48b8-b5d5-b6419af5e7af}</Project>
+      <Name>TestFoundations.UnitTests</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Choose>

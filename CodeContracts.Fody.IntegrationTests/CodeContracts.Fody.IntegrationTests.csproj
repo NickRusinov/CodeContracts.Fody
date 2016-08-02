@@ -131,6 +131,26 @@
       <Project>{c224e445-9eb3-45d4-b92b-3c74691fab61}</Project>
       <Name>CodeContracts.StarWars</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestFoundations\TestFoundations.IntegrationTests.Default\TestFoundations.IntegrationTests.Default.csproj">
+      <Project>{59dd51b3-2b3a-4cff-a9bc-4904fdc270a5}</Project>
+      <Name>TestFoundations.IntegrationTests.Default</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestFoundations\TestFoundations.IntegrationTests.NotClean\TestFoundations.IntegrationTests.NotClean.csproj">
+      <Project>{d275d00d-ef76-4754-93cd-4be5e7a10b4d}</Project>
+      <Name>TestFoundations.IntegrationTests.NotClean</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestFoundations\TestFoundations.IntegrationTests.NotEnabled\TestFoundations.IntegrationTests.NotEnabled.csproj">
+      <Project>{04008eb4-ebdd-4610-9705-787a07b20b5a}</Project>
+      <Name>TestFoundations.IntegrationTests.NotEnabled</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestFoundations\TestFoundations.IntegrationTests.WithExceptions\TestFoundations.IntegrationTests.WithExceptions.csproj">
+      <Project>{8d3e74cd-a1e3-4831-b4a8-e091f2cfe8ba}</Project>
+      <Name>TestFoundations.IntegrationTests.WithExceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestFoundations\TestFoundations.IntegrationTests.WithMessages\TestFoundations.IntegrationTests.WithMessages.csproj">
+      <Project>{4a16756d-0d3b-4734-a8a3-c374b53971e8}</Project>
+      <Name>TestFoundations.IntegrationTests.WithMessages</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
