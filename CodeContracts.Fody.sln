@@ -19,8 +19,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.Fody.IntegrationTests", "CodeContracts.Fody.IntegrationTests\CodeContracts.Fody.IntegrationTests.csproj", "{F2DED7D5-B852-429D-BE39-0BCE50FE24BD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C224E445-9EB3-45D4-B92B-3C74691FAB61} = {C224E445-9EB3-45D4-B92B-3C74691FAB61}
-		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
-		{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35} = {3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeContracts.StarWars", "TestAssemblies\CodeContracts.StarWars\CodeContracts.StarWars.csproj", "{C224E445-9EB3-45D4-B92B-3C74691FAB61}"
@@ -52,14 +50,29 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestFoundations", "TestFoundations", "{CF4E99B6-1B8E-4F8F-BF93-BB8ED925482D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFoundations.IntegrationTests.Default", "TestFoundations\TestFoundations.IntegrationTests.Default\TestFoundations.IntegrationTests.Default.csproj", "{59DD51B3-2B3A-4CFF-A9BC-4904FDC270A5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFoundations.IntegrationTests.WithMessages", "TestFoundations\TestFoundations.IntegrationTests.WithMessages\TestFoundations.IntegrationTests.WithMessages.csproj", "{4A16756D-0D3B-4734-A8A3-C374B53971E8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFoundations.IntegrationTests.WithExceptions", "TestFoundations\TestFoundations.IntegrationTests.WithExceptions\TestFoundations.IntegrationTests.WithExceptions.csproj", "{8D3E74CD-A1E3-4831-B4A8-E091F2CFE8BA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFoundations.IntegrationTests.NotEnabled", "TestFoundations\TestFoundations.IntegrationTests.NotEnabled\TestFoundations.IntegrationTests.NotEnabled.csproj", "{04008EB4-EBDD-4610-9705-787A07B20B5A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFoundations.IntegrationTests.NotClean", "TestFoundations\TestFoundations.IntegrationTests.NotClean\TestFoundations.IntegrationTests.NotClean.csproj", "{D275D00D-EF76-4754-93CD-4BE5E7A10B4D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{462F0895-0BE2-4BF5-AD9E-3C488A9013F1} = {462F0895-0BE2-4BF5-AD9E-3C488A9013F1}
+	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestFoundations.IntegrationTests.Shared", "TestFoundations\TestFoundations.IntegrationTests.Shared\TestFoundations.IntegrationTests.Shared.shproj", "{0513CD2E-7A59-4CE2-88AE-6DD6285B192A}"
 EndProject
