@@ -22,7 +22,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             RequiresDefinition requiresDefinition,
             ContractSelfResolver sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("Sith", "Create");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", "StaticMethod");
 
             var contractValidateParameters = sut.Resolve(requiresDefinition, methodDefinition).ToList();
 
@@ -38,7 +38,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             RequiresDefinition requiresDefinition,
             ContractSelfResolver sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("Sith", ".ctor");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", ".ctor");
 
             var contractValidateParameters = sut.Resolve(requiresDefinition, methodDefinition).ToList();
 
@@ -53,7 +53,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             [Frozen] ModuleDefinition moduleDefinition,
             ContractSelfResolver sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("DarthMaul", "JoinDarkSide");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", "MethodWithAttribute");
             var contractDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.Single(), methodDefinition, methodDefinition);
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
@@ -61,7 +61,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             var contractMember = Assert.Single(contractValidateParameters);
             Assert.IsType<ThisParameterBuilder>(contractMember.ParameterBuilder);
             Assert.Equal("self", contractMember.ParameterDefinition.Name);
-            Assert.Equal(moduleDefinition.FindType("DarthMaul"), contractMember.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
+            Assert.Equal(moduleDefinition.FindType("ConcreteClass"), contractMember.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
         }
     }
 }

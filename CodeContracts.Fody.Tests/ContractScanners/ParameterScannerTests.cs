@@ -24,7 +24,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(true);
 
-            var contracts = sut.Scan(moduleDefinition.FindParameter("DarthMaul", "KillJedi", "jedi")).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindParameter("ConcreteClass", "MethodWithParameter", "parameter")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Single(contracts);
@@ -39,7 +39,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(false);
 
-            var contracts = sut.Scan(moduleDefinition.FindParameter("DarthMaul", "KillJedi", "revenge")).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindParameter("ConcreteClass", "MethodWithParameter", "parameter")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Empty(contracts);

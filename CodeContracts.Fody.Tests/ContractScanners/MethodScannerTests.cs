@@ -22,9 +22,9 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IParameterScanner> parameterScannerMock,
             MethodScanner sut)
         {
-            sut.Scan(moduleDefinition.FindMethod("DarthMaul", "KillJedi")).ToList();
+            sut.Scan(moduleDefinition.FindMethod("ConcreteClass", "MethodWithParameter")).ToList();
 
-            parameterScannerMock.Verify(ps => ps.Scan(It.IsAny<ParameterDefinition>()), Times.Exactly(2));
+            parameterScannerMock.Verify(ps => ps.Scan(It.IsAny<ParameterDefinition>()), Times.Once);
         }
 
         [Theory(DisplayName = "Проверка сканирования возвращаемого значения метода"), AutoFixture]
@@ -33,7 +33,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
             [Frozen]Mock<IMethodReturnScanner> methodReturnScannerMock,
             MethodScanner sut)
         {
-            sut.Scan(moduleDefinition.FindMethod("DarthMaul", "KillJedi")).ToList();
+            sut.Scan(moduleDefinition.FindMethod("ConcreteClass", "MethodWithReturnAttribute")).ToList();
 
             methodReturnScannerMock.Verify(mrs => mrs.Scan(It.IsAny<MethodReturnType>()), Times.Once);
         }
@@ -46,7 +46,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(true);
 
-            var contracts = sut.Scan(moduleDefinition.FindMethod("DarthMaul", "JoinDarkSide")).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindMethod("ConcreteClass", "MethodWithAttribute")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Single(contracts.OfType<RequiresDefinition>());
@@ -60,7 +60,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(false);
 
-            var contracts = sut.Scan(moduleDefinition.FindMethod("DarthMaul", "KillJedi")).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindMethod("ConcreteClass", "MethodWithAttribute")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Empty(contracts.OfType<RequiresDefinition>());

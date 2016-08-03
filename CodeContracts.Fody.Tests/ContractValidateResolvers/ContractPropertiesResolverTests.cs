@@ -23,14 +23,14 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             [Frozen] ModuleDefinition moduleDefinition,
             ContractPropertiesResolver sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("DarthPlagueis", "JoinDarkSide");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClassWithPropertiesAttributes", "Method");
             var contractDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.Single(), methodDefinition, methodDefinition);
 
-            var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();
+            var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            Assert.Equal(2, contractMembers.Count);
-            var constMember = Assert.Single(contractMembers, cm => cm.ParameterDefinition.Name == "Max");
-            Assert.Equal(moduleDefinition.TypeSystem.Int16, constMember.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
+            Assert.Equal(2, contractValidateParameters.Count);
+            var constMember = Assert.Single(contractValidateParameters, cm => cm.ParameterDefinition.Name == "X");
+            Assert.Equal(moduleDefinition.TypeSystem.Int32, constMember.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
             Assert.IsType<CompositeParameterBuilder>(constMember.ParameterBuilder);
         }
 
@@ -40,14 +40,14 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             [Frozen] Mock<IMethodParameterParser> methodParameterParserMock,
             ContractPropertiesResolver sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("DarthPlagueis", "JoinDarkSide");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClassWithPropertiesAttributes", "Method");
             var contractDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.Single(), methodDefinition, methodDefinition);
 
-            var contractMembers = sut.Resolve(contractDefinition, methodDefinition).ToList();
+            var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            methodParameterParserMock.Verify(mpp => mpp.Parse(methodDefinition, "$.value"), Times.Once);
-            Assert.Single(contractMembers, cm => cm.ParameterDefinition.Name == "Min");
-            Assert.Equal(2, contractMembers.Count);
+            methodParameterParserMock.Verify(mpp => mpp.Parse(methodDefinition, "value"), Times.Once);
+            Assert.Single(contractValidateParameters, cm => cm.ParameterDefinition.Name == "Y");
+            Assert.Equal(2, contractValidateParameters.Count);
         }
     }
 }

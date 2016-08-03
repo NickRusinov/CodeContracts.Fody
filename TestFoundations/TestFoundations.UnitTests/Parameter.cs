@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeContracts.TestAssembly
+namespace TestFoundations.UnitTests
 {
-    public class Force
+    public class Parameter
     {
 
     }

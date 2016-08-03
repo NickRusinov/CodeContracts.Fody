@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeContracts.TestAssembly
+namespace TestFoundations.UnitTests
 {
-    [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
-    public class NoContractAttribute : Attribute
+    public class NoCustomContractAttribute : Attribute
     {
 
     }

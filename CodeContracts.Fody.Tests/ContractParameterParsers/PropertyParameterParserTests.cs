@@ -21,40 +21,39 @@ namespace CodeContracts.Fody.Tests.ContractParameterParsers
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             PropertyParameterParser sut)
         {
-            var typeDefinition = moduleDefinition.FindType("Jedi");
+            var typeDefinition = moduleDefinition.FindType("ConcreteClassWithProperty");
 
-            var parseResult = sut.Parse(typeDefinition, "Name");
+            var parseResult = sut.Parse(typeDefinition, "Property");
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
             Assert.IsType<PropertyParameterBuilder>(parseResult.ParsedParameterBuilder);
-            Assert.Equal(moduleDefinition.TypeSystem.String.Resolve(), parseResult.ParsedParameterType);
+            Assert.Equal(moduleDefinition.FindType("Property"), parseResult.ParsedParameterType);
         }
 
         [Theory(DisplayName = "Проверка парсера параметров ссылок на свойство объекта")]
-        [InlineAutoFixture("Name.Length", "Length")]
-        [InlineAutoFixture("OrderRank.Length", "Length")]
+        [InlineAutoFixture("Property.Length", "Length")]
         public void ComplexExistsPropertyTest(string parameterString, string tailParameterString,
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             PropertyParameterParser sut)
         {
-            var typeDefinition = moduleDefinition.FindType("Jedi");
+            var typeDefinition = moduleDefinition.FindType("ConcreteClassWithProperty");
 
             var parseResult = sut.Parse(typeDefinition, parameterString);
 
-            memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.TypeSystem.String.Resolve(), tailParameterString));
+            memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("Property"), tailParameterString));
             Assert.IsType<CompositeParameterBuilder>(parseResult.ParsedParameterBuilder);
         }
 
         [Theory(DisplayName = "Проверка парсера параметров ссылок на свойство объекта")]
-        [InlineAutoFixture("Master")]
-        [InlineAutoFixture("Master.OrderRank")]
+        [InlineAutoFixture("NoProperty")]
+        [InlineAutoFixture("NoProperty.OrderRank")]
         public void NotExistsPropertyTest(string parameterString,
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             PropertyParameterParser sut)
         {
-            var typeDefinition = moduleDefinition.FindType("Jedi");
+            var typeDefinition = moduleDefinition.FindType("ConcreteClassWithProperty");
 
             var parseResult = sut.Parse(typeDefinition, parameterString);
 

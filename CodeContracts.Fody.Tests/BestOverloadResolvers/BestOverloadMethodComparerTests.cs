@@ -14,15 +14,15 @@ namespace CodeContracts.Fody.Tests.BestOverloadResolvers
     public class BestOverloadMethodComparerTests
     {
         [Theory(DisplayName = "Проверка компаратора параметров для определения лучшей перегрузки метода")]
-        [InlineAutoFixture("ValidateMinInt", "ValidateMinLong", +1)]
-        [InlineAutoFixture("ValidateMinMaxComparable", "ValidateMinMaxLong", -1)]
-        [InlineAutoFixture("ValidateMinInt", "ValidateMaxInt", 0)]
+        [InlineAutoFixture("ValidateWithInt", "ValidateWithLong", +1)]
+        [InlineAutoFixture("ValidateWithComparable", "ValidateWithLong", -1)]
+        [InlineAutoFixture("ValidateWithComparable", "ValidateWithEnumerable", 0)]
         public void CompareTest(string xMethodName, string yMethodName, int compareExpected,
             [Frozen] ModuleDefinition moduleDefinition,
             BestOverloadMethodComparer sut)
         {
-            var x = moduleDefinition.FindMethod("MyAttribute", xMethodName);
-            var y = moduleDefinition.FindMethod("MyAttribute", yMethodName);
+            var x = moduleDefinition.FindMethod("CustomContractWithMethodsAttribute", xMethodName);
+            var y = moduleDefinition.FindMethod("CustomContractWithMethodsAttribute", yMethodName);
 
             var compare = sut.Compare(x, y);
 

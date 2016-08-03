@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeContracts.TestAssembly
+namespace TestFoundations.UnitTests
 {
-    public class ExtraRedLightsaberAttribute : RedLightsaberAttribute
+    public abstract class AbstractClass
     {
-        public ExtraRedLightsaberAttribute(params object[] args)
-            : base(args)
+        public abstract void AbstractMethod();
+
+        public virtual void ConcreteMethod()
         {
             
         }

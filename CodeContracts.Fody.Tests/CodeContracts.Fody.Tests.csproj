@@ -180,10 +180,6 @@
       <Project>{462f0895-0be2-4bf5-ad9e-3c488a9013f1}</Project>
       <Name>CodeContracts.Fody</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestAssemblies\CodeContracts.TestAssembly\CodeContracts.TestAssembly.csproj">
-      <Project>{21e3e079-812c-4062-9dd4-e4a3196aa14e}</Project>
-      <Name>CodeContracts.TestAssembly</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TestFoundations\TestFoundations.UnitTests\TestFoundations.UnitTests.csproj">
       <Project>{f533d32d-4712-48b8-b5d5-b6419af5e7af}</Project>
       <Name>TestFoundations.UnitTests</Name>

@@ -21,13 +21,13 @@ namespace CodeContracts.Fody.Tests.ContractParameterParsers
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             ThisParameterParser sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", "Method");
 
             var parseResult = sut.Parse(methodDefinition, "$");
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
             Assert.IsType<ThisParameterBuilder>(parseResult.ParsedParameterBuilder);
-            Assert.Equal(moduleDefinition.FindType("Jedi"), parseResult.ParsedParameterType);
+            Assert.Equal(moduleDefinition.FindType("ConcreteClass"), parseResult.ParsedParameterType);
         }
 
         [Theory(DisplayName = "Проверка парсера параметра ссылки на текущий объект")]
@@ -38,11 +38,11 @@ namespace CodeContracts.Fody.Tests.ContractParameterParsers
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             ThisParameterParser sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", "Method");
 
             var parseResult = sut.Parse(methodDefinition, parameterString);
 
-            memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("Jedi"), tailParameterString));
+            memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("ConcreteClass"), tailParameterString));
             Assert.IsType<CompositeParameterBuilder>(parseResult.ParsedParameterBuilder);
         }
     }

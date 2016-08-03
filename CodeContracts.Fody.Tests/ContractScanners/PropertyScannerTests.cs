@@ -24,7 +24,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(true);
 
-            var contracts = sut.Scan(moduleDefinition.FindProperty("DarthPlagueis", "Slave")).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindProperty("ConcreteClassWithProperty", "PropertyWithAttribute")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Single(contracts.OfType<EnsuresDefinition>());
@@ -38,7 +38,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(false);
 
-            var contracts = sut.Scan(moduleDefinition.FindProperty("DarthPlagueis", "Slave")).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindProperty("ConcreteClassWithProperty", "PropertyWithAttribute")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Empty(contracts);
@@ -52,7 +52,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(true);
 
-            var contracts = sut.Scan(moduleDefinition.FindProperty("DarthPlagueis", "Slave")).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindProperty("ConcreteClassWithProperty", "PropertyWithAttribute")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Single(contracts.OfType<RequiresDefinition>());
@@ -66,7 +66,7 @@ namespace CodeContracts.Fody.Tests.ContractScanners
         {
             contractCriteriaMock.Setup(cc => cc.IsContract(It.IsAny<CustomAttribute>())).Returns(false);
 
-            var contracts = sut.Scan(moduleDefinition.FindProperty("DarthPlagueis", "Slave")).ToList();
+            var contracts = sut.Scan(moduleDefinition.FindProperty("ConcreteClassWithProperty", "PropertyWithAttribute")).ToList();
 
             contractCriteriaMock.Verify(cc => cc.IsContract(It.IsAny<CustomAttribute>()));
             Assert.Empty(contracts);

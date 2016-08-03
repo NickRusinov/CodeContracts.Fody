@@ -5,13 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeContracts.TestAssembly.Siths
+namespace TestFoundations.UnitTests
 {
-    public interface ISith
+    public class Property
     {
-        string Name { get; }
 
-        [True]
-        bool JoinDarkSide();
     }
 }

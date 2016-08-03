@@ -21,40 +21,40 @@ namespace CodeContracts.Fody.Tests.ContractParameterParsers
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             ArgumentParameterParser sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", "MethodWithParameter");
 
-            var parseResult = sut.Parse(methodDefinition, "$force");
+            var parseResult = sut.Parse(methodDefinition, "$parameter");
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
             Assert.IsType<ArgumentParameterBuilder>(parseResult.ParsedParameterBuilder);
-            Assert.Equal(moduleDefinition.FindType("Force"), parseResult.ParsedParameterType);
+            Assert.Equal(moduleDefinition.FindType("Parameter"), parseResult.ParsedParameterType);
         }
 
         [Theory(DisplayName = "Проверка парсера аргументов методов для параметров, заданных строкой")]
-        [InlineAutoFixture("$force.Feel.you", "Feel.you")]
-        [InlineAutoFixture("$force.Use.you", "Use.you")]
+        [InlineAutoFixture("$parameter.Feel.you", "Feel.you")]
+        [InlineAutoFixture("$parameter.Use.you", "Use.you")]
         public void ComplexExistsArgumentTest(string parameterString, string tailParameterString,
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             ArgumentParameterParser sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", "MethodWithParameter");
 
             var parseResult = sut.Parse(methodDefinition, parameterString);
 
-            memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("Force"), tailParameterString));
+            memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("Parameter"), tailParameterString));
             Assert.IsType<CompositeParameterBuilder>(parseResult.ParsedParameterBuilder);
         }
 
         [Theory(DisplayName = "Проверка парсера аргументов методов для параметров, заданных строкой")]
-        [InlineAutoFixture("$lightsaber")]
-        [InlineAutoFixture("$lightsaber.Use.you")]
+        [InlineAutoFixture("$noparameter")]
+        [InlineAutoFixture("$noparameter.Use.you")]
         public void NotExistsArgumentTest(string parameterString,
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             ArgumentParameterParser sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("Jedi", "UseTheForce");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", "MethodWithParameter");
 
             var parseResult = sut.Parse(methodDefinition, parameterString);
 

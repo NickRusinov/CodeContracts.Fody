@@ -21,9 +21,9 @@ namespace CodeContracts.Fody.Tests.ContractInjectResolvers
             [Frozen]ModuleDefinition moduleDefinition,
             InvariantMethodResolver sut)
         {
-            var invariantMethod = sut.Resolve(moduleDefinition.FindType("Jedi"));
+            var invariantMethod = sut.Resolve(moduleDefinition.FindType("ConcreteClassWithInvariant"));
 
-            Assert.Same(moduleDefinition.FindMethod("Jedi", "Invariant"), invariantMethod);
+            Assert.Same(moduleDefinition.FindMethod("ConcreteClassWithInvariant", "InvariantMethod"), invariantMethod);
         }
 
         [Theory(DisplayName = "Проверка разрешения метода инварианта для класса, не содержащего метод инвариант"), AutoFixture]
@@ -32,9 +32,9 @@ namespace CodeContracts.Fody.Tests.ContractInjectResolvers
             [Frozen]Mock<IInvariantMethodBuilder> invariantMethodBuilderMock,
             InvariantMethodResolver sut)
         {
-            var invariantMethod = sut.Resolve(moduleDefinition.FindType("Sith"));
+            var invariantMethod = sut.Resolve(moduleDefinition.FindType("ConcreteClass"));
 
-            invariantMethodBuilderMock.Verify(imb => imb.Build(moduleDefinition.FindType("Sith")), Times.Once);
+            invariantMethodBuilderMock.Verify(imb => imb.Build(moduleDefinition.FindType("ConcreteClass")), Times.Once);
         }
     }
 }

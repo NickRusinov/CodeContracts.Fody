@@ -14,39 +14,39 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
     public class ContractValidateScannerTests
     {
         [Theory(DisplayName = "Проверка типа исключения и сообщения об ошибке для методов валидации контракта")]
-        [InlineAutoFixture("ValidateA", null, typeof(Exception))]
-        [InlineAutoFixture("ValidateB", "method level", typeof(Exception))]
-        [InlineAutoFixture("ValidateC", null, typeof(ArgumentNullException))]
-        [InlineAutoFixture("ValidateD", "method level", typeof(ArgumentNullException))]
+        [InlineAutoFixture("ValidateMethodA", null, typeof(Exception))]
+        [InlineAutoFixture("ValidateMethodB", "method level", typeof(Exception))]
+        [InlineAutoFixture("ValidateMethodC", null, typeof(ArgumentNullException))]
+        [InlineAutoFixture("ValidateMethodD", "method level", typeof(ArgumentNullException))]
         public void ContractAttributeWithoutClassAttributesTest(string validateMethod, string errorMessage, Type exceptionType,
             [Frozen] ModuleDefinition moduleDefinition,
             ContractValidateScanner sut)
         {
-            var customAttribute = moduleDefinition.FindProperty("Lightsaber", "Color").CustomAttributes.First();
+            var customAttribute = moduleDefinition.FindMethod("ConcreteClassWithAttributes", "MethodWithMethodLevelAttribute").CustomAttributes.First();
 
             var contractValidateDefinitions = sut.Scan(customAttribute).ToList();
 
             Assert.Equal(4, contractValidateDefinitions.Count);
-            var contractValidateDefinition = Assert.Single(contractValidateDefinitions, cvd => Equals(cvd.ValidateMethod, moduleDefinition.FindMethod("RedLightsaberAttribute", validateMethod)));
+            var contractValidateDefinition = Assert.Single(contractValidateDefinitions, cvd => Equals(cvd.ValidateMethod, moduleDefinition.FindMethod("CustomContractMethodLevelAttribute", validateMethod)));
             Assert.Equal(moduleDefinition.ImportReference(exceptionType).Resolve(), contractValidateDefinition.ExceptionType);
             Assert.Equal(errorMessage, contractValidateDefinition.ErrorMessage);
         }
 
         [Theory(DisplayName = "Проверка типа исключения и сообщения об ошибке для методов валидации контракта")]
-        [InlineAutoFixture("ValidateA", "class level", typeof(ArgumentException))]
-        [InlineAutoFixture("ValidateB", "method level", typeof(ArgumentException))]
-        [InlineAutoFixture("ValidateC", "class level", typeof(ArgumentNullException))]
-        [InlineAutoFixture("ValidateD", "method level", typeof(ArgumentNullException))]
+        [InlineAutoFixture("ValidateMethodA", "class level", typeof(ArgumentException))]
+        [InlineAutoFixture("ValidateMethodB", "method level", typeof(ArgumentException))]
+        [InlineAutoFixture("ValidateMethodC", "class level", typeof(ArgumentNullException))]
+        [InlineAutoFixture("ValidateMethodD", "method level", typeof(ArgumentNullException))]
         public void ContractAttributeWithClassAttributesTest(string validateMethod, string errorMessage, Type exceptionType,
             [Frozen] ModuleDefinition moduleDefinition,
             ContractValidateScanner sut)
         {
-            var customAttribute = moduleDefinition.FindProperty("Lightsaber", "Color").CustomAttributes.Skip(1).First();
+            var customAttribute = moduleDefinition.FindMethod("ConcreteClassWithAttributes", "MethodWithClassLevelAttribute").CustomAttributes.First();
 
             var contractValidateDefinitions = sut.Scan(customAttribute).ToList();
 
             Assert.Equal(4, contractValidateDefinitions.Count);
-            var contractValidateDefinition = Assert.Single(contractValidateDefinitions, cvd => Equals(cvd.ValidateMethod, moduleDefinition.FindMethod("BlueLightsaberAttribute", validateMethod)));
+            var contractValidateDefinition = Assert.Single(contractValidateDefinitions, cvd => Equals(cvd.ValidateMethod, moduleDefinition.FindMethod("CustomContractClassLevelAttribute", validateMethod)));
             Assert.Equal(moduleDefinition.ImportReference(exceptionType).Resolve(), contractValidateDefinition.ExceptionType);
             Assert.Equal(errorMessage, contractValidateDefinition.ErrorMessage);
         }

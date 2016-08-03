@@ -21,40 +21,40 @@ namespace CodeContracts.Fody.Tests.ContractParameterParsers
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             FieldParameterParser sut)
         {
-            var typeDefinition = moduleDefinition.FindType("DarthMaul");
+            var typeDefinition = moduleDefinition.FindType("ConcreteClassWithField");
 
-            var parseResult = sut.Parse(typeDefinition, "lightsaber");
+            var parseResult = sut.Parse(typeDefinition, "field");
 
             memberParameterParserMock.Verify(mpp => mpp.Parse(It.IsAny<TypeDefinition>(), It.IsAny<string>()), Times.Never);
             Assert.IsType<FieldParameterBuilder>(parseResult.ParsedParameterBuilder);
-            Assert.Equal(moduleDefinition.FindType("Lightsaber"), parseResult.ParsedParameterType);
+            Assert.Equal(moduleDefinition.FindType("Field"), parseResult.ParsedParameterType);
         }
 
         [Theory(DisplayName = "Проверка парсера параметров ссылок на поле объекта")]
-        [InlineAutoFixture("lightsaber.Color", "Color")]
-        [InlineAutoFixture("lightsaber.BladeCount", "BladeCount")]
+        [InlineAutoFixture("field.Color", "Color")]
+        [InlineAutoFixture("field.BladeCount", "BladeCount")]
         public void ComplexExistsFieldTest(string parameterString, string tailParameterString,
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             FieldParameterParser sut)
         {
-            var typeDefinition = moduleDefinition.FindType("DarthMaul");
+            var typeDefinition = moduleDefinition.FindType("ConcreteClassWithField");
 
             var parseResult = sut.Parse(typeDefinition, parameterString);
 
-            memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("Lightsaber"), tailParameterString));
+            memberParameterParserMock.Verify(mpp => mpp.Parse(moduleDefinition.FindType("Field"), tailParameterString));
             Assert.IsType<CompositeParameterBuilder>(parseResult.ParsedParameterBuilder);
         }
 
         [Theory(DisplayName = "Проверка парсера параметров ссылок на поле объекта")]
-        [InlineAutoFixture("heart")]
-        [InlineAutoFixture("soul.IsAlive")]
+        [InlineAutoFixture("nofield")]
+        [InlineAutoFixture("nofield.IsAlive")]
         public void NotExistsFieldTest(string parameterString,
             [Frozen]ModuleDefinition moduleDefinition,
             [Frozen]Mock<IMemberParameterParser> memberParameterParserMock,
             FieldParameterParser sut)
         {
-            var typeDefinition = moduleDefinition.FindType("DarthMaul");
+            var typeDefinition = moduleDefinition.FindType("ConcreteClassWithField");
 
             var parseResult = sut.Parse(typeDefinition, parameterString);
 

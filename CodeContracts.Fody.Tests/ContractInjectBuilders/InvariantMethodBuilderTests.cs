@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectBuilders;
+using CodeContracts.Fody.Internal;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Ploeh.AutoFixture.Xunit2;
@@ -18,7 +19,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectBuilders
             [Frozen]ModuleDefinition moduleDefinition,
             InvariantMethodBuilder sut)
         {
-            var typeDefinition = moduleDefinition.FindType("DarthMaul");
+            var typeDefinition = moduleDefinition.FindType("ConcreteClass");
             var methodsCount = typeDefinition.Methods.Count;
 
             var invariantMethod = sut.Build(typeDefinition);
@@ -34,12 +35,12 @@ namespace CodeContracts.Fody.Tests.ContractInjectBuilders
             InvariantMethodBuilder sut)
         {
             var invariantAttribute = moduleDefinition.ImportReference(typeof(ContractInvariantMethodAttribute));
-            var typeDefinition = moduleDefinition.FindType("DarthMaul");
+            var typeDefinition = moduleDefinition.FindType("ConcreteClass");
 
             var invariantMethod = sut.Build(typeDefinition);
 
             Assert.Single(invariantMethod.CustomAttributes);
-            Assert.Single(invariantMethod.CustomAttributes, ca => Equals(ca.AttributeType.Resolve(), invariantAttribute.Resolve()));
+            Assert.Single(invariantMethod.CustomAttributes, ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, invariantAttribute));
         }
     }
 }

@@ -21,7 +21,7 @@ namespace CodeContracts.Fody.Tests
 {
     public class AutoFixtureAttribute : AutoDataAttribute
     {
-        private static readonly string moduleFileName = "CodeContracts.TestAssembly.dll";
+        private static readonly string moduleFileName = "TestFoundations.UnitTests.dll";
 
         private readonly Lazy<ModuleDefinition> moduleDefinitionLazy = new Lazy<ModuleDefinition>(() => ModuleDefinition.ReadModule(moduleFileName));
 
@@ -34,15 +34,15 @@ namespace CodeContracts.Fody.Tests
             
             Fixture.Register(() => moduleDefinitionLazy.Value);
             Fixture.Register((ModuleDefinition md) => md.TypeSystem);
-            Fixture.Register((ModuleDefinition md) => md.FindType("DarthMaul"));
-            Fixture.Register((ModuleDefinition md) => md.FindType("DarthMaul") as TypeReference);
-            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi"));
-            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi") as MethodReference);
-            Fixture.Register((ModuleDefinition md) => md.FindParameter("DarthMaul", "KillJedi", "jedi"));
-            Fixture.Register((ModuleDefinition md) => md.FindParameter("DarthMaul", "KillJedi", "jedi") as ParameterReference);
+            Fixture.Register((ModuleDefinition md) => md.FindType("ConcreteClass"));
+            Fixture.Register((ModuleDefinition md) => md.FindType("ConcreteClass") as TypeReference);
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("ConcreteClass", "Method"));
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("ConcreteClass", "Method") as MethodReference);
+            Fixture.Register((ModuleDefinition md) => md.FindParameter("ConcreteClass", "MethodWithParameter", "parameter"));
+            Fixture.Register((ModuleDefinition md) => md.FindParameter("ConcreteClass", "MethodWithParameter", "parameter") as ParameterReference);
 
-            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi") as ICustomAttributeProvider);
-            Fixture.Register((ModuleDefinition md) => md.FindMethod("DarthMaul", "KillJedi").CustomAttributes.First());
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("ConcreteClass", "MethodWithAttribute") as ICustomAttributeProvider);
+            Fixture.Register((ModuleDefinition md) => md.FindMethod("ConcreteClass", "MethodWithAttribute").CustomAttributes.First());
 
             Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria());
             Fixture.Register((ModuleDefinition md) => new BestOverloadCriteria() as IBestOverloadCriteria);

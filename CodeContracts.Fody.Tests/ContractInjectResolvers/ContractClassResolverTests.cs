@@ -21,11 +21,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectResolvers
             [Frozen]ModuleDefinition moduleDefinition,
             ContractClassResolver sut)
         {
-            var contractClassA = sut.Resolve(moduleDefinition.FindType("IJedi"), moduleDefinition.FindMethod("IJedi", "get_Name"));
-            var contractClassB = sut.Resolve(moduleDefinition.FindType("IJedi"), null);
+            var contractClassA = sut.Resolve(moduleDefinition.FindType("IInterfaceWithContractClass"), moduleDefinition.FindMethod("IInterfaceWithContractClass", "Method"));
+            var contractClassB = sut.Resolve(moduleDefinition.FindType("IInterfaceWithContractClass"), null);
 
-            Assert.Same(moduleDefinition.FindType("IJediContracts"), contractClassA);
-            Assert.Same(moduleDefinition.FindType("IJediContracts"), contractClassB);
+            Assert.Same(moduleDefinition.FindType("IInterfaceWithContractClassContracts"), contractClassA);
+            Assert.Same(moduleDefinition.FindType("IInterfaceWithContractClassContracts"), contractClassB);
         }
 
         [Theory(DisplayName = "Проверка разрешения контрактного класса для абстрактного класса с атрибутом ContractClass"), AutoFixture]
@@ -33,13 +33,13 @@ namespace CodeContracts.Fody.Tests.ContractInjectResolvers
             [Frozen]ModuleDefinition moduleDefinition,
             ContractClassResolver sut)
         {
-            var contractClassA = sut.Resolve(moduleDefinition.FindType("Jedi"), moduleDefinition.FindMethod("Jedi", "UseTheForce"));
-            var contractClassB = sut.Resolve(moduleDefinition.FindType("Jedi"), moduleDefinition.FindMethod("Jedi", "get_OrderRank"));
-            var contractClassC = sut.Resolve(moduleDefinition.FindType("Jedi"), null);
+            var contractClassA = sut.Resolve(moduleDefinition.FindType("AbstractClassWithContractClass"), moduleDefinition.FindMethod("AbstractClassWithContractClass", "AbstractMethod"));
+            var contractClassB = sut.Resolve(moduleDefinition.FindType("AbstractClassWithContractClass"), moduleDefinition.FindMethod("AbstractClassWithContractClass", "ConcreteMethod"));
+            var contractClassC = sut.Resolve(moduleDefinition.FindType("AbstractClassWithContractClass"), null);
 
-            Assert.Same(moduleDefinition.FindType("JediContracts"), contractClassA);
-            Assert.Same(moduleDefinition.FindType("Jedi"), contractClassB);
-            Assert.Same(moduleDefinition.FindType("Jedi"), contractClassC);
+            Assert.Same(moduleDefinition.FindType("AbstractClassWithContractClassContracts"), contractClassA);
+            Assert.Same(moduleDefinition.FindType("AbstractClassWithContractClass"), contractClassB);
+            Assert.Same(moduleDefinition.FindType("AbstractClassWithContractClass"), contractClassC);
         }
 
         [Theory(DisplayName = "Проверка разрешения контрактного класса для интерфейса без атрибута ContractClass"), AutoFixture]
@@ -48,11 +48,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectResolvers
             [Frozen]Mock<IInterfaceContractClassBuilder> interfaceContractClassBuilderMock,
             ContractClassResolver sut)
         {
-            var contractClassA = sut.Resolve(moduleDefinition.FindType("ISith"), moduleDefinition.FindMethod("ISith", "get_Name"));
-            var contractClassB = sut.Resolve(moduleDefinition.FindType("ISith"), null);
+            var contractClassA = sut.Resolve(moduleDefinition.FindType("IInterface"), moduleDefinition.FindMethod("IInterface", "Method"));
+            var contractClassB = sut.Resolve(moduleDefinition.FindType("IInterface"), null);
 
-            interfaceContractClassBuilderMock.Verify(iccb => iccb.Build(moduleDefinition.FindType("ISith")), Times.Exactly(2));
-            interfaceContractClassBuilderMock.Verify(iccb => iccb.Build(moduleDefinition.FindType("ISith")), Times.Exactly(2));
+            interfaceContractClassBuilderMock.Verify(iccb => iccb.Build(moduleDefinition.FindType("IInterface")), Times.Exactly(2));
+            interfaceContractClassBuilderMock.Verify(iccb => iccb.Build(moduleDefinition.FindType("IInterface")), Times.Exactly(2));
         }
 
         [Theory(DisplayName = "Проверка разрешения контрактного класса для абстрактного класса без атрибута ContractClass"), AutoFixture]
@@ -61,13 +61,13 @@ namespace CodeContracts.Fody.Tests.ContractInjectResolvers
             [Frozen]Mock<IAbstractContractClassBuilder> abstractContractClassBuilderMock,
             ContractClassResolver sut)
         {
-            var contractClassA = sut.Resolve(moduleDefinition.FindType("Sith"), moduleDefinition.FindMethod("Sith", "UseForceLightining"));
-            var contractClassB = sut.Resolve(moduleDefinition.FindType("Sith"), moduleDefinition.FindMethod("Sith", "JoinDarkSide"));
-            var contractClassC = sut.Resolve(moduleDefinition.FindType("Sith"), null);
+            var contractClassA = sut.Resolve(moduleDefinition.FindType("AbstractClass"), moduleDefinition.FindMethod("AbstractClass", "AbstractMethod"));
+            var contractClassB = sut.Resolve(moduleDefinition.FindType("AbstractClass"), moduleDefinition.FindMethod("AbstractClass", "ConcreteMethod"));
+            var contractClassC = sut.Resolve(moduleDefinition.FindType("AbstractClass"), null);
 
-            abstractContractClassBuilderMock.Verify(accb => accb.Build(moduleDefinition.FindType("Sith")), Times.Once);
-            Assert.Same(moduleDefinition.FindType("Sith"), contractClassB);
-            Assert.Same(moduleDefinition.FindType("Sith"), contractClassC);
+            abstractContractClassBuilderMock.Verify(accb => accb.Build(moduleDefinition.FindType("AbstractClass")), Times.Once);
+            Assert.Same(moduleDefinition.FindType("AbstractClass"), contractClassB);
+            Assert.Same(moduleDefinition.FindType("AbstractClass"), contractClassC);
         }
     }
 }

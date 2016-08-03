@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectBuilders;
+using CodeContracts.Fody.Internal;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Ploeh.AutoFixture.Xunit2;
@@ -18,7 +19,7 @@ namespace CodeContracts.Fody.Tests.ContractInjectBuilders
             [Frozen]ModuleDefinition moduleDefinition,
             AbstractContractClassBuilder sut)
         {
-            var typeDefinition = moduleDefinition.FindType("Sith");
+            var typeDefinition = moduleDefinition.FindType("AbstractClass");
             var typesCount = moduleDefinition.Types.Count;
 
             var contractClass = sut.Build(typeDefinition);
@@ -35,11 +36,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectBuilders
             InterfaceContractClassBuilder sut)
         {
             var contractClassAttribute = moduleDefinition.ImportReference(typeof(ContractClassAttribute));
-            var typeDefinition = moduleDefinition.FindType("Sith");
+            var typeDefinition = moduleDefinition.FindType("AbstractClass");
 
             var contractClass = sut.Build(typeDefinition);
 
-            var attribute = Assert.Single(typeDefinition.CustomAttributes, ca => Equals(ca.AttributeType.Resolve(), contractClassAttribute.Resolve()));
+            var attribute = Assert.Single(typeDefinition.CustomAttributes, ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, contractClassAttribute));
             Assert.Equal(contractClass, attribute.ConstructorArguments.Select(ca => ca.Value).Single());
         }
 
@@ -49,11 +50,11 @@ namespace CodeContracts.Fody.Tests.ContractInjectBuilders
             InterfaceContractClassBuilder sut)
         {
             var contractClassForAttribute = moduleDefinition.ImportReference(typeof(ContractClassForAttribute));
-            var typeDefinition = moduleDefinition.FindType("Sith");
+            var typeDefinition = moduleDefinition.FindType("AbstractClass");
 
             var contractClass = sut.Build(typeDefinition);
 
-            var attribute = Assert.Single(contractClass.CustomAttributes, ca => Equals(ca.AttributeType.Resolve(), contractClassForAttribute.Resolve()));
+            var attribute = Assert.Single(contractClass.CustomAttributes, ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, contractClassForAttribute));
             Assert.Equal(typeDefinition, attribute.ConstructorArguments.Select(ca => ca.Value).Single());
         }
     }

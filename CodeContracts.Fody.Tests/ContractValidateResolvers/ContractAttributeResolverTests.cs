@@ -22,7 +22,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             MethodDefinition methodDefinition,
             ContractAttributeResolver sut)
         {
-            var fieldDefinition = moduleDefinition.FindField("DarthMaul", "lightsaber");
+            var fieldDefinition = moduleDefinition.FindField("ConcreteClassWithField", "fieldWithAttribute");
             var contractDefinition = new InvariantDefinition(fieldDefinition.CustomAttributes.Single(), fieldDefinition, fieldDefinition.DeclaringType);
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
@@ -39,7 +39,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             MethodDefinition methodDefinition,
             ContractAttributeResolver sut)
         {
-            var propertyDefinition = moduleDefinition.FindProperty("DarthPlagueis", "Slave");
+            var propertyDefinition = moduleDefinition.FindProperty("ConcreteClassWithProperty", "PropertyWithAttribute");
             var contractDefinition = new RequiresDefinition(propertyDefinition.CustomAttributes.Single(), propertyDefinition, propertyDefinition.SetMethod);
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
@@ -55,7 +55,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             MethodDefinition methodDefinition,
             ContractAttributeResolver sut)
         {
-            var propertyDefinition = moduleDefinition.FindProperty("DarthPlagueis", "Slave");
+            var propertyDefinition = moduleDefinition.FindProperty("ConcreteClassWithProperty", "PropertyWithAttribute");
             var contractDefinition = new EnsuresDefinition(propertyDefinition.CustomAttributes.Single(), propertyDefinition, propertyDefinition.GetMethod);
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
@@ -65,30 +65,13 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             Assert.IsType<BoxParameterBuilder>(builders[1]);
         }
 
-        [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к свойству"), AutoFixture]
-        public void AttributeAppliedToPropertyInvariantTest(
-            [Frozen] ModuleDefinition moduleDefinition,
-            MethodDefinition methodDefinition,
-            ContractAttributeResolver sut)
-        {
-            var propertyDefinition = moduleDefinition.FindProperty("DarthPlagueis", "Slave");
-            var contractDefinition = new InvariantDefinition(propertyDefinition.CustomAttributes.Single(), propertyDefinition, propertyDefinition.DeclaringType);
-
-            var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
-
-            var builders = ContractValidateParametersAssert(contractValidateParameters, propertyDefinition.PropertyType).ToList();
-            Assert.IsType<ThisParameterBuilder>(builders[0]);
-            Assert.IsType<PropertyParameterBuilder>(builders[1]);
-            Assert.IsType<BoxParameterBuilder>(builders[2]);
-        }
-
         [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к параметру метода"), AutoFixture]
         public void AttributeAppliedToParameterTest(
             [Frozen] ModuleDefinition moduleDefinition,
             MethodDefinition methodDefinition,
             ContractAttributeResolver sut)
         {
-            var parameterDefinition = moduleDefinition.FindParameter("DarthMaul", "KillJedi", "jedi");
+            var parameterDefinition = moduleDefinition.FindParameter("ConcreteClass", "MethodWithParameter", "parameter");
             var contractDefinition = new RequiresDefinition(parameterDefinition.CustomAttributes.Single(), parameterDefinition, (MethodDefinition)parameterDefinition.Method);
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
@@ -103,7 +86,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             [Frozen] ModuleDefinition moduleDefinition,
             ContractAttributeResolver sut)
         {
-            var methodDefinition = moduleDefinition.FindMethod("DarthMaul", "KillJedi");
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClass", "MethodWithReturnAttribute");
             var contractDefinition = new EnsuresDefinition(methodDefinition.MethodReturnType.CustomAttributes.Single(), methodDefinition.MethodReturnType, methodDefinition);
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();

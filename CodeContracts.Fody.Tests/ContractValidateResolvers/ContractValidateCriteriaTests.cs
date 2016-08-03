@@ -13,12 +13,12 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
 {
     public class ContractValidateCriteriaTests
     {
-        [Theory(DisplayName = "Проверка критерия для определения методов валидации кнтрактов")]
-        [InlineAutoFixture("RedLightsaberAttribute", "ValidateA", true)]
-        [InlineAutoFixture("BlueLightsaberAttribute", "ValidateB", true)]
-        [InlineAutoFixture("Lightsaber", ".ctor", false)]
-        [InlineAutoFixture("Lightsaber", "get_Color", false)]
-        [InlineAutoFixture("Lightsaber", "set_Color", false)]
+        [Theory(DisplayName = "Проверка критерия для определения методов валидации контрактов")]
+        [InlineAutoFixture("CustomContractAttribute", "ValidateMethodA", true)]
+        [InlineAutoFixture("CustomContractAttribute", "ValidateMethodB", true)]
+        [InlineAutoFixture("ConcreteClassWithProperty", "get_Property", false)]
+        [InlineAutoFixture("ConcreteClassWithProperty", "set_Property", false)]
+        [InlineAutoFixture("ConcreteClass", ".ctor", false)]
         public void IsContractValidateMethodTest(string typeName, string methodName, bool isContractValidateExpected,
             [Frozen] ModuleDefinition moduleDefinition,
             ContractValidateCriteria sut)

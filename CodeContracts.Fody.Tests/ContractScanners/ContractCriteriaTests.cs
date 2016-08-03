@@ -15,9 +15,8 @@ namespace CodeContracts.Fody.Tests.ContractScanners
     public class ContractCriteriaTests
     {
         [Theory(DisplayName = "Проверка определения атрибута контракта")]
-        [InlineAutoFixture("Sith", "JoinDarkSide", true)]
-        [InlineAutoFixture("Sith", "UseForceLightining", true)]
-        [InlineAutoFixture("DarthMaul", "KillJedi", false)]
+        [InlineAutoFixture("ConcreteClass", "MethodWithAttribute", true)]
+        [InlineAutoFixture("ConcreteClass", "MethodWithNoContractAttribute", false)]
         public void IsContractAppliedToMethodTest(string typeName, string methodName, bool isContractExpected,
             [Frozen] ModuleDefinition moduleDefinition,
             ContractCriteria sut)

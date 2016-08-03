@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -25,7 +25,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;CONTRACTS_FULL</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -43,7 +43,35 @@
     <Compile Include="..\..\CodeContracts.Fody.Shared.cs">
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
+    <Compile Include="AbstractClass.cs" />
+    <Compile Include="AbstractClassWithContractClass.cs" />
+    <Compile Include="ConcreteClass.cs" />
+    <Compile Include="ConcreteClassInheritInterface.cs" />
+    <Compile Include="ConcreteClassWithAttributes.cs" />
+    <Compile Include="ConcreteClassWithField.cs" />
+    <Compile Include="ConcreteClassWithInvariant.cs" />
+    <Compile Include="ConcreteClassWithParametersAttributes.cs" />
+    <Compile Include="ConcreteClassWithPropertiesAttributes.cs" />
+    <Compile Include="ConcreteClassWithProperty.cs" />
+    <Compile Include="CustomContractAttribute.cs" />
+    <Compile Include="CustomContractClassLevelAttribute.cs" />
+    <Compile Include="CustomContractMethodLevelAttribute.cs" />
+    <Compile Include="CustomContractWithMethodsAttribute.cs" />
+    <Compile Include="CustomContractWithParametersAttribute.cs" />
+    <Compile Include="CustomContractWithPropertiesAttribute.cs" />
+    <Compile Include="Field.cs" />
+    <Compile Include="IInterface.cs" />
+    <Compile Include="IInterfaceWithContractClass.cs" />
+    <Compile Include="NoCustomContractAttribute.cs" />
+    <Compile Include="Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeContracts\CodeContracts.csproj">
+      <Project>{3585ECED-97EF-4DD9-A1B9-BD4B52A07D35}</Project>
+      <Name>CodeContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
