@@ -9,5 +9,6 @@
     <Import_RootNamespace>TestFoundations.IntegrationTests.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithMethods.cs" />
   </ItemGroup>
 </Project>

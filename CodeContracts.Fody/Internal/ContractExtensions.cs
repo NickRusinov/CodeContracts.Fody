@@ -81,7 +81,7 @@ namespace CodeContracts.Fody.Internal
         /// <returns>Resolved method</returns>
         public static MethodReference ImportRequiresWithException(this ModuleDefinition moduleDefinition, TypeReference genericReference)
         {
-            return moduleDefinition.ImportMethod("Requires", 1, 1).MakeGeneric(genericReference);
+            return moduleDefinition.ImportMethod("Requires", 1, 1).MakeGeneric(moduleDefinition.ImportReference(genericReference));
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace CodeContracts.Fody.Internal
         /// <returns>Resolved method</returns>
         public static MethodReference ImportRequiresWithExceptionAndMessage(this ModuleDefinition moduleDefinition, TypeReference genericReference)
         {
-            return moduleDefinition.ImportMethod("Requires", 2, 1).MakeGeneric(genericReference);
+            return moduleDefinition.ImportMethod("Requires", 2, 1).MakeGeneric(moduleDefinition.ImportReference(genericReference));
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace CodeContracts.Fody.Internal
         /// <returns>Resolved method</returns>
         public static MethodReference ImportResult(this ModuleDefinition moduleDefinition, TypeReference genericReference)
         {
-            return moduleDefinition.ImportMethod("Result", 0, 1).MakeGeneric(genericReference);
+            return moduleDefinition.ImportMethod("Result", 0, 1).MakeGeneric(moduleDefinition.ImportReference(genericReference));
         }
 
         /// <summary>

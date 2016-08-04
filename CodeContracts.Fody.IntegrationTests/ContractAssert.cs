@@ -10,27 +10,49 @@ namespace CodeContracts.Fody.IntegrationTests
 {
     public static class ContractAssert
     {
-        public static void Fail<T>(Func<T> constructor, params Action<T>[] actions)
+        public static void Success(Action action)
         {
-            var exception = Record.Exception(() =>
-            {
-                var instance = constructor.Invoke();
-                Array.ForEach(actions, a => a.Invoke(instance));
-            });
+            var exception = Record.Exception(action);
+
+            Assert.Null(exception);
+        }
+
+        public static void Fail(Action action)
+        {
+            var exception = Record.Exception(action);
 
             Assert.NotNull(exception);
             Assert.Equal("ContractException", exception.GetType().Name);
         }
 
-        public static void Success<T>(Func<T> constructor, params Action<T>[] actions)
+        public static void Fail<TException>(Action action)
         {
-            var exception = Record.Exception(() =>
-            {
-                var instance = constructor.Invoke();
-                Array.ForEach(actions, a => a.Invoke(instance));
-            });
+            var exception = Record.Exception(action);
 
-            Assert.Null(exception);
+            Assert.NotNull(exception);
+            Assert.IsType<TException>(exception);
+        }
+
+        public static void Success<TSut>(Action<TSut> action)
+            where TSut : new()
+        {
+            Success(() => action(new TSut()));
+        }
+
+        public static void Success<TSut>(Action<TSut> action, TSut sut)
+        {
+            Success(() => action(sut));
+        }
+
+        public static void Fail<TSut>(Action<TSut> action)
+            where TSut : new()
+        {
+            Fail(() => action(new TSut()));
+        }
+
+        public static void Fail<TSut>(Action<TSut> action, TSut sut)
+        {
+            Fail(() => action(sut));
         }
 
         public static void Get(this object o)
