@@ -90,6 +90,7 @@
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
     <Compile Include="EnumAttributeTests.cs" />
+    <Compile Include="NotEqualsAttributeTests.cs" />
     <Compile Include="EqualsAttributeTests.cs" />
     <Compile Include="FalseAttributeTests.cs" />
     <Compile Include="IsAttributeTests.cs" />

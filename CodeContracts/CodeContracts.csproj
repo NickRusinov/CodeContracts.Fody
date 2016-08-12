@@ -138,6 +138,7 @@
     <Compile Include="EqualsAttribute.cs" />
     <Compile Include="FalseAttribute.cs" />
     <Compile Include="IsAttribute.cs" />
+    <Compile Include="NotEqualsAttribute.cs" />
     <Compile Include="NotNullAttribute.cs" />
     <Compile Include="NotZeroAttribute.cs" />
     <Compile Include="NullAttribute.cs" />
