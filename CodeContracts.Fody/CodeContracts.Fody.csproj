@@ -181,6 +181,8 @@
     <Compile Include="ContractInjectors\IInvariantInjector.cs" />
     <Compile Include="ContractInjectors\ContractInjector.cs" />
     <Compile Include="ContractInjectors\IRequiresInjector.cs" />
+    <Compile Include="ContractInjectResolvers\AsyncMethodsNotSupportedException.cs" />
+    <Compile Include="ContractInjectResolvers\IteratorMethodsNotSupportedException.cs" />
     <Compile Include="ContractInstructionsBuilders\ContractBuilder.cs" />
     <Compile Include="ContractInstructionsBuilders\ContractEnsuresFactory.cs" />
     <Compile Include="ContractInstructionsBuilders\ContractInvariantFactory.cs" />
