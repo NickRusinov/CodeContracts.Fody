@@ -41,9 +41,11 @@
     <Compile Include="AbstractClassWithContractClass.cs" />
     <Compile Include="ConcreteClass.cs" />
     <Compile Include="ConcreteClassInheritInterface.cs" />
+    <Compile Include="ConcreteClassWithAsyncs.cs" />
     <Compile Include="ConcreteClassWithAttributes.cs" />
     <Compile Include="ConcreteClassWithField.cs" />
     <Compile Include="ConcreteClassWithInvariant.cs" />
+    <Compile Include="ConcreteClassWithIterators.cs" />
     <Compile Include="ConcreteClassWithParametersAttributes.cs" />
     <Compile Include="ConcreteClassWithPropertiesAttributes.cs" />
     <Compile Include="ConcreteClassWithProperty.cs" />

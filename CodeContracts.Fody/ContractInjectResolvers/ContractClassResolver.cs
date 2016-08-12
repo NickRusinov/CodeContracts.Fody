@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectBuilders;
+using CodeContracts.Fody.Exceptions;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 
@@ -52,6 +54,12 @@ namespace CodeContracts.Fody.ContractInjectResolvers
         {
             var contractClass = ResolveContractClass(typeDefinition);
 
+            if (methodDefinition != null && IsIteratorStateMachine(methodDefinition))
+                throw new IteratorMethodsNotSupportedException(methodDefinition);
+
+            if (methodDefinition != null && IsAsyncStateMachine(methodDefinition))
+                throw new AsyncMethodsNotSupportedException(methodDefinition);
+
             if (typeDefinition.IsInterface && contractClass == null)
                 return interfaceContractClassBuilder.Build(typeDefinition);
 
@@ -75,11 +83,43 @@ namespace CodeContracts.Fody.ContractInjectResolvers
         private TypeDefinition ResolveContractClass(TypeDefinition typeDefinition)
         {
             Contract.Requires(typeDefinition != null);
-            
+
+            var contractClassTypeReference = moduleDefinition.ImportContractClass();
+
             return (TypeDefinition)typeDefinition.CustomAttributes
-                .SingleOrDefault(ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, moduleDefinition.ImportContractClass()))?.ConstructorArguments
+                .SingleOrDefault(ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, contractClassTypeReference))?.ConstructorArguments
                 .Select(ca => ca.Value)
                 .Single();
+        }
+
+        /// <summary>
+        /// Checks that method is iterator method
+        /// </summary>
+        /// <param name="methodDefinition">Method for which checks iterator method</param>
+        /// <returns>True if method is iterator; otherwise false</returns>
+        private bool IsIteratorStateMachine(MethodDefinition methodDefinition)
+        {
+            Contract.Requires(methodDefinition != null);
+
+            var iteratorStateMachineTypeReference = moduleDefinition.ImportReference(typeof(IteratorStateMachineAttribute));
+
+            return methodDefinition.CustomAttributes
+                .Any(ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, iteratorStateMachineTypeReference));
+        }
+
+        /// <summary>
+        /// Checks that method is async method
+        /// </summary>
+        /// <param name="methodDefinition">Method for which checks async method</param>
+        /// <returns>True if method is async; otherwise false</returns>
+        private bool IsAsyncStateMachine(MethodDefinition methodDefinition)
+        {
+            Contract.Requires(methodDefinition != null);
+
+            var asyncStateMachineTypeReference = moduleDefinition.ImportReference(typeof(AsyncStateMachineAttribute));
+
+            return methodDefinition.CustomAttributes
+                .Any(ca => TypeReferenceComparer.Instance.Equals(ca.AttributeType, asyncStateMachineTypeReference));
         }
     }
 }

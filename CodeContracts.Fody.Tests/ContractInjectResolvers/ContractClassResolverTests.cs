@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeContracts.Fody.ContractInjectBuilders;
 using CodeContracts.Fody.ContractInjectResolvers;
+using CodeContracts.Fody.Exceptions;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Moq;
@@ -68,6 +69,28 @@ namespace CodeContracts.Fody.Tests.ContractInjectResolvers
             abstractContractClassBuilderMock.Verify(accb => accb.Build(moduleDefinition.FindType("AbstractClass")), Times.Once);
             Assert.Same(moduleDefinition.FindType("AbstractClass"), contractClassB);
             Assert.Same(moduleDefinition.FindType("AbstractClass"), contractClassC);
+        }
+
+        [Theory(DisplayName = "Проверка разрешения контрактного класса для метода итератора"), AutoFixture]
+        public void IteratorMethodTest(
+            [Frozen] ModuleDefinition moduleDefinition,
+            ContractClassResolver sut)
+        {
+            var iteratorClass = moduleDefinition.FindType("ConcreteClassWithIterators");
+            var iteratorMethod = moduleDefinition.FindMethod("ConcreteClassWithIterators", "IteratorMethod");
+
+            Assert.Throws<IteratorMethodsNotSupportedException>(() => sut.Resolve(iteratorClass, iteratorMethod));
+        }
+
+        [Theory(DisplayName = "Проверка разрешения контрактного класса для асинхронного метода"), AutoFixture]
+        public void AsyncMethodTest(
+            [Frozen] ModuleDefinition moduleDefinition,
+            ContractClassResolver sut)
+        {
+            var iteratorClass = moduleDefinition.FindType("ConcreteClassWithAsyncs");
+            var iteratorMethod = moduleDefinition.FindMethod("ConcreteClassWithAsyncs", "AsyncMethod");
+
+            Assert.Throws<AsyncMethodsNotSupportedException>(() => sut.Resolve(iteratorClass, iteratorMethod));
         }
     }
 }
