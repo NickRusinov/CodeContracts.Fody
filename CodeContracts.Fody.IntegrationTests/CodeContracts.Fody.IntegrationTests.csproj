@@ -105,10 +105,13 @@
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
     <Compile Include="ContractAssert.cs" />
+    <Compile Include="Default\ConcreteClassWithFieldsTests.cs" />
     <Compile Include="Default\ConcreteClassWithMethodsTests.cs" />
     <Compile Include="Default\ConcreteClassWithPropertiesTests.cs" />
+    <Compile Include="NotClean\ConcreteClassWithFieldsTests.cs" />
     <Compile Include="NotClean\ConcreteClassWithMethodsTests.cs" />
     <Compile Include="NotClean\ConcreteClassWithPropertiesTests.cs" />
+    <Compile Include="NotEnabled\ConcreteClassWithFieldsTests.cs" />
     <Compile Include="NotEnabled\ConcreteClassWithMethodsTests.cs" />
     <Compile Include="NotEnabled\ConcreteClassWithPropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
