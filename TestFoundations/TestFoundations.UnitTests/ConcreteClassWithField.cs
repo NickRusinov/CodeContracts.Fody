@@ -9,9 +9,9 @@ namespace TestFoundations.UnitTests
 {
     public class ConcreteClassWithField
     {
-        private readonly Field field;
+        private readonly Field field = new Field();
 
         [CustomContract]
-        private readonly Field fieldWithAttribute;
+        private readonly Field fieldWithAttribute = new Field();
     }
 }
