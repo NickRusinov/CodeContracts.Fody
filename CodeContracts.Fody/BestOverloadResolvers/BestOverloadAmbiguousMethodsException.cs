@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -60,7 +61,7 @@ namespace CodeContracts.Fody.BestOverloadResolvers
         /// <param name="allMethodReferences">Collection of all overload methods</param>
         /// <param name="ambiguousMethodReferences">Collection of ambiguous overload methods </param>
         public BestOverloadAmbiguousMethodsException(IReadOnlyCollection<MethodReference> allMethodReferences, IReadOnlyCollection<MethodReference> ambiguousMethodReferences)
-            : base(FormatMessage(ambiguousMethodReferences))
+            : base(FormatMessage(ambiguousMethodReferences), TraceLevel.Error)
         {
             AllMethodReferences = allMethodReferences;
             AmbiguousMethodReferences = ambiguousMethodReferences;

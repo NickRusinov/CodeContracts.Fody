@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -59,7 +60,7 @@ namespace CodeContracts.Fody.BestOverloadResolvers
         /// </summary>
         /// <param name="allMethodReferences">Collection of all overload methods</param>
         public BestOverloadMissingMethodsException(IReadOnlyCollection<MethodReference> allMethodReferences)
-            : base(FormatMessage(allMethodReferences))
+            : base(FormatMessage(allMethodReferences), TraceLevel.Error)
         {
             AllMethodReferences = allMethodReferences;
         }

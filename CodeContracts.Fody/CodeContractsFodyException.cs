@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -16,7 +17,7 @@ namespace CodeContracts.Fody
         /// <summary>
         /// Initializes a new instance of class <see cref="CodeContractsFodyException"/>
         /// </summary>
-        public CodeContractsFodyException()
+        protected CodeContractsFodyException()
         {
 
         }
@@ -25,7 +26,7 @@ namespace CodeContracts.Fody
         /// Initializes a new instance of class <see cref="CodeContractsFodyException"/>
         /// </summary>
         /// <param name="message">The message that describes the error</param>
-        public CodeContractsFodyException(string message) 
+        protected CodeContractsFodyException(string message) 
             : base(message)
         {
 
@@ -36,7 +37,7 @@ namespace CodeContracts.Fody
         /// </summary>
         /// <param name="message">The message that describes the error</param>
         /// <param name="inner">The exception that is the cause of the current exception</param>
-        public CodeContractsFodyException(string message, Exception inner) 
+        protected CodeContractsFodyException(string message, Exception inner) 
             : base(message, inner)
         {
 
@@ -52,5 +53,21 @@ namespace CodeContracts.Fody
         {
 
         }
+
+        /// <summary>
+        /// Initializes a new instance of class <see cref="CodeContractsFodyException"/>
+        /// </summary>
+        /// <param name="message">The message that describes the error</param>
+        /// <param name="level">Exception level (info, warning or error)</param>
+        protected CodeContractsFodyException(string message, TraceLevel level)
+            : base(message)
+        {
+            Level = level;
+        }
+
+        /// <summary>
+        /// Exception level (info, warning or error)
+        /// </summary>
+        public TraceLevel Level { get; } = TraceLevel.Info;
     }
 }
