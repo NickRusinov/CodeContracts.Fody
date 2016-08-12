@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithFields.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithInvariant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithMethods.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithProperties.cs" />
   </ItemGroup>
