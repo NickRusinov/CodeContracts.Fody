@@ -8,78 +8,78 @@ using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.ContractInjectResolvers
+namespace CodeContracts.Fody.Exceptions
 {
     /// <summary>
-    /// Represents exception for warnings that async methods currently not supported
+    /// Represents exception for warnings that iterator methods currently not supported
     /// </summary>
     [Serializable]
-    public class AsyncMethodsNotSupportedException : CodeContractsFodyException
+    public class IteratorMethodsNotSupportedException : CodeContractsFodyException
     {
         /// <summary>
-        /// Initializes a new instance of class <see cref="AsyncMethodsNotSupportedException"/>
+        /// Initializes a new instance of class <see cref="IteratorMethodsNotSupportedException"/>
         /// </summary>
-        public AsyncMethodsNotSupportedException()
+        public IteratorMethodsNotSupportedException()
         {
 
         }
 
         /// <summary>
-        /// Initializes a new instance of class <see cref="AsyncMethodsNotSupportedException"/>
+        /// Initializes a new instance of class <see cref="IteratorMethodsNotSupportedException"/>
         /// </summary>
         /// <param name="message">The message that describes the error</param>
-        public AsyncMethodsNotSupportedException(string message)
+        public IteratorMethodsNotSupportedException(string message)
             : base(message)
         {
 
         }
 
         /// <summary>
-        /// Initializes a new instance of class <see cref="AsyncMethodsNotSupportedException"/>
+        /// Initializes a new instance of class <see cref="IteratorMethodsNotSupportedException"/>
         /// </summary>
         /// <param name="message">The message that describes the error</param>
         /// <param name="inner">The exception that is the cause of the current exception</param>
-        public AsyncMethodsNotSupportedException(string message, Exception inner)
+        public IteratorMethodsNotSupportedException(string message, Exception inner)
             : base(message, inner)
         {
 
         }
 
         /// <summary>
-        /// Initializes a new instance of class <see cref="AsyncMethodsNotSupportedException"/>
+        /// Initializes a new instance of class <see cref="IteratorMethodsNotSupportedException"/>
         /// </summary>
         /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown</param>
         /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination</param>
-        protected AsyncMethodsNotSupportedException(SerializationInfo info, StreamingContext context)
+        protected IteratorMethodsNotSupportedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
 
         }
 
         /// <summary>
-        /// Initializes a new instance of class <see cref="AsyncMethodsNotSupportedException"/>
+        /// Initializes a new instance of class <see cref="IteratorMethodsNotSupportedException"/>
         /// </summary>
-        /// <param name="methodDefinition">Definition of async method</param>
-        public AsyncMethodsNotSupportedException(MethodDefinition methodDefinition)
+        /// <param name="methodDefinition">Definition of iterator method</param>
+        public IteratorMethodsNotSupportedException(MethodDefinition methodDefinition)
             : base(FormatMessage(methodDefinition), TraceLevel.Error)
         {
             MethodDefinition = methodDefinition;
         }
 
         /// <summary>
-        /// Definition of async method
+        /// Definition of iterator method
         /// </summary>
         public MethodDefinition MethodDefinition { get; }
 
         /// <summary>
         /// Formats error message for exception
         /// </summary>
-        /// <param name="methodDefinition">Definition of async method</param>
+        /// <param name="methodDefinition">Definition of iterator method</param>
         /// <returns>Formatted error message</returns>
         private static string FormatMessage(MethodDefinition methodDefinition)
         {
             return
-                "Async methods currently not supported:" + Environment.NewLine +
+                "Iterator methods currently not supported:" + Environment.NewLine +
                 methodDefinition;
         }
     }

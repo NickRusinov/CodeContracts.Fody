@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeContracts.Fody.BestOverloadResolvers;
+using CodeContracts.Fody.Exceptions;
 using CodeContracts.Fody.Tests.Internal;
 using Mono.Cecil;
 using Ploeh.AutoFixture.Xunit2;

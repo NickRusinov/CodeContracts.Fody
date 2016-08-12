@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Mono.Cecil;
 
-namespace CodeContracts.Fody.BestOverloadResolvers
+namespace CodeContracts.Fody.Exceptions
 {
     /// <summary>
     /// Represents exception for ambiguous overload methods while resolves best oveload method

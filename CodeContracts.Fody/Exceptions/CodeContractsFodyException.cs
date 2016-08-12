@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeContracts.Fody
+namespace CodeContracts.Fody.Exceptions
 {
     /// <summary>
     /// Base class for all application exceptions of current Fody addin

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
+using CodeContracts.Fody.Exceptions;
 using CodeContracts.Fody.Internal;
 using Mono.Cecil;
 

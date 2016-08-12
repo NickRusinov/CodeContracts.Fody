@@ -148,15 +148,15 @@
     <Compile Include="..\CodeContracts.Fody.Shared.cs">
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
-    <Compile Include="BestOverloadResolvers\BestOverloadAmbiguousMethodsException.cs" />
+    <Compile Include="Exceptions\BestOverloadAmbiguousMethodsException.cs" />
     <Compile Include="BestOverloadResolvers\BestOverloadCriteria.cs" />
     <Compile Include="BestOverloadResolvers\BestOverloadMethodComparer.cs" />
-    <Compile Include="BestOverloadResolvers\BestOverloadMissingMethodsException.cs" />
+    <Compile Include="Exceptions\BestOverloadMissingMethodsException.cs" />
     <Compile Include="BestOverloadResolvers\BestOverloadParameterComparer.cs" />
     <Compile Include="BestOverloadResolvers\BestOverloadResolver.cs" />
     <Compile Include="BestOverloadResolvers\IBestOverloadCriteria.cs" />
     <Compile Include="BestOverloadResolvers\IBestOverloadResolver.cs" />
-    <Compile Include="CodeContractsFodyException.cs" />
+    <Compile Include="Exceptions\CodeContractsFodyException.cs" />
     <Compile Include="Configurations\LoggerConfiguration.cs" />
     <Compile Include="Configurations\TinyIoCConfiguration.cs" />
     <Compile Include="ContractCleaners\ContractCleaner.cs" />
@@ -181,8 +181,8 @@
     <Compile Include="ContractInjectors\IInvariantInjector.cs" />
     <Compile Include="ContractInjectors\ContractInjector.cs" />
     <Compile Include="ContractInjectors\IRequiresInjector.cs" />
-    <Compile Include="ContractInjectResolvers\AsyncMethodsNotSupportedException.cs" />
-    <Compile Include="ContractInjectResolvers\IteratorMethodsNotSupportedException.cs" />
+    <Compile Include="Exceptions\AsyncMethodsNotSupportedException.cs" />
+    <Compile Include="Exceptions\IteratorMethodsNotSupportedException.cs" />
     <Compile Include="ContractInstructionsBuilders\ContractBuilder.cs" />
     <Compile Include="ContractInstructionsBuilders\ContractEnsuresFactory.cs" />
     <Compile Include="ContractInstructionsBuilders\ContractInvariantFactory.cs" />
