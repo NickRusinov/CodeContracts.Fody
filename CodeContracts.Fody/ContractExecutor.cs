@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using CodeContracts.Fody.ContractCleaners;
 using CodeContracts.Fody.ContractInjectors;
 using CodeContracts.Fody.ContractInjectResolvers;
 using CodeContracts.Fody.ContractScanners;
+using CodeContracts.Fody.Exceptions;
 using Mono.Cecil;
 
 namespace CodeContracts.Fody
@@ -61,12 +63,25 @@ namespace CodeContracts.Fody
         public void Execute(ModuleDefinition moduleDefinition)
         {
             foreach (var contractDefinition in moduleScanner.Scan(moduleDefinition).ToList())
-            {
-                var injectMethodDefinition = contractInjectResolver.Resolve(contractDefinition);
+                try
+                {
+                    var injectMethodDefinition = contractInjectResolver.Resolve(contractDefinition);
 
-                contractInjector.Inject(contractDefinition, injectMethodDefinition);
-                contractCleaner.Clean(contractDefinition);
-            }
+                    contractInjector.Inject(contractDefinition, injectMethodDefinition);
+                    contractCleaner.Clean(contractDefinition);
+                }
+                catch (CodeContractsFodyException e) when (e.Level == TraceLevel.Error)
+                {
+                    Logger.Instance.LogError(e.Message);
+                }
+                catch (CodeContractsFodyException e) when (e.Level == TraceLevel.Warning)
+                {
+                    Logger.Instance.LogWarning(e.Message);
+                }
+                catch (CodeContractsFodyException e) when (e.Level == TraceLevel.Info)
+                {
+                    Logger.Instance.LogInfo(e.Message);
+                }
         }
     }
 }
