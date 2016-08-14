@@ -35,7 +35,8 @@ namespace CodeContracts.Tests
         }
 
         [Theory(DisplayName = "Проверка атрибута контракта Equals")]
-        [MemberData(nameof(ValidateArgToOfIntTestData))]
+        [InlineData(10, 20, false)]
+        [InlineData(42, 42, true)]
         public void ValidateArgToOfIntTest(int arg, int to, bool isValidExpected)
         {
             var isValid = EqualsAttribute.Validate(arg, to);
@@ -43,11 +44,34 @@ namespace CodeContracts.Tests
             Assert.Equal(isValidExpected, isValid);
         }
 
-        private static IEnumerable<object[]> ValidateArgToOfIntTestData()
+        [Theory(DisplayName = "Проверка атрибута контракта Equals")]
+        [InlineData(10u, 20u, false)]
+        [InlineData(42u, 42u, true)]
+        public void ValidateArgToOfUIntTest(uint arg, uint to, bool isValidExpected)
         {
-            yield return new object[] { 10, 20, false };
+            var isValid = EqualsAttribute.Validate(arg, to);
 
-            yield return new object[] { 42, 42, true };
+            Assert.Equal(isValidExpected, isValid);
+        }
+
+        [Theory(DisplayName = "Проверка атрибута контракта Equals")]
+        [InlineData(10L, 20L, false)]
+        [InlineData(42L, 42L, true)]
+        public void ValidateArgToOfLongTest(long arg, long to, bool isValidExpected)
+        {
+            var isValid = EqualsAttribute.Validate(arg, to);
+
+            Assert.Equal(isValidExpected, isValid);
+        }
+
+        [Theory(DisplayName = "Проверка атрибута контракта Equals")]
+        [InlineData(10uL, 20uL, false)]
+        [InlineData(42uL, 42uL, true)]
+        public void ValidateArgToOfULongTest(ulong arg, ulong to, bool isValidExpected)
+        {
+            var isValid = EqualsAttribute.Validate(arg, to);
+
+            Assert.Equal(isValidExpected, isValid);
         }
     }
 }

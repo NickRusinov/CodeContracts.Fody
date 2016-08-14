@@ -21,5 +21,14 @@ namespace CodeContracts
 
         [Pure]
         public static bool Validate(int arg, int to) => arg == to;
+
+        [Pure]
+        public static bool Validate(uint arg, uint to) => arg == to;
+
+        [Pure]
+        public static bool Validate(long arg, long to) => arg == to;
+
+        [Pure]
+        public static bool Validate(ulong arg, ulong to) => arg == to;
     }
 }
