@@ -100,6 +100,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyAttributeTests.cs" />
     <Compile Include="RangeAttributeTests.cs" />
+    <Compile Include="RegexAttributeTests.cs" />
     <Compile Include="ThisAttributeTests.cs" />
     <Compile Include="NotZeroAttributeTests.cs" />
     <Compile Include="PositiveAttributeTests.cs" />
