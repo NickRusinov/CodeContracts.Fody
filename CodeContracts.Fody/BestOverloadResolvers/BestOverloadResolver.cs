@@ -35,11 +35,14 @@ namespace CodeContracts.Fody.BestOverloadResolvers
         /// <inheritdoc/>
         public MethodReference Resolve(IReadOnlyCollection<MethodReference> methodReferences, IReadOnlyCollection<ParameterDefinition> parameterDefinitions)
         {
-            methodReferences = methodReferences.Where(mr => bestOverloadCriteria.IsApply(mr, parameterDefinitions)).ToList();
+            var appliedMethodReferences = methodReferences
+                .Where(mr => bestOverloadCriteria.IsApply(mr, parameterDefinitions))
+                .ToList();
 
-            return methodReferences.Single(mr => methodReferences.All(imr => BestOverloadMethodComparer.Instance.Compare(mr, imr) >= 0),
-                ms => new BestOverloadAmbiguousMethodsException(methodReferences, ms),
-                () => new BestOverloadMissingMethodsException(methodReferences));
+            return appliedMethodReferences
+                .Single(mr => appliedMethodReferences.All(imr => BestOverloadMethodComparer.Instance.Compare(mr, imr) >= 0),
+                    ms => new BestOverloadAmbiguousMethodsException(methodReferences, ms),
+                    () => new BestOverloadMissingMethodsException(methodReferences));
         }
     }
 }
