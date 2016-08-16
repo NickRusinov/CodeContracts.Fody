@@ -12,6 +12,8 @@ namespace CodeContracts
     [ContractException(typeof(ArgumentOutOfRangeException))]
     public sealed class NegativeAttribute : ContractAttribute
     {
+        public NegativeAttribute() { }
+
         public NegativeAttribute(object arg) { }
 
         [Pure]
