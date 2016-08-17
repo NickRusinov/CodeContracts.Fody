@@ -9,6 +9,11 @@
     <Import_RootNamespace>TestFoundations.IntegrationTests.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractClassWithContractClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractClassWithConstructors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractClassWithFields.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractClassWithMethods.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractClassWithProperties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithFields.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithInvariant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithMethods.cs" />

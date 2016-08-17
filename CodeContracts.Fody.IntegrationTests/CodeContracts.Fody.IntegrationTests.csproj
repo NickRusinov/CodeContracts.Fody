@@ -105,14 +105,29 @@
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
     <Compile Include="ContractAssert.cs" />
+    <Compile Include="Default\AbstractClassWithConstructorsTests.cs" />
+    <Compile Include="Default\AbstractClassWithContractClassTests.cs" />
+    <Compile Include="Default\AbstractClassWithFieldsTests.cs" />
+    <Compile Include="Default\AbstractClassWithMethodsTests.cs" />
+    <Compile Include="Default\AbstractClassWithPropertiesTests.cs" />
     <Compile Include="Default\ConcreteClassWithFieldsTests.cs" />
     <Compile Include="Default\ConcreteClassWithInvariantTests.cs" />
     <Compile Include="Default\ConcreteClassWithMethodsTests.cs" />
     <Compile Include="Default\ConcreteClassWithPropertiesTests.cs" />
+    <Compile Include="NotClean\AbstractClassWithConstructorsTests.cs" />
+    <Compile Include="NotClean\AbstractClassWithContractClassTests.cs" />
+    <Compile Include="NotClean\AbstractClassWithFieldsTests.cs" />
+    <Compile Include="NotClean\AbstractClassWithMethodsTests.cs" />
+    <Compile Include="NotClean\AbstractClassWithPropertiesTests.cs" />
     <Compile Include="NotClean\ConcreteClassWithFieldsTests.cs" />
     <Compile Include="NotClean\ConcreteClassWithInvariantTests.cs" />
     <Compile Include="NotClean\ConcreteClassWithMethodsTests.cs" />
     <Compile Include="NotClean\ConcreteClassWithPropertiesTests.cs" />
+    <Compile Include="NotEnabled\AbstractClassWithConstructorsTests.cs" />
+    <Compile Include="NotEnabled\AbstractClassWithContractClassTests.cs" />
+    <Compile Include="NotEnabled\AbstractClassWithFieldsTests.cs" />
+    <Compile Include="NotEnabled\AbstractClassWithMethodsTests.cs" />
+    <Compile Include="NotEnabled\AbstractClassWithPropertiesTests.cs" />
     <Compile Include="NotEnabled\ConcreteClassWithFieldsTests.cs" />
     <Compile Include="NotEnabled\ConcreteClassWithInvariantTests.cs" />
     <Compile Include="NotEnabled\ConcreteClassWithMethodsTests.cs" />

@@ -13,34 +13,44 @@ namespace CodeContracts.Fody.IntegrationTests
         public static ContractAssert<TSut> Success<TSut>(Action<TSut> action)
             where TSut : new()
         {
-            return new ContractAssert<TSut>(new TSut()).Success(action);
+            return ContractAssert<TSut>.CreateSuccess(() => new TSut()).Success(action);
         }
 
         public static ContractAssert<TSut> Success<TSut>(Action<TSut> action, TSut sut)
         {
-            return new ContractAssert<TSut>(sut).Success(action);
+            return ContractAssert<TSut>.CreateSuccess(() => sut).Success(action);
+        }
+
+        public static ContractAssert<TSut> Success<TSut>(Func<TSut> sutFactory)
+        {
+            return ContractAssert<TSut>.CreateSuccess(sutFactory);
         }
 
         public static ContractAssert<TSut> Fail<TSut>(Action<TSut> action)
             where TSut : new()
         {
-            return new ContractAssert<TSut>(new TSut()).Fail(action);
+            return ContractAssert<TSut>.CreateSuccess(() => new TSut()).Fail(action);
         }
 
         public static ContractAssert<TSut> Fail<TSut>(Action<TSut> action, TSut sut)
         {
-            return new ContractAssert<TSut>(sut).Fail(action);
+            return ContractAssert<TSut>.CreateSuccess(() => sut).Fail(action);
+        }
+
+        public static ContractAssert<TSut> Fail<TSut>(Func<TSut> sutFactory)
+        {
+            return ContractAssert<TSut>.CreateFail(sutFactory);
         }
 
         public static ContractAssert<TSut> With<TSut>()
             where TSut : new()
         {
-            return new ContractAssert<TSut>(new TSut());
+            return ContractAssert<TSut>.CreateSuccess(() => new TSut());
         }
 
         public static ContractAssert<TSut> With<TSut>(TSut sut)
         {
-            return new ContractAssert<TSut>(sut);
+            return ContractAssert<TSut>.CreateSuccess(() => sut);
         }
 
         public static void Get(this object o)
@@ -53,9 +63,30 @@ namespace CodeContracts.Fody.IntegrationTests
     {
         private readonly TSut sut;
 
-        public ContractAssert(TSut sut)
+        private ContractAssert(TSut sut)
         {
             this.sut = sut;
+        }
+
+        public static ContractAssert<TSut> CreateSuccess(Func<TSut> sutFactory)
+        {
+            var sut = default(TSut);
+            var exception = Record.Exception(() => sut = sutFactory.Invoke());
+
+            Assert.Null(exception);
+
+            return new ContractAssert<TSut>(sut);
+        }
+
+        public static ContractAssert<TSut> CreateFail(Func<TSut> sutFactory)
+        {
+            var sut = default(TSut);
+            var exception = Record.Exception(() => sut = sutFactory.Invoke());
+
+            Assert.NotNull(exception);
+            Assert.Equal("ContractException", exception.GetType().Name);
+
+            return new ContractAssert<TSut>(sut);
         }
 
         public ContractAssert<TSut> Success(Action<TSut> action)
