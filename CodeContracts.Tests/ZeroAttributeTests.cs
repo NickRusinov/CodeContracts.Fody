@@ -10,7 +10,8 @@ namespace CodeContracts.Tests
     public class ZeroAttributeTests
     {
         [Theory(DisplayName = "Проверка атрибута контракта Zero")]
-        [MemberData(nameof(ValidateArgTestData))]
+        [InlineData(1, false)]
+        [InlineData(0, true)]
         public void ValidateArgTest(int arg, bool isValidExpected)
         {
             var isValid = ZeroAttribute.Validate(arg);
@@ -18,11 +19,34 @@ namespace CodeContracts.Tests
             Assert.Equal(isValidExpected, isValid);
         }
 
-        private static IEnumerable<object[]> ValidateArgTestData()
+        [Theory(DisplayName = "Проверка атрибута контракта Zero")]
+        [InlineData(1u, false)]
+        [InlineData(0u, true)]
+        public void ValidateArgTest(uint arg, bool isValidExpected)
         {
-            yield return new object[] { 1, false };
+            var isValid = ZeroAttribute.Validate(arg);
 
-            yield return new object[] { 0, true };
+            Assert.Equal(isValidExpected, isValid);
+        }
+
+        [Theory(DisplayName = "Проверка атрибута контракта Zero")]
+        [InlineData(1L, false)]
+        [InlineData(0L, true)]
+        public void ValidateArgTest(long arg, bool isValidExpected)
+        {
+            var isValid = ZeroAttribute.Validate(arg);
+
+            Assert.Equal(isValidExpected, isValid);
+        }
+
+        [Theory(DisplayName = "Проверка атрибута контракта Zero")]
+        [InlineData(1uL, false)]
+        [InlineData(0uL, true)]
+        public void ValidateArgTest(ulong arg, bool isValidExpected)
+        {
+            var isValid = ZeroAttribute.Validate(arg);
+
+            Assert.Equal(isValidExpected, isValid);
         }
     }
 }
