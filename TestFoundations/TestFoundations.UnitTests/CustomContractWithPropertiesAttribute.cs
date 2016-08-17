@@ -13,5 +13,7 @@ namespace TestFoundations.UnitTests
         public object X { get; set; }
 
         public object Y { get; set; }
+
+        public object Z { get; set; }
     }
 }

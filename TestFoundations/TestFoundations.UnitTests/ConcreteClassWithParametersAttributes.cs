@@ -9,7 +9,7 @@ namespace TestFoundations.UnitTests
 {
     public class ConcreteClassWithParametersAttributes
     {
-        [CustomContractWithParameters(42, "value")]
+        [CustomContractWithParameters(42, "value", typeof(void))]
         public void Method()
         {
             throw new NotImplementedException();

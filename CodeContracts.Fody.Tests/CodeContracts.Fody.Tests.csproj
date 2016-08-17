@@ -139,6 +139,7 @@
     <Compile Include="ContractParameterBuilders\ResultParameterBuilderTests.cs" />
     <Compile Include="ContractParameterBuilders\StringParameterBuilderTests.cs" />
     <Compile Include="ContractParameterBuilders\ThisParameterBuilderTests.cs" />
+    <Compile Include="ContractParameterBuilders\TypeParameterBuilderTests.cs" />
     <Compile Include="ContractParameterParsers\ArgumentParameterParserTests.cs" />
     <Compile Include="ContractParameterParsers\FieldParameterParserTests.cs" />
     <Compile Include="ContractParameterParsers\PropertyParameterParserTests.cs" />

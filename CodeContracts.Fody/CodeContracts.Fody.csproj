@@ -148,6 +148,7 @@
     <Compile Include="..\CodeContracts.Fody.Shared.cs">
       <Link>Properties\CodeContracts.Fody.Shared.cs</Link>
     </Compile>
+    <Compile Include="ContractParameterBuilders\TypeParameterBuilder.cs" />
     <Compile Include="Exceptions\BestOverloadAmbiguousMethodsException.cs" />
     <Compile Include="BestOverloadResolvers\BestOverloadCriteria.cs" />
     <Compile Include="BestOverloadResolvers\BestOverloadMethodComparer.cs" />

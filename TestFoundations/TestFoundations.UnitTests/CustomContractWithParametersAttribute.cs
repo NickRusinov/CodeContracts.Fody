@@ -10,7 +10,7 @@ namespace TestFoundations.UnitTests
 {
     public class CustomContractWithParametersAttribute : ContractAttribute
     {
-        public CustomContractWithParametersAttribute(object x, object y)
+        public CustomContractWithParametersAttribute(object x, object y, object z)
         {
             
         }

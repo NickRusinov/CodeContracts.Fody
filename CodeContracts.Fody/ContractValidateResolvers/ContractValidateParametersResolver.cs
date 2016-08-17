@@ -58,12 +58,32 @@ namespace CodeContracts.Fody.ContractValidateResolvers
                 if (parameterString != null)
                 {
                     var parseResult = methodParameterParser.Parse(methodDefinition, parameterString);
-                    yield return new ContractValidateParameter(new ParameterDefinition(parameter.Key, 0, parseResult.ParsedParameterType), parseResult.ParsedParameterBuilder);
+
+                    yield return new ContractValidateParameter(
+                        new ParameterDefinition(parameter.Key, 0, parseResult.ParsedParameterType), 
+                        parseResult.ParsedParameterBuilder);
                 }
-                else
+
+                var parameterTypeReference = parameter.Value as TypeReference;
+                if (parameterTypeReference != null)
+                {
+                    var parameterType = moduleDefinition.ImportReference(typeof(Type));
+
+                    yield return new ContractValidateParameter(
+                        new ParameterDefinition(parameter.Key, 0, parameterType), 
+                        new TypeParameterBuilder(moduleDefinition, parameterTypeReference));
+                }
+
+                if (parameterString == null && parameterTypeReference == null)
                 {
                     var parameterType = moduleDefinition.ImportReference(parameter.Value.GetType());
-                    yield return new ContractValidateParameter(new ParameterDefinition(parameter.Key, 0, parameterType), new CompositeParameterBuilder(new ConstParameterBuilder(parameter.Value), new ConvertParameterBuilder(moduleDefinition), new BoxParameterBuilder(moduleDefinition, parameterType)));
+
+                    yield return new ContractValidateParameter(
+                        new ParameterDefinition(parameter.Key, 0, parameterType), 
+                        new CompositeParameterBuilder(
+                            new ConstParameterBuilder(parameter.Value), 
+                            new ConvertParameterBuilder(moduleDefinition), 
+                            new BoxParameterBuilder(moduleDefinition, parameterType)));
                 }
             }
         }

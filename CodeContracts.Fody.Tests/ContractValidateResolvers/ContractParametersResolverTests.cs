@@ -28,7 +28,7 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
 
             var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
 
-            Assert.Equal(2, contractValidateParameters.Count);
+            Assert.Equal(3, contractValidateParameters.Count);
             var constMember = Assert.Single(contractValidateParameters, cm => cm.ParameterDefinition.Name == "x");
             Assert.Equal(moduleDefinition.TypeSystem.Int32, constMember.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
             Assert.IsType<CompositeParameterBuilder>(constMember.ParameterBuilder);
@@ -47,7 +47,23 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
 
             methodParameterParserMock.Verify(mpp => mpp.Parse(methodDefinition, "value"), Times.Once);
             Assert.Single(contractValidateParameters, cvp => cvp.ParameterDefinition.Name == "y");
-            Assert.Equal(2, contractValidateParameters.Count);
+            Assert.Equal(3, contractValidateParameters.Count);
+        }
+
+        [Theory(DisplayName = "Проверка разрешения параметра типа атрибута контракта"), AutoFixture]
+        public void TypeIfParameterValueIsTypeTest(
+            [Frozen] ModuleDefinition moduleDefinition,
+            ContractParametersResolver sut)
+        {
+            var methodDefinition = moduleDefinition.FindMethod("ConcreteClassWithParametersAttributes", "Method");
+            var contractDefinition = new RequiresDefinition(methodDefinition.CustomAttributes.Single(), methodDefinition, methodDefinition);
+
+            var contractValidateParameters = sut.Resolve(contractDefinition, methodDefinition).ToList();
+
+            Assert.Equal(3, contractValidateParameters.Count);
+            var typeMember = Assert.Single(contractValidateParameters, cm => cm.ParameterDefinition.Name == "z");
+            Assert.Equal(moduleDefinition.ImportReference(typeof(Type)), typeMember.ParameterDefinition.ParameterType, TypeReferenceComparer.Instance);
+            Assert.IsType<TypeParameterBuilder>(typeMember.ParameterBuilder);
         }
     }
 }
