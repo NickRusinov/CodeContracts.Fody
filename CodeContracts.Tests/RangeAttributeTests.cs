@@ -38,7 +38,10 @@ namespace CodeContracts.Tests
         }
 
         [Theory(DisplayName = "Проверка атрибута контракта Range")]
-        [MemberData(nameof(ValidateArgMinMaxOfIntTestData))]
+        [InlineData(10, 20, 10, false)]
+        [InlineData(23, 23, 333, true)]
+        [InlineData(56, 0, 56, true)]
+        [InlineData(42, 42, 42, true)]
         public void ValidateArgMinMaxOfIntTest(int arg, int min, int max, bool isValidExpected)
         {
             var isValid = RangeAttribute.Validate(arg, min, max);
@@ -46,15 +49,40 @@ namespace CodeContracts.Tests
             Assert.Equal(isValidExpected, isValid);
         }
 
-        private static IEnumerable<object[]> ValidateArgMinMaxOfIntTestData()
+        [Theory(DisplayName = "Проверка атрибута контракта Range")]
+        [InlineData(10u, 20u, 10u, false)]
+        [InlineData(23u, 23u, 333u, true)]
+        [InlineData(56u, 0u, 56u, true)]
+        [InlineData(42u, 42u, 42u, true)]
+        public void ValidateArgMinMaxOfUIntTest(uint arg, uint min, uint max, bool isValidExpected)
         {
-            yield return new object[] { 10, 20, 10, false };
+            var isValid = RangeAttribute.Validate(arg, min, max);
 
-            yield return new object[] { 23, 23, 333, true };
+            Assert.Equal(isValidExpected, isValid);
+        }
 
-            yield return new object[] { 56, 0, 56, true };
+        [Theory(DisplayName = "Проверка атрибута контракта Range")]
+        [InlineData(10L, 20L, 10L, false)]
+        [InlineData(23L, 23L, 333L, true)]
+        [InlineData(56L, 0L, 56L, true)]
+        [InlineData(42L, 42L, 42L, true)]
+        public void ValidateArgMinMaxOfLongTest(long arg, long min, long max, bool isValidExpected)
+        {
+            var isValid = RangeAttribute.Validate(arg, min, max);
 
-            yield return new object[] { 42, 42, 42, true };
+            Assert.Equal(isValidExpected, isValid);
+        }
+
+        [Theory(DisplayName = "Проверка атрибута контракта Range")]
+        [InlineData(10uL, 20uL, 10uL, false)]
+        [InlineData(23uL, 23uL, 333uL, true)]
+        [InlineData(56uL, 0uL, 56uL, true)]
+        [InlineData(42uL, 42uL, 42uL, true)]
+        public void ValidateArgMinMaxOfULongTest(ulong arg, ulong min, ulong max, bool isValidExpected)
+        {
+            var isValid = RangeAttribute.Validate(arg, min, max);
+
+            Assert.Equal(isValidExpected, isValid);
         }
     }
 }

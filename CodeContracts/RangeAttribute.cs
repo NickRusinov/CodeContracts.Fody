@@ -21,5 +21,14 @@ namespace CodeContracts
 
         [Pure]
         public static bool Validate(int arg, int min, int max) => arg >= min && arg <= max;
+
+        [Pure]
+        public static bool Validate(uint arg, uint min, uint max) => arg >= min && arg <= max;
+
+        [Pure]
+        public static bool Validate(long arg, long min, long max) => arg >= min && arg <= max;
+
+        [Pure]
+        public static bool Validate(ulong arg, ulong min, ulong max) => arg >= min && arg <= max;
     }
 }
