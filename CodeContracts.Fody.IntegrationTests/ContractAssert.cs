@@ -42,6 +42,11 @@ namespace CodeContracts.Fody.IntegrationTests
             return ContractAssert<TSut>.CreateFail(sutFactory);
         }
 
+        public static ContractAssert<TSut> Fail<TSut, TException>(Func<TSut> sutFactory)
+        {
+            return ContractAssert<TSut>.CreateFail<TException>(sutFactory);
+        }
+
         public static ContractAssert<TSut> With<TSut>()
             where TSut : new()
         {
@@ -85,6 +90,17 @@ namespace CodeContracts.Fody.IntegrationTests
 
             Assert.NotNull(exception);
             Assert.Equal("ContractException", exception.GetType().Name);
+
+            return new ContractAssert<TSut>(sut);
+        }
+
+        public static ContractAssert<TSut> CreateFail<TException>(Func<TSut> sutFactory)
+        {
+            var sut = default(TSut);
+            var exception = Record.Exception(() => sut = sutFactory.Invoke());
+
+            Assert.NotNull(exception);
+            Assert.IsType<TException>(exception);
 
             return new ContractAssert<TSut>(sut);
         }

@@ -148,6 +148,20 @@
     <Compile Include="NotEnabled\InterfaceWithMethodsTests.cs" />
     <Compile Include="NotEnabled\InterfaceWithPropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WithExceptions\AbstractClassWithConstructorsTests.cs" />
+    <Compile Include="WithExceptions\AbstractClassWithContractClassTests.cs" />
+    <Compile Include="WithExceptions\AbstractClassWithFieldsTests.cs" />
+    <Compile Include="WithExceptions\AbstractClassWithMethodsTests.cs" />
+    <Compile Include="WithExceptions\AbstractClassWithPropertiesTests.cs" />
+    <Compile Include="WithExceptions\ConcreteClassWithFieldsTests.cs" />
+    <Compile Include="WithExceptions\ConcreteClassWithInvariantTests.cs" />
+    <Compile Include="WithExceptions\ConcreteClassWithMethodsTests.cs" />
+    <Compile Include="WithExceptions\ConcreteClassWithPropertiesTests.cs" />
+    <Compile Include="WithExceptions\InterfaceWithContractClassTests.cs" />
+    <Compile Include="WithExceptions\InterfaceWithInheritedInterfaceTests.cs" />
+    <Compile Include="WithExceptions\InterfaceWithMemberConflictTests.cs" />
+    <Compile Include="WithExceptions\InterfaceWithMethodsTests.cs" />
+    <Compile Include="WithExceptions\InterfaceWithPropertiesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -185,7 +199,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="WithExceptions\" />
     <Folder Include="WithMessages\" />
   </ItemGroup>
   <Choose>
