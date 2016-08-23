@@ -28,13 +28,19 @@ namespace CodeContracts.Fody.BestOverloadResolvers
             if (TypeReferenceComparer.Instance.Equals(x.ParameterType, y.ParameterType))
                 return 0;
 
-            if (x.ParameterType.IsAssignable(y.ParameterType) ||
-                x.ParameterType.IsSignedNumeric() && y.ParameterType.IsUnsignedNumeric())
-                return +1;
+            if (x.ParameterType.IsSignedNumeric() &&
+                y.ParameterType.IsUnsignedNumeric())
+                return + 1;
 
-            if (y.ParameterType.IsAssignable(x.ParameterType) ||
-                y.ParameterType.IsSignedNumeric() && x.ParameterType.IsUnsignedNumeric())
-                return -1;
+            if (y.ParameterType.IsSignedNumeric() &&
+                x.ParameterType.IsUnsignedNumeric())
+                return - 1;
+
+            if (x.ParameterType.IsAssignable(y.ParameterType))
+                return + 1;
+
+            if (y.ParameterType.IsAssignable(x.ParameterType))
+                return - 1;
 
             return 0;
         }

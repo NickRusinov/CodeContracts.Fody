@@ -24,9 +24,11 @@ namespace CodeContracts.Fody.Tests.BestOverloadResolvers
             var x = moduleDefinition.FindMethod("CustomContractWithMethodsAttribute", xMethodName);
             var y = moduleDefinition.FindMethod("CustomContractWithMethodsAttribute", yMethodName);
 
-            var compare = sut.Compare(x, y);
+            var compareXy = sut.Compare(x, y);
+            var compareYx = sut.Compare(y, x);
 
-            Assert.Equal(compareExpected, compare);
+            Assert.Equal(+ 1 * compareExpected, compareXy);
+            Assert.Equal(- 1 * compareExpected, compareYx);
         }
     }
 }
