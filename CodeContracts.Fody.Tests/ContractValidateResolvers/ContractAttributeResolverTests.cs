@@ -30,7 +30,8 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
             var builders = ContractValidateParametersAssert(contractValidateParameters, fieldDefinition.FieldType).ToList();
             Assert.IsType<ThisParameterBuilder>(builders[0]);
             Assert.IsType<FieldParameterBuilder>(builders[1]);
-            Assert.IsType<BoxParameterBuilder>(builders[2]);
+            Assert.IsType<ConvertParameterBuilder>(builders[2]);
+            Assert.IsType<BoxParameterBuilder>(builders[3]);
         }
 
         [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к свойству"), AutoFixture]
@@ -46,7 +47,8 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
 
             var builders = ContractValidateParametersAssert(contractValidateParameters, propertyDefinition.PropertyType).ToList();
             Assert.IsType<ArgumentParameterBuilder>(builders[0]);
-            Assert.IsType<BoxParameterBuilder>(builders[1]);
+            Assert.IsType<ConvertParameterBuilder>(builders[1]);
+            Assert.IsType<BoxParameterBuilder>(builders[2]);
         }
 
         [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к свойству"), AutoFixture]
@@ -62,7 +64,8 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
 
             var builders = ContractValidateParametersAssert(contractValidateParameters, propertyDefinition.PropertyType).ToList();
             Assert.IsType<ResultParameterBuilder>(builders[0]);
-            Assert.IsType<BoxParameterBuilder>(builders[1]);
+            Assert.IsType<ConvertParameterBuilder>(builders[1]);
+            Assert.IsType<BoxParameterBuilder>(builders[2]);
         }
 
         [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к параметру метода"), AutoFixture]
@@ -78,7 +81,8 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
 
             var builders = ContractValidateParametersAssert(contractValidateParameters, parameterDefinition.ParameterType).ToList();
             Assert.IsType<ArgumentParameterBuilder>(builders[0]);
-            Assert.IsType<BoxParameterBuilder>(builders[1]);
+            Assert.IsType<ConvertParameterBuilder>(builders[1]);
+            Assert.IsType<BoxParameterBuilder>(builders[2]);
         }
 
         [Theory(DisplayName = "Проверка разрешения параметра атрибута контракта, примененного к возвращаемому значению метода"), AutoFixture]
@@ -93,7 +97,8 @@ namespace CodeContracts.Fody.Tests.ContractValidateResolvers
 
             var builders = ContractValidateParametersAssert(contractValidateParameters, methodDefinition.MethodReturnType.ReturnType).ToList();
             Assert.IsType<ResultParameterBuilder>(builders[0]);
-            Assert.IsType<BoxParameterBuilder>(builders[1]);
+            Assert.IsType<ConvertParameterBuilder>(builders[1]);
+            Assert.IsType<BoxParameterBuilder>(builders[2]);
         }
 
         private static IEnumerable<IParameterBuilder> ContractValidateParametersAssert(IReadOnlyCollection<ContractValidateParameter> contractValidateParameters, TypeReference parameterTypeReference)
