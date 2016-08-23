@@ -18,5 +18,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithInvariant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithMethods.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConcreteClassWithProperties.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InterfaceWithContractClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InterfaceWithInheritedInterface.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InterfaceWithMemberConflict.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InterfaceWithMethods.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InterfaceWithProperties.cs" />
   </ItemGroup>
 </Project>

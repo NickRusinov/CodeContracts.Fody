@@ -114,6 +114,11 @@
     <Compile Include="Default\ConcreteClassWithInvariantTests.cs" />
     <Compile Include="Default\ConcreteClassWithMethodsTests.cs" />
     <Compile Include="Default\ConcreteClassWithPropertiesTests.cs" />
+    <Compile Include="Default\InterfaceWithContractClassTests.cs" />
+    <Compile Include="Default\InterfaceWithInheritedInterfaceTests.cs" />
+    <Compile Include="Default\InterfaceWithMemberConflictTests.cs" />
+    <Compile Include="Default\InterfaceWithMethodsTests.cs" />
+    <Compile Include="Default\InterfaceWithPropertiesTests.cs" />
     <Compile Include="NotClean\AbstractClassWithConstructorsTests.cs" />
     <Compile Include="NotClean\AbstractClassWithContractClassTests.cs" />
     <Compile Include="NotClean\AbstractClassWithFieldsTests.cs" />
@@ -123,6 +128,11 @@
     <Compile Include="NotClean\ConcreteClassWithInvariantTests.cs" />
     <Compile Include="NotClean\ConcreteClassWithMethodsTests.cs" />
     <Compile Include="NotClean\ConcreteClassWithPropertiesTests.cs" />
+    <Compile Include="NotClean\InterfaceWithContractClassTests.cs" />
+    <Compile Include="NotClean\InterfaceWithInheritedInterfaceTests.cs" />
+    <Compile Include="NotClean\InterfaceWithMemberConflictTests.cs" />
+    <Compile Include="NotClean\InterfaceWithMethodsTests.cs" />
+    <Compile Include="NotClean\InterfaceWithPropertiesTests.cs" />
     <Compile Include="NotEnabled\AbstractClassWithConstructorsTests.cs" />
     <Compile Include="NotEnabled\AbstractClassWithContractClassTests.cs" />
     <Compile Include="NotEnabled\AbstractClassWithFieldsTests.cs" />
@@ -132,6 +142,11 @@
     <Compile Include="NotEnabled\ConcreteClassWithInvariantTests.cs" />
     <Compile Include="NotEnabled\ConcreteClassWithMethodsTests.cs" />
     <Compile Include="NotEnabled\ConcreteClassWithPropertiesTests.cs" />
+    <Compile Include="NotEnabled\InterfaceWithContractClassTests.cs" />
+    <Compile Include="NotEnabled\InterfaceWithInheritedInterfaceTests.cs" />
+    <Compile Include="NotEnabled\InterfaceWithMemberConflictTests.cs" />
+    <Compile Include="NotEnabled\InterfaceWithMethodsTests.cs" />
+    <Compile Include="NotEnabled\InterfaceWithPropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
