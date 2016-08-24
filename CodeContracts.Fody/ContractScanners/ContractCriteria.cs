@@ -14,28 +14,11 @@ namespace CodeContracts.Fody.ContractScanners
     /// </summary>
     public class ContractCriteria : IContractCriteria
     {
-        /// <summary>
-        /// Definition of current weaving assembly
-        /// </summary>
-        private readonly ModuleDefinition moduleDefinition;
-
-        /// <summary>
-        /// Initializes a new instance of class <see cref="ContractCriteria"/>
-        /// </summary>
-        /// <param name="moduleDefinition">Definition of current weaving assembly</param>
-        public ContractCriteria(ModuleDefinition moduleDefinition)
-        {
-            Contract.Requires(moduleDefinition != null);
-
-            this.moduleDefinition = moduleDefinition;
-        }
-
         /// <inheritdoc/>
         public bool IsContract(CustomAttribute attribute)
         {
-            var contractAttributeType = moduleDefinition.ImportReference(typeof(ContractAttribute));
-
-            return attribute.AttributeType.GetBaseTypes().Contains(contractAttributeType, TypeReferenceComparer.Instance);
+            return attribute.AttributeType.GetBaseTypes()
+                .Any(tr => tr.Name == "ContractAttribute");
         }
     }
 }
