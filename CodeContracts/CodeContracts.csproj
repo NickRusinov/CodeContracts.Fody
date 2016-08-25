@@ -148,6 +148,8 @@
     <Compile Include="PropertyAttribute.cs" />
     <Compile Include="RangeAttribute.cs" />
     <Compile Include="RegexAttribute.cs" />
+    <Compile Include="StrictlyNegativeAttribute.cs" />
+    <Compile Include="StrictlyPositiveAttribute.cs" />
     <Compile Include="ThisAttribute.cs" />
     <Compile Include="TrueAttribute.cs" />
     <Compile Include="ZeroAttribute.cs" />
