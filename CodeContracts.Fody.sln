@@ -22,7 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
 		build.fsx = build.fsx
-		CodeContracts.Fody.nuspec = CodeContracts.Fody.nuspec
 		CodeContracts.Fody.Shared.cs = CodeContracts.Fody.Shared.cs
 		CodeContracts.Fody.snk = CodeContracts.Fody.snk
 		Icon.png = Icon.png
@@ -66,6 +65,13 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestFoundations.IntegrationTests.Shared", "TestFoundations\TestFoundations.IntegrationTests.Shared\TestFoundations.IntegrationTests.Shared.shproj", "{0513CD2E-7A59-4CE2-88AE-6DD6285B192A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFoundations.UnitTests", "TestFoundations\TestFoundations.UnitTests\TestFoundations.UnitTests.csproj", "{F533D32D-4712-48B8-B5D5-B6419AF5E7AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{60859EF0-FADC-4BBD-9D71-93026FC98981}"
+	ProjectSection(SolutionItems) = preProject
+		Nuget\CodeContracts.Fody.nuspec = Nuget\CodeContracts.Fody.nuspec
+		Nuget\Install.ps1 = Nuget\Install.ps1
+		Nuget\Uninstall.ps1 = Nuget\Uninstall.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

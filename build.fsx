@@ -13,6 +13,13 @@ Target "Clean" (fun _ ->
     CleanDir outputFolder
 )
 
+Target "Copy" (fun _ ->
+    [ "LICENSE.txt"; "README.md"; 
+      "Icon.png"; "Icon.svg";
+      "Nuget/Install.ps1"; "Nuget/Uninstall.ps1" ]
+    |> CopyFiles outputFolder
+)
+
 Target "Restore" (fun _ ->
     RestorePackages ()
 )
@@ -37,7 +44,7 @@ Target "IntegrationTests" (fun _ ->
 )
 
 Target "NugetPackage" (fun _ ->
-    !! "*.nuspec"
+    !! "Nuget/*.nuspec"
     |> Seq.iter (NuGet (fun p -> { p with Version = outputFolder @@ "CodeContracts.Fody.dll" |> GetAssemblyVersionString
                                           WorkingDir = outputFolder
                                           OutputPath = outputFolder }))
@@ -54,6 +61,9 @@ Target "Release" ignore
 Target "Publish" ignore
 
 "Clean" ==> "Build"
+"Clean" ==> "Copy"
+
+"Copy" ==> "Build"
 
 "Restore" ==> "Build"
 

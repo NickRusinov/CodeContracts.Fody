@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata minClientVersion="2.8">
+    <id>CodeContracts.Fody</id>
+    <version>@build.number@</version>
+    <title>CodeContracts.Fody</title>
+    <authors>Nick Rusinov</authors>
+    <owners>Nick Rusinov</owners>
+    <description>Generates requires, ensures and invariants based on attributes</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/NickRusinov/CodeContracts.Fody</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/NickRusinov/CodeContracts.Fody/master/LICENSE.txt</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/NickRusinov/CodeContracts.Fody/master/Icon.png</iconUrl>
+    <dependencies>
+      <dependency id="Fody" version="1.29.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="CodeContracts.dll" target="lib" />
+    <file src="CodeContracts.pdb" target="lib" />
+    <file src="CodeContracts.Fody.dll" target="" />
+    <file src="CodeContracts.Fody.pdb" target="" />
+    <file src="CodeContracts.Fody.xml" target="" />
+    <file src="Install.ps1" target="tools" />
+    <file src="Uninstall.ps1" target="tools" />
+  </files>
+</package>
