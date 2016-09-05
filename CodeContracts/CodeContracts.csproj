@@ -157,8 +157,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\tools\CodeContracts\MSBuild\v$(MSBuildToolsVersion)\Microsoft.CodeContracts.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetPath) $(SolutionDir)packages\$(SolutionName)\ /Y
-xcopy $(TargetDir)$(TargetName).pdb $(SolutionDir)packages\$(SolutionName)\ /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetPath) $(SolutionDir)packages\CodeContractsForTests.Fody\ /Y
+xcopy $(TargetDir)$(TargetName).pdb $(SolutionDir)packages\CodeContractsForTests.Fody\ /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

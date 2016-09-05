@@ -16,15 +16,13 @@ namespace CodeContracts.Fody
     /// </summary>
     public class ContractConfigParser : IContractConfigParser
     {
-        /// <summary>
-        /// <see cref="XmlSerializer"/> that deserialize given configuration string
-        /// </summary>
-        private readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(ContractConfig), new XmlRootAttribute("CodeContracts"));
-
         /// <inheritdoc/>
         public ContractConfig Parse(string configString)
         {
-            using (var stringReader = new StringReader(XElement.Parse(configString).ToString()))
+            var xmlElement = XElement.Parse(configString);
+            var xmlSerializer = new XmlSerializer(typeof(ContractConfig), new XmlRootAttribute(xmlElement.Name.LocalName));
+
+            using (var stringReader = new StringReader(xmlElement.ToString()))
                 return (ContractConfig)xmlSerializer.Deserialize(stringReader);
         }
     }

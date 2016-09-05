@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Weavers VerifyAssembly="true">
-  <CodeContracts Requries="WithMessages" Ensures="WithMessages" Invariant="WithMessages" />
+  <CodeContractsForTests Requries="WithMessages" Ensures="WithMessages" Invariant="WithMessages" />
 </Weavers>
